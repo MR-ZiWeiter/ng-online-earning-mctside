@@ -1,0 +1,55 @@
+@import 'mixin';
+.swipe-input-component {
+  @include flex-justify-align(flex-start, center);
+  @include wh(format(630), format(92));
+  border: format(2) solid $default_border_color;
+  border-radius: format(8);
+  overflow: hidden;
+  &.no-content {
+    border-color: $default_border_color;
+  }
+  &.focus {
+    border-color: var(--ion-color-primary);
+  }
+  &.success {
+    border-color: var(--ion-color-success);
+  }
+  &.error {
+    border-color: var(--ion-color-danger);
+  }
+  .prefix,
+  .suffix {
+    height: 100%;
+  }
+  .context-input {
+    @include wh(100%, 100%);
+    @include flex-justify-align(center, flex-start);
+    margin: 0 format(30);
+    position: relative;
+    .input-class {
+      @include wh(100%, 100%);
+      @include sc(format(28), $default_color_2);
+      border-radius: format(8);
+      overflow: hidden;
+      font-weight: 400;
+      border: none;
+      outline: none;
+      background: transparent;
+      &:active,
+      &:focus {
+        border: none;
+        outline: none;
+      }
+      &::placeholder {
+        @include sc(format(28), $default_placeholder);
+      }
+    }
+    .icon-clear {
+      transform: translateY(-50%);
+      position: absolute;
+      right: format(-15);
+      top: 50%;
+      @include sc(format(32), $default_color_4);
+    }
+  }
+}

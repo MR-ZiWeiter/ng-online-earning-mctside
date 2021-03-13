@@ -1,0 +1,193 @@
+/* 静态资源变量HOST */
+$static-host-url: '';
+
+// 变量设置
+$default_color: #FFFFFF;
+$default_color_1: #000000;
+$default_color_2: #333333;
+$default_color_3: #999999;
+$default_color_4: #666666;
+
+$default_color_5: #FAFAFA;
+$default_color_6: #E5E5E5;
+
+$default_color_7: #E6F1FC;
+$default_color_8: #F4FFEF;
+
+$default_color_7_border: #A3D0FD;
+$default_color_8_border: #C4F5AB;
+
+$default_color_9: #C0C4CC;
+
+$default_background_color: #F5F7FA;
+$default_border_color: #DCDFE6FF;
+$default_placeholder: #909399;
+
+$bgColors: #F4F4F4;
+$bgColorBtn: #0486FEFF;
+$bgColorsing: #F15A32;
+$bgColorsed: #24A4FF;
+$bgColorserr: #999999;
+
+$fontSize: 24rpx;
+$fontSizes: 28rpx;
+$fontSizeMiddle: 30rpx;
+$fontSizesed: 32rpx;
+$fontSizeMax: 40rpx;
+$fontSizeMin: 20rpx;
+
+$Color: #000000;
+$Colors: #FFFFFF;
+$Colorsed: #24A4FF;
+$ColorGay: #333333;
+$ColorGays: #666666;
+$ColorGaysed: #999999;
+$ColorRed: #E61200;
+
+$BorderRadius: 8rpx;
+$BorderRadiuses: 16rpx;
+$BorderRadiusHalf: 50%;
+
+$fontWeight: 400;
+$fontWeights: 500;
+$fontWeightsed: 600;
+$fontWeighting: bold;
+
+$fontFamily: 'PingFangSC';
+$fontFamilys: 'DIN';
+
+$LinearGradient: linear-gradient(to bottom, rgba(0, 0, 0, .75), rgba(0, 0, 0, 0));
+
+$vm_design: 750;
+
+@font-face {
+  font-family: $fontFamilys;
+  src: url('#{$static-host-url}/statics/fonts/DIN.ttf');
+}
+
+@function format($px) {
+  @return ($px / $vm_design) * 100vw;
+}
+
+//  背景图片地址和大小
+@mixin bis($url) {
+  background-image: url($url);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+@mixin borderRadius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  -o-border-radius: $radius;
+  border-radius: $radius;
+}
+// 定位全屏
+@mixin allcover {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+// 定位上下左右居中
+@mixin center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// 定位上下居中
+@mixin ct {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+// 定位左右居中
+@mixin cl {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+// 宽高
+@mixin wh($width, $height) {
+  width: $width;
+  height: $height;
+}
+
+@mixin bgBorderRadius($bgColor, $radius, $border: none) {
+	background-color: $bgColor;
+	border-radius: $radius;
+	border: $border;
+}
+
+// 字体大小，颜色
+@mixin sc($size, $color) {
+  font-size: $size;
+  color: $color;
+}
+
+// flex 布局和 子元素 对其方式
+@mixin fj($type: space-between) {
+  display: flex;
+  justify-content: $type;
+}
+
+// flex 布局和 子元素 对其方式
+@mixin flex-justify-align($type: space-between, $align: center) {
+  display: flex;
+	justify-content: $type;
+	align-items: $align;
+}
+
+// inline-flex 布局和 子元素 对其方式
+@mixin ifj($type: space-between) {
+  display: inline-flex;
+  justify-content: $type;
+}
+
+/* 新增grid布局 */
+@mixin grid-col-row-gap($col: 1fr, $row: 1fr, $col-gap: 0px, $row-gap: 0px) {
+  display: grid;
+  grid-template-columns: $col;
+  grid-template-rows: $row;
+  grid-column-gap: $col-gap;
+  column-gap: $col-gap;
+  grid-row-gap: $row-gap;
+  row-gap: $row-gap;
+  justify-items: stretch;
+  align-items: stretch;
+  justify-content: stretch;
+  align-content: stretch;
+}
+
+/* 多行隐藏 */
+@mixin overflow-text($num: 1) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $num;
+  flex-direction: column;
+}
+
+/* 点击效果 */
+/*
+ * @param $opacity {number|string}
+ * @param $type {number} 1: 透明度方式 值为透明度 2：背景方式 值为色值
+ */
+@mixin click-active($opacity: 0.8, $type: 1) {
+  @if ($type == 1) {
+    &:active {
+      opacity: $opacity;
+    }
+  }
+  @else if ($type == 2) {
+    &:active {
+      background: $opacity;
+    }
+  }
+}
+

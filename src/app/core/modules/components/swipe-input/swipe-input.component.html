@@ -1,0 +1,24 @@
+<section [ngClass]="['swipe-input-component',
+  isFocus ? 'focus' : 'blur',
+  isPass ? 'success' : (value || isRequired ? 'error' : 'no-content')]">
+  <section class="prefix" *ngIf="isPrefix">
+    <ng-content select="[name=prefix]"></ng-content>
+  </section>
+  <section class="context-input">
+    <input
+      [name]="name"
+      [type]="type"
+      [(ngModel)]="value"
+      [placeholder]="placeholder"
+      [maxlength]="maxLength"
+      [minlength]="minLength"
+      (ngModelChange)="inputChange($event)"
+      (focus)="inputFocusChange($event)"
+      (blur)="inputBlurChange($event)"
+      class="input-class" />
+    <i (click)="clearInputEvent($event)" *ngIf="value && isClear" class="icon-clear" name="close-circle-outline"></i>
+  </section>
+  <section class="suffix" *ngIf="isSuffix">
+    <ng-content select="[name=suffix]"></ng-content>
+  </section>
+</section>

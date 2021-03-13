@@ -1,0 +1,21 @@
+@import 'mixin';
+.login-page {
+  @include wh(100vw, 100vh);
+  @include flex-justify-align(center, center);
+}
+
+.login-form {
+  max-width: 300px;
+}
+
+.login-form-margin {
+  margin-bottom: 16px;
+}
+
+.login-form-forgot {
+  float: right;
+}
+
+.login-form-button {
+  width: 100%;
+}

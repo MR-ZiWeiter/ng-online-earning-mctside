@@ -3,7 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  NAME: 'ONLINE_EARNING',
+  ENVIRONMENT: 'development',
+  API_URL: '/',
+  BASIC_URL: '/',
+  VERSION: 2
 };
 
 /*
