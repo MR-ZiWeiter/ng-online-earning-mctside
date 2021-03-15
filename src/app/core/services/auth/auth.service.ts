@@ -30,12 +30,12 @@ export class AuthService extends CoreToolsFunction {
 
   // 公共登录
   public openLogin(): void {
-    this.router.navigate(['/pages/account/login']);
+    this.router.navigate(['/pages/login']);
   }
   // 登出
   public logout(): void {
     this.userService.setUserBasicInfo(null);
     this.userService.setAppToken(null);
-    this.router.navigate(['/pages/account/login']);
+    this.router.navigate(['/pages/login']);
   }
 }
