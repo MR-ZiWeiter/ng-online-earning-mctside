@@ -6,7 +6,7 @@ import { NzUploadFile } from 'ng-zorro-antd/upload';
   styleUrls: ['./swipe-upload.component.scss']
 })
 export class SwipeUploadComponent implements OnInit {
-  @Input() public ListType: 'text' | 'picture' | 'picture-card' = 'picture-card';
+  @Input() public ListType: 'text' | 'picture' | 'picture-card' = 'picture';
   @Input() public Action = 'https://www.mocky.io/v2/5cc8019d300000980a055e76';
   @Input() public maxFileListLength = 2;
   @Input() public coustom = false;

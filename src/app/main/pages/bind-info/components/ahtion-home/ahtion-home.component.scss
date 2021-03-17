@@ -1,0 +1,41 @@
+@import 'mixin';
+
+.ahtion-home {
+  .ahtion-home-card {
+    border: 1px solid #DCDFE6;
+    @include flex-justify-align();
+    padding: format(24) format(30);
+    margin-bottom: format(10);
+    .ahtion-home-card-left {
+      @include flex-justify-align();
+      flex-shrink: 0;
+      @include sc(format(16), $default_color_4);
+      font-weight: 500;
+      // margin-right: format(48);
+      img {
+        @include wh(format(28), format(28));
+        margin-right: format(10);
+      }
+    }
+    .ahtion-home-card-center {
+      @include flex-justify-align();
+      img {
+        @include wh(format(28), format(28));
+        margin-right: format(9);
+      }
+      .center-text {
+        .title {
+          @include sc(format(16),$default_color_4)
+        }
+        .desc {
+          @include sc(format(12), #C0C4CC);
+        }
+      }
+    }
+    .ahtion-home-card-right {
+      @include sc(format(14), $bgColorBtn);
+      font-family: 'Source Han Sans CN';
+      cursor: pointer;
+    }
+  }
+}

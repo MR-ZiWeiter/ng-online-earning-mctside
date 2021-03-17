@@ -5,8 +5,9 @@
     [(nzFileList)]="fileList"
     [nzShowButton]="fileList.length < maxFileListLength"
     [nzPreview]="handlePreview"
+    class="coustom-upload"
   >
-    <div *ngIf="!coustom">
+    <div *ngIf="!coustom" class="iiii">
       <i nz-icon nzType="plus"></i>
       <!-- <div style="margin-top: 8px"></div> -->
     </div>

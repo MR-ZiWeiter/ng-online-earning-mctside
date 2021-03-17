@@ -1,0 +1,22 @@
+<div class="ahtion-home">
+  <div class="ahtion-home-card" *ngFor="let item of userInfoList">
+    <div class="ahtion-home-card-left">
+      <img [src]="item.iconUrl" alt="">
+       <span>{{ item.title }}</span>
+    </div>
+    <div class="ahtion-home-card-center">
+      <img [src]="item.status ? urlMap.Y : urlMap.N " alt="">
+      <div class="center-text">
+        <div class="title">
+          <span>{{ item.status ? '已认证' + item.value : '未认证' }}</span>
+        </div>
+        <div class="desc">
+          <span>实名认证之后，一旦账户出现什么问题，都可以通过你的身份证去解决，享有更多高级功能及服务</span>
+        </div>
+      </div>
+    </div>
+    <div class="ahtion-home-card-right">
+      <span>{{ item.status ? '查看' : '认证' }}</span>
+    </div>
+  </div>
+</div>

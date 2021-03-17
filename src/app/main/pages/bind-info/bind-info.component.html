@@ -8,10 +8,11 @@
     <label nz-radio-button nzValue="F">绑定支付宝</label>
   </nz-radio-group>
   <div class="bind-info-content" [ngSwitch]="radioValue">
-    <swipe-bind-we-chat *ngSwitchCase="'E'">
-    </swipe-bind-we-chat>
+    <swipe-bind-we-chat *ngSwitchCase="'E'"></swipe-bind-we-chat>
     <swipe-phone-ahtion *ngSwitchCase="'B'"></swipe-phone-ahtion>
     <swipe-bind-zfb *ngSwitchCase="'F'"></swipe-bind-zfb>
     <swipe-bank-ahtion *ngSwitchCase="'D'" ></swipe-bank-ahtion>
+    <swipe-ahtion-home *ngSwitchCase="'A'"></swipe-ahtion-home>
+    <swipe-real-name-ahtion *ngSwitchCase="'C'" ></swipe-real-name-ahtion>
   </div>
 </swipe-custom-card>

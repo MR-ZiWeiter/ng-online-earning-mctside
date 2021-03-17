@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./bind-info.component.scss'],
 })
 export class BindInfoComponent implements OnInit {
-  public radioValue = 'A';
+  public radioValue = 'C';
   constructor() {}
 
   ngOnInit() {}
