@@ -1,0 +1,32 @@
+@import 'mixin';
+
+
+.get-code {
+  @include wh(100%, format(32));
+  @include flex-justify-align(flex-start,center);
+  border: 1px solid #D8DCE6;
+  overflow: hidden;
+  .ipt {
+    outline: none;
+    border: none;
+    height: 32px;
+    &:focus {
+      border: none;
+      outline: none;
+      box-shadow: none;
+    }
+  }
+
+  .get-code-btn {
+    // width: format(120);
+    // flex-basis: format(120);
+    cursor: pointer;
+    height: 100%;
+    flex: 1;
+    @include sc(format(14), #C0C4CC);
+    text-align: center;
+    line-height: format(32);
+    flex-shrink: 0;
+    // padding: 0 format(10);
+  }
+}

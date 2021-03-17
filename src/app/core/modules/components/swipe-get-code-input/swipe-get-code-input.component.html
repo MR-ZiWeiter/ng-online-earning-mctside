@@ -1,0 +1,12 @@
+<div class="get-code">
+  <input 
+    class="ipt" 
+    [placeholder]="placeholder"
+    [type]="type"
+    [(ngModel)]="value"
+    [maxlength]="maxLength"
+    [minlength]="minLength"
+    (ngModelChange)="inputChange($event)"
+    >
+  <span class="get-code-btn" (click)="sendCode($event)" >{{ codeText }}</span>
+</div>

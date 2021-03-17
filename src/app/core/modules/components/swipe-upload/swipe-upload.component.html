@@ -1,0 +1,22 @@
+<div class="clearfix">
+  <nz-upload
+    [nzAction]="Action"
+    [nzListType]="ListType"
+    [(nzFileList)]="fileList"
+    [nzShowButton]="fileList.length < maxFileListLength"
+    [nzPreview]="handlePreview"
+  >
+    <div *ngIf="!coustom">
+      <i nz-icon nzType="plus"></i>
+      <!-- <div style="margin-top: 8px"></div> -->
+    </div>
+    <div *ngIf="coustom">
+      <ng-content></ng-content>
+    </div>
+  </nz-upload>
+  <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null" (nzOnCancel)="previewVisible = false">
+    <ng-template #modalContent>
+      <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+    </ng-template>
+  </nz-modal>
+</div>

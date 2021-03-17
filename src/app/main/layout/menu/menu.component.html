@@ -1,3 +1,16 @@
-<p>
-  menu works!
-</p>
+<div class="menu">
+  <ul nz-menu nzMode="inline" style="width: 100%;">
+    <ng-container *ngFor="let item of menuMap; index as idx">
+      <li nz-submenu [nzOpen]="openMap[idx]"  (nzOpenChange)="openHandler(idx)"  [nzTitle]="item.title" [nzIcon]="item.icon"  >
+        <ul>
+         <ng-container *ngFor="let i of item.list">
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="i.path">{{i.name}}</a>
+          </li>
+         </ng-container>
+        </ul>
+      </li>
+    </ng-container>
+
+  </ul>
+</div>

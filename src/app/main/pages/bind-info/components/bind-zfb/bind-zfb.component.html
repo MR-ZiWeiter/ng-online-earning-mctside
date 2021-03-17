@@ -1,0 +1,20 @@
+<form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-label  [nzSm]="4" [nzXs]="12"  nzFor="email">姓名</nz-form-label>
+    <nz-form-control nz-row [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+      <input nz-col [nzSpan]="10"  nz-input formControlName="email" id="email" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label  [nzSm]="4" [nzXs]="12"  nzFor="email">支付宝账号</nz-form-label>
+    <nz-form-control nz-row [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+      <input nz-col [nzSpan]="10"  nz-input formControlName="email" id="email" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item  >
+    <nz-form-label  [nzSm]="4" nzNoColon="true"></nz-form-label>
+    <nz-form-control   nz-row [nzSm]="14" [nzXs]="24" nzErrorTip="">
+      <button nz-button nzType="primary">确认绑定</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

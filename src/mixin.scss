@@ -4,12 +4,13 @@ $static-host-url: '';
 // 变量设置
 $default_color: #FFFFFF;
 $default_color_1: #000000;
-$default_color_2: #333333;
-$default_color_3: #999999;
-$default_color_4: #666666;
+$default_color_3: #333333;
+$default_color_2: #303313;
+$default_color_9: #999999;
+$default_color_6: #666666;
 
-$default_color_5: #FAFAFA;
-$default_color_6: #E5E5E5;
+$default_color_FA: #FAFAFA;
+$default_color_E5: #E5E5E5;
 
 $default_color_7: #E6F1FC;
 $default_color_8: #F4FFEF;
@@ -17,17 +18,19 @@ $default_color_8: #F4FFEF;
 $default_color_7_border: #A3D0FD;
 $default_color_8_border: #C4F5AB;
 
-$default_color_9: #C0C4CC;
+$default_color_4: #606266;
 
 $default_background_color: #F5F7FA;
-$default_border_color: #DCDFE6FF;
+$default_border_color: #D8DCE6;
 $default_placeholder: #909399;
-
+$default_border_bttom_color: #F2F6FC;
+$default_border_F6: #DCDFE6;
 $bgColors: #F4F4F4;
 $bgColorBtn: #0486FEFF;
 $bgColorsing: #F15A32;
 $bgColorsed: #24A4FF;
 $bgColorserr: #999999;
+
 
 $fontSize: 24rpx;
 $fontSizes: 28rpx;
@@ -66,7 +69,7 @@ $vm_design: 750;
 }
 
 @function format($px) {
-  @return ($px / $vm_design) * 100vw;
+  @return $px + px ;
 }
 
 //  背景图片地址和大小

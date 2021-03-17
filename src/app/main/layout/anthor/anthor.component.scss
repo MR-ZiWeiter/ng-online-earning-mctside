@@ -1,0 +1,83 @@
+
+@import 'mixin';
+.anthor {
+  @include wh(100%, auto);
+  @include flex-justify-align();
+  flex-direction: column;
+  background: $default_color;
+  .anthor-top {
+    padding: format(40);
+    @include flex-justify-align(flex-start, center);
+    flex-direction: column;
+    border-bottom: 1px solid $default_border_bttom_color;
+    .anthor-top-img {
+      @include wh(format(110), format(110));
+      border-radius: 50%;
+      overflow: hidden;
+      img {
+        @include wh(100%, 100%);
+      }
+    }
+    .anthor-top-name {
+      @include sc(format(18), $default_color_2);
+      font-weight: bold;
+      line-height:  format(31);
+      margin-top: format(18)
+    }
+    .anthor-top-authentication-info {
+      margin-top: format(15);
+      @include flex-justify-align(space-around,center);
+      .authentication {
+        @include sc(format(12), $default_placeholder);
+        i {
+          margin-right: format(5);
+        }
+        &:not(:last-child) {
+          margin-right: format(30);
+        }
+      }
+    }
+  }
+  .anthor-btm {
+    padding: format(40);
+    @include flex-justify-align(flex-start,center);
+    flex-direction: column;
+    .anthor-btm-money {
+      @include sc(format(14), $default_placeholder);
+      span {
+        &:last-child {
+          color: $default_color_4;
+        }
+      }
+    }
+    .anthor-btm-btn {
+      @include flex-justify-align(space-around,center);
+      margin-top: format(25);
+      .btn {
+        @include wh(format(95), format(36));
+        @include flex-justify-align(center,center);
+        border-radius: format(4);
+        border: 1px  solid $default_border_F6;
+        @include sc(format(14), $default_color_4);
+        cursor: pointer;
+        @include click-active();
+        &:hover {
+          color: $default_color;
+          background: $bgColorBtn;
+        }
+        &:first-child {
+          border: 1px  solid $default_color_7_border;
+          background: $default_color_7;
+          @include sc(format(14), $bgColorBtn);
+          &:hover {
+            color: $default_color;
+            background: $bgColorBtn;
+          }
+        }
+        &:not(:last-child) {
+          margin-right: format(18);
+        }
+      }
+    }
+  }
+}

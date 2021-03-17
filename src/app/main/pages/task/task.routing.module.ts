@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { TaskComponent } from './task.component';
 
 const routes: Routes = [
-  { path: 'task', component: TaskComponent },
+  { path: '', component: TaskComponent },
 ];
 
 @NgModule({

@@ -1,0 +1,41 @@
+<form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-label  [nzSm]="4" [nzXs]="12"  nzFor="email">姓名</nz-form-label>
+    <nz-form-control nz-row [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+      <input nz-col [nzSpan]="10"  nz-input formControlName="email" id="email" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label  [nzSm]="4" [nzXs]="12"  nzFor="email">微信号</nz-form-label>
+    <nz-form-control nz-row [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+      <input nz-col [nzSpan]="10"  nz-input formControlName="email" id="email" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label  [nzSm]="4" [nzXs]="12"  nzFor="email">上传微信二维码</nz-form-label>
+    <nz-form-control nz-row [nzSm]="14" [nzXs]="24">
+      <div class="uplaod-content">
+        <nz-upload
+        class="avatar-uploader"
+        nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+        nzName="avatar"
+        nzListType="picture-card"
+        [nzShowUploadList]="false"
+        [nzBeforeUpload]="beforeUpload"
+        (nzChange)="handleChange($event)"
+      >
+        <ng-container *ngIf="!avatarUrl">
+          <button  [nzGhost]="true" nz-button  nzType="primary">点击上传</button>
+        </ng-container>
+        <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%" />
+      </nz-upload>
+      </div>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item  >
+    <nz-form-label  [nzSm]="4" nzNoColon="true"></nz-form-label>
+    <nz-form-control   nz-row [nzSm]="14" [nzXs]="24" nzErrorTip="">
+      <button nz-button nzType="primary">确认绑定</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

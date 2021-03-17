@@ -1,0 +1,17 @@
+<swipe-custom-card [nzBorderless]="true" title="绑定微信" >
+  <nz-radio-group [(ngModel)]="radioValue" nzButtonStyle="solid">
+    <label nz-radio-button  nzValue="A">认证首页</label>
+    <label nz-radio-button nzValue="B">手机认证</label>
+    <label nz-radio-button nzValue="C">实名认证</label>
+    <label nz-radio-button nzValue="D">银行认证</label>
+    <label nz-radio-button nzValue="E">绑定微信</label>
+    <label nz-radio-button nzValue="F">绑定支付宝</label>
+  </nz-radio-group>
+  <div class="bind-info-content" [ngSwitch]="radioValue">
+    <swipe-bind-we-chat *ngSwitchCase="'E'">
+    </swipe-bind-we-chat>
+    <swipe-phone-ahtion *ngSwitchCase="'B'"></swipe-phone-ahtion>
+    <swipe-bind-zfb *ngSwitchCase="'F'"></swipe-bind-zfb>
+    <swipe-bank-ahtion *ngSwitchCase="'D'" ></swipe-bank-ahtion>
+  </div>
+</swipe-custom-card>

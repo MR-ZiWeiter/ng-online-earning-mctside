@@ -1,11 +1,69 @@
 @import 'mixin';
 .login-page {
   @include wh(100vw, 100vh);
-  @include flex-justify-align(center, center);
+  @include flex-justify-align();
 }
 
-.login-form {
-  max-width: 300px;
+.login-bg {
+  // @include wh(66.6%, 100%);
+  height: 100%;
+  img {
+    @include wh(100%, 100%);
+  }
+}
+.login-form-container {
+  // @include wh(33.3%, 100%);
+  height: 100%;
+  @include flex-justify-align(center,center);
+  .login-form {
+    // max-width: 300px;
+    .login-form-tab {
+      @include flex-justify-align(space-around,center);
+      @include sc(format(22), $default_placeholder);
+      margin-bottom: format(28);
+      .tab-title {
+        margin-right: format(16);
+        cursor: pointer;
+        &.active {
+          color: $bgColorBtn;
+          font-weight: bold;
+        }
+      }
+    }
+    .input {
+      height: format(40);
+      border-radius: format(4);
+      border: 1px solid #D8DCE6;
+      &:focus {
+        // border: none;
+      }
+      &.input-code {
+        margin-right: format(10)
+      }
+    }
+    .get-code {
+      @include flex-justify-align();
+      @include wh(100%, format(40));
+      border: 1px solid $default_border_color;
+      border-radius: format(4);
+      .input {
+        border: none;
+        height: format(36);
+      }
+      .code-btn {
+        @include sc(format(14), $default_color_4);
+        cursor: pointer;
+      }
+    }
+    .code-img {
+      height: format(40);
+      cursor: pointer;
+    }
+    .register {
+      @include wh(100%, auto);
+      text-align: center;
+    }
+  }
 }
 
 .login-form-margin {

@@ -1,0 +1,53 @@
+
+@import 'mixin';
+.header {
+  width: 100%;
+  height: format(80);
+  background: $bgColorBtn;
+  .header-container {
+    @include wh(format(1200), 100%);
+    margin: 0 auto;
+    @include flex-justify-align();
+    .header-container-left {
+      @include flex-justify-align(flex-start,center);
+      .header-logo {
+        @include wh(format(136), format(62));
+        margin-right: format(30);
+        img {
+          @include wh(100%, 100%);
+        }
+      }
+      .header-name {
+        @include flex-justify-align();
+        @include sc(format(20), $default_color);
+        span {
+          margin-right: format(8);
+          &:last-child {
+            font-size: format(14);
+            align-self: flex-end;
+          }
+        }
+      }
+    } 
+    .header-container-right {
+      @include flex-justify-align();
+      @include sc(format(16), $default_color);
+      .my-info {
+        margin-right: format(30);
+        cursor: pointer;
+        i {
+          margin-right: format(8);
+        }
+      }
+      .issue-task {
+        cursor: pointer;
+        @include wh(format(104), format(40));
+        background: $default_color;
+        @include sc(format(16), $bgColorBtn);
+        @include flex-justify-align(center,center);
+        border-radius: format(4);
+        @include  click-active();
+      }
+    }
+  }
+}

@@ -6,9 +6,12 @@ import { MenuComponent } from './menu/menu.component';
 import { AnthorComponent } from './anthor/anthor.component';
 import { HeaderComponent } from "./header/header.component";
 
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+
 @NgModule({
   imports: [
-    CoreModule
+    CoreModule,
+    NzMenuModule
   ],
   exports: [
     HeaderComponent,

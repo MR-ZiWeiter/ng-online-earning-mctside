@@ -1,0 +1,6 @@
+@import 'mixin';
+.bind-info-content {
+  @include wh(100%, auto);
+  padding: format(22);
+}
+

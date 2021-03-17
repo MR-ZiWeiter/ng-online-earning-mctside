@@ -1,30 +1,120 @@
-<section class="login-page">
-  <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
-    <nz-form-item>
-      <nz-form-control nzErrorTip="Please input your username!">
-        <nz-input-group nzPrefixIcon="user">
-          <input type="text" nz-input formControlName="username" placeholder="Username" />
-        </nz-input-group>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-control nzErrorTip="Please input your Password!">
-        <nz-input-group nzPrefixIcon="lock">
-          <input type="password" nz-input formControlName="password" placeholder="Password" />
-        </nz-input-group>
-      </nz-form-control>
-    </nz-form-item>
-    <div nz-row class="login-form-margin">
-      <div nz-col [nzSpan]="12">
-        <label nz-checkbox>
-          <span>Remember me</span>
-        </label>
-      </div>
-      <div nz-col [nzSpan]="12">
-        <a class="login-form-forgot">Forgot password</a>
-      </div>
-    </div>
-    <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Log in</button>
-    Or <a> register now! </a>
-  </form>
+<section nz-row class="login-page">
+  <section class="login-bg" nz-col [nzSpan]="16">
+    <img [src]="loginBg" alt="">
+  </section>
+  <section class="login-form-container" nz-col [nzSpan]="8" >
+    <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+      <section class="login-form-tab" *ngIf="!register && !reset">
+        <div [class]="['tab-title', item.type === activeLoginType && 'active' ]" (click)="activeLoginType = item.type" *ngFor="let item of loginType " >{{ item.text }}</div>
+      </section>
+      <section class="login-form-tab" *ngIf="register && !reset " >
+        <section class="tab-title active">注册</section>
+      </section>
+      <section class="login-form-tab" *ngIf="reset" >
+        <section class="tab-title active">找回密码</section>
+      </section>
+      <!--账户密码登陆-->
+      <section *ngIf="!activeLoginType && !reset || register ">
+        <nz-form-item>
+          <nz-form-control nzErrorTip="请输入正确的用户名！">
+            <nz-input-group >
+              <input type="text" [nzBorderless]="true" class="input" nz-input formControlName="username" placeholder="请输入用户名" />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="请输入正确的账户密码！">
+            <nz-input-group >
+              <input type="password" [nzBorderless]="true" class="input" nz-input formControlName="password" placeholder="请输入密码" />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item *ngIf="register">
+          <nz-form-control nzErrorTip="请再次输入正确的账户密码">
+            <nz-input-group >
+              <input type="password" [nzBorderless]="true" class="input" nz-input formControlName="confirmPassword" placeholder="请再次输入密码" />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="请输入正确的验证码！" class="code">
+            <nz-input-group >
+              <input type="password" [nzBorderless]="true" class="input input-code" nz-input formControlName="userCode" placeholder="请输入验证码" nz-col [nzSpan]="16" /><img class="code-img" nz-col [nzSpan]="7" src="/assets/images/pages/login/code-mock@2x.png" alt="">
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <div nz-row class="login-form-margin" *ngIf="!register">
+          <div nz-col [nzSpan]="12">
+            <label nz-checkbox formControlName="remember" >
+              <span>记住密码</span>
+            </label>
+          </div>
+          <div nz-col [nzSpan]="12">
+            <a class="login-form-forgot" (click)="reset=true" >忘记密码？</a>
+          </div>
+        </div>
+      </section>
+      <!--手机验证码登陆-->
+      <section *ngIf="activeLoginType || register || reset ">
+        <nz-form-item>
+          <nz-form-control nzErrorTip="请输入正确的手机号码！">
+            <nz-input-group >
+              <input type="text" [nzBorderless]="true" class="input" nz-input formControlName="mobile" placeholder="请输入手机号码" />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="请输入正确的验证码！">
+            <nz-input-group >
+              <section class="get-code">
+                <input type="password" [nzBorderless]="true" class="input input-code" nz-input formControlName="phoneCode" placeholder="请输入验证码" nz-col [nzSpan]="16" /><span class="code-btn" nz-col [nzSpan]="7"  >获取验证码</span>
+              </section>
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item *ngIf="reset">
+          <nz-form-control nzErrorTip="请输入正确的账户密码！">
+            <nz-input-group >
+              <input type="password" [nzBorderless]="true" class="input" nz-input formControlName="password" placeholder="请输入新密码" />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item *ngIf="reset">
+          <nz-form-control nzErrorTip="请再次输入正确的账户密码">
+            <nz-input-group >
+              <input type="password" [nzBorderless]="true" class="input" nz-input formControlName="confirmPassword" placeholder="请再次输入新密码" />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item *ngIf="register">
+          <nz-form-control nzErrorTip="请输入正确的QQ号码！">
+            <nz-input-group >
+              <input type="password" [nzBorderless]="true" class="input" nz-input formControlName="QQNum" placeholder="请输入QQ号码" />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item *ngIf="register">
+          <nz-form-control nzErrorTip="请输入正确的微信号码!">
+            <nz-input-group >
+              <input type="password" [nzBorderless]="true" class="input" nz-input formControlName="weChatNum" placeholder="请输入微信号码" />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <div nz-row class="login-form-margin">
+        </div>
+      </section>
+      <button nz-button *ngIf="!activeLoginType && !register" class="login-form-button login-form-margin" [nzType]="'primary'">登陆</button>
+      <button nz-button *ngIf="activeLoginType && !register" class="login-form-button login-form-margin" [nzType]="'primary'">登陆</button>
+      <button nz-button *ngIf="register" class="login-form-button login-form-margin" [nzType]="'primary'">确认注册</button>
+       <section class="register" *ngIf="!register">
+        没有账号？<a (click)="register=true;reset=false;activeLoginType=0">注册</a>
+       </section>
+      <section class="register" *ngIf="register" >
+        已有账号？<a (click)="register=false;reset=false;activeLoginType=0">登陆</a>
+        </section>
+
+       
+    </form>
+  </section>
+
 </section>

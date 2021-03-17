@@ -21,8 +21,7 @@ export class SwipeInputComponent implements OnInit {
   @Input() public isPrefix: boolean = false;
   @Input() public isSuffix: boolean = false;
   @Input() public isClear: boolean = false;
-  @Input()
-  public maxLength!: number;
+  @Input() public maxLength!: number;
   @Input()
   public minLength!: number;
 

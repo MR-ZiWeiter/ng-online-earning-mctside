@@ -1,0 +1,33 @@
+
+
+
+@import 'mixin';
+
+.text {
+  font-size: 12px;
+  color: #C0C4CC;
+  padding-left: 10px;
+}
+
+
+.avatarUrl {
+  @include wh(format(80), format(80));
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  img {
+    @include wh(100%, 100%);
+  }
+}
+
+.radio-antd {
+  // @include wh(format(58), format(40));
+  padding: format(10);
+  border: 1px solid #DCDFE6;
+  border-radius: format(4);
+  text-align: center;
+  &.active {
+    color: #1989FA;
+    border-color: #1989FA;
+  }
+}

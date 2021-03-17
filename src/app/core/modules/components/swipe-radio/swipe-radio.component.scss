@@ -1,0 +1,13 @@
+
+@import 'mixin';
+.radio-antd {
+  // @include wh(format(58), format(40));
+  padding: format(10);
+  border: 1px solid #DCDFE6;
+  border-radius: format(4);
+  text-align: center;
+  &.active {
+    color: #1989FA;
+    border-color: #1989FA;
+  }
+}

@@ -9,7 +9,7 @@ import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
-
+import { NzMessageModule } from 'ng-zorro-antd/message';
 
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
@@ -40,7 +40,7 @@ registerLocaleData(zh);
     AppRoutingModule,
     BrowserAnimationsModule,
     CoreModule,
-
+    NzMessageModule,
     /* 网络服务 */
     HttpClientModule,
     AppRoutingModule,
