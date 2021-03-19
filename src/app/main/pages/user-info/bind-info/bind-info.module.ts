@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CoreModule } from 'src/app/core/core.module';
-import { CustomModel } from '../components/component.module';
+import { CustomModel } from '../../components/component.module';
 import { BindInfoComponent } from './bind-info.component';
 import { AhtionHomeComponent } from './components/ahtion-home/ahtion-home.component';
 import { BankAhtionComponent } from './components/bank-ahtion/bank-ahtion.component';

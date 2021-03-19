@@ -12,7 +12,8 @@ import { CustomModel } from '../components/component.module';
       {
         path: '',
         component: UserInfoComponent
-      }
+      },
+      { path: 'bind-info', loadChildren: () => import('./bind-info/bind-info.module').then(m => m.BindInfoModule) }
     ]),
     NzSelectModule,
     NzDatePickerModule,

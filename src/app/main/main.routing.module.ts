@@ -13,8 +13,6 @@ const routes: Routes = [
       { path: 'index', component: IndexComponent },
       { path: 'task', loadChildren: () => import('./pages/task/task.module').then(m => m.TaskModule) },
       { path: 'user-info', loadChildren: () => import('./pages/user-info/user-info.module').then(m => m.UserInfoModule) },
-      { path: 'bind-info', loadChildren: () => import('./pages/bind-info/bind-info.module').then(m => m.BindInfoModule) }
-
     ]
   },
 ];

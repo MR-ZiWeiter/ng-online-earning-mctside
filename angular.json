@@ -29,6 +29,12 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
+            /* 添加CommonJS依赖 */
+            "allowedCommonJsDependencies": [
+              "lodash",
+              "moment",
+              "lottie-web"
+            ],
             "assets": [
               "src/favicon.ico",
               "src/assets",
