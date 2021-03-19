@@ -56,7 +56,7 @@ export class LoginPage implements OnInit {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
     }
-    console.log(this.validateForm);
+    // console.log(this.validateForm);
     if (this.validateForm.valid) {
       /* 预处理登录成功后-后期重写至ApiService模块 */
       this.userService.setAppToken(
