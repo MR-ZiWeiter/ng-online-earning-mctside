@@ -33,7 +33,8 @@
             "allowedCommonJsDependencies": [
               "lodash",
               "moment",
-              "lottie-web"
+              "lottie-web",
+              "date-fns"
             ],
             "assets": [
               "src/favicon.ico",

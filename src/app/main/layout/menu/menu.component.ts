@@ -9,11 +9,12 @@ export class MenuComponent implements OnInit {
   public openMap: Array<boolean> = [true, false, false, false] ;
   public menuMap: Array<any> = [
     { title: '我的任务', icon: 'carry-out' , list: [
-      { name: '发布任务', id: '0-1' , path: ''},
-      { name: '绑定商铺', id: '0-2' , path: '//'},
-      { name: '已发布任务', id: '0-3' , path: '//' },
-      { name: '任务模版', id: '0-4' , path: '//'},
-      { name: '收费明细', id: '0-5' , path: '//'},
+      { name: '发布任务', id: '0-1' , path: 'task/post-task'},
+      { name: '绑定商铺', id: '0-2' , path: 'task/bound-shop'},
+      { name: '已发布任务', id: '0-3' , path: 'task/published-list' },
+      { name: '任务模版', id: '0-4' , path: 'task/task-template'},
+      { name: '收费明细', id: '0-5' , path: 'task/charge-details'},
+      { name: '我的订单', id: '0-6' , path: 'task/order-management'},
      ] },
      { title: '财务明细', icon: 'credit-card' , list: [
       { name: '账户充值', id: '1-1' , path: ''},
