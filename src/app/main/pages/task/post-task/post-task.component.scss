@@ -1,4 +1,11 @@
 @import 'mixin';
-.btn-sty {
-  margin-right: format(12);
+.task-page{
+  .btn-controll {
+    @include wh(100%, format(100));
+    @include flex-justify-align(center, center);
+    .custom-btn-sty {
+      margin: 0 format(15);
+      padding: 0 format(34);
+    }
+  }
 }

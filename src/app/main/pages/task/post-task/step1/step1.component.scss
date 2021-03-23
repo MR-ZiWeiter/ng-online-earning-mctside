@@ -1,5 +1,5 @@
 @import 'mixin';
-.published-list-component {
+.step1-component {
   background-color: $default_color;
   margin-bottom: format(10);
   .header-info {
@@ -12,13 +12,7 @@
       font-weight: 500;
     }
   }
-  .context-info {
-    padding: format(12) 0;
-    .custom-select-input {
-      @include wh(format(132), auto);
-    }
-    .custom-search-input {
-      @include wh(format(520), auto);
-    }
+  .form-info {
+    padding: format(30) 0;
   }
 }

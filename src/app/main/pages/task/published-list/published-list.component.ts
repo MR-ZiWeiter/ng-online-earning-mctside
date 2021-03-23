@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'swipe-published-list',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PublishedListComponent implements OnInit {
 
-  constructor() { }
+  public validateForm!: FormGroup;
 
-  ngOnInit() {
+  constructor(private fb: FormBuilder) {}
+
+  submitForm(): void {
+    for (const i in this.validateForm.controls) {
+      this.validateForm.controls[i].markAsDirty();
+      this.validateForm.controls[i].updateValueAndValidity();
+    }
+  }
+
+  ngOnInit(): void {
+    this.validateForm = this.fb.group({
+      taskType: [null, [Validators.required]]
+    });
   }
 
 }

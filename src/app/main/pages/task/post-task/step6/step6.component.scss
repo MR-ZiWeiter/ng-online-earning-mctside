@@ -1,0 +1,33 @@
+@import 'mixin';
+.step6-component {
+  background-color: $default_color;
+  margin-bottom: format(10);
+  .header-info {
+    @include wh(auto, format(44));
+    @include flex-justify-align(flex-start, center);
+    margin-left: format(20);
+    border-bottom: format(1) solid $default_color_10;
+    .title-text {
+      @include sc(format(16), $default_color_6);
+      font-weight: 500;
+    }
+  }
+  .form-info {
+    padding: format(22) 0;
+    .custom-check-radio-group {
+      @include flex-justify-align(flex-start, flex-start);
+      flex-wrap: wrap;
+      .min-check-radio {
+        @include wh(auto, format(32));
+        @include flex-justify-align(center);
+      }
+    }
+    .min-offset-left {
+      margin-left: format(12);
+    }
+    .custom-margin-0 {
+      margin: 0;
+    }
+
+  }
+}

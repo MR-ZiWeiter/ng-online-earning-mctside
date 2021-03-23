@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 
@@ -13,11 +13,11 @@ function getBase64(file: File): Promise<string | ArrayBuffer | null> {
 }
 
 @Component({
-  selector: 'swipe-post-task',
-  templateUrl: './post-task.component.html',
-  styleUrls: ['./post-task.component.scss']
+  selector: 'swipe-step4',
+  templateUrl: './step4.component.html',
+  styleUrls: ['./step4.component.scss']
 })
-export class PostTaskComponent implements OnInit {
+export class Step4Component implements OnInit {
 
   public selectedValue = null;
 
@@ -113,10 +113,10 @@ export class PostTaskComponent implements OnInit {
       phoneNumber: [null, [Validators.required]],
       website: [null, [Validators.required]],
       captcha: [null, [Validators.required]],
+      keyword: [null, [Validators.required]],
       norm: [null],
       price: [null, [Validators.pattern(/^\d+(\.\d+)?$/)]],
       agree: [false]
     });
   }
-
 }

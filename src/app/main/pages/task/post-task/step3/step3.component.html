@@ -1,0 +1,163 @@
+<section class="step3-component">
+  <section class="header-info">
+    <span class="title-text">第三步：千人千面</span>
+  </section>
+  <section class="form-info">
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzSm]="5" [nzXs]="24" nzRequired nzFor="temp">买号信誉</nz-form-label>
+            <nz-form-control [nzSm]="6" [nzXs]="12" nzErrorTip="不要求">
+              <nz-select nz-col nzSpan="24" nzShowSearch nzAllowClear formControlName="temp" id="temp" nzPlaceHolder="不要求" [(ngModel)]="selectedValue">
+                <nz-option nzLabel="模板一" nzValue="1"></nz-option>
+                <nz-option nzLabel="模板二" nzValue="2"></nz-option>
+                <nz-option nzLabel="模板三" nzValue="3"></nz-option>
+              </nz-select>
+            </nz-form-control>
+            <button nz-button disabled nzType="text">注：建议不开启，选择淘宝信誉评级范围后，增加对应增值费</button>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="checkPassword" nzRequired>买号自动打标</nz-form-label>
+            <nz-form-control [nzSm]="4" [nzXs]="24">
+              <!-- <input nz-input type="password" formControlName="checkPassword" id="checkPassword"  [(ngModel)]="radioValue" /> -->
+              <nz-radio-group class="custom-check-radio-group" id="checkPassword" formControlName="checkPassword">
+                <label class="min-check-radio" nz-radio nzValue="A">不要求</label>
+                <label class="min-check-radio" nz-radio nzValue="B">要求</label>
+              </nz-radio-group>
+            </nz-form-control>
+            <button nz-button disabled nzType="text">注：建议开启，系统对接单买号、关键词自动打标，增加下单权重，增值费+0.5元/单</button>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="checkPassword" nzRequired>要求收藏店铺</nz-form-label>
+            <nz-form-control [nzSm]="4" [nzXs]="24">
+              <!-- <input nz-input type="password" formControlName="checkPassword" id="checkPassword"  [(ngModel)]="radioValue" /> -->
+              <nz-radio-group class="custom-check-radio-group" id="checkPassword" formControlName="checkPassword">
+                <label class="min-check-radio" nz-radio nzValue="A">不要求</label>
+                <label class="min-check-radio" nz-radio nzValue="B">要求</label>
+              </nz-radio-group>
+            </nz-form-control>
+            <button nz-button disabled nzType="text">注：建议不用每单都选择，选择收藏店铺，增值费 +0 元</button>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="checkPassword" nzRequired>要求收藏加购</nz-form-label>
+            <nz-form-control [nzSm]="4" [nzXs]="24">
+              <!-- <input nz-input type="password" formControlName="checkPassword" id="checkPassword"  [(ngModel)]="radioValue" /> -->
+              <nz-radio-group class="custom-check-radio-group" id="checkPassword" formControlName="checkPassword">
+                <label class="min-check-radio" nz-radio nzValue="A">不要求</label>
+                <label class="min-check-radio" nz-radio nzValue="B">要求</label>
+              </nz-radio-group>
+            </nz-form-control>
+            <button nz-button disabled nzType="text">注：建议不用每单都选择，选择收藏加购宝贝，增值费 +0 元</button>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="checkPassword" nzRequired>要求和客服聊天</nz-form-label>
+            <nz-form-control [nzSm]="4" [nzXs]="24">
+              <!-- <input nz-input type="password" formControlName="checkPassword" id="checkPassword"  [(ngModel)]="radioValue" /> -->
+              <nz-radio-group class="custom-check-radio-group" id="checkPassword" formControlName="checkPassword">
+                <label class="min-check-radio" nz-radio nzValue="A">不要求</label>
+                <label class="min-check-radio" nz-radio nzValue="B">要求</label>
+              </nz-radio-group>
+            </nz-form-control>
+            <button nz-button disabled nzType="text">注：建议不用每单都选择，选择客服假聊，增值费 +0 元</button>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="checkPassword" nzRequired>要求买号性别</nz-form-label>
+            <nz-form-control [nzSm]="6" [nzXs]="24">
+              <!-- <input nz-input type="password" formControlName="checkPassword" id="checkPassword"  [(ngModel)]="radioValue" /> -->
+              <nz-radio-group class="custom-check-radio-group" id="checkPassword" formControlName="checkPassword">
+                <label class="min-check-radio" nz-radio nzValue="A">不要求</label>
+                <label class="min-check-radio" nz-radio nzValue="B">男</label>
+                <label class="min-check-radio" nz-radio nzValue="C">女</label>
+              </nz-radio-group>
+            </nz-form-control>
+            <button nz-button disabled nzType="text">注：可根据类目选择，选择限制性别后，增值费 +0.5 元</button>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzSm]="5" [nzXs]="24" nzRequired nzFor="temp">买号信誉</nz-form-label>
+            <nz-form-control [nzSm]="6" [nzXs]="12" nzErrorTip="不要求">
+              <nz-select nz-col nzSpan="24" nzShowSearch nzAllowClear formControlName="temp" id="temp" nzPlaceHolder="不要求" [(ngModel)]="selectedValue">
+                <nz-option nzLabel="模板一" nzValue="1"></nz-option>
+                <nz-option nzLabel="模板二" nzValue="2"></nz-option>
+                <nz-option nzLabel="模板三" nzValue="3"></nz-option>
+              </nz-select>
+            </nz-form-control>
+            <button nz-button disabled nzType="text">注：建议不开启，选择淘宝信誉评级范围后，增加对应增值费</button>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzSm]="5" [nzXs]="24" nzRequired nzFor="temp">要求买号年龄</nz-form-label>
+            <nz-form-control [nzSm]="6" [nzXs]="12" nzErrorTip="不要求">
+              <nz-select nz-col nzSpan="24" nzShowSearch nzAllowClear formControlName="temp" id="temp" nzPlaceHolder="不要求" [(ngModel)]="selectedValue">
+                <nz-option nzLabel="模板一" nzValue="1"></nz-option>
+                <nz-option nzLabel="模板二" nzValue="2"></nz-option>
+                <nz-option nzLabel="模板三" nzValue="3"></nz-option>
+              </nz-select>
+            </nz-form-control>
+            <button nz-button disabled nzType="text">注：建议不用选择，选择买号年龄，增值费 +2 元</button>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzSm]="5" [nzXs]="24" nzRequired nzFor="temp">要求付款方式</nz-form-label>
+            <nz-form-control [nzSm]="6" [nzXs]="12" nzErrorTip="不要求">
+              <nz-select nz-col nzSpan="24" nzShowSearch nzAllowClear formControlName="temp" id="temp" nzPlaceHolder="不要求" [(ngModel)]="selectedValue">
+                <nz-option nzLabel="模板一" nzValue="1"></nz-option>
+                <nz-option nzLabel="模板二" nzValue="2"></nz-option>
+                <nz-option nzLabel="模板三" nzValue="3"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item nz-row nzAlign="top">
+            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="checkPassword" nzRequired>买号常购物标签</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24">
+              <!-- <input nz-input type="password" formControlName="checkPassword" id="checkPassword"  [(ngModel)]="radioValue" /> -->
+              <nz-radio-group class="custom-check-radio-group" id="checkPassword" formControlName="checkPassword">
+                <label class="min-check-radio" nz-radio nzValue="A">女装内衣</label>
+                <label class="min-check-radio" nz-radio nzValue="B">精品男装</label>
+                <label class="min-check-radio" nz-radio nzValue="C">鞋子箱包</label>
+                <label class="min-check-radio" nz-radio nzValue="D">时尚配饰</label>
+                <label class="min-check-radio" nz-radio nzValue="E">美容护肤</label>
+                <label class="min-check-radio" nz-radio nzValue="F">美食特产</label>
+                <label class="min-check-radio" nz-radio nzValue="G">数码家电</label>
+              </nz-radio-group>
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+      </section>
+    </form>
+  </section>
+</section>

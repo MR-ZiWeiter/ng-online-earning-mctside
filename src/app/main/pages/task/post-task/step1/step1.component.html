@@ -1,0 +1,207 @@
+<section class="step1-component">
+  <section class="header-info">
+    <span class="title-text">第一步：填写任务基本信息</span>
+  </section>
+  <section class="form-info">
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzSm]="5" [nzXs]="24" nzRequired nzFor="temp">选择模板</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请选择任务模板">
+              <nz-select nz-col nzSpan="24" nzShowSearch nzAllowClear formControlName="temp" id="temp" nzPlaceHolder="选择任务模板" [(ngModel)]="selectedValue">
+                <nz-option nzLabel="模板一" nzValue="1"></nz-option>
+                <nz-option nzLabel="模板二" nzValue="2"></nz-option>
+                <nz-option nzLabel="模板三" nzValue="3"></nz-option>
+              </nz-select>
+            </nz-form-control>
+            <button nz-button color="primary" nzType="text">模板管理</button>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzSm]="5" [nzXs]="24" nzRequired nzFor="temp">所属平台</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请选择任务平台">
+              <nz-select nz-col nzSpan="24" nzShowSearch nzAllowClear formControlName="temp" id="temp" nzPlaceHolder="淘宝" [(ngModel)]="selectedValue">
+                <nz-option nzLabel="淘宝" nzValue="1"></nz-option>
+                <nz-option nzLabel="京东" nzValue="2"></nz-option>
+                <nz-option nzLabel="天猫" nzValue="3"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="checkPassword" nzRequired>是否截图</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24">
+              <!-- <input nz-input type="password" formControlName="checkPassword" id="checkPassword"  [(ngModel)]="radioValue" /> -->
+              <nz-radio-group id="checkPassword" formControlName="checkPassword">
+                <label nz-radio nzValue="A">需要</label>
+                <label nz-radio nzValue="B">不需要</label>
+              </nz-radio-group>
+              <button nz-button disabled nzType="text">提示：不截图模式更加安全</button>
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzSm]="5" [nzXs]="24" nzRequired nzFor="temp">选择店铺</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请选择店铺">
+              <nz-select nz-col nzSpan="24" nzShowSearch nzAllowClear formControlName="temp" id="temp" nzPlaceHolder="淘宝" [(ngModel)]="selectedValue">
+                <nz-option nzLabel="淘宝" nzValue="1"></nz-option>
+                <nz-option nzLabel="京东" nzValue="2"></nz-option>
+                <nz-option nzLabel="天猫" nzValue="3"></nz-option>
+              </nz-select>
+            </nz-form-control>
+            <button nz-button color="primary" nzType="text">绑定店铺</button>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzSm]="5" [nzXs]="24" nzRequired nzFor="temp">商品类目</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请选择商品类目">
+              <nz-select nz-col nzSpan="24" nzShowSearch nzAllowClear formControlName="temp" id="temp" nzPlaceHolder="淘宝" [(ngModel)]="selectedValue">
+                <nz-option nzLabel="淘宝" nzValue="1"></nz-option>
+                <nz-option nzLabel="京东" nzValue="2"></nz-option>
+                <nz-option nzLabel="天猫" nzValue="3"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="website" nzRequired>商品链接</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入商品链接">
+              <input nz-input id="website" formControlName="website" placeholder="website" placeholder="请输入商品链接"/>
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="website" nzRequired>商品标题</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入商品标题">
+              <input nz-input id="website" formControlName="website" placeholder="请输入商品标题" />
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="norm">商品规格</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24">
+              <input nz-input id="norm" formControlName="norm" placeholder="请输入商品规格" />
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="12">
+          <nz-form-item>
+            <nz-form-label [nzSm]="10" [nzXs]="12" nzRequired>下单价格</nz-form-label>
+            <nz-form-control
+              [nzSm]="10"
+              [nzXs]="12"
+              nzErrorTip="请输入正确的下单价格">
+              <ng-template #nzPrefix>
+                <i nz-icon nzType="minus" nzTheme="outline"></i>
+              </ng-template>
+              <nz-input-group [nzAddOnBefore]="nzPrefix" [nzAddOnAfter]="suffixButton">
+                <input type="number" nz-input formControlName="price" placeholder="1.00" />
+              </nz-input-group>
+              <ng-template #suffixButton>
+                <i nz-icon nzType="plus" nzTheme="outline"></i>
+              </ng-template>
+              <!-- <nz-input-number nz-input [nzMin]="1" [nzStep]="1" formControlName="price"></nz-input-number> -->
+            </nz-form-control>
+            <button nz-button disabled nzType="text">元</button>
+          </nz-form-item>
+        </section>
+        <section nz-col [nzSpan]="10" [nzOffset]="1">
+          <nz-form-item>
+            <nz-form-label [nzSm]="4" [nzXs]="12" nzFor="price" nzRequired>每单买</nz-form-label>
+            <nz-form-control
+              [nzSm]="8"
+              [nzXs]="12"
+              nzErrorTip="每单至少为1件">
+              <!-- <nz-input-number nz-input nzId="price" [nzMin]="1" [nzStep]="1" formControlName="price"></nz-input-number> -->
+              <ng-template #nzPrefix>
+                <i nz-icon nzType="minus" nzTheme="outline"></i>
+              </ng-template>
+              <nz-input-group [nzAddOnBefore]="nzPrefix" [nzAddOnAfter]="suffixButton">
+                <input type="number" nz-input formControlName="price" placeholder="1" />
+              </nz-input-group>
+              <ng-template #suffixButton>
+                <i nz-icon nzType="plus" nzTheme="outline"></i>
+              </ng-template>
+            </nz-form-control>
+            <button nz-button disabled nzType="text">件</button>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="norm">商品图片</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24">
+              <div class="clearfix">
+                <nz-upload
+                  nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                  nzListType="picture-card"
+                  [(nzFileList)]="fileList"
+                  [nzShowButton]="fileList.length < 8"
+                  [nzPreview]="handlePreview"
+                >
+                  <div>
+                    <i nz-icon nzType="plus"></i>
+                    <div style="margin-top: 8px">Upload</div>
+                  </div>
+                </nz-upload>
+                <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null" (nzOnCancel)="previewVisible = false">
+                  <ng-template #modalContent>
+                    <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+                  </ng-template>
+                </nz-modal>
+              </div>
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzSm]="5" [nzXs]="12" nzRequired>任务数量</nz-form-label>
+            <nz-form-control
+              [nzSm]="5"
+              [nzXs]="6"
+              nzErrorTip="请输入正确的下单价格">
+              <ng-template #nzPrefix>
+                <i nz-icon nzType="minus" nzTheme="outline"></i>
+              </ng-template>
+              <nz-input-group [nzAddOnBefore]="nzPrefix" [nzAddOnAfter]="suffixButton">
+                <input type="number" nz-input formControlName="price" placeholder="例如：100" />
+              </nz-input-group>
+              <ng-template #suffixButton>
+                <i nz-icon nzType="plus" nzTheme="outline"></i>
+              </ng-template>
+              <!-- <nz-input-number nz-input [nzMin]="1" [nzStep]="1" formControlName="price"></nz-input-number> -->
+            </nz-form-control>
+            <button nz-button disabled nzType="text">注：要和下面关键词数量总和一致。</button>
+          </nz-form-item>
+        </section>
+      </section>
+    </form>
+  </section>
+</section>

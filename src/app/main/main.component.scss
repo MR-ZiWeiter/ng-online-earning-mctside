@@ -1,11 +1,13 @@
 @import 'mixin';
 
 .main-container {
-  @include wh(100vw, 100vh);
+  @include wh(100vw, auto);
+  min-width: format(1240);
+  min-height: 100vh;
   background: $default_background_color;
   .custom-header {
     @include wh(100%, auto);
-  } 
+  }
   .main-content {
     width: format(1200);
     margin: 0 auto;
@@ -20,8 +22,6 @@
     .main-right-content {
       flex: 1;
       align-self: flex-start;
-      background: $default_color;
-      padding: format(20);
     }
   }
 }

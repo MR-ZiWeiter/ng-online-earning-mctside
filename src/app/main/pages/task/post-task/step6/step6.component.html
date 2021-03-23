@@ -1,0 +1,39 @@
+<section class="step6-component">
+  <!-- <section class="header-info">
+    <span class="title-text">第五步：其他</span>
+  </section> -->
+  <section class="form-info">
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item nz-row>
+            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="checkPassword" nzRequired>将本次任务存为模板</nz-form-label>
+            <nz-form-control [nzSm]="5" [nzXs]="24">
+              <!-- <input nz-input type="password" formControlName="checkPassword" id="checkPassword"  [(ngModel)]="radioValue" /> -->
+              <nz-radio-group class="custom-check-radio-group" id="checkPassword" formControlName="checkPassword">
+                <label class="min-check-radio" nz-radio nzValue="A">不启用</label>
+                <label class="min-check-radio" nz-radio nzValue="B">启用</label>
+              </nz-radio-group>
+            </nz-form-control>
+            <section nz-col nzFlex="1" nz-row>
+              <section nz-col [nzSpan]="24">
+                <nz-form-item class="custom-margin-0">
+                  <nz-form-label [nzSm]="5" [nzXs]="12" nzFor="keyword" nzRequired>模板名称</nz-form-label>
+                  <nz-form-control
+                    [nzSm]="14"
+                    [nzXs]="24"
+                    nzErrorTip="请输入模板名称">
+                    <input nz-input type="text" formControlName="keyword" placeholder="模板名称" />
+                  </nz-form-control>
+                </nz-form-item>
+              </section>
+            </section>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row nzJustify="center">
+        <button nz-button disabled nzType="text">注：发布可保存模版。下次同商品可直接选择模版，想改的改一下，就可发布。</button>
+      </section>
+    </form>
+  </section>
+</section>

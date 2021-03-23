@@ -1,5 +1,5 @@
 @import 'mixin';
-.published-list-component {
+.step3-component {
   background-color: $default_color;
   margin-bottom: format(10);
   .header-info {
@@ -12,13 +12,19 @@
       font-weight: 500;
     }
   }
-  .context-info {
-    padding: format(12) 0;
-    .custom-select-input {
-      @include wh(format(132), auto);
+  .form-info {
+    padding: format(30) 0;
+    .custom-check-radio-group {
+      @include flex-justify-align(flex-start, flex-start);
+      flex-wrap: wrap;
+      .min-check-radio {
+        @include wh(auto, format(32));
+        @include flex-justify-align(center);
+      }
     }
-    .custom-search-input {
-      @include wh(format(520), auto);
+    .min-offset-left {
+      margin-left: format(12);
     }
+
   }
 }

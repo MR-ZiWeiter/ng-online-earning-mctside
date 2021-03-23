@@ -1,0 +1,48 @@
+<section class="step2-component">
+  <section class="header-info">
+    <span class="title-text">第二步：进店方式</span>
+  </section>
+  <section class="form-info">
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item nz-row nzAlign="top">
+            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="checkPassword" nzRequired>进店方式</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24">
+              <!-- <input nz-input type="password" formControlName="checkPassword" id="checkPassword"  [(ngModel)]="radioValue" /> -->
+              <nz-radio-group class="custom-check-radio-group" id="checkPassword" formControlName="checkPassword">
+                <label class="min-check-radio" nz-radio nzValue="A">搜索关键词</label>
+                <label class="min-check-radio" nz-radio nzValue="B">搜索店铺名</label>
+                <label class="min-check-radio" nz-radio nzValue="C">直通车</label>
+                <label class="min-check-radio" nz-radio nzValue="D">直接打开网址</label>
+                <label class="min-check-radio" nz-radio nzValue="E">淘口令</label>
+                <label class="min-check-radio" nz-radio nzValue="F">二维码</label>
+                <label class="min-check-radio" nz-radio nzValue="G">其他渠道</label>
+              </nz-radio-group>
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzSm]="5" [nzXs]="12" nzFor="keyword1" nzRequired>关键词1</nz-form-label>
+            <nz-form-control
+              [nzSm]="5"
+              [nzXs]="6"
+              nzErrorTip="请输入关键词">
+              <input nz-input id="keyword" formControlName="keyword1" placeholder="请输入关键词" />
+            </nz-form-control>
+            <nz-form-control
+              class="min-offset-left"
+              [nzSm]="5"
+              [nzXs]="6">
+              <input nz-input type="number" formControlName="keyword2" placeholder="数量" />
+            </nz-form-control>
+            <button nz-button class="min-offset-left">增加</button>
+          </nz-form-item>
+        </section>
+      </section>
+    </form>
+  </section>
+</section>

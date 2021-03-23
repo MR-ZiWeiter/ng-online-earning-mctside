@@ -12,6 +12,9 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzCascaderModule } from 'ng-zorro-antd/cascader';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+
 /* ICON模块注入 */
 import {
   MenuFoldOutline,
@@ -45,6 +48,8 @@ import { SwipeUploadComponent } from './modules/components/swipe-upload/swipe-up
     NzUploadModule,
     NzRadioModule,
     NzCascaderModule,
+    NzInputNumberModule,
+    NzDatePickerModule,
     NzModalModule,
     NzSelectModule
   ],
@@ -56,19 +61,21 @@ import { SwipeUploadComponent } from './modules/components/swipe-upload/swipe-up
     NzFormModule,
     NzInputModule,
     NzButtonModule,
+    NzInputNumberModule,
+    NzCardModule,
+    NzUploadModule,
+    NzRadioModule,
+    NzModalModule,
+    NzSelectModule,
+    NzCascaderModule,
+    NzDatePickerModule,
     SwipeEyeCareModeComponent,
     SwipeLottieComponent,
     SwipeInputComponent,
     RouterModule,
-    NzCardModule,
-    NzUploadModule,
-    NzRadioModule,
-    NzCascaderModule,
     SwipeRadioComponent,
     SwipeGetCodeInputComponent,
     SwipeUploadComponent,
-    NzModalModule,
-    NzSelectModule
   ],
   declarations: [
     SwipeEyeCareModeComponent,

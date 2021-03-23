@@ -1,3 +1,59 @@
-<p>
-  published-list works!
-</p>
+<section class="published-list-component">
+  <section class="header-info">
+    <span class="title-text">已发任务</span>
+  </section>
+  <section class="context-info">
+    <section class="itro-text">
+      <span class="label-text">1. 在已发布任务区，您可以查看和操作所有自己发布的任务及任务操作进度；</span>
+      <span class="label-text">2. 买方上传收货好评截图后需要商家您进行确认。</span>
+    </section>
+    <section class="filter-form">
+      <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+        <nz-form-item>
+          <nz-form-label [nzSm]="3" [nzXs]="24">任务搜索</nz-form-label>
+          <nz-form-control [nzSm]="21" [nzXs]="24">
+            <nz-input-group nzCompact>
+              <nz-select class="custom-select-input" formControlName="taskType">
+                <nz-option [nzLabel]="'任务编号'" [nzValue]="1"></nz-option>
+                <nz-option [nzLabel]="'任务金额'" [nzValue]="2"></nz-option>
+              </nz-select>
+              <input type="text" class="custom-search-input" nz-input placeholder="请输入相关信息" />
+              <button nz-button nzType="primary" nzSearch>搜索</button>
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+    </section>
+    <section class="context-list">
+      <section class="task-carc-info">
+        <section class="header-info">
+          <span class="lable-text">订单编号：232030232385143</span>
+          <span class="time-text">发布时间：2021/2/26 09:25:36</span>
+        </section>
+        <section class="content-info">
+          <section class="product-info">
+            <img class="product-img" src="/" alt="/">
+            <section class="product-intro">
+              <span class="label-text">商品标题</span>
+              <span class="label-text">掌柜号</span>
+              <span class="label-text">店铺名</span>
+            </section>
+          </section>
+          <section class="task-intro">
+            <span class="label-text">任务金额：￥1000.00</span>
+            <span class="label-text">收货时限：物流显示签收好评</span>
+            <span class="label-text">任务要求：货比  收藏  男性账号</span>
+          </section>
+          <section class="task-status">
+            <span class="status-text">待审核</span>
+          </section>
+          <section class="task-handler">
+            <button nz-button nzType="text">详情</button>
+            <button nz-button nzType="text">删除</button>
+            <button nz-button nzType="text">下架</button>
+          </section>
+        </section>
+      </section>
+    </section>
+  </section>
+</section>

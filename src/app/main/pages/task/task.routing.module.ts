@@ -16,7 +16,7 @@ const routes: Routes = [
     component: TaskComponent,
     children: [
       { path: '', redirectTo: 'post-task', pathMatch: 'full' },
-      { path: 'post-task', component: PostTaskComponent },
+      { path: 'post-task', loadChildren: () => import('./post-task/post-task.module').then(m => m.PostTaskModule) },
       { path: 'bound-shop', component: BoundShopComponent },
       { path: 'charge-details', component: ChargeDetailsComponent },
       { path: 'order-management', component: OrderManagementComponent },

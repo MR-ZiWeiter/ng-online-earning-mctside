@@ -1,8 +1,8 @@
-<section nz-row class="login-page">
-  <section class="login-bg" nz-col [nzSpan]="16">
+<section class="login-page">
+  <section class="login-bg">
     <img [src]="loginBg" alt="">
   </section>
-  <section class="login-form-container" nz-col [nzSpan]="8" >
+  <section class="login-form-container">
     <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
       <section class="login-form-tab" *ngIf="!register && !reset">
         <div [class]="['tab-title', item.type === activeLoginType && 'active' ]" (click)="activeLoginType = item.type" *ngFor="let item of loginType " >{{ item.text }}</div>
@@ -112,9 +112,6 @@
       <section class="register" *ngIf="register" >
         已有账号？<a (click)="register=false;reset=false;activeLoginType=0">登陆</a>
         </section>
-
-       
     </form>
   </section>
-
 </section>
