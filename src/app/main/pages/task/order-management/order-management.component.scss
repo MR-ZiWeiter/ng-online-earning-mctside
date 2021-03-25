@@ -1,0 +1,108 @@
+@import 'mixin';
+.order-management-component {
+  background-color: $default_color;
+  margin-bottom: format(10);
+  >.header-info {
+    @include wh(auto, format(44));
+    @include flex-justify-align(flex-start, center);
+    margin-left: format(20);
+    border-bottom: format(1) solid $default_color_10;
+    .title-text {
+      @include sc(format(16), $default_color_6);
+      font-weight: 500;
+    }
+  }
+  .context-info {
+    padding: format(12) format(20) format(20);
+    .custom-search-group {
+      ::ng-deep .ant-form-item-control-input-content {
+        @include flex-justify-align(space-between, center);
+      }
+    }
+    .custom-select-input {
+      @include wh(format(132), auto);
+    }
+    .custom-search-input {
+      @include wh(format(520), auto);
+      margin-right: format(20);
+      margin-left: format(16);
+    }
+    .itro-text {
+      @include flex-justify-align(center, flex-start);
+      flex-direction: column;
+      .label-text {
+        @include sc(format(12), $default_color_9);
+        font-weight: 400;
+      }
+    }
+    .filter-form {
+      margin-top: format(38);
+    }
+    .context-list {
+      .task-carc-info {
+        border: format(1) solid $default_color_11;
+        .header-info,
+        .footer-info {
+          @include wh(auto, format(45));
+          @include flex-justify-align(space-between, center);
+          padding: 0 format(19);
+          .lable-text {
+            @include sc(format(14), $default_color_9);
+            font-weight: 500;
+          }
+          .time-text {
+            @include sc(format(14), $default_color_12);
+            font-weight: 400;
+          }
+        }
+        .header-info {
+          border-bottom: format(1) solid $default_color_11;
+        }
+        .footer-info {
+          border-top: format(1) solid $default_color_11;
+        }
+        .content-info {
+          @include grid-col-row-gap(format(225)  auto  format(104) format(142), format(88), 0, 0);
+          .product-info,
+          .task-intro,
+          .task-status {
+            border-right: format(1) solid $default_color_11;
+            padding: 0 format(15);
+          }
+          .product-info {
+            @include flex-justify-align(flex-start, center);
+            @include wh(100%, 100%);
+            .product-img {
+              @include wh(format(58), format(58));
+            }
+            .product-intro {
+              @include flex-justify-align(center, flex-start);
+              flex-direction: column;
+              margin-left: format(10);
+              .label-text {
+                @include sc(format(14), $default_color_6);
+              }
+            }
+          }
+          .task-intro {
+            @include flex-justify-align(center, flex-start);
+            flex-direction: column;
+            .label-text {
+              @include sc(format(14), $default_color_6);
+            }
+          }
+          .task-status {
+            @include flex-justify-align(center, center);
+          }
+          .task-handler {
+            @include flex-justify-align(center, center);
+            .handler-btn {
+              padding: format(5);
+              color: $bgColorBtn;
+            }
+          }
+        }
+      }
+    }
+  }
+}

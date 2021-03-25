@@ -1,3 +1,84 @@
-<p>
-  bound-shop works!
-</p>
+<section class="bound-shop-component">
+  <section class="header-info">
+    <span class="title-text">绑定商铺</span>
+  </section>
+  <section class="form-info">
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzSm]="5" [nzXs]="24" nzRequired nzFor="temp">电商平台</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请选择电商平台">
+              <nz-select nz-col nzSpan="24" nzShowSearch nzAllowClear formControlName="temp" id="temp" nzPlaceHolder="选择电商平台" [(ngModel)]="selectedValue">
+                <nz-option nzLabel="模板一" nzValue="1"></nz-option>
+                <nz-option nzLabel="模板二" nzValue="2"></nz-option>
+                <nz-option nzLabel="模板三" nzValue="3"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="website" nzRequired>旺旺账号</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入旺旺账号">
+              <input nz-input id="website" formControlName="website" placeholder="website" placeholder="请输入旺旺账号"/>
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="website" nzRequired>店铺名称</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入店铺名称">
+              <input nz-input id="website" formControlName="website" placeholder="请输入店铺名称" />
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="website" nzRequired>店铺首页网址</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入店铺首页网址">
+              <input nz-input id="website" formControlName="website" placeholder="请输入店铺首页网址" />
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="norm">店铺后台凭证截图</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24">
+              <div class="clearfix">
+                <nz-upload
+                  nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                  nzListType="picture-card"
+                  [(nzFileList)]="fileList"
+                  [nzShowButton]="fileList.length < 8"
+                  [nzPreview]="handlePreview"
+                >
+                  <div>
+                    <i nz-icon nzType="plus"></i>
+                    <div style="margin-top: 8px">上传图片</div>
+                  </div>
+                </nz-upload>
+                <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null" (nzOnCancel)="previewVisible = false">
+                  <ng-template #modalContent>
+                    <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+                  </ng-template>
+                </nz-modal>
+              </div>
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+      </section>
+    </form>
+    <footer class="btn-controll" nz-row nzJustify="center">
+      <button class="custom-btn-sty" nz-button color="primary" nzType="primary">确认提交</button>
+    </footer>
+  </section>
+</section>

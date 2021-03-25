@@ -1,3 +1,53 @@
-<p>
-  charge-details works!
-</p>
+<section class="charge-details-component">
+  <section class="header-info">
+    <span class="title-text">基础服务费</span>
+  </section>
+  <section class="context-info">
+    <section class="context-list">
+      <ng-template #tableTitle1>
+        <span class="title-text">平台基础服务费</span>
+      </ng-template>
+      <nz-table [nzTitle]="tableTitle1" #borderedTable nzBordered [nzShowPagination]="false" [nzData]="dataSet">
+        <thead>
+          <tr>
+            <th nzAlign="center">商品价格区间（元）</th>
+            <th nzAlign="center">平台收费价格（元）</th>
+            <th nzAlign="center">商品价格区间（元）</th>
+            <th nzAlign="center">平台收费价格（元）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of borderedTable.data">
+            <td nzAlign="center">{{ data.region }}</td>
+            <td nzAlign="center">{{ data.price }}</td>
+            <td nzAlign="center">{{ data.region }}</td>
+            <td nzAlign="center">{{ data.price }}</td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </section>
+  </section>
+</section>
+
+<section class="charge-details-component">
+  <section class="header-info">
+    <span class="title-text">增值服务费</span>
+  </section>
+  <section class="context-info">
+    <section class="context-list">
+      <ng-template #tableTitle2>
+        <span class="title-text">增值服务费</span>
+      </ng-template>
+      <nz-table [nzTitle]="tableTitle2" #borderedTable2 nzBordered [nzShowPagination]="false" [nzData]="dataSet2">
+        <tbody>
+          <tr *ngFor="let data of borderedTable2.data">
+            <td nzAlign="center">{{ data[0] }}</td>
+            <td nzAlign="center">{{ data[1] }}</td>
+            <td nzAlign="center">{{ data[2] }}</td>
+            <td nzAlign="center">{{ data[3] }}</td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </section>
+  </section>
+</section>

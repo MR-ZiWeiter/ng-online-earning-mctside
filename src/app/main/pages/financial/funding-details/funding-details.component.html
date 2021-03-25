@@ -1,0 +1,65 @@
+<section class="withdrawal-details-component">
+  <section class="header-info">
+    <span class="title-text">提现明细</span>
+  </section>
+  <section class="context-info">
+    <section class="filter-form">
+      <form nz-form nz-row [formGroup]="validateForm" (ngSubmit)="submitForm()">
+        <section nz-col [nzSpan]="12">
+          <nz-form-item nz-row>
+            <nz-form-label>搜索</nz-form-label>
+            <nz-form-control class="custom-search-group" [nzSm]="21" [nzXs]="24">
+              <nz-input-group nzSearch>
+                <input nz-input placeholder="如任务编号"/>
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+        <section nz-col [nzSpan]="12">
+          <nz-form-item nz-row>
+            <nz-form-label>时间</nz-form-label>
+            <nz-form-control class="custom-search-group" [nzSm]="24" [nzXs]="24">
+              <nz-input-group nzSearch [nzAddOnAfter]="addOnAfterTemplate">
+                <nz-date-picker
+                  class="custom-date-picker"
+                  nzShowTime
+                  nzFormat="yyyy-MM-dd HH:mm:ss"
+                  nzPlaceHolder="选择日期时间"
+                ></nz-date-picker>
+              </nz-input-group>
+              <ng-template #addOnAfterTemplate>
+                <button nz-button nzType="primary" nzSearch>搜索</button>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+      </form>
+    </section>
+    <section class="context-list">
+      <nz-table #borderedTable nzBordered [nzData]="dataSet">
+        <thead>
+          <tr>
+            <th nzAlign="center">时间</th>
+            <th nzAlign="center">收入（元）</th>
+            <th nzAlign="center">支出（元）</th>
+            <th nzAlign="center">摘要</th>
+            <th nzAlign="center">当前余额（元）</th>
+            <th nzAlign="center">编号</th>
+            <th nzAlign="center">备注</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of borderedTable.data">
+            <td nzAlign="center">{{ data.time }}</td>
+            <td nzAlign="center">{{ data.countIn }}</td>
+            <td nzAlign="center">{{ data.countOut }}</td>
+            <td nzAlign="center">{{ data.intro }}</td>
+            <td nzAlign="center">{{ data.cover }}</td>
+            <td nzAlign="center">{{ data.code }}</td>
+            <td nzAlign="center">{{ data.remark }}</td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </section>
+  </section>
+</section>

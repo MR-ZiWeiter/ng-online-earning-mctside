@@ -1,5 +1,5 @@
 @import 'mixin';
-.bound-shop-component {
+.change-pwd-component {
   background-color: $default_color;
   margin-bottom: format(10);
   .header-info {
@@ -14,5 +14,9 @@
   }
   .form-info {
     padding: format(30) 0;
+    .invate-code {
+      @include wh(format(88), format(30));
+      margin-left: format(10);
+    }
   }
 }

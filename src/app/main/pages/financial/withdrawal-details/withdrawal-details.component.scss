@@ -1,5 +1,5 @@
 @import 'mixin';
-.task-template-component {
+.withdrawal-details-component {
   background-color: $default_color;
   margin-bottom: format(10);
   >.header-info {
@@ -39,6 +39,17 @@
       margin-top: format(38);
     }
     .context-list {
+      ::ng-deep {
+        .ant-table-title {
+          border: none;
+        }
+      }
+      .title-text {
+        @include flex-justify-align(center, center);
+        @include wh(100%, 100%);
+        @include sc(format(26), $default_color_6);
+        font-weight: 500;
+      }
     }
   }
 }

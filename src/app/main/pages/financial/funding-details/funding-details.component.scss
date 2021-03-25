@@ -1,5 +1,5 @@
 @import 'mixin';
-.task-template-component {
+.withdrawal-details-component {
   background-color: $default_color;
   margin-bottom: format(10);
   >.header-info {
@@ -19,6 +19,10 @@
         @include flex-justify-align(space-between, center);
       }
     }
+    .custom-date-picker {
+      flex: 1;
+      width: calc(100% - #{format(20)});
+    }
     .custom-select-input {
       @include wh(format(132), auto);
     }
@@ -36,9 +40,20 @@
       }
     }
     .filter-form {
-      margin-top: format(38);
+      margin-top: format(8);
     }
     .context-list {
+      ::ng-deep {
+        .ant-table-title {
+          border: none;
+        }
+      }
+      .title-text {
+        @include flex-justify-align(center, center);
+        @include wh(100%, 100%);
+        @include sc(format(26), $default_color_6);
+        font-weight: 500;
+      }
     }
   }
 }

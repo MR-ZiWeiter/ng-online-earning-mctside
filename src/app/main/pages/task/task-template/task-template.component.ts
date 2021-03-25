@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'swipe-task-template',
@@ -7,9 +8,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TaskTemplateComponent implements OnInit {
 
-  constructor() { }
+  public validateForm!: FormGroup;
 
-  ngOnInit() {
+  public dataSet = [
+    {
+      index: 1,
+      taskRegion: '淘宝天猫',
+      image: '',
+      tempName: '淘宝',
+      shopkeeper: '猴三棍',
+      website: 'https://lan…',
+      price: '1200',
+      praiseLimit: '物流收货后好评',
+      createTime: '1990/05/05 20:19:35'
+    }
+  ];
+
+  constructor(private fb: FormBuilder) {}
+
+  submitForm(): void {
+    for (const i in this.validateForm.controls) {
+      this.validateForm.controls[i].markAsDirty();
+      this.validateForm.controls[i].updateValueAndValidity();
+    }
   }
 
+  ngOnInit(): void {
+    this.validateForm = this.fb.group({
+      taskType: [null, [Validators.required]]
+    });
+  }
 }

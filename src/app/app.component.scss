@@ -1,9 +1,6 @@
 
 @import 'mixin';
 :host {
-  display: flex;
+  @include wh(100%, auto);
   min-width: format(1240);
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }

@@ -1,0 +1,34 @@
+<section class="recharge-record-component">
+  <section class="header-info">
+    <span class="title-text">充值记录</span>
+  </section>
+  <section class="context-info">
+    <section class="context-list">
+      <ng-template #tableTitle1>
+        <span class="title-text">充值记录</span>
+      </ng-template>
+      <nz-table [nzTitle]="tableTitle1" #borderedTable nzBordered [nzData]="dataSet">
+        <thead>
+          <tr>
+            <th nzAlign="center">交易/流水号</th>
+            <th nzAlign="center">充值方式</th>
+            <th nzAlign="center">充值金额（元）</th>
+            <th nzAlign="center">时间</th>
+            <th nzAlign="center">当前余额（元）</th>
+            <th nzAlign="center">状态</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of borderedTable.data">
+            <td nzAlign="center">{{ data.code }}</td>
+            <td nzAlign="center">{{ data.type }}</td>
+            <td nzAlign="center">{{ data.price }}</td>
+            <td nzAlign="center">{{ data.time }}</td>
+            <td nzAlign="center">{{ data.over }}</td>
+            <td nzAlign="center">{{ data.status }}</td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </section>
+  </section>
+</section>

@@ -17,11 +17,11 @@ export class MenuComponent implements OnInit {
       { name: '我的订单', id: '0-6' , path: 'task/order-management'},
      ] },
      { title: '财务明细', icon: 'credit-card' , list: [
-      { name: '账户充值', id: '1-1' , path: ''},
-      { name: '账户提现', id: '1-2' , path: ''},
-      { name: '充值记录', id: '1-3' , path: '' },
-      { name: '资金明细', id: '1-4' , path: ''},
-      { name: '提现明细', id: '1-5' , path: ''},
+      { name: '账户充值', id: '1-1' , path: 'financial'},
+      { name: '账户提现', id: '1-2' , path: 'financial'},
+      { name: '充值记录', id: '1-3' , path: 'financial/recharge-record' },
+      { name: '资金明细', id: '1-4' , path: 'financial/funding-details'},
+      { name: '提现明细', id: '1-5' , path: 'financial/withdrawal-details'},
      ] },
      { title: '我的申诉', icon: 'comment' , list: [
       { name: '发现申诉', id: '2-1' , path: ''},
@@ -29,9 +29,9 @@ export class MenuComponent implements OnInit {
       { name: '我收到的申诉', id: '2-3' , path: ''},
      ] },
      { title: '个人资料', icon: 'user' , list: [
-      { name: '个人资料', id: '3-1' , path: 'user-info'},
-      { name: '修改密码', id: '3-2' , path: ''},
-      { name: '实名认证', id: '3-3' , path: 'bind-info'},
+      { name: '个人资料', id: '3-1' , path: 'user-info/basic-info'},
+      { name: '修改密码', id: '3-2' , path: 'user-info/change-pwd'},
+      { name: '实名认证', id: '3-3' , path: 'user-info/bind-info'},
      ] }
   ];
   constructor() {

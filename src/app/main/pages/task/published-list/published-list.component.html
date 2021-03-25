@@ -10,16 +10,18 @@
     <section class="filter-form">
       <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
         <nz-form-item>
-          <nz-form-label [nzSm]="3" [nzXs]="24">任务搜索</nz-form-label>
-          <nz-form-control [nzSm]="21" [nzXs]="24">
-            <nz-input-group nzCompact>
-              <nz-select class="custom-select-input" formControlName="taskType">
-                <nz-option [nzLabel]="'任务编号'" [nzValue]="1"></nz-option>
-                <nz-option [nzLabel]="'任务金额'" [nzValue]="2"></nz-option>
-              </nz-select>
+          <nz-form-label>任务搜索</nz-form-label>
+          <nz-form-control class="custom-search-group" [nzSm]="21" [nzXs]="24">
+            <nz-select class="custom-select-input" formControlName="taskType">
+              <nz-option [nzLabel]="'任务编号'" [nzValue]="1"></nz-option>
+              <nz-option [nzLabel]="'任务金额'" [nzValue]="2"></nz-option>
+            </nz-select>
+            <nz-input-group nzSearch [nzAddOnAfter]="addOnAfterTemplate">
               <input type="text" class="custom-search-input" nz-input placeholder="请输入相关信息" />
-              <button nz-button nzType="primary" nzSearch>搜索</button>
             </nz-input-group>
+            <ng-template #addOnAfterTemplate>
+              <button nz-button nzType="primary" nzSearch>搜索</button>
+            </ng-template>
           </nz-form-control>
         </nz-form-item>
       </form>
@@ -48,10 +50,13 @@
             <span class="status-text">待审核</span>
           </section>
           <section class="task-handler">
-            <button nz-button nzType="text">详情</button>
-            <button nz-button nzType="text">删除</button>
-            <button nz-button nzType="text">下架</button>
+            <button class="handler-btn" nz-button nzType="text">详情</button>
+            <button class="handler-btn" nz-button nzType="text">删除</button>
+            <button class="handler-btn" nz-button nzType="text">下架</button>
           </section>
+        </section>
+        <section class="footer-info">
+          <span class="lable-text">任务编号：232030232385143</span>
         </section>
       </section>
     </section>
