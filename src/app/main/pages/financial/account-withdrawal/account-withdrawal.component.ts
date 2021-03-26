@@ -3,11 +3,11 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
 
 @Component({
-  selector: 'swipe-change-pwd',
-  templateUrl: './change-pwd.component.html',
-  styleUrls: ['./change-pwd.component.scss']
+  selector: 'swipe-account-withdrawal',
+  templateUrl: './account-withdrawal.component.html',
+  styleUrls: ['./account-withdrawal.component.scss']
 })
-export class ChangePwdComponent implements OnInit {
+export class AccountWithdrawalComponent implements OnInit {
 
   public selectedValue = null;
 
@@ -53,10 +53,15 @@ export class ChangePwdComponent implements OnInit {
       phoneNumberPrefix: ['+86'],
       phoneNumber: [null, [Validators.required]],
       website: [null, [Validators.required]],
-      captcha: [null, [Validators.required]],
+      paytype: ['1', [Validators.required]],
       norm: [null],
       price: [null, [Validators.pattern(/^\d+(\.\d+)?$/)]],
       agree: [false]
     });
   }
+  /* 选择支付类别 */
+  public selectPayTypeChange(ev: any) {
+    console.log(ev)
+  }
+
 }

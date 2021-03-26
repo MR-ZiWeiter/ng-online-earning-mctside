@@ -1,0 +1,58 @@
+@import 'mixin';
+.wechat-component {
+  .recharge-type {
+    @include wh(100%, format(41));
+    .title-text {
+      @include sc(format(16), $bgColorBtn);
+      font-weight: 500;
+    }
+  }
+  .header-info {
+    padding: format(10) 0;
+    .title-text {
+      @include sc(format(16), $default_color_6);
+      font-weight: 500;
+    }
+  }
+  .context-info {
+    @include flex-justify-align(center, flex-start);
+    flex-direction: column;
+    .label-text {
+      @include sc(format(14), $default_color_9);
+      line-height: format(24);
+      font-weight: 400;
+    }
+  }
+  .context-image {
+    @include wh(format(266), format(338));
+    background-color: #0AA417;
+    border-radius: format(4);
+    margin-top: format(10);
+    margin-bottom: format(50);
+    .pay-code {
+      @include flex-justify-align(flex-start, center);
+      flex-direction: column;
+      .label-text {
+        @include wh(100%, format(47));
+        @include flex-justify-align(center, center);
+        @include sc(format(18), $default_color);
+      }
+      .code {
+        @include wh(format(244), format(244));
+      }
+      .value-text {
+        @include wh(100%, format(47));
+        @include flex-justify-align(center, center);
+        @include sc(format(16), $default_color);
+      }
+    }
+  }
+  .form-info {
+    // padding: format(30) 0;
+    padding-bottom: format(40);
+    .invate-code {
+      @include wh(format(88), format(30));
+      margin-left: format(10);
+    }
+  }
+}

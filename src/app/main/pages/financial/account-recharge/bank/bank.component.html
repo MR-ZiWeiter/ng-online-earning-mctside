@@ -1,0 +1,147 @@
+<section class="alipay-component">
+  <section class="header-info">
+    <span class="title-text">充值注意事项：</span>
+  </section>
+  <section class="context-info">
+    <span class="label-text">1、推荐使用手机银行或网上银行转账，如使用支付宝转账禁止在备注信息那填写无关信息；</span>
+    <span class="label-text">2、转账时仔细核对收款人姓名、银行卡号（农行转账相较于其他银行较慢）；</span>
+    <span class="label-text">3、提交转账信息前仔细核对转账金额、姓名及银行卡号，禁止重复提交转账信息如发现恶意重复提交，将罚款甚至封号；</span>
+    <span class="label-text">4、及时提交转账信息，未及时提交者（超过一天）联系充值客服说明充值时间。</span>
+  </section>
+</section>
+
+<section class="alipay-component">
+  <section class="recharge-type">
+    <span class="title-text">第二步：转账到平台指定收款账号</span>
+  </section>
+  <section class="form-info">
+    <form nz-form>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item class="no-margin">
+            <nz-form-label [nzNoColon]="true" [nzSm]="3" [nzXs]="24">转账途径：</nz-form-label>
+            <nz-form-control [nzSm]="5" [nzXs]="24">
+              <span>电脑网银、手机银行转账 </span>
+            </nz-form-control>
+            <button nz-button disabled nzType="text">（注：请勿通过其他途径转账）</button>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item class="no-margin">
+            <nz-form-label [nzNoColon]="true" [nzSm]="3" [nzXs]="24">收款银行名称：</nz-form-label>
+            <nz-form-control [nzSm]="7" [nzXs]="24">
+              <span>中国工商银行</span>
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item class="no-margin">
+            <nz-form-label [nzNoColon]="true" [nzSm]="3" [nzXs]="24">收款银行卡号： </nz-form-label>
+            <nz-form-control [nzSm]="7" [nzXs]="24">
+              <span>888888888888213213213</span>
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item class="no-margin">
+            <nz-form-label [nzNoColon]="true" [nzSm]="3" [nzXs]="24">收款人姓名：</nz-form-label>
+            <nz-form-control [nzSm]="7" [nzXs]="24">
+              <span>逍遥子</span>
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+      </section>
+    </form>
+  </section>
+</section>
+
+<section class="alipay-component">
+  <section class="recharge-type">
+    <span class="title-text">第三步：填写转账信息</span>
+    <button nz-button disabled nzType="text">（注：亲，转账完成后一定要在这填写转账信息提交，再联系客服审核入款！）</button>
+  </section>
+  <section class="form-info">
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="website" nzRequired>打款银行名称</nz-form-label>
+            <nz-form-control [nzSm]="7" [nzXs]="24" nzErrorTip="请输入打款银行名称">
+              <input nz-input id="website" formControlName="website" placeholder="请输入打款银行名称" />
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="website" nzRequired>打款人姓名</nz-form-label>
+            <nz-form-control [nzSm]="7" [nzXs]="24" nzErrorTip="请输入打款人姓名">
+              <input nz-input id="website" formControlName="website" placeholder="请输入打款人姓名" />
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="norm" nzRequired>打款银行卡号后4位数字</nz-form-label>
+            <nz-form-control [nzSm]="7" [nzXs]="24" nzErrorTip="请输入打款银行卡号后4位数字">
+              <input nz-input id="norm" formControlName="norm" placeholder="请输入打款银行卡号后4位数字" />
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="website" nzRequired>转账金额</nz-form-label>
+            <nz-form-control [nzSm]="7" [nzXs]="24" nzErrorTip="请输入转账金额">
+              <nz-input-number formControlName="price" [nzMin]="1" [nzMax]="10" [nzStep]="1" [nzPlaceHolder]="'输入金额'"></nz-input-number>
+              <button nz-button disabled nzType="text">元</button>
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="norm" nzRequired>转账记录截图</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24">
+              <div class="clearfix">
+                <nz-upload
+                  nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                  nzListType="picture-card"
+                  [(nzFileList)]="fileList"
+                  [nzShowButton]="fileList.length < 8"
+                  [nzPreview]="handlePreview"
+                >
+                  <div>
+                    <i nz-icon nzType="plus"></i>
+                    <div style="margin-top: 8px">点击上传</div>
+                  </div>
+                </nz-upload>
+                <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null" (nzOnCancel)="previewVisible = false">
+                  <ng-template #modalContent>
+                    <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+                  </ng-template>
+                </nz-modal>
+                <button nz-button disabled nzType="text">注：为提高查账速度，可选提交截图（截图要求：清晰看到打款时间和金额）</button>
+              </div>
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+      </section>
+      <footer class="btn-controll" nz-row nzJustify="start">
+        <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24"></nz-form-label>
+        <button class="custom-btn-sty" nz-button type="submit" color="primary" nzType="primary">确认提交</button>
+      </footer>
+    </form>
+  </section>
+</section>

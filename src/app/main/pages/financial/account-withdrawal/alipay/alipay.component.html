@@ -1,0 +1,41 @@
+<section class="alipay-component">
+  <section class="form-info">
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="website" nzRequired>提现金额</nz-form-label>
+            <nz-form-control [nzSm]="7" [nzXs]="24" nzErrorTip="请输入提现金额">
+              <nz-input-number formControlName="price" [nzMin]="1" [nzMax]="10" [nzStep]="1" [nzPlaceHolder]="'输入金额'"></nz-input-number>
+              <button nz-button disabled nzType="text">元</button>
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="website" nzRequired>姓名</nz-form-label>
+            <nz-form-control [nzSm]="7" [nzXs]="24" nzErrorTip="请输入姓名">
+              <input nz-input id="website" formControlName="website" placeholder="请输入姓名" />
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="norm" nzRequired>支付宝账号</nz-form-label>
+            <nz-form-control [nzSm]="7" [nzXs]="24" nzErrorTip="请输入支付宝账号">
+              <input nz-input id="norm" formControlName="norm" placeholder="请输入支付宝账号" />
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+      </section>
+      <footer class="btn-controll" nz-row nzJustify="start">
+        <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24"></nz-form-label>
+        <button class="custom-btn-sty" nz-button type="submit" color="primary" nzType="primary">确认提交</button>
+      </footer>
+    </form>
+  </section>
+</section>

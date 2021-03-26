@@ -159,12 +159,20 @@ $vm_design: 750;
 
 /* 新增grid布局 */
 @mixin grid-col-row-gap($col: 1fr, $row: 1fr, $col-gap: 0px, $row-gap: 0px) {
+  display: -moz-grid;
+  display: -ms-grid;
   display: grid;
+  -ms-grid-template-columns: $col;
   grid-template-columns: $col;
+  -ms-grid-template-rows: $row;
   grid-template-rows: $row;
+  -ms-grid-column-gap: $col-gap;
   grid-column-gap: $col-gap;
+  -ms-column-gap: $col-gap;
   column-gap: $col-gap;
+  -ms-grid-row-gap: $row-gap;
   grid-row-gap: $row-gap;
+  -ms-row-gap: $row-gap;
   row-gap: $row-gap;
   justify-items: stretch;
   align-items: stretch;

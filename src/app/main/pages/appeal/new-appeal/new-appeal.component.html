@@ -1,0 +1,73 @@
+<section class="step1-component">
+  <section class="header-info">
+    <span class="title-text">发起申诉</span>
+  </section>
+  <section class="form-info">
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="website" nzRequired>标题</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入标题">
+              <input nz-input id="website" formControlName="website" placeholder="website" placeholder="请输入标题"/>
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="website" nzRequired>被申诉用户</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入被申诉用户">
+              <input nz-input id="website" formControlName="website" placeholder="请输入被申诉用户" />
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="norm">订单编号</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24">
+              <input nz-input id="norm" formControlName="norm" placeholder="请输入订单编号" />
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="norm">是否锁定</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24">
+              <label nz-checkbox formControlName="isLock">有违规行为可锁定便于客服介入处理</label>
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="norm">申诉内容</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24">
+              <textarea nz-input placeholder="请输入申诉内容" formControlName="norm"></textarea>
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="norm">期望解决方案</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24">
+              <textarea nz-input placeholder="请输入期望解决方案" formControlName="norm"></textarea>
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+      </section>
+      <footer class="btn-controll" nz-row nzJustify="start">
+        <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24"></nz-form-label>
+        <button class="custom-btn-sty" nz-button type="submit" color="primary" nzType="primary">确认提交</button>
+      </footer>
+    </form>
+  </section>
+</section>

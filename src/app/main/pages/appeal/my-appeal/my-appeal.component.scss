@@ -1,0 +1,55 @@
+@import 'mixin';
+.my-appeal-component {
+  background-color: $default_color;
+  margin-bottom: format(10);
+  >.header-info {
+    @include wh(auto, format(44));
+    @include flex-justify-align(flex-start, center);
+    margin-left: format(20);
+    border-bottom: format(1) solid $default_color_10;
+    .title-text {
+      @include sc(format(16), $default_color_6);
+      font-weight: 500;
+    }
+  }
+  .context-info {
+    padding: format(12) format(20) format(20);
+    .custom-search-group {
+      ::ng-deep .ant-form-item-control-input-content {
+        @include flex-justify-align(space-between, center);
+      }
+    }
+    .custom-select-input {
+      @include wh(format(132), auto);
+    }
+    .custom-search-input {
+      @include wh(format(520), auto);
+      margin-right: format(20);
+      margin-left: format(16);
+    }
+    .itro-text {
+      @include flex-justify-align(center, flex-start);
+      flex-direction: column;
+      .label-text {
+        @include sc(format(12), $default_color_9);
+        font-weight: 400;
+      }
+    }
+    .filter-form {
+      margin-top: format(38);
+    }
+    .context-list {
+      ::ng-deep {
+        .ant-table-title {
+          border: none;
+        }
+      }
+      .title-text {
+        @include flex-justify-align(center, center);
+        @include wh(100%, 100%);
+        @include sc(format(26), $default_color_6);
+        font-weight: 500;
+      }
+    }
+  }
+}

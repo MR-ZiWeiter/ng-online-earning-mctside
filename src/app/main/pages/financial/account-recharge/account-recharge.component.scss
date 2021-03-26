@@ -1,0 +1,31 @@
+@import 'mixin';
+.account-recharge-component {
+  background-color: $default_color;
+  margin-bottom: format(10);
+  .header-info {
+    @include wh(auto, format(44));
+    @include flex-justify-align(flex-start, center);
+    margin-left: format(20);
+    border-bottom: format(1) solid $default_color_10;
+    .title-text {
+      @include sc(format(16), $default_color_6);
+      font-weight: 500;
+    }
+  }
+  .recharge-type {
+    padding: 0 format(20);
+    @include flex-justify-align(flex-start, center);
+    @include wh(100%, format(56));
+    .title-text {
+      @include sc(format(16), $bgColorBtn);
+      font-weight: 500;
+    }
+  }
+  .form-info {
+    padding: 0 format(20);
+    .invate-code {
+      @include wh(format(88), format(30));
+      margin-left: format(10);
+    }
+  }
+}

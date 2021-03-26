@@ -1,0 +1,59 @@
+<section class="wechat-component">
+  <section class="form-info">
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="website" nzRequired>提现金额</nz-form-label>
+            <nz-form-control [nzSm]="7" [nzXs]="24" nzErrorTip="请输入提现金额">
+              <nz-input-number formControlName="price" [nzMin]="1" [nzMax]="10" [nzStep]="1" [nzPlaceHolder]="'输入金额'"></nz-input-number>
+              <button nz-button disabled nzType="text">元</button>
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="website" nzRequired>微信收款二维码</nz-form-label>
+            <nz-form-control [nzSm]="7" [nzXs]="24" nzErrorTip="请输入姓名">
+              <input nz-input id="website" formControlName="website" placeholder="请输入姓名" />
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="norm" nzRequired>微信收款二维码</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24">
+              <div class="clearfix">
+                <nz-upload
+                  nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                  nzListType="picture-card"
+                  [(nzFileList)]="fileList"
+                  [nzShowButton]="fileList.length < 8"
+                  [nzPreview]="handlePreview"
+                >
+                  <div>
+                    <i nz-icon nzType="plus"></i>
+                    <div style="margin-top: 8px">Upload</div>
+                  </div>
+                </nz-upload>
+                <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null" (nzOnCancel)="previewVisible = false">
+                  <ng-template #modalContent>
+                    <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+                  </ng-template>
+                </nz-modal>
+              </div>
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+      </section>
+      <footer class="btn-controll" nz-row nzJustify="start">
+        <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24"></nz-form-label>
+        <button class="custom-btn-sty" nz-button type="submit" color="primary" nzType="primary">确认提交</button>
+      </footer>
+    </form>
+  </section>
+</section>

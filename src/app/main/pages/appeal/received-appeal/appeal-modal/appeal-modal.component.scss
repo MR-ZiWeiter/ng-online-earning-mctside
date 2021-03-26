@@ -1,0 +1,40 @@
+@import 'mixin';
+
+.appeal-modal-component {
+  .title-info {
+    padding: format(20) 0 format(10);
+    .title-text {
+      @include sc(format(16), $default_color_6);
+      font-weight: 400;
+    }
+  }
+  .sub-title {
+    padding: format(10) 0 format(5) format(35);
+    .title-text {
+      @include sc(format(16), $default_color_6);
+      font-weight: 400;
+    }
+  }
+  .context-group {
+    .label-item {
+      padding: format(5) 0;
+      .label-text {
+        @include sc(format(14), $default_color_9);
+        font-weight: 400;
+        text-align: right;
+      }
+      .value-text {
+        @include sc(format(14), $default_color_6);
+        font-weight: 400;
+      }
+      .intro-text {
+        padding: 0;
+        height: auto;
+      }
+    }
+    .btn-controll {
+      margin: format(30) 0 format(40);
+    }
+  }
+}
+

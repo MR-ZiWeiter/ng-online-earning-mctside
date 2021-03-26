@@ -1,0 +1,18 @@
+@import 'mixin';
+.step1-component {
+  background-color: $default_color;
+  margin-bottom: format(10);
+  .header-info {
+    @include wh(auto, format(44));
+    @include flex-justify-align(flex-start, center);
+    margin-left: format(20);
+    border-bottom: format(1) solid $default_color_10;
+    .title-text {
+      @include sc(format(16), $default_color_6);
+      font-weight: 500;
+    }
+  }
+  .form-info {
+    padding: format(30) 0;
+  }
+}

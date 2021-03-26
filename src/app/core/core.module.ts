@@ -15,7 +15,9 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzTableModule } from 'ng-zorro-antd/table';
-import { NzDividerModule } from 'ng-zorro-antd/divider'
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 
 /* ICON模块注入 */
 import {
@@ -55,7 +57,9 @@ import { SwipeUploadComponent } from './modules/components/swipe-upload/swipe-up
     NzModalModule,
     NzSelectModule,
     NzTableModule,
-    NzDividerModule
+    NzDividerModule,
+    NzTabsModule,
+    NzCheckboxModule
   ],
   exports: [
     ReactiveFormsModule,
@@ -75,6 +79,8 @@ import { SwipeUploadComponent } from './modules/components/swipe-upload/swipe-up
     NzDatePickerModule,
     NzTableModule,
     NzDividerModule,
+    NzTabsModule,
+    NzCheckboxModule,
     SwipeEyeCareModeComponent,
     SwipeLottieComponent,
     SwipeInputComponent,

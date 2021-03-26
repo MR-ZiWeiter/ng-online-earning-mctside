@@ -1,0 +1,39 @@
+<section class="account-withdrawal-component">
+  <section class="header-info">
+    <span class="title-text">账户提现</span>
+  </section>
+  <section class="form-info">
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24">账户余额</nz-form-label>
+            <nz-form-control>
+              <span>￥6000.00</span>
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="paytype" nzRequired>提现到</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24">
+              <!-- <input nz-input type="password" formControlName="paytype" id="paytype"  [(ngModel)]="radioValue" /> -->
+              <nz-radio-group id="paytype" formControlName="paytype" (ngModelChange)="selectPayTypeChange($event)">
+                <label nz-radio nzValue="1">支付宝</label>
+                <label nz-radio nzValue="2">微信</label>
+                <label nz-radio nzValue="3">网银</label>
+              </nz-radio-group>
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+      </section>
+      <ng-container [ngSwitch]="validateForm.value.paytype">
+        <swipe-alipay *ngSwitchCase="1"></swipe-alipay>
+        <swipe-wechat *ngSwitchCase="2"></swipe-wechat>
+        <swipe-bank *ngSwitchCase="3"></swipe-bank>
+      </ng-container>
+    </form>
+  </section>
+</section>

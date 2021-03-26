@@ -1,0 +1,56 @@
+<section class="wechat-component">
+  <section class="header-info">
+    <span class="title-text">微信自动充值（免手续费）</span>
+  </section>
+  <section class="context-info">
+    <span class="label-text">1、打开微信扫一扫下面的二维码，再输入你要充值的金额并完成付款；</span>
+    <span class="label-text">2、支付完成后，再点 钱包 》 右上角的方块图标 》 交易记录，找到刚支付的记录，点一下进入，找到 交易号 类似“1000050300201212250147412345”</span>
+    <span class="label-text">3、到下面的“第二步：填写支付信息”填写该交易号和金额提交，客服会尽快给您入款。</span>
+  </section>
+  <section class="header-info">
+    <span class="title-text">收款人姓名：逍遥子</span>
+    <span class="title-text">微信号：xxxxx@126.com</span>
+  </section>
+  <section class="context-image">
+    <section class="pay-code">
+      <span class="label-text">微信充值</span>
+      <img class="code" src="/" alt="">
+      <span class="value-text">打开微信扫一扫</span>
+    </section>
+  </section>
+</section>
+
+<section class="wechat-component">
+  <section class="recharge-type">
+    <span class="title-text">第二步：填写支付信息</span>
+  </section>
+  <section class="form-info">
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="website" nzRequired>订单号/交易单号</nz-form-label>
+            <nz-form-control [nzSm]="7" [nzXs]="24" nzErrorTip="请输入订单号/交易单号">
+              <input nz-input id="website" formControlName="website" placeholder="请输入订单号/交易单号" />
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+      </section>
+      <section nz-row>
+        <section nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="website" nzRequired>转账金额</nz-form-label>
+            <nz-form-control [nzSm]="7" [nzXs]="24" nzErrorTip="请输入转账金额">
+              <nz-input-number formControlName="price" [nzMin]="1" [nzMax]="10" [nzStep]="1" [nzPlaceHolder]="'输入金额'"></nz-input-number>
+              <button nz-button disabled nzType="text">元</button>
+            </nz-form-control>
+          </nz-form-item>
+        </section>
+      </section>
+      <footer class="btn-controll" nz-row nzJustify="start">
+        <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24"></nz-form-label>
+        <button class="custom-btn-sty" nz-button type="submit" color="primary" nzType="primary">确认提交</button>
+      </footer>
+    </form>
+  </section>
+</section>

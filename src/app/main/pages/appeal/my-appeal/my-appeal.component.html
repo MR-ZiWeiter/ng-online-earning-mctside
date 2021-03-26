@@ -1,0 +1,40 @@
+<section class="my-appeal-component">
+  <section class="header-info">
+    <span class="title-text">我发起的申诉</span>
+  </section>
+  <section class="context-info">
+    <section class="context-list">
+      <ng-template #tableTitle1>
+        <span class="title-text">我发起的申诉</span>
+      </ng-template>
+      <nz-table [nzTitle]="tableTitle1" #borderedTable nzBordered [nzData]="dataSet">
+        <thead>
+          <tr>
+            <th nzAlign="center">标题</th>
+            <th nzAlign="center">被申诉人</th>
+            <th nzAlign="center">订单编号</th>
+            <th nzAlign="center">申诉时间</th>
+            <th nzAlign="center">是否辩解</th>
+            <th nzAlign="center">辩解时间</th>
+            <th nzAlign="center">平台意见</th>
+            <th nzAlign="center">操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of borderedTable.data">
+            <td nzAlign="center">{{ data.code }}</td>
+            <td nzAlign="center">{{ data.type }}</td>
+            <td nzAlign="center">{{ data.price }}</td>
+            <td nzAlign="center">{{ data.time }}</td>
+            <td nzAlign="center">{{ data.over }}</td>
+            <td nzAlign="center">{{ data.status }}</td>
+            <td nzAlign="center">{{ data.status }}</td>
+            <td nzAlign="center">
+              <a>查看</a>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </section>
+  </section>
+</section>

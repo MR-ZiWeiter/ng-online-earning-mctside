@@ -83,6 +83,9 @@
                   "maximumError": "4kb"
                 }
               ]
+            },
+            "es5": {
+              "tsConfig": "./tsconfig.app.es5.json"
             }
           }
         },
@@ -94,6 +97,9 @@
           "configurations": {
             "production": {
               "browserTarget": "ng-online-earning-mctside:build:production"
+            },
+            "es5": {
+              "browserTarget": "ng-online-earning-mctside:build:es5"
             }
           }
         },
