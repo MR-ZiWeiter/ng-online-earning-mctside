@@ -1,0 +1,85 @@
+@import 'mixin';
+
+.controll-center-component {
+  background-color: $default_color;
+  margin-bottom: format(10);
+  padding-bottom: format(20);
+  .header-info {
+    @include wh(auto, format(44));
+    @include flex-justify-align(flex-start, center);
+    margin-left: format(20);
+    border-bottom: format(1) solid $default_color_10;
+    .title-text {
+      @include sc(format(16), $default_color_6);
+      font-weight: 500;
+      &.min {
+        font-size: format(14);
+      }
+    }
+  }
+  .step-nav {
+    @include flex-justify-align(center, center);
+    background-color: #F5F7FA;
+    margin: format(20) format(20) 0;
+    border-radius: format(4);
+    .step-item {
+      flex: 1;
+      @include flex-justify-align(center, center);
+      @include wh(auto, format(54));
+      position: relative;
+      &.check {
+        .label-text {
+          @include sc(format(16), $default_color_6);
+        }
+      }
+      .list-idot {
+        @include sc(format(16), $default_color_9);
+        @include wh(format(24), format(24));
+        @include flex-justify-align(center, center);
+        margin-right: format(15);
+        border: format(1) solid $default_color_9;
+        border-radius: 50%;
+        padding-bottom: format(2);
+      }
+      .label-text {
+        @include sc(format(16), $default_color_9);
+        font-weight: 400;
+        vertical-align: middle;
+      }
+      &::before {
+        @include wh(format(20.5), format(20.5));
+        content: " ";
+        display: table;
+        position: absolute;
+        border: format(2) solid #C0C4CC;
+        border-top: 0;
+        border-left: 0;
+        transform: rotate(-45deg) scale(1) translate(8%, -45%);
+        opacity: 1;
+        transition: all 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46) 0.1s;
+        z-index: 9;
+        top: 50%;
+        right: format(-7);
+      }
+      &:last-child::before {
+        display: none;
+      }
+    }
+  }
+  .task-bord {
+    @include grid-col-row-gap(repeat(5, format(186)), format(156),  0, 0);
+    .task-item {
+      @include flex-justify-align(center, center);
+      flex-direction: column;
+      .label-text {
+        @include sc(format(30), $default_color_3);
+        font-weight: bold;
+      }
+      .value-text {
+        @include sc(format(14), $default_color_9);
+        font-weight: 400;
+        margin-top: format(11);
+      }
+    }
+  }
+}
