@@ -1,16 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
-import { NzUploadFile } from 'ng-zorro-antd/upload';
-
-function getBase64(file: File): Promise<string | ArrayBuffer | null> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
-  });
-}
+import { ApiReleaseService } from 'src/app/core/modules/provider/api';
 
 @Component({
   selector: 'swipe-post-task',
@@ -19,64 +10,48 @@ function getBase64(file: File): Promise<string | ArrayBuffer | null> {
 })
 export class PostTaskComponent implements OnInit {
 
-  public selectedValue = null;
-
   public validateForm!: FormGroup;
+
+  /* 选中模板的类型 */
+  public tempSelected: any = null;
+  /* 模板列表 */
+  public tempDictArray: any[] = [];
+
   captchaTooltipIcon: NzFormTooltipIcon = {
     type: 'info-circle',
     theme: 'twotone'
   };
 
-  fileList: NzUploadFile[] = [
-    {
-      uid: '-1',
-      name: 'image.png',
-      status: 'done',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-    },
-    {
-      uid: '-2',
-      name: 'image.png',
-      status: 'done',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-    },
-    {
-      uid: '-3',
-      name: 'image.png',
-      status: 'done',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-    },
-    {
-      uid: '-4',
-      name: 'image.png',
-      status: 'done',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-    },
-    {
-      uid: '-xxx',
-      percent: 50,
-      name: 'image.png',
-      status: 'uploading',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-    },
-    {
-      uid: '-5',
-      name: 'image.png',
-      status: 'error'
-    }
-  ];
-  previewImage: string | undefined = '';
-  previewVisible = false;
+  constructor(
+    private fb: FormBuilder,
+    private apiReleaseService: ApiReleaseService
+  ) {
+    this.initalConfigInfo();
+  }
 
-  constructor(private fb: FormBuilder) {}
+  /* 初始化初始数据 */
+  private initalConfigInfo() {
+    this.apiReleaseService.asyncFetchTaskConfigInfo().subscribe(res => {
+      console.log(res);
+    })
+    this.apiReleaseService.asyncFetchTempDictList({
+      pageNum: 1,
+      pageSize: 200
+    }).subscribe(res => {
+      // console.log(res);
+      this.tempDictArray = res.rel;
+    })
+  }
 
-  handlePreview = async (file: NzUploadFile) => {
-    if (!file.url && !file.preview) {
-      file.preview = await getBase64(file.originFileObj!);
-    }
-    this.previewImage = file.url || file.preview;
-    this.previewVisible = true;
-  };
+  /* 选择模板点击下拉回调 */
+  public selectTempChange(ev: any) {
+    // console.log(ev);
+    this.apiReleaseService.asyncFetchTempIdToInfo({
+      templateId: ev
+    }).subscribe(res => {
+      console.log(res);
+    })
+  }
 
   submitForm(): void {
     for (const i in this.validateForm.controls) {

@@ -15,9 +15,20 @@ export class ApiUserIndexService {
   // 获取用户基本信息
   asyncFetchBasicInfo(info: any = {}): Observable<any> {
     return new Observable(observer => {
-      this.http.get('/service/user/getUserBasicInfo', info).subscribe((res: ApiResponseModel) => {
-        console.log(res);
+      this.http.get('/business/account-privacy/get', info).subscribe((res: ApiResponseModel) => {
+        // console.log(res);
         this.userService.setUserBasicInfo(res.rel);
+        observer.next(res);
+      }, err => {
+        observer.error(false);
+      });
+    });
+  }
+
+  // 个人主页信息
+  asyncFetchUserHomeInfo(info: any = {}): Observable<any> {
+    return new Observable(observer => {
+      this.http.get('/business/account-privacy/index', info).subscribe((res: ApiResponseModel) => {
         observer.next(res);
       }, err => {
         observer.error(false);

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
+import { ApiMerchantService } from 'src/app/core/modules/provider/api';
+import { SystemService } from 'src/app/core/services/system/system.service';
 
 function getBase64(file: File): Promise<string | ArrayBuffer | null> {
   return new Promise((resolve, reject) => {
@@ -19,104 +21,122 @@ function getBase64(file: File): Promise<string | ArrayBuffer | null> {
 })
 export class BoundShopComponent implements OnInit {
 
+  public platformRenderArray: any[] = [];
+
   public selectedValue = null;
 
-    public validateForm!: FormGroup;
-    captchaTooltipIcon: NzFormTooltipIcon = {
-      type: 'info-circle',
-      theme: 'twotone'
-    };
+  public validateForm!: FormGroup;
+  captchaTooltipIcon: NzFormTooltipIcon = {
+    type: 'info-circle',
+    theme: 'twotone'
+  };
 
-    fileList: NzUploadFile[] = [
-      {
-        uid: '-1',
-        name: 'image.png',
-        status: 'done',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-      },
-      {
-        uid: '-2',
-        name: 'image.png',
-        status: 'done',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-      },
-      {
-        uid: '-3',
-        name: 'image.png',
-        status: 'done',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-      },
-      {
-        uid: '-4',
-        name: 'image.png',
-        status: 'done',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-      },
-      {
-        uid: '-xxx',
-        percent: 50,
-        name: 'image.png',
-        status: 'uploading',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-      },
-      {
-        uid: '-5',
-        name: 'image.png',
-        status: 'error'
-      }
-    ];
-    previewImage: string | undefined = '';
-    previewVisible = false;
-
-    constructor(private fb: FormBuilder) {}
-
-    handlePreview = async (file: NzUploadFile) => {
-      if (!file.url && !file.preview) {
-        file.preview = await getBase64(file.originFileObj!);
-      }
-      this.previewImage = file.url || file.preview;
-      this.previewVisible = true;
-    };
-
-    submitForm(): void {
-      for (const i in this.validateForm.controls) {
-        this.validateForm.controls[i].markAsDirty();
-        this.validateForm.controls[i].updateValueAndValidity();
-      }
+  fileList: NzUploadFile[] = [
+    {
+      uid: '-1',
+      name: 'image.png',
+      status: 'done',
+      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
+    },
+    {
+      uid: '-2',
+      name: 'image.png',
+      status: 'done',
+      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
+    },
+    {
+      uid: '-3',
+      name: 'image.png',
+      status: 'done',
+      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
+    },
+    {
+      uid: '-4',
+      name: 'image.png',
+      status: 'done',
+      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
+    },
+    {
+      uid: '-xxx',
+      percent: 50,
+      name: 'image.png',
+      status: 'uploading',
+      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
+    },
+    {
+      uid: '-5',
+      name: 'image.png',
+      status: 'error'
     }
+  ];
+  previewImage: string | undefined = '';
+  previewVisible = false;
 
-    updateConfirmValidator(): void {
-      /** wait for refresh value */
-      Promise.resolve().then(() => this.validateForm.controls.checkPassword.updateValueAndValidity());
+  constructor(
+    private fb: FormBuilder,
+    private systemService: SystemService,
+    private apiMerchantService: ApiMerchantService
+  ) {}
+
+  ngOnInit(): void {
+    this.initalOtherConfig();
+    /* 注册表单控制器 */
+    this.validateForm = this.fb.group({
+      platformId: [null, [Validators.required]],
+      account: [null, [Validators.required]],
+      title: [null, [Validators.required]],
+      website: [null, [Validators.required]],
+      image: [null]
+    });
+  }
+
+  private initalOtherConfig() {
+    this.apiMerchantService.asyncFetchPlatformListInfo().subscribe(res => {
+      // console.log(res);
+      this.platformRenderArray = res.rel;
+    })
+  }
+
+  handlePreview = async (file: NzUploadFile) => {
+    if (!file.url && !file.preview) {
+      file.preview = await getBase64(file.originFileObj!);
     }
+    this.previewImage = file.url || file.preview;
+    this.previewVisible = true;
+  };
 
-    confirmationValidator = (control: FormControl): { [s: string]: boolean } => {
-      if (!control.value) {
-        return { required: true };
-      } else if (control.value !== this.validateForm.controls.password.value) {
-        return { confirm: true, error: true };
-      }
-      return {};
-    };
-
-    getCaptcha(e: MouseEvent): void {
-      e.preventDefault();
+  /* 提交数据 */
+  public submitForm(): void {
+    for (const i in this.validateForm.controls) {
+      this.validateForm.controls[i].markAsDirty();
+      this.validateForm.controls[i].updateValueAndValidity();
     }
-
-    ngOnInit(): void {
-      this.validateForm = this.fb.group({
-        temp: [null, [Validators.required]],
-        password: [null, [Validators.required]],
-        checkPassword: [null, [Validators.required, this.confirmationValidator]],
-        nickname: [null, [Validators.required]],
-        phoneNumberPrefix: ['+86'],
-        phoneNumber: [null, [Validators.required]],
-        website: [null, [Validators.required]],
-        captcha: [null, [Validators.required]],
-        norm: [null],
-        price: [null, [Validators.pattern(/^\d+(\.\d+)?$/)]],
-        agree: [false]
-      });
+    console.log(this.validateForm)
+    if (this.validateForm.valid) {
+      this.apiMerchantService.asyncFetchBindShopInfo(this.validateForm.value).subscribe(res => {
+        // console.log(res);
+        this.systemService.presentToast('新增商品成功!', 'success');
+        this.validateForm.reset();
+      })
     }
+  }
+
+  updateConfirmValidator(): void {
+    /** wait for refresh value */
+    Promise.resolve().then(() => this.validateForm.controls.checkPassword.updateValueAndValidity());
+  }
+
+  confirmationValidator = (control: FormControl): { [s: string]: boolean } => {
+    if (!control.value) {
+      return { required: true };
+    } else if (control.value !== this.validateForm.controls.password.value) {
+      return { confirm: true, error: true };
+    }
+    return {};
+  };
+
+  getCaptcha(e: MouseEvent): void {
+    e.preventDefault();
+  }
 
 }

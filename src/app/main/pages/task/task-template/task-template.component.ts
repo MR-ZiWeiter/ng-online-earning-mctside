@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { IApiTempInfoModal } from 'src/app/core/model';
+import { ApiReleaseService } from 'src/app/core/modules/provider/api';
 
 @Component({
   selector: 'swipe-task-template',
@@ -10,21 +12,24 @@ export class TaskTemplateComponent implements OnInit {
 
   public validateForm!: FormGroup;
 
-  public dataSet = [
-    {
-      index: 1,
-      taskRegion: '淘宝天猫',
-      image: '',
-      tempName: '淘宝',
-      shopkeeper: '猴三棍',
-      website: 'https://lan…',
-      price: '1200',
-      praiseLimit: '物流收货后好评',
-      createTime: '1990/05/05 20:19:35'
-    }
-  ];
+  public renderInfoArray: Array<IApiTempInfoModal> = [];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private apiReleaseService: ApiReleaseService
+  ) {
+    this.onSearchInfo()
+  }
+
+  public onSearchInfo() {
+    this.apiReleaseService.asyncFetchTempList({
+      pageNum: 1,
+      pageSize: 20
+    }).subscribe(res => {
+      console.log(res)
+      this.renderInfoArray = res.rel;
+    })
+  }
 
   submitForm(): void {
     for (const i in this.validateForm.controls) {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiUserAccountService, ApiUserIndexService } from 'src/app/core/modules/provider/api';
 
 @Component({
   selector: 'swipe-anthor',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AnthorComponent implements OnInit {
 
-  constructor() { }
+  public anthorInfo: any;
+
+  constructor(
+    private apiUserIndexService: ApiUserIndexService
+  ) { }
 
   ngOnInit() {
+    this.apiUserIndexService.asyncFetchUserHomeInfo().subscribe(res => {
+      // console.log(res);
+      this.anthorInfo = res.rel;
+    })
   }
 
 }

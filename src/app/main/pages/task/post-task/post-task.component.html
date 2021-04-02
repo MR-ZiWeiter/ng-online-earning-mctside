@@ -1,5 +1,19 @@
 <section class="task-page">
-  <swipe-step1></swipe-step1>
+  <swipe-step1>
+    <section name="selectTemp" nz-row>
+      <section nz-col [nzSpan]="24">
+        <nz-form-item>
+          <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="temp">选择模板</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24">
+            <nz-select nz-col nzSpan="24" nzShowSearch nzAllowClear id="temp" nzPlaceHolder="选择任务模板" [(ngModel)]="tempSelected" (ngModelChange)="selectTempChange($event)">
+              <nz-option *ngFor="let item of tempDictArray" [nzLabel]="item.title" [nzValue]="item.id"></nz-option>
+            </nz-select>
+          </nz-form-control>
+          <button nz-button color="primary" nzType="text">模板管理</button>
+        </nz-form-item>
+      </section>
+    </section>
+  </swipe-step1>
   <swipe-step2></swipe-step2>
   <swipe-step3></swipe-step3>
   <swipe-step4></swipe-step4>

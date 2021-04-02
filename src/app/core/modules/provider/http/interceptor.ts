@@ -9,7 +9,7 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LoggerService } from './../logger/logger.service';
-import { catchError, map, tap, mergeMap, retry } from 'rxjs/operators';
+import { catchError, map, tap, mergeMap, retry, retryWhen } from 'rxjs/operators';
 import { Observable, throwError, timer, of } from 'rxjs';
 import { RequestProcessedHandler } from './handler/request-processed-handler';
 import { RequestPreviewHandler } from './handler/request-preview-handler';
@@ -58,6 +58,7 @@ export class LarkHttpInterceptor implements HttpInterceptor {
           throw err;
           // return this.requestExceptionHandler.handle(err);
         })
+        // retryWhen((err: Observable<any>) => timer(5000))
       );
   }
 }

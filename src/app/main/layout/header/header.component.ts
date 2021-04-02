@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/core/services/user/user.service';
-import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 
 @Component({
   selector: 'swipe-header',
@@ -10,17 +9,14 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
 
   constructor(
-    private userService: UserService,
-    private router: Router
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
   }
   /* 登出 */
   public onLogout() {
-    /* 暂时使用直接更改TOKEN方式，后期将改为调用APIServices */
-    this.userService.setAppToken(null);
-    this.router.navigate(['/'])
+    this.authService.logout();
   }
 
 }

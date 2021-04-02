@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   NAME: 'ONLINE_EARNING',
   ENVIRONMENT: 'development',
-  API_URL: '/',
+  API_URL: 'http://192.168.0.168:9001',
   BASIC_URL: '/',
   VERSION: 2
 };

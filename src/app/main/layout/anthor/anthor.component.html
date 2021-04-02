@@ -1,10 +1,10 @@
-<div class="anthor">
+<div class="anthor" *ngIf="anthorInfo">
   <div class="anthor-top">
     <div class="anthor-top-img">
-      <img src="/assets/images/pages/login/login-bg@2x.png" alt="">
+      <img [src]="anthorInfo.avatar" alt="">
     </div>
     <div class="anthor-top-name">
-      <span>张大飞_1</span>
+      <span>{{anthorInfo.realName}}</span>
     </div>
     <div class="anthor-top-authentication-info">
       <div class="authentication">
@@ -17,7 +17,7 @@
   </div>
   <div class="anthor-btm">
     <div class="anthor-btm-money">
-      <span>账户余额：</span><span>￥6000.00</span>
+      <span>账户余额：</span><span>￥{{anthorInfo.balance}}</span>
     </div>
     <div class="anthor-btm-btn">
       <div class="btn active">

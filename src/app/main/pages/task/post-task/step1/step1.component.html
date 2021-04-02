@@ -4,21 +4,7 @@
   </section>
   <section class="form-info">
     <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
-      <section nz-row>
-        <section nz-col [nzSpan]="24">
-          <nz-form-item>
-            <nz-form-label [nzSm]="5" [nzXs]="24" nzRequired nzFor="temp">选择模板</nz-form-label>
-            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请选择任务模板">
-              <nz-select nz-col nzSpan="24" nzShowSearch nzAllowClear formControlName="temp" id="temp" nzPlaceHolder="选择任务模板" [(ngModel)]="selectedValue">
-                <nz-option nzLabel="模板一" nzValue="1"></nz-option>
-                <nz-option nzLabel="模板二" nzValue="2"></nz-option>
-                <nz-option nzLabel="模板三" nzValue="3"></nz-option>
-              </nz-select>
-            </nz-form-control>
-            <button nz-button color="primary" nzType="text">模板管理</button>
-          </nz-form-item>
-        </section>
-      </section>
+      <ng-content select="[name=selectTemp]"></ng-content>
       <section nz-row>
         <section nz-col [nzSpan]="24">
           <nz-form-item>

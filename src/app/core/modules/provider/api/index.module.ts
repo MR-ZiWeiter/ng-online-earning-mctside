@@ -1,28 +1,24 @@
 import { NgModule } from '@angular/core';
 import {
   ApiUserIndexService,
-  UserAccountService,
-  ApiTakeLookService,
-  ApiAcademicService,
-  ApiListenService,
-  ApiPlayerService,
-  ApiSearchService,
+  ApiUserAccountService,
   ApiSuperVipService,
-  ApiSystemService
+  ApiSystemService,
+  ApiMerchantService,
+  ApiIndexService,
+  ApiReleaseService
 } from './index';
 
 @NgModule({
   imports: [],
   providers: [
     ApiUserIndexService,
-    UserAccountService,
-    ApiTakeLookService,
-    ApiAcademicService,
-    ApiListenService,
-    ApiPlayerService,
-    ApiSearchService,
+    ApiUserAccountService,
     ApiSuperVipService,
-    ApiSystemService
+    ApiMerchantService,
+    ApiSystemService,
+    ApiIndexService,
+    ApiReleaseService
   ]
 })
 

@@ -6,6 +6,7 @@ import { BehaviorSubject, Subject, Observable } from 'rxjs';
 })
 export class UserService {
   public token!: string|null;
+  public userBasicInfo!: any;
 
   private $WxAppToken: BehaviorSubject<string|null> = new BehaviorSubject<string|null>(null);
 
@@ -43,6 +44,7 @@ export class UserService {
   // 暴露更新用户信息方法
   public setUserBasicInfo(info: object|null): void {
     console.log('正在设置用户信息');
+    this.userBasicInfo = info;
     this.$userBasicInfo.next(info);
   }
 

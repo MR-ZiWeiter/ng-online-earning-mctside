@@ -6,6 +6,7 @@ import { RequestMethods } from './request-methods';
 import { LoggerService } from './../logger/logger.service';
 
 import { environment } from '@app/env';
+import { ApiResponseModel } from '../api/index.d';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class HttpService {
    * @param paramMap //
    * @param header //
    */
-  get(url: string, paramMap: {} = {}, header: {} = {}): Observable<object> {
+  get(url: string, paramMap: {} = {}, header: {} = {}): Observable<ApiResponseModel> {
     return this.sendRequest(url, paramMap, RequestMethods.GET, header);
   }
 
@@ -31,7 +32,7 @@ export class HttpService {
    * @param paramMap //
    * @param header //
    */
-  post(url: string, paramMap: {} = {}, header: {} = {}, body: any): Observable<object> {
+  post(url: string, paramMap: {} = {}, header: {} = {}, body: any): Observable<ApiResponseModel> {
     return this.sendRequest(url, paramMap, RequestMethods.POST, header, body);
   }
 
@@ -41,7 +42,7 @@ export class HttpService {
    * @param paramMap //
    * @param header //
    */
-  delete(url: string, paramMap: {} = {}, header: {} = {}): Observable<object> {
+  delete(url: string, paramMap: {} = {}, header: {} = {}): Observable<ApiResponseModel> {
     return this.sendRequest(url, paramMap, RequestMethods.DELETE, header);
   }
 
@@ -51,7 +52,7 @@ export class HttpService {
    * @param paramMap //
    * @param header //
    */
-  options(url: string, paramMap: {} = {}, header: {} = {}): Observable<object> {
+  options(url: string, paramMap: {} = {}, header: {} = {}): Observable<ApiResponseModel> {
     return this.sendRequest(url, paramMap, RequestMethods.OPTIONS, header);
   }
 
@@ -61,7 +62,7 @@ export class HttpService {
    * @param paramMap //
    * @param header //
    */
-  trace(url: string, paramMap: {} = {}, header: {} = {}): Observable<object> {
+  trace(url: string, paramMap: {} = {}, header: {} = {}): Observable<ApiResponseModel> {
     return this.sendRequest(url, paramMap, RequestMethods.TRACE, header);
   }
 
@@ -71,7 +72,7 @@ export class HttpService {
    * @param paramMap //
    * @param header //
    */
-  HEAD(url: string, paramMap: {} = {}, header: {} = {}): Observable<object> {
+  HEAD(url: string, paramMap: {} = {}, header: {} = {}): Observable<ApiResponseModel> {
     return this.sendRequest(url, paramMap, RequestMethods.HEAD, header);
   }
 
@@ -81,7 +82,7 @@ export class HttpService {
    * @param paramMap //
    * @param header //
    */
-  patch(url: string, paramMap: {} = {}, header: {} = {}): Observable<object> {
+  patch(url: string, paramMap: {} = {}, header: {} = {}): Observable<ApiResponseModel> {
     return this.sendRequest(url, paramMap, RequestMethods.PATCH, header);
   }
 
@@ -102,7 +103,7 @@ export class HttpService {
     paramMap: any = {},
     method: RequestMethods = RequestMethods.GET,
     header: {} = {},
-    body?: any): Observable<object> {
+    body?: any): Observable<ApiResponseModel> {
     if (url.includes('http://') || url.includes('https://')) {
       this.logger.log('其他请求地址');
     } else {
@@ -124,7 +125,7 @@ export class HttpService {
         (res: any) => {
           observer.next(res);
         },
-        (        err: any) => {
+        (err: any) => {
           observer.error(err);
         }
       );

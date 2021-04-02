@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+/* 接口模块注入 */
+import { ApiServiceModule } from './modules/provider/api/index.module';
 /* 公共模块注入 */
 import { NZ_ICONS, NzIconModule } from 'ng-zorro-antd/icon';
 import { NzFormModule } from 'ng-zorro-antd/form';
@@ -44,6 +46,7 @@ import { SwipeUploadComponent } from './modules/components/swipe-upload/swipe-up
     RouterModule,
     CommonModule,
     FormsModule,
+    ApiServiceModule,
     NzIconModule,
     NzFormModule,
     NzInputModule,
@@ -65,6 +68,7 @@ import { SwipeUploadComponent } from './modules/components/swipe-upload/swipe-up
     ReactiveFormsModule,
     CommonModule,
     FormsModule,
+    ApiServiceModule,
     NzIconModule,
     NzFormModule,
     NzInputModule,

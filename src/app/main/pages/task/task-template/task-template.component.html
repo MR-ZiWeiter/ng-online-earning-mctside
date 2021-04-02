@@ -27,7 +27,7 @@
       </form>
     </section>
     <section class="context-list">
-      <nz-table #borderedTable nzBordered [nzData]="dataSet">
+      <nz-table #borderedTable nzBordered [nzData]="renderInfoArray">
         <thead>
           <tr>
             <th>序号</th>
@@ -37,7 +37,7 @@
             <th>掌柜名称</th>
             <th>商品网址</th>
             <th>价格</th>
-            <th>好评时限</th>
+            <!-- <th>好评时限</th> -->
             <th>添加时间</th>
             <th>操作</th>
           </tr>
@@ -45,13 +45,13 @@
         <tbody>
           <tr *ngFor="let data of borderedTable.data">
             <td>{{ data.index }}</td>
-            <td>{{ data.taskRegion }}</td>
+            <td>{{ data.platformTitle }}</td>
             <td>{{ data.image }}</td>
-            <td>{{ data.tempName }}</td>
-            <td>{{ data.shopkeeper }}</td>
-            <td>{{ data.website }}</td>
-            <td>{{ data.price }}</td>
-            <td>{{ data.praiseLimit }}</td>
+            <td>{{ data.templateTitle }}</td>
+            <td>{{ data.shopTitle }}</td>
+            <td>{{ data.url }}</td>
+            <td>{{ data.unitPrice }}</td>
+            <!-- <td>{{ data.praiseLimit }}</td> -->
             <td>{{ data.createTime }}</td>
             <td>
               <a>发布</a>

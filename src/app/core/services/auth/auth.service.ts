@@ -4,6 +4,7 @@ import { environment } from '@app/env';
 
 import { UserService } from '../user/user.service';
 import { CoreToolsFunction } from 'src/app/core/core.tools';
+import { ApiUserAccountService } from 'src/app/core/modules/provider/api';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class AuthService extends CoreToolsFunction {
   public redirectUrl: string|null = null;
 
   constructor(
+    private apiAccountService: ApiUserAccountService,
     private userService: UserService,
     private router: Router
   ) {
@@ -26,6 +28,16 @@ export class AuthService extends CoreToolsFunction {
         this.isLoggedIn = false;
       }
     });
+  }
+
+  // 重新获取Token 刷新Token
+  public refreshToken() {
+    setTimeout(() => {
+      this.apiAccountService.asyncAccountRefreshToken({
+        token: this.userService.token
+      }).subscribe()
+
+    }, 5000)
   }
 
   // 公共登录

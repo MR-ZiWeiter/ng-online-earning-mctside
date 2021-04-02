@@ -15,8 +15,8 @@ export class RequestPreviewHandler {
   handle(request: HttpRequest<any>): HttpRequest<any> {
     let params = new HttpParams();
     const headers = {};
-    params = request.params.append('client', 'wx');
-    console.log(request);
+    params = request.params.append('client', 'mctside');
+    // console.log(request);
     if (request.method === 'POST') {
       console.log(request.params.get('noHeader'));
       if (!request.params.get('noHeader')) {
@@ -27,8 +27,8 @@ export class RequestPreviewHandler {
     }
     const cloneHttpRequest = request.clone({
       setHeaders: {
-        token: this.getToken(),
-        client: 'wx',
+        accessToken: this.getToken(),
+        client: 'mctside',
         ...headers
       },
       params
