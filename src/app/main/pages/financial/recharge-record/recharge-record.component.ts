@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ApiFinancialService } from 'src/app/core/modules/provider/api';
 
 @Component({
   selector: 'swipe-recharge-record',
@@ -45,7 +46,25 @@ export class RechargeRecordComponent implements OnInit {
     }
   ];
 
-  constructor(private fb: FormBuilder) {}
+  public renderConfig: any = {
+    pageNum: 1,
+    pageSize: 20
+  }
+
+  public renderArray: any[] = [];
+
+  constructor(
+    private fb: FormBuilder,
+    private apiFinancialService: ApiFinancialService
+  ) {
+    this.fetchFinancialCapitalRechargeList();
+  }
+
+  public fetchFinancialCapitalRechargeList() {
+    this.apiFinancialService.asyncFetchFinancialCapitalRechargeList(this.renderConfig).subscribe(res => {
+      this.renderArray = res.rel.list
+    })
+  }
 
   submitForm(): void {
     for (const i in this.validateForm.controls) {

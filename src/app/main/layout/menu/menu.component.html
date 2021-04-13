@@ -1,7 +1,8 @@
 <div class="menu">
-  <ul nz-menu nzMode="inline" style="width: 100%;">
+  <ul nz-menu nzMode="inline" [nzInlineCollapsed]="false" style="width: 100%;">
     <ng-container *ngFor="let item of menuMap; index as idx">
-      <li nz-submenu [nzOpen]="openMap[idx]"  (nzOpenChange)="openHandler(idx)"  [nzTitle]="item.title" [nzIcon]="item.icon"  >
+      <!--  [nzOpen]="openMap[idx]" -->
+      <li nz-submenu [nzOpen] (nzOpenChange)="openHandler(idx)"  [nzTitle]="item.title" [nzIcon]="item.icon"  >
         <ul>
          <ng-container *ngFor="let i of item.list">
           <li nz-menu-item nzMatchRouter>

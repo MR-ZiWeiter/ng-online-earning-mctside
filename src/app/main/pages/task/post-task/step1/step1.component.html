@@ -10,10 +10,8 @@
           <nz-form-item>
             <nz-form-label [nzSm]="5" [nzXs]="24" nzRequired nzFor="temp">所属平台</nz-form-label>
             <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请选择任务平台">
-              <nz-select nz-col nzSpan="24" nzShowSearch nzAllowClear formControlName="temp" id="temp" nzPlaceHolder="淘宝" [(ngModel)]="selectedValue">
-                <nz-option nzLabel="淘宝" nzValue="1"></nz-option>
-                <nz-option nzLabel="京东" nzValue="2"></nz-option>
-                <nz-option nzLabel="天猫" nzValue="3"></nz-option>
+              <nz-select nz-col nzSpan="24" nzShowSearch nzAllowClear id="temp" nzPlaceHolder="淘宝" [(ngModel)]="platformSelect">
+                <nz-option *ngFor="let item of packgeConfig.platform" [nzLabel]="item.title" [nzValue]="item.id"></nz-option>
               </nz-select>
             </nz-form-control>
           </nz-form-item>

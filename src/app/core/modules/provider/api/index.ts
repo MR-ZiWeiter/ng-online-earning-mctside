@@ -5,3 +5,4 @@ export * from './system/index.service';
 export * from './task/index.service';
 export * from './task/merchant.service';
 export * from './task/release.service';
+export * from './financial/index.service';

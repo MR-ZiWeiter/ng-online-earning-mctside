@@ -6,7 +6,8 @@ import {
   ApiSystemService,
   ApiMerchantService,
   ApiIndexService,
-  ApiReleaseService
+  ApiReleaseService,
+  ApiFinancialService
 } from './index';
 
 @NgModule({
@@ -18,7 +19,8 @@ import {
     ApiMerchantService,
     ApiSystemService,
     ApiIndexService,
-    ApiReleaseService
+    ApiReleaseService,
+    ApiFinancialService
   ]
 })
 

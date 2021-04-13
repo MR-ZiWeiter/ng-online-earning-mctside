@@ -7,7 +7,13 @@
       <ng-template #tableTitle1>
         <span class="title-text">充值记录</span>
       </ng-template>
-      <nz-table [nzTitle]="tableTitle1" #borderedTable nzBordered [nzData]="dataSet">
+      <nz-table
+        [nzTitle]="tableTitle1"
+        #borderedTable
+        nzBordered
+        (nzQueryParams)="renderConfig"
+        [nzData]="renderArray"
+        [nzFrontPagination]="false">
         <thead>
           <tr>
             <th nzAlign="center">交易/流水号</th>
@@ -20,11 +26,11 @@
         </thead>
         <tbody>
           <tr *ngFor="let data of borderedTable.data">
-            <td nzAlign="center">{{ data.code }}</td>
-            <td nzAlign="center">{{ data.type }}</td>
-            <td nzAlign="center">{{ data.price }}</td>
-            <td nzAlign="center">{{ data.time }}</td>
-            <td nzAlign="center">{{ data.over }}</td>
+            <td nzAlign="center">{{ data.outTradeNo }}</td>
+            <td nzAlign="center">{{ data.direction }}</td>
+            <td nzAlign="center">{{ data.amount }}</td>
+            <td nzAlign="center">{{ data.createTime }}</td>
+            <td nzAlign="center">{{ data.afterBalance }}</td>
             <td nzAlign="center">{{ data.status }}</td>
           </tr>
         </tbody>
