@@ -7,27 +7,28 @@
       <section nz-row>
         <section nz-col [nzSpan]="24">
           <nz-form-item nz-row>
-            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="checkPassword" nzRequired>将本次任务存为模板</nz-form-label>
+            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="saveTemplate" nzRequired>将本次任务存为模板</nz-form-label>
             <nz-form-control [nzSm]="5" [nzXs]="24">
-              <!-- <input nz-input type="password" formControlName="checkPassword" id="checkPassword"  [(ngModel)]="radioValue" /> -->
-              <nz-radio-group class="custom-check-radio-group" id="checkPassword" formControlName="checkPassword">
-                <label class="min-check-radio" nz-radio nzValue="A">不启用</label>
-                <label class="min-check-radio" nz-radio nzValue="B">启用</label>
+              <nz-radio-group class="custom-check-radio-group" id="saveTemplate" formControlName="saveTemplate">
+                <label class="min-check-radio" nz-radio [nzValue]="0">不启用</label>
+                <label class="min-check-radio" nz-radio [nzValue]="1">启用</label>
               </nz-radio-group>
             </nz-form-control>
-            <section nz-col nzFlex="1" nz-row>
-              <section nz-col [nzSpan]="24">
-                <nz-form-item class="custom-margin-0">
-                  <nz-form-label [nzSm]="5" [nzXs]="12" nzFor="keyword" nzRequired>模板名称</nz-form-label>
-                  <nz-form-control
-                    [nzSm]="14"
-                    [nzXs]="24"
-                    nzErrorTip="请输入模板名称">
-                    <input nz-input type="text" formControlName="keyword" placeholder="模板名称" />
-                  </nz-form-control>
-                </nz-form-item>
+            <ng-container *ngIf="validateForm.value.saveTemplate">
+              <section nz-col nzFlex="1" nz-row>
+                <section nz-col [nzSpan]="24">
+                  <nz-form-item class="custom-margin-0">
+                    <nz-form-label [nzSm]="5" [nzXs]="12" nzFor="templateTitle" nzRequired>模板名称</nz-form-label>
+                    <nz-form-control
+                      [nzSm]="14"
+                      [nzXs]="24"
+                      nzErrorTip="请输入模板名称">
+                      <input nz-input type="text" formControlName="templateTitle" placeholder="模板名称" />
+                    </nz-form-control>
+                  </nz-form-item>
+                </section>
               </section>
-            </section>
+            </ng-container>
           </nz-form-item>
         </section>
       </section>

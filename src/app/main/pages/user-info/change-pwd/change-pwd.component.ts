@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { UserService } from 'src/app/core/services/user/user.service';
+import { SystemService } from 'src/app/core/services/system/system.service';
+import { ApiUserAccountService } from 'src/app/core/modules/provider/api';
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
 
 @Component({
@@ -17,12 +20,33 @@ export class ChangePwdComponent implements OnInit {
     theme: 'twotone'
   };
 
-  constructor(private fb: FormBuilder) {}
+  public basicInfo: any = {};
+
+  constructor(
+    private fb: FormBuilder,
+    private systemService: SystemService,
+    private userService: UserService,
+    private apiUserAccountService: ApiUserAccountService
+  ) {
+    this.userService.getUserBasicInfo().subscribe(renderInfo => {
+      // console.log(renderInfo)
+      if (renderInfo) {
+        this.basicInfo = renderInfo;
+      }
+    })
+  }
 
   submitForm(): void {
     for (const i in this.validateForm.controls) {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
+    }
+    if (this.validateForm.valid) {
+      this.apiUserAccountService.asyncFetchAccountPwdChange(this.validateForm.value).subscribe(res => {
+        this.systemService.presentToast('修改成功', 'success');
+      })
+    } else {
+      this.systemService.presentToast('请完善表单后提交', 'error');
     }
   }
 
@@ -34,7 +58,7 @@ export class ChangePwdComponent implements OnInit {
   confirmationValidator = (control: FormControl): { [s: string]: boolean } => {
     if (!control.value) {
       return { required: true };
-    } else if (control.value !== this.validateForm.controls.password.value) {
+    } else if (control.value !== this.validateForm.controls.newCredential.value) {
       return { confirm: true, error: true };
     }
     return {};
@@ -46,17 +70,13 @@ export class ChangePwdComponent implements OnInit {
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
-      temp: [null, [Validators.required]],
-      password: [null, [Validators.required]],
+      accountType: [3],
+      identifier: [null, [Validators.required]],
+      credential: [null, [Validators.required]],
+      newCredential: [null, [Validators.required]],
       checkPassword: [null, [Validators.required, this.confirmationValidator]],
-      nickname: [null, [Validators.required]],
-      phoneNumberPrefix: ['+86'],
-      phoneNumber: [null, [Validators.required]],
-      website: [null, [Validators.required]],
-      captcha: [null, [Validators.required]],
-      norm: [null],
-      price: [null, [Validators.pattern(/^\d+(\.\d+)?$/)]],
-      agree: [false]
+      imageCode: [null, [Validators.required]],
+      imageCodeToken: [null, [Validators.required]],
     });
   }
 }

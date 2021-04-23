@@ -34,4 +34,16 @@ export class ApiFinancialService {
       });
     });
   }
+
+  /* 提现明细 */
+  asyncFetchFinancialWithdrawalInfo(info: any = {}): Observable<any> {
+    return new Observable((observer: { next: (arg0: any) => void; error: (arg0: boolean) => void; }) => {
+      this.http.get('/business/capital-account/cash-out/list', info, {}).subscribe((res: any) => {
+        // console.log(res);
+        observer.next(res);
+      }, (err: any) => {
+        observer.error(false);
+      });
+    });
+  }
 }

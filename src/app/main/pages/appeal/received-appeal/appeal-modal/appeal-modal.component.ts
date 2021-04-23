@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'swipe-appeal-modal',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./appeal-modal.component.scss']
 })
 export class AppealModalComponent implements OnInit {
+
+  @Input() public renderInfo?: any = {};
 
   constructor() { }
 

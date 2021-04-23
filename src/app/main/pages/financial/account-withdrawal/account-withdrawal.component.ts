@@ -1,6 +1,9 @@
+import { ApiFinancialAccountService } from 'src/app/core/modules/provider/api';
+import { SystemService } from 'src/app/core/services/system/system.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
+import { UserService } from 'src/app/core/services/user/user.service';
 
 @Component({
   selector: 'swipe-account-withdrawal',
@@ -17,7 +20,26 @@ export class AccountWithdrawalComponent implements OnInit {
     theme: 'twotone'
   };
 
-  constructor(private fb: FormBuilder) {}
+  public renderInfo: any = {};
+
+  constructor(
+    private fb: FormBuilder,
+    private systemService: SystemService,
+    private userService: UserService,
+    private apiFinancialAccountService: ApiFinancialAccountService
+  ) {
+    this.fetchRenderInfo();
+    this.userService.getUserBasicInfo().subscribe(renderInfo => {
+      console.log(renderInfo)
+    })
+  }
+
+  /* 获取配置数据 */
+  private fetchRenderInfo() {
+    this.apiFinancialAccountService.asyncFetchFinancialAccountPayInfo().subscribe(res => {
+      this.renderInfo = res.rel;
+    })
+  }
 
   submitForm(): void {
     for (const i in this.validateForm.controls) {
@@ -61,7 +83,7 @@ export class AccountWithdrawalComponent implements OnInit {
   }
   /* 选择支付类别 */
   public selectPayTypeChange(ev: any) {
-    console.log(ev)
+    // console.log(ev)
   }
 
 }

@@ -195,6 +195,7 @@ $vm_design: 750;
  * @param $type {number} 1: 透明度方式 值为透明度 2：背景方式 值为色值
  */
 @mixin click-active($opacity: 0.8, $type: 1) {
+  cursor: pointer;
   @if ($type == 1) {
     &:active {
       opacity: $opacity;

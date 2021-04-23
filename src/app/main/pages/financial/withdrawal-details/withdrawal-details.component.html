@@ -7,7 +7,17 @@
       <ng-template #tableTitle1>
         <span class="title-text">提现明细</span>
       </ng-template>
-      <nz-table [nzTitle]="tableTitle1" #borderedTable nzBordered [nzData]="dataSet">
+      <nz-table
+        [nzTitle]="tableTitle1"
+        #borderedTable
+        [nzLoading]="renderConfig.loading"
+        [nzTotal]="renderConfig.total"
+        [nzPageSize]="renderConfig.pageSize"
+        [nzPageIndex]="renderConfig.pageNum"
+        nzBordered
+        (nzQueryParams)="onQueryParamsChange($event)"
+        nzBordered
+        [nzData]="renderArray">
         <thead>
           <tr>
             <th nzAlign="center">交易/流水号</th>
@@ -15,22 +25,26 @@
             <th nzAlign="center">支付类型</th>
             <th nzAlign="center">账户</th>
             <th nzAlign="center">提现金额(元)</th>
-            <th nzAlign="center">提现金额(元)</th>
+            <th nzAlign="center">实付金额(元)</th>
             <th nzAlign="center">时间</th>
             <th nzAlign="center">状态</th>
             <th nzAlign="center">备注</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of borderedTable.data">
-            <td nzAlign="center">{{ data.code }}</td>
-            <td nzAlign="center">{{ data.name }}</td>
-            <td nzAlign="center">{{ data.type }}</td>
-            <td nzAlign="center">{{ data.acount }}</td>
-            <td nzAlign="center">{{ data.withdrawalPrice }}</td>
-            <td nzAlign="center">{{ data.price }}</td>
-            <td nzAlign="center">{{ data.time }}</td>
-            <td nzAlign="center">{{ data.status }}</td>
+          <tr *ngFor="let data of borderedTable.data" [ngSwitch]="data.status">
+            <td nzAlign="center">{{ data.withdrawalNum }}</td>
+            <td nzAlign="center">{{ data.realName }}</td>
+            <td nzAlign="center">{{ data.withdrawalMethod }}</td>
+            <td nzAlign="center">{{ data.accountNumbe }}</td>
+            <td nzAlign="center">{{ data.amount }}</td>
+            <td nzAlign="center">{{ data.realAmount }}</td>
+            <td nzAlign="center">{{ data.createTime }}</td>
+            <td nzAlign="center" *ngSwitchCase="1">待审核</td>
+            <td nzAlign="center" *ngSwitchCase="2">处理中</td>
+            <td nzAlign="center" *ngSwitchCase="3">审核成功</td>
+            <td nzAlign="center" *ngSwitchCase="4">审核失败</td>
+            <td nzAlign="center" *ngSwitchCase="5">撤销</td>
             <td nzAlign="center">{{ data.remark }}</td>
           </tr>
         </tbody>

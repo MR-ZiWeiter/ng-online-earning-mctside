@@ -1,4 +1,4 @@
-<section class="alipay-component">
+<section class="alipay-component" *ngIf="renderInfo">
   <section class="header-info">
     <span class="title-text">充值注意事项：</span>
   </section>
@@ -10,7 +10,7 @@
   </section>
 </section>
 
-<section class="alipay-component">
+<section class="alipay-component" *ngIf="renderInfo">
   <section class="recharge-type">
     <span class="title-text">第二步：转账到平台指定收款账号</span>
   </section>
@@ -32,7 +32,7 @@
           <nz-form-item class="no-margin">
             <nz-form-label [nzNoColon]="true" [nzSm]="3" [nzXs]="24">收款银行名称：</nz-form-label>
             <nz-form-control [nzSm]="7" [nzXs]="24">
-              <span>中国工商银行</span>
+              <span>{{renderInfo.bankAddress}}</span>
             </nz-form-control>
           </nz-form-item>
         </section>
@@ -42,7 +42,7 @@
           <nz-form-item class="no-margin">
             <nz-form-label [nzNoColon]="true" [nzSm]="3" [nzXs]="24">收款银行卡号： </nz-form-label>
             <nz-form-control [nzSm]="7" [nzXs]="24">
-              <span>888888888888213213213</span>
+              <span>{{renderInfo.accountNumber}}</span>
             </nz-form-control>
           </nz-form-item>
         </section>
@@ -52,7 +52,7 @@
           <nz-form-item class="no-margin">
             <nz-form-label [nzNoColon]="true" [nzSm]="3" [nzXs]="24">收款人姓名：</nz-form-label>
             <nz-form-control [nzSm]="7" [nzXs]="24">
-              <span>逍遥子</span>
+              <span>{{renderInfo.bankRealName}}</span>
             </nz-form-control>
           </nz-form-item>
         </section>
@@ -71,9 +71,9 @@
       <section nz-row>
         <section nz-col [nzSpan]="24">
           <nz-form-item>
-            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="website" nzRequired>打款银行名称</nz-form-label>
+            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="bankName" nzRequired>打款银行名称</nz-form-label>
             <nz-form-control [nzSm]="7" [nzXs]="24" nzErrorTip="请输入打款银行名称">
-              <input nz-input id="website" formControlName="website" placeholder="请输入打款银行名称" />
+              <input nz-input id="bankName" formControlName="bankName" placeholder="请输入打款银行名称" />
             </nz-form-control>
           </nz-form-item>
         </section>
@@ -81,9 +81,9 @@
       <section nz-row>
         <section nz-col [nzSpan]="24">
           <nz-form-item>
-            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="website" nzRequired>打款人姓名</nz-form-label>
+            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="realName" nzRequired>打款人姓名</nz-form-label>
             <nz-form-control [nzSm]="7" [nzXs]="24" nzErrorTip="请输入打款人姓名">
-              <input nz-input id="website" formControlName="website" placeholder="请输入打款人姓名" />
+              <input nz-input id="realName" formControlName="realName" placeholder="请输入打款人姓名" />
             </nz-form-control>
           </nz-form-item>
         </section>
@@ -91,9 +91,9 @@
       <section nz-row>
         <section nz-col [nzSpan]="24">
           <nz-form-item>
-            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="norm" nzRequired>打款银行卡号后4位数字</nz-form-label>
+            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="bankCardNum" nzRequired>打款银行卡号后4位数字</nz-form-label>
             <nz-form-control [nzSm]="7" [nzXs]="24" nzErrorTip="请输入打款银行卡号后4位数字">
-              <input nz-input id="norm" formControlName="norm" placeholder="请输入打款银行卡号后4位数字" />
+              <input nz-input id="bankCardNum" formControlName="bankCardNum" placeholder="请输入打款银行卡号后4位数字" />
             </nz-form-control>
           </nz-form-item>
         </section>
@@ -101,9 +101,9 @@
       <section nz-row>
         <section nz-col [nzSpan]="24">
           <nz-form-item>
-            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="website" nzRequired>转账金额</nz-form-label>
+            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="amount" nzRequired>转账金额</nz-form-label>
             <nz-form-control [nzSm]="7" [nzXs]="24" nzErrorTip="请输入转账金额">
-              <nz-input-number formControlName="price" [nzMin]="1" [nzMax]="10" [nzStep]="1" [nzPlaceHolder]="'输入金额'"></nz-input-number>
+              <nz-input-number formControlName="amount" [nzMin]="1" [nzMax]="99999999" [nzStep]="1" [nzPlaceHolder]="'输入金额'"></nz-input-number>
               <button nz-button disabled nzType="text">元</button>
             </nz-form-control>
           </nz-form-item>

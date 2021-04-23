@@ -1,10 +1,10 @@
 <swipe-custom-card [nzBorderless]="true" title="个人资料" >
-  <div class="form">
+  <div class="form" *ngIf="basicInfo">
     <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
-      <nz-form-item  >
-        <nz-form-label  [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">用户名</nz-form-label>
-        <nz-form-control   nz-row [nzSm]="14" [nzXs]="24" nzErrorTip="">
-          <input nz-input formControlName="email" id="email" nz-col [nzSpan]="10" /> <nz-form-text nz-col [nzSpan]="14" class="text"></nz-form-text>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="username">用户名</nz-form-label>
+        <nz-form-control nz-row [nzSm]="14" [nzXs]="24">
+          <input nz-input id="username" [ngModelOptions]="{standalone: true}" [disabled]="true" [(ngModel)]="basicInfo.nickname" nz-col [nzSpan]="10" /> <nz-form-text nz-col [nzSpan]="14" class="text"></nz-form-text>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
@@ -16,11 +16,10 @@
             nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
             [nzShowUploadList]="false"
             [nzBeforeUpload]="beforeUpload"
-            (nzChange)="handleChange($event)"
-          >
+            (nzChange)="handleChange($event)">
             <ng-container *ngIf="!avatarUrl">
                <div class="avatarUrl">
-                 <img src="/assets/images/public/header-img-mock@2x.png" alt="">
+                 <img [src]="basicInfo.avatar" alt="">
                </div>
             </ng-container>
             <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%" />
@@ -29,67 +28,75 @@
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label  [nzSm]="6" [nzXs]="24"  >真实姓名</nz-form-label>
-        <nz-form-control   nz-row [nzSm]="14" [nzXs]="24" nzErrorTip="">
-          <swipe-swipe-radio (radioChange)="onRadioChange($event)" ></swipe-swipe-radio>
-          <!-- <nz-radio-group [(ngModel)]="radioValue"  (ngModelChange)="onRadioChange($event)" formControlName="radio"  >
-            <label [class]="['radio-antd', radioValue === 'A' && 'active' ]"   nz-radio nzValue="A">男</label>
-            <label [class]="['radio-antd', radioValue === 'B' && 'active' ]" nz-radio nzValue="B">女</label>
-            <label [class]="['radio-antd', radioValue === 'C' && 'active' ]" nz-radio nzValue="C">保密</label>
-          </nz-radio-group> -->
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="username">真实姓名</nz-form-label>
+        <nz-form-control nz-row [nzSm]="14" [nzXs]="24" nzErrorTip="">
+          <input nz-input id="username" [ngModelOptions]="{standalone: true}" [disabled]="true" [(ngModel)]="basicInfo.realName" nz-col [nzSpan]="10" /> <nz-form-text nz-col [nzSpan]="14" class="text"></nz-form-text>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label  [nzSm]="6" [nzXs]="24"  >生日</nz-form-label>
-        <nz-form-control   nz-row [nzSm]="14" [nzXs]="24" nzErrorTip="">
-          <nz-date-picker nz-col [nzSpan]="10"  formControlName="date" [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-date-picker>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>性别</nz-form-label>
+        <nz-form-control nz-row [nzSm]="14" [nzXs]="24" nzErrorTip="请选择性别">
+          <swipe-swipe-radio [radioList]="genderRender" formControlName="gender"></swipe-swipe-radio>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>生日</nz-form-label>
+        <nz-form-control nz-row [nzSm]="14" [nzXs]="24" nzErrorTip="请选择出生日期">
+          <nz-date-picker nz-col [nzSpan]="10" formControlName="birthday"></nz-date-picker>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="qq">QQ</nz-form-label>
+        <nz-form-control nz-row [nzSm]="14" [nzXs]="24">
+          <input nz-input id="qq" nz-col [nzSpan]="10" [ngModelOptions]="{standalone: true}" [disabled]="true" [(ngModel)]="basicInfo.qq"/> <nz-form-text nz-col [nzSpan]="14" class="text">如果实名认证通过后需要修改，请联系客服！</nz-form-text>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item  >
-        <nz-form-label  [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">QQ</nz-form-label>
-        <nz-form-control   nz-row [nzSm]="14" [nzXs]="24" nzErrorTip="">
-          <input nz-input formControlName="email" id="email" nz-col [nzSpan]="10" /> <nz-form-text nz-col [nzSpan]="14" class="text">如果实名认证通过后需要修改，请联系客服！</nz-form-text>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="wechart">微信</nz-form-label>
+        <nz-form-control nz-row [nzSm]="14" [nzXs]="24">
+          <input nz-input id="wechart" nz-col [nzSpan]="10" [ngModelOptions]="{standalone: true}" [disabled]="true" [(ngModel)]="basicInfo.weChatNum"/> <nz-form-text nz-col [nzSpan]="14" class="text">请填写真实微信号，方便客服来联系您！</nz-form-text>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item  >
-        <nz-form-label  [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">微信</nz-form-label>
-        <nz-form-control   nz-row [nzSm]="14" [nzXs]="24" nzErrorTip="">
-          <input nz-input formControlName="email" id="email" nz-col [nzSpan]="10" /> <nz-form-text nz-col [nzSpan]="14" class="text">请填写真实微信号，方便客服来联系您！</nz-form-text>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item  >
-        <nz-form-label  [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">邮箱</nz-form-label>
-        <nz-form-control   nz-row [nzSm]="14" [nzXs]="24" nzErrorTip="">
+        <nz-form-label  [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">邮箱</nz-form-label>
+        <nz-form-control   nz-row [nzSm]="14" [nzXs]="24" nzErrorTip="请输入正确的邮箱">
           <input nz-input formControlName="email" id="email" nz-col [nzSpan]="10" /> <nz-form-text nz-col [nzSpan]="14" class="text"></nz-form-text>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item  >
-        <nz-form-label  [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">手机</nz-form-label>
-        <nz-form-control   nz-row [nzSm]="14" [nzXs]="24" nzErrorTip="">
-          <input nz-input formControlName="email" id="email" nz-col [nzSpan]="10" /> <nz-form-text nz-col [nzSpan]="14" class="text">如果实名认证通过后需要修改，请联系客服！</nz-form-text>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phone">手机</nz-form-label>
+        <nz-form-control nz-row [nzSm]="14" [nzXs]="24">
+          <input nz-input id="phone" nz-col [nzSpan]="10" [ngModelOptions]="{standalone: true}" [disabled]="true" [(ngModel)]="basicInfo.phone"/> <nz-form-text nz-col [nzSpan]="14" class="text">如果实名认证通过后需要修改，请联系客服！</nz-form-text>
         </nz-form-control>
       </nz-form-item>
-      <nz-form-item  >
-        <nz-form-label  [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">所属地区</nz-form-label>
-        <nz-form-control   nz-row [nzSm]="14" [nzXs]="24" nzErrorTip="">
-          <nz-cascader nz-col [nzSpan]="10" [nzOptions]="options" [(ngModel)]="values" formControlName="email" (ngModelChange)="onChanges($event)"></nz-cascader>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="addressCode">所属地区</nz-form-label>
+        <nz-form-control nz-row [nzSm]="14" [nzXs]="24" nzErrorTip="请选择所属地区">
+          <nz-cascader
+            [nzValueProperty]="'cityId'"
+            [nzLabelProperty]="'name'"
+            [nzShowSearch]="true"
+            nz-col [nzSpan]="10"
+            [nzOptions]="cityJsonRenderArray"
+            formControlName="addressCode">
+          </nz-cascader>
         </nz-form-control>
       </nz-form-item>
-      <nz-form-item  >
-        <nz-form-label  [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">详细地址</nz-form-label>
-        <nz-form-control   nz-row [nzSm]="14" [nzXs]="24" nzErrorTip="">
-          <input nz-input formControlName="email" id="email" nz-col [nzSpan]="10" /> <nz-form-text nz-col [nzSpan]="14" class="text"></nz-form-text>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="addressDetail">详细地址</nz-form-label>
+        <nz-form-control nz-row [nzSm]="14" [nzXs]="24" nzErrorTip="请完善详细地址">
+          <input nz-input formControlName="addressDetail" id="addressDetail" nz-col [nzSpan]="10" /> <nz-form-text nz-col [nzSpan]="14" class="text"></nz-form-text>
         </nz-form-control>
       </nz-form-item>
-      <nz-form-item  >
-        <nz-form-label  [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">个性签名</nz-form-label>
-        <nz-form-control   nz-row [nzSm]="14" [nzXs]="24" nzErrorTip="">
-          <input nz-input formControlName="email" id="email" nz-col [nzSpan]="10" /> <nz-form-text nz-col [nzSpan]="14" class="text"></nz-form-text>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="signature">个性签名</nz-form-label>
+        <nz-form-control nz-row [nzSm]="14" [nzXs]="24" nzErrorTip="请填写个性签名">
+          <input nz-input formControlName="signature" id="signature" nz-col [nzSpan]="10" /> <nz-form-text nz-col [nzSpan]="14" class="text"></nz-form-text>
         </nz-form-control>
       </nz-form-item>
-      <nz-form-item  >
-        <nz-form-label  [nzSm]="6" nzNoColon="true"></nz-form-label>
-        <nz-form-control   nz-row [nzSm]="14" [nzXs]="24" nzErrorTip="">
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" nzNoColon="true"></nz-form-label>
+        <nz-form-control nz-row [nzSm]="14" [nzXs]="24" nzErrorTip="">
           <button nz-button nzType="primary">确认修改</button>
         </nz-form-control>
       </nz-form-item>

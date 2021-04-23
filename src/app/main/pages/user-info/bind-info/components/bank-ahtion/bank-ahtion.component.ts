@@ -14,8 +14,14 @@ export class BankAhtionComponent implements OnInit {
 
   ngOnInit() {
     this.validateForm = this.fb.group({
+      realName: [null, [Validators.required]],
+      idCardNum: [null, [Validators.required]],
+      bankId: [null, [Validators.required]],
+      branchBankName: [null, [Validators.required]],
+      cityCode: [null, [Validators.required]],
       mobile: [null, [Validators.required]],
-      phoneCode: [null, [Validators.required]],
+      smsCode: [null, [Validators.required]],
+      bankCardNum: [null, [Validators.required]]
     });
   }
   onChanges(e: any) {

@@ -21,6 +21,9 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 
+// 管道类
+import { KeysPipe } from './pipes';
+
 /* ICON模块注入 */
 import {
   MenuFoldOutline,
@@ -92,6 +95,8 @@ import { SwipeUploadComponent } from './modules/components/swipe-upload/swipe-up
     SwipeRadioComponent,
     SwipeGetCodeInputComponent,
     SwipeUploadComponent,
+    /* 管道类 */
+    KeysPipe
   ],
   declarations: [
     SwipeEyeCareModeComponent,
@@ -99,7 +104,9 @@ import { SwipeUploadComponent } from './modules/components/swipe-upload/swipe-up
     SwipeInputComponent,
     SwipeRadioComponent,
     SwipeGetCodeInputComponent,
-    SwipeUploadComponent
+    SwipeUploadComponent,
+    /* 管道类 */
+    KeysPipe
   ],
   providers: [
     { provide: NZ_ICONS, useValue: icons }

@@ -13,12 +13,13 @@ export class BindZfbComponent implements OnInit {
   validateForm!: FormGroup;
   loading = false;
   avatarUrl?: string;
-  // tslint:disable-next-line:typedef
+
+  constructor(private fb: FormBuilder, private msg: NzMessageService) {}
+
   ngOnInit() {
     this.validateForm = this.fb.group({
-      userName: [null, [Validators.required]],
-      password: [null, [Validators.required]],
-      email: [true],
+      account: [null, [Validators.required]],
+      realName: [null, [Validators.required]]
     });
   }
   submitForm(): void {
@@ -28,7 +29,4 @@ export class BindZfbComponent implements OnInit {
       this.validateForm.controls[i].updateValueAndValidity();
     }
   }
-  constructor(private fb: FormBuilder, private msg: NzMessageService) {}
-
-
 }

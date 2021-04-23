@@ -14,12 +14,12 @@
   }
   .form-info {
     padding: format(30) 0;
-    .custom-check-radio-group {
+    .custom-checkbox-group {
       @include flex-justify-align(flex-start, flex-start);
       flex-wrap: wrap;
-      .min-check-radio {
+      .min-checkbox {
         @include wh(auto, format(32));
-        @include flex-justify-align(center);
+        @include flex-justify-align(flex-start, center);
       }
     }
     .min-offset-left {

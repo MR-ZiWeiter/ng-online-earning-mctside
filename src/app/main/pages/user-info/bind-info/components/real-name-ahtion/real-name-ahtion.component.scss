@@ -4,6 +4,9 @@
   .header {
     @include flex-justify-align(flex-start,center);
   }
+  ::ng-deep .input-controll {
+    margin-left: format(12);
+  }
   .input-content {
     @include flex-justify-align();
     margin-bottom: format(22);
@@ -29,7 +32,7 @@
         // border: none;
       }
     }
-    .upload-content { 
+    .upload-content {
       padding: format(23) format(25);
       border: 1px solid #D8DCE6;
       flex: 1;

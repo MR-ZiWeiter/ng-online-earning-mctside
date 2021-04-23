@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { NzTableQueryParams } from 'ng-zorro-antd/table';
+import { ApiFinancialService } from 'src/app/core/modules/provider/api';
 
 @Component({
   selector: 'swipe-withdrawal-details',
@@ -10,45 +12,36 @@ export class WithdrawalDetailsComponent implements OnInit {
 
   public validateForm!: FormGroup;
 
-  public dataSet = [
-    {
-      code: '055804',
-      name: '司马余强',
-      type: '支付宝',
-      acount: '17279948119',
-      withdrawalPrice: '31',
-      price: '724750',
-      time: '1977/02/11 13:25:56',
-      status: '等待充值',
-      remark: '湖南省'
-    },
-    {
-      code: '055804',
-      type: '支付宝',
-      price: '724750',
-      time: '1977/02/11 13:25:56',
-      over: '724750',
-      status: '等待充值'
-    },
-    {
-      code: '055804',
-      type: '支付宝',
-      price: '724750',
-      time: '1977/02/11 13:25:56',
-      over: '724750',
-      status: '等待充值'
-    },
-    {
-      code: '055804',
-      type: '支付宝',
-      price: '724750',
-      time: '1977/02/11 13:25:56',
-      over: '724750',
-      status: '等待充值'
-    }
-  ];
+  public renderConfig: any = {
+    pageNum: 1,
+    pageSize: 20,
+    total: 0,
+    loading: true
+  }
 
-  constructor(private fb: FormBuilder) {}
+  public renderArray: any[] = [];
+
+  constructor(
+    private fb: FormBuilder,
+    private apiFinancialService: ApiFinancialService
+  ) {
+    this.fetchFinancialWithdrawalInfo();
+  }
+
+  public fetchFinancialWithdrawalInfo() {
+    this.renderConfig.loading = true;
+    this.apiFinancialService.asyncFetchFinancialWithdrawalInfo(this.renderConfig).subscribe(res => {
+      this.renderArray = res.rel.list;
+      this.renderConfig.total = res.rel.count;
+      this.renderConfig.loading = false;
+    })
+  }
+
+  public onQueryParamsChange(params: NzTableQueryParams) {
+    this.renderConfig.pageNum = params.pageIndex;
+    this.fetchFinancialWithdrawalInfo();
+  }
+
 
   submitForm(): void {
     for (const i in this.validateForm.controls) {

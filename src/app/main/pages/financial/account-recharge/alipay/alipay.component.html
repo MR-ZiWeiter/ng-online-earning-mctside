@@ -1,4 +1,4 @@
-<section class="alipay-component">
+<section class="alipay-component" *ngIf="renderInfo">
   <section class="header-info">
     <span class="title-text">支付宝自动充值（免手续费）</span>
   </section>
@@ -8,13 +8,13 @@
     <span class="label-text">3、若付款后超过五分钟没到账，请到手机支付宝右下角 我的 》 账单，找到刚支付的记录，点一下进入，找到 订单号类似“2021011821001000820027310189” 复制到下面的“第二步：填写支付信息”填写该订单号和金额提交，再联系客服帮你审核入款。</span>
   </section>
   <section class="header-info">
-    <span class="title-text">收款人姓名：逍遥子</span>
-    <span class="title-text">支付宝号：xxxxx@126.com</span>
+    <span class="title-text">收款人姓名：{{renderInfo.bankRealName}}</span>
+    <span class="title-text">支付宝号：{{renderInfo.accountNumber}}</span>
   </section>
   <section class="context-image">
     <section class="pay-code">
       <span class="label-text">支付宝充值</span>
-      <img class="code" src="/" alt="">
+      <img class="code" [src]="renderInfo.qrCodeUrl" alt="">
       <span class="value-text">打开支付宝扫一扫</span>
     </section>
   </section>
@@ -29,9 +29,9 @@
       <section nz-row>
         <section nz-col [nzSpan]="24">
           <nz-form-item>
-            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="website" nzRequired>订单号/交易单号</nz-form-label>
+            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="outTradeNo" nzRequired>订单号/交易单号</nz-form-label>
             <nz-form-control [nzSm]="7" [nzXs]="24" nzErrorTip="请输入订单号/交易单号">
-              <input nz-input id="website" formControlName="website" placeholder="请输入订单号/交易单号" />
+              <input nz-input id="outTradeNo" formControlName="outTradeNo" placeholder="请输入订单号/交易单号" />
             </nz-form-control>
           </nz-form-item>
         </section>
@@ -39,9 +39,9 @@
       <section nz-row>
         <section nz-col [nzSpan]="24">
           <nz-form-item>
-            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="website" nzRequired>转账金额</nz-form-label>
+            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="amount" nzRequired>转账金额</nz-form-label>
             <nz-form-control [nzSm]="7" [nzXs]="24" nzErrorTip="请输入转账金额">
-              <nz-input-number formControlName="price" [nzMin]="1" [nzMax]="10" [nzStep]="1" [nzPlaceHolder]="'输入金额'"></nz-input-number>
+              <nz-input-number formControlName="amount" [nzMin]="1" [nzMax]="9999999999" [nzStep]="1" [nzPlaceHolder]="'输入金额'"></nz-input-number>
               <button nz-button disabled nzType="text">元</button>
             </nz-form-control>
           </nz-form-item>

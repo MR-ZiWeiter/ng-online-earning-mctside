@@ -15,9 +15,9 @@ export class BindWeChatComponent implements OnInit {
   // tslint:disable-next-line:typedef
   ngOnInit() {
     this.validateForm = this.fb.group({
-      userName: [null, [Validators.required]],
-      password: [null, [Validators.required]],
-      email: [true],
+      account: [null, [Validators.required]],
+      imageUrl: [null, [Validators.required]],
+      realName: [null, [Validators.required]],
     });
   }
   submitForm(): void {

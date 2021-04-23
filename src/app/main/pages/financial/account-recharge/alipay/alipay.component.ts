@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
+import { ApiFinancialAccountService } from 'src/app/core/modules/provider/api';
+import { SystemService } from 'src/app/core/services/system/system.service';
 
 @Component({
   selector: 'swipe-alipay',
@@ -9,54 +11,37 @@ import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
 })
 export class AlipayComponent implements OnInit {
 
-  public selectedValue = null;
-
   public validateForm!: FormGroup;
-  captchaTooltipIcon: NzFormTooltipIcon = {
-    type: 'info-circle',
-    theme: 'twotone'
-  };
 
-  constructor(private fb: FormBuilder) {}
+  @Input() public renderInfo: any = {};
+
+  constructor(
+    private fb: FormBuilder,
+    private systemService: SystemService,
+    private apiFinancialAccountService: ApiFinancialAccountService
+  ) {}
 
   submitForm(): void {
     for (const i in this.validateForm.controls) {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
     }
-  }
-
-  updateConfirmValidator(): void {
-    /** wait for refresh value */
-    Promise.resolve().then(() => this.validateForm.controls.checkPassword.updateValueAndValidity());
-  }
-
-  confirmationValidator = (control: FormControl): { [s: string]: boolean } => {
-    if (!control.value) {
-      return { required: true };
-    } else if (control.value !== this.validateForm.controls.password.value) {
-      return { confirm: true, error: true };
+    if (this.validateForm.valid) {
+      this.apiFinancialAccountService.asyncFetchFinancialAccountRecharge(this.validateForm.value).subscribe(res => {
+        // console.log(res);
+        this.systemService.presentToast('提交成功，将会在3个工作日内为您进行核验', 'success');
+        this.validateForm.reset();
+      })
+    } else {
+      this.systemService.presentToast('请完善表单后提交', 'warning');
     }
-    return {};
-  };
-
-  getCaptcha(e: MouseEvent): void {
-    e.preventDefault();
   }
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
-      temp: [null, [Validators.required]],
-      password: [null, [Validators.required]],
-      checkPassword: [null, [Validators.required, this.confirmationValidator]],
-      nickname: [null, [Validators.required]],
-      phoneNumberPrefix: ['+86'],
-      phoneNumber: [null, [Validators.required]],
-      website: [null, [Validators.required]],
-      paytype: ['1', [Validators.required]],
-      norm: [null],
-      price: [null, [Validators.pattern(/^\d+(\.\d+)?$/)]],
-      agree: [false]
+      rechargeMethod: ['alipay', [Validators.required]],
+      outTradeNo: [null, [Validators.required, Validators.pattern(/^\d+(\.\d+)?$/)]],
+      amount: [null, [Validators.required, Validators.pattern(/^\d+(\.\d+)?$/)]]
     });
   }
 

@@ -1,5 +1,5 @@
-<nz-radio-group [(ngModel)]="radioValue"  (ngModelChange)="onRadioChange($event)"   >
+<nz-radio-group [(ngModel)]="value" [disabled]="disabled" (ngModelChange)="onRadioChange($event)"   >
   <ng-container *ngFor="let item of radioList">
-    <label [class]="['radio-antd', radioValue === item.type && 'active' ]"   nz-radio [nzValue]="item.type">{{ item.text }}</label>
+    <label [class]="['radio-antd', value === item.value && 'active' ]" nz-radio [nzValue]="item.value">{{ item.label }}</label>
   </ng-container>
 </nz-radio-group>

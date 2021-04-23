@@ -1,32 +1,7 @@
 @import 'mixin';
-.phone-code {
-  border: 1px solid #D8DCE6;
-  display: flex;
-  overflow: hidden;
-  @include wh(format(500), format(40))
-}
-.inpt {
-  border: 1px solid #D8DCE6;  
-  height: 40px;
-  &:focus {
-    box-shadow: none;
+.check-form {
+  .code-btn {
+    @include flex-justify-align(flex-start, center);
+    @include click-active();
   }
-}
-.ipt {
-  outline: none;
-  border: none;
-  height: 42px;
- 
-  &:focus {
-    border: none;
-    outline: none;
-    box-shadow: none;
-  }
-}
-.text {
-  flex-shrink: 0;
-}
-
-.code-btn {
-  @include sc(format(14), #C0C4CC);
 }

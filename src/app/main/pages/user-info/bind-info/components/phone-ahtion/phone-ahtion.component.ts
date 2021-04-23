@@ -1,3 +1,4 @@
+import { SystemService } from 'src/app/core/services/system/system.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/core/services/user/user.service';
@@ -11,14 +12,14 @@ export class PhoneAhtionComponent implements OnInit {
   public validateForm!: FormGroup;
   constructor(
     private fb: FormBuilder,
-    private userService: UserService
+    private systemService: SystemService,
   ) { }
 
   // tslint:disable-next-line:typedef
   ngOnInit() {
     this.validateForm = this.fb.group({
-      mobile: [null, [Validators.required]],
-      phoneCode: [null, [Validators.required]],
+      mobile: [null, [Validators.required, Validators.pattern(/^1{1}[3-9]{1}[0-9]{9}$/)]],
+      smsCode: [null, [Validators.required, Validators.pattern(/^[0-9]{6}$/)]],
     });
   }
   public submitForm(): void {
@@ -30,9 +31,12 @@ export class PhoneAhtionComponent implements OnInit {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
     }
-    console.log(this.validateForm);
+    // console.log(this.validateForm);
+    if (this.validateForm.valid) {
 
-    
+    } else {
+      this.systemService.presentToast('请完善表单后提交', 'error');
+    }
   }
 
 }

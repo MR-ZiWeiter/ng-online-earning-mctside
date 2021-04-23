@@ -2,12 +2,13 @@ import { NgModule } from '@angular/core';
 import {
   ApiUserIndexService,
   ApiUserAccountService,
-  ApiSuperVipService,
   ApiSystemService,
   ApiMerchantService,
   ApiIndexService,
   ApiReleaseService,
-  ApiFinancialService
+  ApiFinancialService,
+  ApiFinancialAccountService,
+  ApiAppealService
 } from './index';
 
 @NgModule({
@@ -15,12 +16,13 @@ import {
   providers: [
     ApiUserIndexService,
     ApiUserAccountService,
-    ApiSuperVipService,
     ApiMerchantService,
     ApiSystemService,
     ApiIndexService,
     ApiReleaseService,
-    ApiFinancialService
+    ApiFinancialService,
+    ApiFinancialAccountService,
+    ApiAppealService
   ]
 })
 

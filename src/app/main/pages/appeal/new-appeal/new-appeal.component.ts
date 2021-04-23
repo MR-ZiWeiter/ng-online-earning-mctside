@@ -1,7 +1,9 @@
+import { SystemService } from 'src/app/core/services/system/system.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
+import { ApiAppealService } from 'src/app/core/modules/provider/api';
 
 @Component({
   selector: 'swipe-new-appeal',
@@ -18,12 +20,23 @@ export class NewAppealComponent implements OnInit {
       theme: 'twotone'
     };
 
-    constructor(private fb: FormBuilder) {}
+    constructor(
+      private systemService: SystemService,
+      private apiAppealService: ApiAppealService,
+      private fb: FormBuilder
+    ) {}
 
     submitForm(): void {
       for (const i in this.validateForm.controls) {
         this.validateForm.controls[i].markAsDirty();
         this.validateForm.controls[i].updateValueAndValidity();
+      }
+      if (this.validateForm.valid) {
+        this.apiAppealService.asyncFetchAppealNew(this.validateForm.value).subscribe(res => {
+          this.systemService.presentToast('发起申诉成功', 'success');
+        })
+      } else {
+        this.systemService.presentToast('请完善表单后提交', 'error');
       }
     }
 
@@ -47,17 +60,12 @@ export class NewAppealComponent implements OnInit {
 
     ngOnInit(): void {
       this.validateForm = this.fb.group({
-        temp: [null, [Validators.required]],
-        password: [null, [Validators.required]],
-        checkPassword: [null, [Validators.required, this.confirmationValidator]],
-        nickname: [null, [Validators.required]],
-        phoneNumberPrefix: ['+86'],
-        phoneNumber: [null, [Validators.required]],
-        website: [null, [Validators.required]],
-        captcha: [null, [Validators.required]],
-        norm: [null],
-        price: [null, [Validators.pattern(/^\d+(\.\d+)?$/)]],
-        isLock: [false, [Validators.required]]
+        title: [null, [Validators.required]],
+        target: [null, [Validators.required]],
+        orderNo: [null, [Validators.required]],
+        isLock: [false, [Validators.required]],
+        description: [null, [Validators.required]],
+        expecte: [null, [Validators.required]]
       });
     }
 

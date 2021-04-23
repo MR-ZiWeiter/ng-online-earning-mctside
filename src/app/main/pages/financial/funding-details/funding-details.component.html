@@ -1,6 +1,6 @@
 <section class="withdrawal-details-component">
   <section class="header-info">
-    <span class="title-text">提现明细</span>
+    <span class="title-text">资金明细</span>
   </section>
   <section class="context-info">
     <section class="filter-form">
@@ -10,7 +10,7 @@
             <nz-form-label>搜索</nz-form-label>
             <nz-form-control class="custom-search-group" [nzSm]="21" [nzXs]="24">
               <nz-input-group nzSearch>
-                <input nz-input placeholder="如任务编号"/>
+                <input formControlName="outTradeNo" nz-input placeholder="如任务编号"/>
               </nz-input-group>
             </nz-form-control>
           </nz-form-item>
@@ -23,8 +23,9 @@
                 <nz-date-picker
                   class="custom-date-picker"
                   nzShowTime
-                  nzFormat="yyyy-MM-dd HH:mm:ss"
+                  nzFormat="yyyy-MM-dd"
                   nzPlaceHolder="选择日期时间"
+                  formControlName="createTime"
                 ></nz-date-picker>
               </nz-input-group>
               <ng-template #addOnAfterTemplate>
@@ -36,7 +37,16 @@
       </form>
     </section>
     <section class="context-list">
-      <nz-table #borderedTable nzBordered [nzData]="dataSet">
+      <nz-table
+        #borderedTable
+        nzBordered
+        [nzLoading]="renderConfig.loading"
+        [nzTotal]="renderConfig.total"
+        [nzPageSize]="renderConfig.pageSize"
+        [nzPageIndex]="renderConfig.pageNum"
+        nzBordered
+        (nzQueryParams)="onQueryParamsChange($event)"
+        [nzData]="renderArray">
         <thead>
           <tr>
             <th nzAlign="center">时间</th>
@@ -49,13 +59,15 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of borderedTable.data">
-            <td nzAlign="center">{{ data.time }}</td>
-            <td nzAlign="center">{{ data.countIn }}</td>
-            <td nzAlign="center">{{ data.countOut }}</td>
-            <td nzAlign="center">{{ data.intro }}</td>
-            <td nzAlign="center">{{ data.cover }}</td>
-            <td nzAlign="center">{{ data.code }}</td>
+          <tr *ngFor="let data of borderedTable.data" [ngSwitch]="data.groupCode">
+            <td nzAlign="center">{{ data.createTime }}</td>
+            <td nzAlign="center">{{ data.direction === 1 ? data.amount : '/' }}</td>
+            <td nzAlign="center">{{ data.direction === 2 ? data.amount : '/' }}</td>
+            <td nzAlign="center" *ngSwitchCase="'withdraw'">提现</td>
+            <td nzAlign="center" *ngSwitchCase="'recharge'">充值</td>
+            <td nzAlign="center" *ngSwitchCase="'commission'">佣金</td>
+            <td nzAlign="center">{{ data.afterBalance }}</td>
+            <td nzAlign="center">{{ data.outTradeNo }}</td>
             <td nzAlign="center">{{ data.remark }}</td>
           </tr>
         </tbody>

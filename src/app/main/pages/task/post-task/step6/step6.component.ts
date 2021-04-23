@@ -49,19 +49,8 @@ export class Step6Component implements OnInit {
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
-      temp: [null, [Validators.required]],
-      password: [null, [Validators.required]],
-      checkPassword: [null, [Validators.required, this.confirmationValidator]],
-      nickname: [null, [Validators.required]],
-      phoneNumberPrefix: ['+86'],
-      phoneNumber: [null, [Validators.required]],
-      website: [null, [Validators.required]],
-      captcha: [null, [Validators.required]],
-      keyword: [null, [Validators.required]],
-      norm: [null],
-      dateTime: [null, [Validators.required]],
-      price: [null, [Validators.pattern(/^\d+(\.\d+)?$/)]],
-      agree: [false]
+      saveTemplate: [0, [Validators.required]],
+      templateTitle: [null, [Validators.required]]
     });
   }
 

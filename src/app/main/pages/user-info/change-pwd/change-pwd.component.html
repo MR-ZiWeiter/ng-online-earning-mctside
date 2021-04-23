@@ -9,7 +9,7 @@
           <nz-form-item>
             <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24">用户名</nz-form-label>
             <nz-form-control>
-              <span>我是用户名</span>
+              <span>{{basicInfo.userName}}</span>
             </nz-form-control>
           </nz-form-item>
         </section>
@@ -17,9 +17,9 @@
       <section nz-row>
         <section nz-col [nzSpan]="24">
           <nz-form-item>
-            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="website" nzRequired>原登录密码</nz-form-label>
+            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="credential" nzRequired>原登录密码</nz-form-label>
             <nz-form-control [nzSm]="7" [nzXs]="24" nzErrorTip="请输入原登录密码">
-              <input nz-input id="website" formControlName="website" placeholder="website" placeholder="请输入原登录密码"/>
+              <input nz-input id="credential" formControlName="credential" placeholder="credential" placeholder="请输入原登录密码"/>
             </nz-form-control>
           </nz-form-item>
         </section>
@@ -27,9 +27,9 @@
       <section nz-row>
         <section nz-col [nzSpan]="24">
           <nz-form-item>
-            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="website" nzRequired>新登录密码</nz-form-label>
+            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="newCredential" nzRequired>新登录密码</nz-form-label>
             <nz-form-control [nzSm]="7" [nzXs]="24" nzErrorTip="请输入新登录密码">
-              <input nz-input id="website" formControlName="website" placeholder="请输入新登录密码" />
+              <input nz-input id="newCredential" formControlName="newCredential" placeholder="请输入新登录密码" />
             </nz-form-control>
           </nz-form-item>
         </section>
@@ -37,9 +37,9 @@
       <section nz-row>
         <section nz-col [nzSpan]="24">
           <nz-form-item>
-            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="norm" nzRequired>确认新密码</nz-form-label>
+            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="checkPassword" nzRequired>确认新密码</nz-form-label>
             <nz-form-control [nzSm]="7" [nzXs]="24" nzErrorTip="请保持与新登录密码一致">
-              <input nz-input id="norm" formControlName="norm" placeholder="请确认新密码" />
+              <input nz-input id="checkPassword" formControlName="checkPassword" placeholder="请确认新密码" />
             </nz-form-control>
           </nz-form-item>
         </section>
@@ -47,9 +47,9 @@
       <section nz-row>
         <section nz-col [nzSpan]="24">
           <nz-form-item>
-            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="norm" nzRequired>验证码</nz-form-label>
+            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="imageCode" nzRequired>验证码</nz-form-label>
             <nz-form-control [nzSm]="7" [nzXs]="24" nzErrorTip="请输入验证码">
-              <input nz-input id="norm" formControlName="norm" placeholder="请输入验证码" />
+              <input nz-input id="imageCode" formControlName="imageCode" placeholder="请输入验证码" />
             </nz-form-control>
             <img class="invate-code" src="/assets/images/pages/login/code-mock@2x.png"/>
           </nz-form-item>

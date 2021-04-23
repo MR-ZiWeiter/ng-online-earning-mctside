@@ -1,15 +1,19 @@
 <div class="clearfix">
   <nz-upload
+    nzName="file"
     [nzAction]="Action"
     [nzListType]="ListType"
+    [nzData]="getExtraData"
+    [nzTransformFile]="transformFile"
     [(nzFileList)]="fileList"
     [nzShowButton]="fileList.length < maxFileListLength"
     [nzPreview]="handlePreview"
+    [nzDisabled]="disabled"
     class="coustom-upload"
-  >
+    (nzChange)="onChange($event)">
     <div *ngIf="!coustom" class="iiii">
       <i nz-icon nzType="plus"></i>
-      <!-- <div style="margin-top: 8px"></div> -->
+      <div style="margin-top: 8px">上传图片</div>
     </div>
     <div *ngIf="coustom">
       <ng-content></ng-content>

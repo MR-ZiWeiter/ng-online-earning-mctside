@@ -7,7 +7,17 @@
       <ng-template #tableTitle1>
         <span class="title-text">我发起的申诉</span>
       </ng-template>
-      <nz-table [nzTitle]="tableTitle1" #borderedTable nzBordered [nzData]="dataSet">
+      <nz-table
+        [nzTitle]="tableTitle1"
+        #borderedTable
+        nzBordered
+        [nzLoading]="renderConfig.loading"
+        [nzTotal]="renderConfig.total"
+        [nzPageSize]="renderConfig.pageSize"
+        [nzPageIndex]="renderConfig.pageNum"
+        nzBordered
+        (nzQueryParams)="onQueryParamsChange($event)"
+        [nzData]="renderArray">
         <thead>
           <tr>
             <th nzAlign="center">标题</th>
@@ -22,13 +32,13 @@
         </thead>
         <tbody>
           <tr *ngFor="let data of borderedTable.data">
-            <td nzAlign="center">{{ data.code }}</td>
-            <td nzAlign="center">{{ data.type }}</td>
-            <td nzAlign="center">{{ data.price }}</td>
-            <td nzAlign="center">{{ data.time }}</td>
-            <td nzAlign="center">{{ data.over }}</td>
-            <td nzAlign="center">{{ data.status }}</td>
-            <td nzAlign="center">{{ data.status }}</td>
+            <td nzAlign="center">{{ data.title }}</td>
+            <td nzAlign="center">{{ data.target }}</td>
+            <td nzAlign="center">{{ data.orderNo }}</td>
+            <td nzAlign="center">{{ data.createTime }}</td>
+            <td nzAlign="center">{{ data.explanation }}</td>
+            <td nzAlign="center">{{ data.explanationTime }}</td>
+            <td nzAlign="center">{{ data.acceptResult }}</td>
             <td nzAlign="center">
               <a>查看</a>
             </td>

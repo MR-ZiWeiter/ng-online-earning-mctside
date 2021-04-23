@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiUserAccountService, ApiUserIndexService } from 'src/app/core/modules/provider/api';
+import { UserService } from 'src/app/core/services/user/user.service';
 
 @Component({
   selector: 'swipe-anthor',
@@ -11,14 +11,17 @@ export class AnthorComponent implements OnInit {
   public anthorInfo: any;
 
   constructor(
-    private apiUserIndexService: ApiUserIndexService
-  ) { }
+    // private apiUserIndexService: ApiUserIndexService
+    private userService: UserService
+  ) {
+    this.userService.getUserBasicInfo().subscribe(renderInfo => {
+      if (renderInfo) {
+        this.anthorInfo = renderInfo;
+      }
+    })
+  }
 
   ngOnInit() {
-    this.apiUserIndexService.asyncFetchUserHomeInfo().subscribe(res => {
-      // console.log(res);
-      this.anthorInfo = res.rel;
-    })
   }
 
 }

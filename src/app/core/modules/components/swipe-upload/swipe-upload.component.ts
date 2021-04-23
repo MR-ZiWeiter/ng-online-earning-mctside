@@ -1,28 +1,123 @@
-import { Component, OnInit , Input} from '@angular/core';
-import { NzUploadFile } from 'ng-zorro-antd/upload';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { SystemService } from 'src/app/core/services/system/system.service';
+import { Component, OnInit , Input, OnDestroy, forwardRef} from '@angular/core';
+import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
+import { IAliossConfigModel } from 'src/app/core/model';
+import { environment } from '@app/env';
 @Component({
-  selector: 'swipe-swipe-upload',
+  selector: 'swipe-upload',
   templateUrl: './swipe-upload.component.html',
-  styleUrls: ['./swipe-upload.component.scss']
+  styleUrls: ['./swipe-upload.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => SwipeUploadComponent),
+      multi: true
+    }
+  ]
 })
-export class SwipeUploadComponent implements OnInit {
-  @Input() public ListType: 'text' | 'picture' | 'picture-card' = 'picture';
-  @Input() public Action = 'https://www.mocky.io/v2/5cc8019d300000980a055e76';
-  @Input() public maxFileListLength = 2;
+export class SwipeUploadComponent implements OnInit, OnDestroy, ControlValueAccessor {
+  @Input() public ListType: 'text' | 'picture' | 'picture-card' = 'picture-card';
+  // @Input() public Action = 'http://ll-wangzhuan.oss-cn-shenzhen.aliyuncs.com';
+  @Input() public Action = environment.API_URL + '/upload/file';
+  @Input() public maxFileListLength = 1;
   @Input() public coustom = false;
-  constructor() { }
+
+  private ossConfig: IAliossConfigModel = {
+    dir: 'mctside/',
+    expire: null,
+    accessKeyId: null,
+    secretKeyId: null,
+    securityToken: null
+  }
 
   // tslint:disable-next-line:member-ordering
-  public fileList: NzUploadFile[] = [
-  ];
+  public fileList: NzUploadFile[] = [];
   // tslint:disable-next-line:member-ordering
   public previewImage: string | undefined = '';
   public previewVisible = false;
 
+  public value!: any;
+  public disabled: boolean = false;
+  valueChange: any = () => {};
+  valueTouch: any = () => {};
+
+  /* 获取alioss配置监听 */
+  private aliossObserver: any;
+
+  constructor(
+    private systemService: SystemService
+  ) {
+    this.aliossObserver = this.systemService.getAliossConfig().subscribe(renderInfo => {
+      // console.log(renderInfo)
+      if (renderInfo) {
+        this.ossConfig = Object.assign({}, this.ossConfig, renderInfo);
+      }
+    })
+  }
+  writeValue(obj: any): void {
+    this.value = obj;
+    /* 处理传入数据 */
+    this.handlerInputFilesChange(obj);
+  }
+  registerOnChange(fn: any): void {
+    this.valueChange = fn;
+  }
+  registerOnTouched(fn: any): void {
+    this.valueTouch = fn;
+  }
+  setDisabledState?(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
+
   ngOnInit() {
   }
 
-  handlePreview = async (file: NzUploadFile) => {
+  /* 处理初始化数据后的数据同步 */
+  private handlerInputFilesChange(fileInfo: Array<string>|string) {
+    /* 处理是数组时 */
+    if (fileInfo instanceof Array) {
+      this.fileList = fileInfo.map((item: string) => {
+        return {
+          uid: `-${Math.random() * 1000000 | 0}`,
+          name: item.slice(item.lastIndexOf('/')).substr(1),
+          status: 'done',
+          url: item
+        }
+      })
+    } else {
+      if (fileInfo) {
+        this.fileList = [{
+          uid: `-${Math.random() * 1000000 | 0}`,
+          name: fileInfo.slice(fileInfo.lastIndexOf('/')).substr(1),
+          status: 'done',
+          url: fileInfo
+        }]
+      }
+    }
+  }
+
+  /* 处理上传前文件类型名字等 */
+  public transformFile = (file: NzUploadFile) => {
+    const suffix = file.name.slice(file.name.lastIndexOf('.'));
+    const filename = Date.now() + suffix;
+    file.url = this.ossConfig.dir + filename;
+    return file;
+  };
+
+  /* 处理拓展数据 */
+  public getExtraData = (file: NzUploadFile) => {
+    const { accessKeyId, secretKeyId, securityToken } = this.ossConfig;
+    return {
+      key: file.url,
+      OSSAccessKeyId: accessKeyId,
+      policy: secretKeyId,
+      Signature: securityToken,
+      noHeader: true
+    };
+  };
+
+  public handlePreview = async (file: NzUploadFile) => {
     if (!file.url && !file.preview) {
       // tslint:disable-next-line:no-non-null-assertion
       file.preview = await getBase64(file.originFileObj!);
@@ -31,6 +126,29 @@ export class SwipeUploadComponent implements OnInit {
     this.previewVisible = true;
   };
 
+  /* 上传成功后回调 */
+  public onChange(e: NzUploadChangeParam): void {
+    console.log('Aliyun OSS:', e.fileList);
+    if (e.fileList && this.maxFileListLength > 1) {
+      const urlList: string[] = [];
+      e.fileList.filter(fs => fs.status === 'done').map((item: any) => {
+        urlList.push(item.url || item.response.rel.url);
+      })
+      this.valueChange(urlList);
+    } else if (e.fileList && this.maxFileListLength === 1) {
+      let urlString: any;
+      e.fileList.filter(fs => fs.status === 'done').map((item: any) => {
+        urlString = item.url || item.response.rel.url;
+      })
+      this.valueChange(urlString);
+    }
+  }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.aliossObserver.unsubscribe()
+  }
 }
 
 
@@ -42,3 +160,5 @@ function getBase64(file: File): Promise<string | ArrayBuffer | null> {
     reader.onerror = error => reject(error);
   });
 }
+
+

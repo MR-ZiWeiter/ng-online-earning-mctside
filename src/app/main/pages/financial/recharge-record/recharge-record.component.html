@@ -10,8 +10,12 @@
       <nz-table
         [nzTitle]="tableTitle1"
         #borderedTable
+        [nzLoading]="renderConfig.loading"
+        [nzTotal]="renderConfig.total"
+        [nzPageSize]="renderConfig.pageSize"
+        [nzPageIndex]="renderConfig.pageNum"
         nzBordered
-        (nzQueryParams)="renderConfig"
+        (nzQueryParams)="onQueryParamsChange($event)"
         [nzData]="renderArray"
         [nzFrontPagination]="false">
         <thead>
@@ -25,13 +29,15 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of borderedTable.data">
+          <tr *ngFor="let data of borderedTable.data" [ngSwitch]="data.status">
             <td nzAlign="center">{{ data.outTradeNo }}</td>
-            <td nzAlign="center">{{ data.direction }}</td>
+            <td nzAlign="center">{{ data.rechargeMethod }}</td>
             <td nzAlign="center">{{ data.amount }}</td>
             <td nzAlign="center">{{ data.createTime }}</td>
             <td nzAlign="center">{{ data.afterBalance }}</td>
-            <td nzAlign="center">{{ data.status }}</td>
+            <td nzAlign="center" *ngSwitchCase="1">待审核</td>
+            <td nzAlign="center" *ngSwitchCase="2">充值成功</td>
+            <td nzAlign="center" *ngSwitchCase="3">审核失败</td>
           </tr>
         </tbody>
       </nz-table>

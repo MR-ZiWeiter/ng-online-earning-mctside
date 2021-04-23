@@ -1,5 +1,7 @@
+import { ApiAppealService } from './../../../../core/modules/provider/api/appeal/index.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { NzTableQueryParams } from 'ng-zorro-antd/table';
 
 @Component({
   selector: 'swipe-my-appeal',
@@ -10,48 +12,35 @@ export class MyAppealComponent implements OnInit {
 
   public validateForm!: FormGroup;
 
-  public dataSet = [
-    {
-      code: '055804',
-      type: '支付宝',
-      price: '724750',
-      time: '1977/02/11 13:25:56',
-      over: '724750',
-      status: '等待充值'
-    },
-    {
-      code: '055804',
-      type: '支付宝',
-      price: '724750',
-      time: '1977/02/11 13:25:56',
-      over: '724750',
-      status: '等待充值'
-    },
-    {
-      code: '055804',
-      type: '支付宝',
-      price: '724750',
-      time: '1977/02/11 13:25:56',
-      over: '724750',
-      status: '等待充值'
-    },
-    {
-      code: '055804',
-      type: '支付宝',
-      price: '724750',
-      time: '1977/02/11 13:25:56',
-      over: '724750',
-      status: '等待充值'
-    }
-  ];
+  public renderConfig: any = {
+    checkType: 1,
+    pageNum: 1,
+    pageSize: 20,
+    total: 0,
+    loading: true
+  }
 
-  constructor(private fb: FormBuilder) {}
+  public renderArray: any[] = [];
 
-  submitForm(): void {
-    for (const i in this.validateForm.controls) {
-      this.validateForm.controls[i].markAsDirty();
-      this.validateForm.controls[i].updateValueAndValidity();
-    }
+  constructor(
+    private fb: FormBuilder,
+    private apiAppealService: ApiAppealService
+  ) {
+    // this.fetchAppealList();
+  }
+
+  public fetchAppealList() {
+    this.renderConfig.loading = true;
+    this.apiAppealService.asyncFetchAppealListInfo(this.renderConfig).subscribe(res => {
+      this.renderArray = res.rel.list;
+      this.renderConfig.total = res.rel.count;
+      this.renderConfig.loading = false;
+    })
+  }
+
+  public onQueryParamsChange(params: NzTableQueryParams) {
+    this.renderConfig.pageNum = params.pageIndex;
+    this.fetchAppealList();
   }
 
   ngOnInit(): void {

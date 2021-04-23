@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 import { WorkIndexedDBService } from './core/modules/provider/indexedDB/work-indexedDB.service';
 import { LoggerService } from './core/modules/provider/logger/logger.service';
 import { UserService } from './core/services/user/user.service';
-import { ApiUserIndexService } from './core/modules/provider/api';
+import { ApiSystemService, ApiUserIndexService } from './core/modules/provider/api';
 import { SettingsService } from './core/services/settings/settings.service';
 
 import vConsole from 'vconsole';
@@ -28,11 +28,12 @@ export class AppComponent {
 
   constructor(
     private router: Router,
-    private workIndexedDBService: WorkIndexedDBService,
     private logger: LoggerService,
-    private settingsService: SettingsService,
     private userService: UserService,
-    private apiUserIndexService: ApiUserIndexService
+    private settingsService: SettingsService,
+    private apiSystemService: ApiSystemService,
+    private apiUserIndexService: ApiUserIndexService,
+    private workIndexedDBService: WorkIndexedDBService,
   ) {
     // const vconsole = new this.vconsole();
     this.initializeApp();
@@ -53,13 +54,10 @@ export class AppComponent {
     this.userService.getWxAppToken().subscribe((info: string|null) => {
       // console.log(info);
       if (info && info !== 'null' && info !== 'undefined') {
-        // 注释服务协议
-        // const serviceRule = localStorage.getItem('WxAppServiceRule');
-        // if (!serviceRule) {
-        //   // 服务协议
-        //   this.serviceAgreementPresentModal();
-        // }
+        // 获取基本信息
         this.apiUserIndexService.asyncFetchBasicInfo().subscribe(res => res, err => err).unsubscribe();
+        /* 获取AliOSS凭证 */
+        this.apiSystemService.asyncFetchSystemAliossSecretKeys().subscribe(res => res, err => err).unsubscribe();
       }
     });
   }

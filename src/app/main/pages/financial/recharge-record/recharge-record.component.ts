@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { ApiFinancialService } from 'src/app/core/modules/provider/api';
 
 @Component({
@@ -11,44 +12,11 @@ export class RechargeRecordComponent implements OnInit {
 
   public validateForm!: FormGroup;
 
-  public dataSet = [
-    {
-      code: '055804',
-      type: '支付宝',
-      price: '724750',
-      time: '1977/02/11 13:25:56',
-      over: '724750',
-      status: '等待充值'
-    },
-    {
-      code: '055804',
-      type: '支付宝',
-      price: '724750',
-      time: '1977/02/11 13:25:56',
-      over: '724750',
-      status: '等待充值'
-    },
-    {
-      code: '055804',
-      type: '支付宝',
-      price: '724750',
-      time: '1977/02/11 13:25:56',
-      over: '724750',
-      status: '等待充值'
-    },
-    {
-      code: '055804',
-      type: '支付宝',
-      price: '724750',
-      time: '1977/02/11 13:25:56',
-      over: '724750',
-      status: '等待充值'
-    }
-  ];
-
   public renderConfig: any = {
     pageNum: 1,
-    pageSize: 20
+    pageSize: 20,
+    total: 0,
+    loading: true
   }
 
   public renderArray: any[] = [];
@@ -61,9 +29,17 @@ export class RechargeRecordComponent implements OnInit {
   }
 
   public fetchFinancialCapitalRechargeList() {
+    this.renderConfig.loading = true;
     this.apiFinancialService.asyncFetchFinancialCapitalRechargeList(this.renderConfig).subscribe(res => {
-      this.renderArray = res.rel.list
+      this.renderArray = res.rel.list;
+      this.renderConfig.total = res.rel.count;
+      this.renderConfig.loading = false;
     })
+  }
+
+  public onQueryParamsChange(params: NzTableQueryParams) {
+    this.renderConfig.pageNum = params.pageIndex;
+    this.fetchFinancialCapitalRechargeList();
   }
 
   submitForm(): void {

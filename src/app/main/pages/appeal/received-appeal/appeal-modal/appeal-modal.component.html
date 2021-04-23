@@ -1,36 +1,36 @@
-<section class="appeal-modal-component">
+<section class="appeal-modal-component" *ngIf="renderInfo">
   <section class="context-group">
     <section class="label-item" nz-row>
       <span class="label-text" nz-col [nzSpan]="6">标题：</span>
-      <span class="value-text" nz-col [nzSpan]="16">差价25</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{renderInfo.title}}</span>
     </section>
     <section class="label-item" nz-row>
       <span class="label-text" nz-col [nzSpan]="6">发起申诉人：</span>
-      <span class="value-text" nz-col [nzSpan]="16">13668796432</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{renderInfo.shopTitle}}</span>
     </section>
     <section class="label-item" nz-row>
       <span class="label-text" nz-col [nzSpan]="6">申诉日期：</span>
-      <span class="value-text" nz-col [nzSpan]="16">2021/2/26 12:42:56</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{renderInfo.createTime}}</span>
     </section>
     <section class="label-item" nz-row>
       <span class="label-text" nz-col [nzSpan]="6">订单编号：</span>
-      <span class="value-text" nz-col [nzSpan]="16">3656463148646【已锁定任务】</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{renderInfo.taskCode}}【已锁定任务】</span>
     </section>
     <section class="label-item" nz-row>
       <span class="label-text" nz-col [nzSpan]="6">被申诉用户：</span>
-      <span class="value-text" nz-col [nzSpan]="16">13668796432</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{renderInfo.explanationContent.operator}}</span>
     </section>
     <section class="label-item" nz-row>
-      <span class="label-text" nz-col [nzSpan]="6">2021/2/26 12:42:56 </span>
+      <span class="label-text" nz-col [nzSpan]="6">{{renderInfo.takeOverTime}} </span>
       <span class="value-text" nz-col [nzSpan]="16"></span>
     </section>
     <section class="label-item" nz-row>
       <span class="label-text" nz-col [nzSpan]="6">申诉内容：</span>
-      <span class="value-text" nz-col [nzSpan]="16">补差价</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{renderInfo.description}}</span>
     </section>
     <section class="label-item" nz-row>
       <span class="label-text" nz-col [nzSpan]="6">希望解决方案：</span>
-      <span class="value-text" nz-col [nzSpan]="16">补差价</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{renderInfo.explanationContent}}</span>
     </section>
     <section class="label-item" nz-row>
       <span class="label-text" nz-col [nzSpan]="6">辩解内容：</span>

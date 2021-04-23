@@ -1,217 +1,142 @@
-<section class="step4-component">
+<section class="step4-component" *ngIf="renderInfo.length">
   <section class="header-info">
     <span class="title-text">第四步：增值服务</span>
   </section>
   <section class="form-info">
     <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
-      <section nz-row>
-        <section nz-col [nzSpan]="24">
-          <nz-form-item>
-            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="checkPassword" nzRequired>好评方式</nz-form-label>
-            <nz-form-control [nzSm]="19" [nzXs]="24">
-              <!-- <input nz-input type="password" formControlName="checkPassword" id="checkPassword"  [(ngModel)]="radioValue" /> -->
-              <nz-radio-group class="custom-check-radio-group" id="checkPassword" formControlName="checkPassword">
-                <label class="min-check-radio" nz-radio nzValue="A">默认五星好评</label>
-                <label class="min-check-radio" nz-radio nzValue="B">自由发挥好评</label>
-                <label class="min-check-radio" nz-radio nzValue="C">指定评语</label>
-                <label class="min-check-radio" nz-radio nzValue="D">指定评语带图</label>
-                <label class="min-check-radio" nz-radio nzValue="E">指定评语带视频</label>
-              </nz-radio-group>
-            </nz-form-control>
-          </nz-form-item>
-        </section>
-      </section>
-      <section nz-row>
-        <section nz-col [nzSpan]="24">
-          <nz-form-item>
-            <nz-form-label [nzSm]="6" [nzXs]="2">延迟</nz-form-label>
-            <nz-form-control
-              [nzSm]="4"
-              [nzXs]="6"
-              nzErrorTip="请输入延迟时间">
-              <ng-template #nzPrefix>
-                <i nz-icon nzType="minus" nzTheme="outline"></i>
-              </ng-template>
-              <nz-input-group [nzAddOnBefore]="nzPrefix" [nzAddOnAfter]="suffixButton">
-                <input type="number" nz-input formControlName="price" placeholder="1.5" />
-              </nz-input-group>
-              <ng-template #suffixButton>
-                <i nz-icon nzType="plus" nzTheme="outline"></i>
-              </ng-template>
-              <!-- <nz-input-number nz-input [nzMin]="1" [nzStep]="1" formControlName="price"></nz-input-number> -->
-            </nz-form-control>
-            <button nz-button disabled nzType="text">增值+0元</button>
-          </nz-form-item>
-        </section>
-      </section>
-      <section nz-row>
-        <section nz-col [nzSpan]="24">
-          <nz-form-item>
-            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="checkPassword" nzRequired>追评方式</nz-form-label>
-            <nz-form-control [nzSm]="19" [nzXs]="24">
-              <!-- <input nz-input type="password" formControlName="checkPassword" id="checkPassword"  [(ngModel)]="radioValue" /> -->
-              <nz-radio-group class="custom-check-radio-group" id="checkPassword" formControlName="checkPassword">
-                <label class="min-check-radio" nz-radio nzValue="A">默认五星好评</label>
-                <label class="min-check-radio" nz-radio nzValue="B">自由发挥好评</label>
-                <label class="min-check-radio" nz-radio nzValue="C">指定评语</label>
-                <label class="min-check-radio" nz-radio nzValue="D">指定评语带图</label>
-                <label class="min-check-radio" nz-radio nzValue="E">指定评语带视频</label>
-              </nz-radio-group>
-            </nz-form-control>
-          </nz-form-item>
-        </section>
-      </section>
-      <section nz-row>
-        <section nz-col [nzSpan]="24">
-          <nz-form-item>
-            <nz-form-label [nzSm]="6" [nzXs]="2">延迟</nz-form-label>
-            <nz-form-control
-              [nzSm]="4"
-              [nzXs]="6"
-              nzErrorTip="请输入延迟时间">
-              <ng-template #nzPrefix>
-                <i nz-icon nzType="minus" nzTheme="outline"></i>
-              </ng-template>
-              <nz-input-group [nzAddOnBefore]="nzPrefix" [nzAddOnAfter]="suffixButton">
-                <input type="number" nz-input formControlName="price" placeholder="1.5" />
-              </nz-input-group>
-              <ng-template #suffixButton>
-                <i nz-icon nzType="plus" nzTheme="outline"></i>
-              </ng-template>
-              <!-- <nz-input-number nz-input [nzMin]="1" [nzStep]="1" formControlName="price"></nz-input-number> -->
-            </nz-form-control>
-            <button nz-button disabled nzType="text">增值+0元</button>
-          </nz-form-item>
-        </section>
-      </section>
-      <section nz-row>
-        <section nz-col [nzSpan]="24">
-          <nz-form-item>
-            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="checkPassword" nzRequired>货比数量</nz-form-label>
-            <nz-form-control [nzSm]="10" [nzXs]="24">
-              <!-- <input nz-input type="password" formControlName="checkPassword" id="checkPassword"  [(ngModel)]="radioValue" /> -->
-              <nz-radio-group id="checkPassword" formControlName="checkPassword">
-                <label nz-radio nzValue="A">不要求</label>
-                <label nz-radio nzValue="B">货比1家</label>
-                <label nz-radio nzValue="C">货比2家</label>
-                <label nz-radio nzValue="D">货比3家</label>
-              </nz-radio-group>
-            </nz-form-control>
-            <button nz-button disabled nzType="text">注：建议不用每单都选择，选择货比，增值费 +0 元</button>
-          </nz-form-item>
-        </section>
-      </section>
-      <section nz-row>
-        <section nz-col [nzSpan]="24">
-          <nz-form-item>
-            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="checkPassword" nzRequired>浏览商品数量</nz-form-label>
-            <nz-form-control [nzSm]="14" [nzXs]="24">
-              <!-- <input nz-input type="password" formControlName="checkPassword" id="checkPassword"  [(ngModel)]="radioValue" /> -->
-              <nz-radio-group id="checkPassword" formControlName="checkPassword">
-                <label nz-radio nzValue="A">不要求</label>
-                <label nz-radio nzValue="B">货比1家</label>
-                <label nz-radio nzValue="C">货比2家</label>
-                <label nz-radio nzValue="D">货比3家</label>
-              </nz-radio-group>
-            </nz-form-control>
-            <button nz-button disabled nzType="text">注：建议不用每单都选择，选择货比，增值费 +0 元</button>
-          </nz-form-item>
-        </section>
-      </section>
-      <section nz-row>
-        <section nz-col [nzSpan]="24">
-          <nz-form-item>
-            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="checkPassword" nzRequired>搭配商品</nz-form-label>
-            <nz-form-control [nzSm]="14" [nzXs]="24">
-              <!-- <input nz-input type="password" formControlName="checkPassword" id="checkPassword"  [(ngModel)]="radioValue" /> -->
-              <nz-radio-group id="checkPassword" formControlName="checkPassword">
-                <label nz-radio nzValue="A">不启用</label>
-                <label nz-radio nzValue="B">启用</label>
-              </nz-radio-group>
-            </nz-form-control>
-            <button nz-button disabled nzType="text">有多件下单需求的，请开启并填写副宝贝信息 （启用此项将收取 2 元/个 增值费）</button>
-          </nz-form-item>
-        </section>
-      </section>
-      <section nz-row>
-        <section nz-col [nzSpan]="24">
-          <nz-form-item>
-            <nz-form-label [nzSm]="5" [nzXs]="12" nzFor="keyword" nzRequired>链接地址1</nz-form-label>
-            <nz-form-control
-              [nzSm]="5"
-              [nzXs]="6"
-              nzErrorTip="请输入商品链接">
-              <input nz-input id="keyword" formControlName="keyword" placeholder="请输入商品链接" />
-            </nz-form-control>
-            <nz-form-control
-              class="min-offset-left"
-              [nzSm]="5"
-              [nzXs]="6"
-              nzErrorTip="请输入商品标题">
-              <input nz-input type="number" formControlName="keyword" placeholder="请输入商品标题" />
-            </nz-form-control>
-            <nz-form-control
-              class="min-offset-left"
-              [nzSm]="3"
-              [nzXs]="4"
-              nzErrorTip="请输入商品价格">
-              <input nz-input type="number" formControlName="keyword" placeholder="价格" />
-            </nz-form-control>
-            <button nz-button class="min-offset-left">增加</button>
-          </nz-form-item>
-        </section>
-      </section>
-      <section nz-row>
-        <section nz-col [nzSpan]="24">
-          <nz-form-item>
-            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="norm">副商品图片</nz-form-label>
-            <nz-form-control [nzSm]="14" [nzXs]="24">
-              <div class="clearfix">
-                <nz-upload
-                  nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                  nzListType="picture-card"
-                  [(nzFileList)]="fileList"
-                  [nzShowButton]="fileList.length < 8"
-                  [nzPreview]="handlePreview"
-                >
-                  <div>
-                    <i nz-icon nzType="plus"></i>
-                    <div style="margin-top: 8px">Upload</div>
-                  </div>
-                </nz-upload>
-                <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null" (nzOnCancel)="previewVisible = false">
-                  <ng-template #modalContent>
-                    <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
-                  </ng-template>
-                </nz-modal>
-              </div>
-            </nz-form-control>
-          </nz-form-item>
-        </section>
-      </section>
-      <section nz-row>
-        <section nz-col [nzSpan]="24">
-          <nz-form-item>
-            <nz-form-label [nzSm]="5" [nzXs]="12" nzRequired>延迟购买时间</nz-form-label>
-            <nz-form-control
-              [nzSm]="5"
-              [nzXs]="6"
-              nzErrorTip="请输入正确的下单价格">
-              <ng-template #nzPrefix>
-                <i nz-icon nzType="minus" nzTheme="outline"></i>
-              </ng-template>
-              <nz-input-group [nzAddOnBefore]="nzPrefix" [nzAddOnAfter]="suffixButton">
-                <input type="number" nz-input formControlName="price" placeholder="0" />
-              </nz-input-group>
-              <ng-template #suffixButton>
-                <i nz-icon nzType="plus" nzTheme="outline"></i>
-              </ng-template>
-              <!-- <nz-input-number nz-input [nzMin]="1" [nzStep]="1" formControlName="price"></nz-input-number> -->
-            </nz-form-control>
-            <button nz-button disabled nzType="text">选0为不启用此项 注：建议不用每单都选择，选择隔天单，增值费 +1 元</button>
-          </nz-form-item>
-        </section>
-      </section>
+      <ng-container formArrayName="requiresForms">
+        <ng-container *ngFor="let item of resultPathToFormControll('requiresForms'); let keyIndex = index;" [ngSwitch]="item.value.tagType">
+          <ng-container [formGroupName]="keyIndex" *ngSwitchCase="2">
+            <section nz-row>
+              <section nz-col [nzSpan]="24">
+                <nz-form-item>
+                  <nz-form-label [nzSm]="5" nzRequired [nzFor]="'select-input-' + keyIndex">{{item.value.title}}</nz-form-label>
+                  <nz-form-control [nzSm]="6" [nzXs]="10" [nzErrorTip]="'请输入' + item.title">
+                    <nz-select nz-col nzSpan="24" nzShowSearch nzAllowClear formControlName="selected" [id]="'select-input-' + keyIndex" nzPlaceHolder="不要求">
+                      <nz-option *ngFor="let option of item.value.requiresRuleItemVos" [nzLabel]="option.title" [nzValue]="option.sort"></nz-option>
+                    </nz-select>
+                  </nz-form-control>
+                  <button nz-button disabled nzType="text">{{item.value.description}}</button>
+                </nz-form-item>
+              </section>
+            </section>
+          </ng-container>
+          <ng-container [formGroupName]="keyIndex" *ngSwitchCase="3">
+            <section nz-row>
+              <section nz-col [nzSpan]="24">
+                <nz-form-item>
+                  <nz-form-label [nzSm]="5" [nzFor]="'radio-input-' + keyIndex" nzRequired>{{item.value.title}}</nz-form-label>
+                  <nz-form-control [nzSm]="item.value.requiresRuleItemVos.length < 5 ? item.value.requiresRuleItemVos.length * 2 + 2 : 19">
+                    <nz-radio-group class="custom-check-radio-group" [id]="'radio-input-' + keyIndex" formControlName="selected" (ngModelChange)="handlerRadioChange(item.value, keyIndex, $event)">
+                      <label *ngFor="let option of item.value.requiresRuleItemVos" class="min-check-radio" nz-radio [nzValue]="option.sort">{{option.title}}</label>
+                    </nz-radio-group>
+                  </nz-form-control>
+                  <button nz-button disabled nzType="text">{{item.value.description}}</button>
+                </nz-form-item>
+              </section>
+            </section>
+            <ng-container *ngIf="item.value.deputyOptions">
+              <ng-container formGroupName="deputyOptions">
+                <section nz-row>
+                  <ng-container [ngSwitch]="item.value.deputyOptions.tagType">
+                    <section nz-col [nzSpan]="24" *ngSwitchCase="1">
+                      <nz-form-item>
+                        <nz-form-label [nzSm]="6" [nzXs]="2">{{item.value.deputyOptions.title}}</nz-form-label>
+                        <nz-form-control
+                          [nzSm]="4"
+                          [nzXs]="6"
+                          [nzErrorTip]="'请输入' + item.value.deputyOptions.title">
+                          <ng-template #nzPrefix>
+                            <i nz-icon nzType="minus" nzTheme="outline"></i>
+                          </ng-template>
+                          <nz-input-group [nzAddOnBefore]="nzPrefix" [nzAddOnAfter]="suffixButton">
+                            <input type="number" formControlName="inputVal" nz-input placeholder="1" />
+                          </nz-input-group>
+                          <ng-template #suffixButton>
+                            <i nz-icon nzType="plus" nzTheme="outline"></i>
+                          </ng-template>
+                          <!-- <nz-input-number nz-input [nzMin]="1" [nzStep]="1" formControlName="price"></nz-input-number> -->
+                        </nz-form-control>
+                        <button nz-button disabled nzType="text">{{item.value.deputyOptions.description}}</button>
+                      </nz-form-item>
+                    </section>
+                  </ng-container>
+                </section>
+              </ng-container>
+            </ng-container>
+            <!-- 副产品 -->
+            <ng-container *ngIf="(item.value.code === 'WITH_GOODS') && (item.value.selected === 2)">
+              <ng-container formArrayName="taskSubjoinMatterForms">
+                <ng-container *ngFor="let subItem of item.get('taskSubjoinMatterForms').controls; let subKeyIndex = index;">
+                  <section nz-row [formGroupName]="subKeyIndex">
+                    <section nz-col [nzSpan]="24">
+                      <nz-form-item>
+                        <nz-form-label [nzSm]="5" [nzXs]="12" nzFor="keyword" nzRequired>链接地址{{subItem.value.sort}}</nz-form-label>
+                        <nz-form-control
+                          [nzSm]="5"
+                          [nzXs]="6"
+                          nzErrorTip="请输入商品链接">
+                          <input nz-input id="keyword"  placeholder="请输入商品链接" />
+                        </nz-form-control>
+                        <nz-form-control
+                          class="min-offset-left"
+                          [nzSm]="5"
+                          [nzXs]="6"
+                          nzErrorTip="请输入商品标题">
+                          <input nz-input type="number" placeholder="请输入商品标题" />
+                        </nz-form-control>
+                        <nz-form-control
+                          class="min-offset-left"
+                          [nzSm]="3"
+                          [nzXs]="4"
+                          nzErrorTip="请输入商品价格">
+                          <input nz-input type="number" placeholder="价格" />
+                        </nz-form-control>
+                        <button nz-button class="min-offset-left">增加</button>
+                      </nz-form-item>
+                    </section>
+                  </section>
+                  <section nz-row>
+                    <section nz-col [nzSpan]="24">
+                      <nz-form-item>
+                        <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="norm">副商品图片</nz-form-label>
+                        <nz-form-control [nzSm]="14" [nzXs]="24">
+                          <swipe-upload></swipe-upload>
+                        </nz-form-control>
+                      </nz-form-item>
+                    </section>
+                  </section>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+          <ng-container [formGroupName]="keyIndex" *ngSwitchCase="1">
+            <section nz-row>
+              <section nz-col [nzSpan]="24">
+                <nz-form-item>
+                  <nz-form-label [nzSm]="5" [nzXs]="12" nzRequired>{{item.value.title}}</nz-form-label>
+                  <nz-form-control
+                    [nzSm]="5"
+                    [nzXs]="6"
+                    [nzErrorTip]="'请输入' + item.value.title">
+                    <ng-template #nzPrefix>
+                      <i nz-icon nzType="minus" nzTheme="outline"></i>
+                    </ng-template>
+                    <nz-input-group [nzAddOnBefore]="nzPrefix" [nzAddOnAfter]="suffixButton">
+                      <input type="number" nz-input placeholder="0" formControlName="inputVal"/>
+                    </nz-input-group>
+                    <ng-template #suffixButton>
+                      <i nz-icon nzType="plus" nzTheme="outline"></i>
+                    </ng-template>
+                  </nz-form-control>
+                  <button type="button" nz-button nzType="text">{{item.value.description}}</button>
+                </nz-form-item>
+              </section>
+            </section>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+
     </form>
   </section>
 </section>

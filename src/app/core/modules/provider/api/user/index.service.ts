@@ -36,49 +36,10 @@ export class ApiUserIndexService {
     });
   }
 
-  // 保存反馈意见
-  asyncPostFeedback(info: any = {}): Observable<any> {
+  /* 保存个人信息 */
+  asyncFetchUserBisicUpdate(info: any = {}): Observable<any> {
     return new Observable(observer => {
-      this.http.post('/service/user/saveFeedback', {}, {
-        // 'Content-Type': 'application/json'
-      }, info).subscribe((res: ApiResponseModel) => {
-        console.log(res);
-        observer.next(res);
-      }, err => {
-        observer.error(false);
-      });
-    });
-  }
-
-  // 消息列表
-  asyncFetchNotificationInfo(info: any = {}): Observable<any> {
-    return new Observable(observer => {
-      this.http.get('/service/tourSysMsg/getMsgList', info, {}).subscribe((res: ApiResponseModel) => {
-        // console.log(res);
-        observer.next(res);
-      }, err => {
-        observer.error(false);
-      });
-    });
-  }
-
-  // 我的喜欢列表
-  asyncFetchMyLoveInfo(info: any = {}): Observable<any> {
-    return new Observable(observer => {
-      this.http.get('/service/user/getRecentLike', info, {}).subscribe((res: ApiResponseModel) => {
-        // console.log(res);
-        observer.next(res);
-      }, err => {
-        observer.error(false);
-      });
-    });
-  }
-
-  // 删除我的喜欢
-  asyncDeleteMyLoveInfo(info: any = {}): Observable<any> {
-    return new Observable(observer => {
-      this.http.post('/service/user/deleteRecentLike', info, {}, info).subscribe((res: ApiResponseModel) => {
-        // console.log(res);
+      this.http.post('/business/account-privacy/save', info, {}, info).subscribe((res: ApiResponseModel) => {
         observer.next(res);
       }, err => {
         observer.error(false);

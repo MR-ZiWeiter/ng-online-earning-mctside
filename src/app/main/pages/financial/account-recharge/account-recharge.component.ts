@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiFinancialAccountService } from 'src/app/core/modules/provider/api';
 
 @Component({
   selector: 'swipe-account-recharge',
@@ -7,7 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountRechargeComponent implements OnInit {
 
-  constructor() { }
+  public renderInfo: any = {};
+
+  constructor(
+    private apiFinancialAccountService: ApiFinancialAccountService
+  ) {
+    this.fetchRenderInfo();
+  }
+  /* asyncFetchFinancialAccountInfo */
+
+  private fetchRenderInfo() {
+    this.apiFinancialAccountService.asyncFetchFinancialAccountInfo().subscribe(res => {
+      console.log(res)
+      this.renderInfo = res.rel;
+    })
+  }
 
   ngOnInit() {
   }

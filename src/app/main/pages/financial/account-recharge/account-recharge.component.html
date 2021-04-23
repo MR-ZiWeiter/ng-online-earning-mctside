@@ -1,6 +1,6 @@
 <section class="account-recharge-component">
   <section class="header-info">
-    <span class="title-text">账户提现</span>
+    <span class="title-text">账户充值</span>
   </section>
   <section class="recharge-type">
     <span class="title-text">第一步：选择充值方式</span>
@@ -8,13 +8,13 @@
   <section class="form-info">
     <nz-tabset>
       <nz-tab nzTitle="支付宝充值">
-        <swipe-alipay></swipe-alipay>
+        <swipe-alipay [renderInfo]="renderInfo.alipay"></swipe-alipay>
       </nz-tab>
       <nz-tab nzTitle="微信充值">
-        <swipe-wechat></swipe-wechat>
+        <swipe-wechat [renderInfo]="renderInfo.wechat_pay"></swipe-wechat>
       </nz-tab>
       <nz-tab nzTitle="网银充值">
-        <swipe-bank></swipe-bank>
+        <swipe-bank [renderInfo]="renderInfo.bank_card"></swipe-bank>
       </nz-tab>
     </nz-tabset>
   </section>

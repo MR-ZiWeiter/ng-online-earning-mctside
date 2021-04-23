@@ -59,4 +59,16 @@ export class ApiReleaseService {
       });
     });
   }
+
+  /* 购物标签 */
+  asyncFetchTaskLabelsInfo(info: any = {}): Observable<any> {
+    return new Observable(observer => {
+      this.http.get('/business/task/labels', info, {}).subscribe((res: ApiResponseModel) => {
+        // console.log(res);
+        observer.next(res);
+      }, err => {
+        observer.error(false);
+      });
+    });
+  }
 }

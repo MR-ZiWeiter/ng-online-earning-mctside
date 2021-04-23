@@ -18,8 +18,19 @@ export class RequestPreviewHandler {
     params = request.params.append('client', 'mctside');
     // console.log(request);
     if (request.method === 'POST') {
-      console.log(request.params.get('noHeader'));
-      if (!request.params.get('noHeader')) {
+      // console.log(request.params.get('noHeader'));
+      /* 处理多类数据时头部是否携带请求头问题 */
+      let noHeader;
+      if (request.body instanceof FormData) {
+        noHeader = request.body.get('noHeader');
+      } else if (request.body instanceof Object) {
+        noHeader = request.body.noHeader;
+      }
+      if (request.params) {
+        noHeader = request.params.get('noHeader') || noHeader
+      }
+      /* END */
+      if (!noHeader) {
         if (!request.headers.has('Content-Type')) {
           (headers as any)['Content-Type'] = 'application/json';
         }

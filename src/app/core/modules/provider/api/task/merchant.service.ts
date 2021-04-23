@@ -39,7 +39,7 @@ constructor(
   /* 获取商铺列表 */
   asyncFetchShopList(info: any = {}): Observable<any> {
     return new Observable(observer => {
-      this.http.post('/business/shops/shops_dict', info, {}, info).subscribe((res: ApiResponseModel) => {
+      this.http.get('/business/shops/shops_dict', info, {}).subscribe((res: ApiResponseModel) => {
         // console.log(res);
         observer.next(res);
       }, err => {
@@ -51,7 +51,7 @@ constructor(
   /* 获取商品列表 */
   asyncFetchGoodsTypeList(info: any = {}): Observable<any> {
     return new Observable(observer => {
-      this.http.post('/business/shops/goods_type', info, {}, info).subscribe((res: ApiResponseModel) => {
+      this.http.get('/business/shops/goods_type', info, {}).subscribe((res: ApiResponseModel) => {
         // console.log(res);
         observer.next(res);
       }, err => {

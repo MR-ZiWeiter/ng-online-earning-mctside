@@ -1,12 +1,12 @@
-<section class="alipay-component">
+<section class="alipay-component" *ngIf="renderInfo">
   <section class="form-info">
     <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
       <section nz-row>
         <section nz-col [nzSpan]="24">
           <nz-form-item>
-            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="website" nzRequired>提现金额</nz-form-label>
+            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="amount" nzRequired>提现金额</nz-form-label>
             <nz-form-control [nzSm]="7" [nzXs]="24" nzErrorTip="请输入提现金额">
-              <nz-input-number formControlName="price" [nzMin]="1" [nzMax]="10" [nzStep]="1" [nzPlaceHolder]="'输入金额'"></nz-input-number>
+              <nz-input-number formControlName="amount" [nzMin]="1" [nzMax]="99999999" [nzStep]="1" [nzPlaceHolder]="'输入金额'"></nz-input-number>
               <button nz-button disabled nzType="text">元</button>
             </nz-form-control>
           </nz-form-item>
@@ -15,19 +15,20 @@
       <section nz-row>
         <section nz-col [nzSpan]="24">
           <nz-form-item>
-            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="website" nzRequired>姓名</nz-form-label>
-            <nz-form-control [nzSm]="7" [nzXs]="24" nzErrorTip="请输入姓名">
-              <input nz-input id="website" formControlName="website" placeholder="请输入姓名" />
+            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="realName">姓名</nz-form-label>
+            <nz-form-control [nzSm]="7" [nzXs]="24">
+              <input nz-input [disabled]="true" id="realName" [(ngModel)]="renderInfo.realName" [ngModelOptions]="{standalone: true}" placeholder="请输入姓名" />
             </nz-form-control>
           </nz-form-item>
         </section>
       </section>
       <section nz-row>
+
         <section nz-col [nzSpan]="24">
           <nz-form-item>
-            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="norm" nzRequired>支付宝账号</nz-form-label>
+            <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="bankCardNum">支付宝账号</nz-form-label>
             <nz-form-control [nzSm]="7" [nzXs]="24" nzErrorTip="请输入支付宝账号">
-              <input nz-input id="norm" formControlName="norm" placeholder="请输入支付宝账号" />
+              <input nz-input [disabled]="true" id="bankCardNum" [(ngModel)]="renderInfo.account" [ngModelOptions]="{standalone: true}" placeholder="请输入支付宝账号" />
             </nz-form-control>
           </nz-form-item>
         </section>

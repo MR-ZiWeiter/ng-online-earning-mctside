@@ -2,6 +2,8 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AppealModalComponent } from './appeal-modal/appeal-modal.component';
+import { NzTableQueryParams } from 'ng-zorro-antd/table';
+import { ApiAppealService } from 'src/app/core/modules/provider/api';
 
 @Component({
   selector: 'swipe-received-appeal',
@@ -12,51 +14,36 @@ export class ReceivedAppealComponent implements OnInit {
 
   public validateForm!: FormGroup;
 
-  public dataSet = [
-    {
-      code: '055804',
-      type: '支付宝',
-      price: '724750',
-      time: '1977/02/11 13:25:56',
-      over: '724750',
-      status: '等待充值'
-    },
-    {
-      code: '055804',
-      type: '支付宝',
-      price: '724750',
-      time: '1977/02/11 13:25:56',
-      over: '724750',
-      status: '等待充值'
-    },
-    {
-      code: '055804',
-      type: '支付宝',
-      price: '724750',
-      time: '1977/02/11 13:25:56',
-      over: '724750',
-      status: '等待充值'
-    },
-    {
-      code: '055804',
-      type: '支付宝',
-      price: '724750',
-      time: '1977/02/11 13:25:56',
-      over: '724750',
-      status: '等待充值'
-    }
-  ];
+  public renderConfig: any = {
+    checkType: 2,
+    pageNum: 1,
+    pageSize: 20,
+    total: 0,
+    loading: true
+  }
+
+  public renderArray: any[] = [];
 
   constructor(
     private fb: FormBuilder,
-    private nzModalService: NzModalService
-  ) {}
+    private nzModalService: NzModalService,
+    private apiAppealService: ApiAppealService
+  ) {
+    // this.fetchAppealList();
+  }
 
-  submitForm(): void {
-    for (const i in this.validateForm.controls) {
-      this.validateForm.controls[i].markAsDirty();
-      this.validateForm.controls[i].updateValueAndValidity();
-    }
+  public fetchAppealList() {
+    this.renderConfig.loading = true;
+    this.apiAppealService.asyncFetchAppealListInfo(this.renderConfig).subscribe(res => {
+      this.renderArray = res.rel.list;
+      this.renderConfig.total = res.rel.count;
+      this.renderConfig.loading = false;
+    })
+  }
+
+  public onQueryParamsChange(params: NzTableQueryParams) {
+    this.renderConfig.pageNum = params.pageIndex;
+    this.fetchAppealList();
   }
 
   ngOnInit(): void {
@@ -66,7 +53,7 @@ export class ReceivedAppealComponent implements OnInit {
   }
 
   /* 打开详情弹窗 */
-  public openAppealDetail() {
+  public openAppealDetail(info: {[x: string]: any}) {
     this.nzModalService.create({
       nzContent: AppealModalComponent,
       nzWidth: 657,
@@ -74,6 +61,9 @@ export class ReceivedAppealComponent implements OnInit {
       nzOkDisabled: true,
       nzCancelDisabled: true,
       nzFooter: null,
+      nzComponentParams: {
+        renderInfo: info
+      },
       nzOnCancel: (e: any) => {
         console.log(e)
       },
