@@ -19,9 +19,9 @@
         <tbody>
           <tr *ngFor="let data of borderedTable.data">
             <td nzAlign="center">{{ data.region }}</td>
-            <td nzAlign="center">{{ data.price }}</td>
-            <td nzAlign="center">{{ data.region }}</td>
-            <td nzAlign="center">{{ data.price }}</td>
+            <td nzAlign="center">{{ data.price|price }}</td>
+            <td nzAlign="center">{{ data.region1 }}</td>
+            <td nzAlign="center">{{ data.price1|price }}</td>
           </tr>
         </tbody>
       </nz-table>

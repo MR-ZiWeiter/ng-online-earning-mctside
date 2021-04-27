@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'swipe-order-info',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./order-info.component.scss']
 })
 export class OrderInfoComponent implements OnInit {
+
+  @Input() public renderInfo?: any;
 
   constructor() { }
 

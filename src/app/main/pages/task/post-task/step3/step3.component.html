@@ -12,8 +12,8 @@
                 <nz-form-item>
                   <nz-form-label [nzSm]="5" nzRequired [nzFor]="'select-input-' + keyIndex">{{item.value.title}}</nz-form-label>
                   <nz-form-control [nzSm]="6" [nzXs]="10" [nzErrorTip]="'请输入' + item.value.title">
-                    <nz-select nz-col nzSpan="24" nzShowSearch nzAllowClear formControlName="selected" [id]="'select-input-' + keyIndex" nzPlaceHolder="不要求">
-                      <nz-option *ngFor="let option of item.value.requiresRuleItemVos" [nzLabel]="option.title" [nzValue]="option.sort"></nz-option>
+                    <nz-select nz-col nzSpan="24" nzShowSearch nzAllowClear formControlName="selectedItemId" [id]="'select-input-' + keyIndex" nzPlaceHolder="不要求">
+                      <nz-option *ngFor="let option of item.value.requiresRuleItemVos" [nzLabel]="option.title" [nzValue]="option.id"></nz-option>
                     </nz-select>
                   </nz-form-control>
                   <button nz-button disabled nzType="text">{{item.value.description}}</button>
@@ -27,8 +27,8 @@
                 <nz-form-item>
                   <nz-form-label [nzSm]="5" [nzFor]="'radio-input-' + keyIndex" nzRequired>{{item.value.title}}</nz-form-label>
                   <nz-form-control [nzSm]="item.value.requiresRuleItemVos.length < 5 ? item.value.requiresRuleItemVos.length * 2 : 14">
-                    <nz-radio-group class="custom-check-radio-group" [id]="'radio-input-' + keyIndex" formControlName="selected">
-                      <label *ngFor="let option of item.value.requiresRuleItemVos" class="min-check-radio" nz-radio [nzValue]="option.sort">{{option.title}}</label>
+                    <nz-radio-group class="custom-check-radio-group" [id]="'radio-input-' + keyIndex" formControlName="selectedItemId">
+                      <label *ngFor="let option of item.value.requiresRuleItemVos" class="min-check-radio" nz-radio [nzValue]="option.id">{{option.title}}</label>
                     </nz-radio-group>
                   </nz-form-control>
                   <button nz-button disabled nzType="text">{{item.value.description}}</button>

@@ -1,0 +1,30 @@
+<section class="task-window-component" *ngIf="taskInfo.commission">
+  <section class="header-info">任务费用预算</section>
+  <section class="context-info">
+    <section class="label-info" *ngIf="taskInfo.commodityFess">
+      <span class="label-text">商品总价：</span>
+      <span class="value-text">{{taskInfo.commodityFess|price:'format'}}元</span>
+    </section>
+    <section class="label-info" *ngIf="taskInfo.valueAdded">
+      <span class="label-text">增值服务费：</span>
+      <span class="value-text">{{taskInfo.valueAdded|price:'format'}}元</span>
+    </section>
+    <section class="label-info" *ngIf="taskInfo.baseFess">
+      <span class="label-text">基础服务费：</span>
+      <span class="value-text">{{taskInfo.baseFess|price}}元</span>
+    </section>
+    <section class="label-info" *ngIf="taskInfo.superaddFees">
+      <span class="label-text">任务追加奖励：</span>
+      <span class="value-text">{{taskInfo.superaddFees|price:'format'}}元</span>
+    </section>
+  </section>
+  <section class="task-num" *ngIf="taskInfo.taskQuantity">
+    <section class="label-info" data-unit="×">
+      <span class="label-text">任务数量：</span>
+      <span class="value-text">{{taskInfo.taskQuantity}}</span>
+    </section>
+  </section>
+  <section class="view-btn">
+    <button class="count-btn" type="button" nz-button nzType="primary">合计：{{taskInfo.commission|price}} 元</button>
+  </section>
+</section>

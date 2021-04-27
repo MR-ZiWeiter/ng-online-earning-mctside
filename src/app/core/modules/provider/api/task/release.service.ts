@@ -71,4 +71,16 @@ export class ApiReleaseService {
       });
     });
   }
+
+  /* 发布任务 */
+  asyncPostMewTaskInfo(info: any = {}): Observable<any> {
+    return new Observable(observer => {
+      this.http.post('/business/task/add', {}, {}, info).subscribe((res: ApiResponseModel) => {
+        // console.log(res);
+        observer.next(res);
+      }, err => {
+        observer.error(false);
+      });
+    });
+  }
 }

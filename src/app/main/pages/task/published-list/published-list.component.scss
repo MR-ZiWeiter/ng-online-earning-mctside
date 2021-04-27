@@ -41,6 +41,7 @@
     .context-list {
       .task-carc-info {
         border: format(1) solid $default_color_11;
+        margin-bottom: format(15);
         .header-info,
         .footer-info {
           @include wh(auto, format(45));
@@ -62,10 +63,11 @@
           border-top: format(1) solid $default_color_11;
         }
         .content-info {
-          @include grid-col-row-gap(format(225)  auto  format(104) format(142), format(88), 0, 0);
+          @include grid-col-row-gap(format(225) auto format(104) format(142), auto, 0, 0);
           .product-info,
           .task-intro,
           .task-status {
+            min-height: format(88);
             border-right: format(1) solid $default_color_11;
             padding: 0 format(15);
           }
@@ -103,6 +105,10 @@
           }
         }
       }
+    }
+    .custom-pagination {
+      text-align: right;
+      margin-top: format(20);
     }
   }
 }

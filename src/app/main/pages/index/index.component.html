@@ -6,15 +6,15 @@
     <section class="step-item check">
       <span class="label-text">发布任务流程</span>
     </section>
-    <section class="step-item">
+    <section class="step-item" routerLink="/main/financial/account-recharge">
       <span class="list-idot">1</span>
       <span class="label-text">账户充值</span>
     </section>
-    <section class="step-item">
+    <section class="step-item" routerLink="/main/task/bound-shop">
       <span class="list-idot">2</span>
       <span class="label-text">绑定商户</span>
     </section>
-    <section class="step-item">
+    <section class="step-item" routerLink="/main/task/post-task">
       <span class="list-idot">3</span>
       <span class="label-text">发布任务</span>
     </section>
@@ -26,24 +26,24 @@
     <span class="title-text">我的任务</span>
   </section>
   <section class="task-bord">
-    <section class="task-item">
-      <span class="label-text">24</span>
+    <section class="task-item" routerLink="/main/task/published-list">
+      <span class="label-text">{{renderInfo.pushOrderNum}}</span>
       <span class="value-text">已发布任务</span>
     </section>
-    <section class="task-item">
-      <span class="label-text">24</span>
+    <section class="task-item" routerLink="/main/task/published-list">
+      <span class="label-text">{{renderInfo.waitOrderNum}}</span>
       <span class="value-text">待接手任务</span>
     </section>
-    <section class="task-item">
-      <span class="label-text">24</span>
+    <section class="task-item" routerLink="/main/task/published-list">
+      <span class="label-text">{{renderInfo.usedOrderNum}}</span>
       <span class="value-text">已接手任务</span>
     </section>
-    <section class="task-item">
-      <span class="label-text">24</span>
+    <section class="task-item" routerLink="/main/task/published-list">
+      <span class="label-text">{{renderInfo.pushOrderNum}}</span>
       <span class="value-text">待审核返款</span>
     </section>
-    <section class="task-item">
-      <span class="label-text">24</span>
+    <section class="task-item" routerLink="/main/task/published-list">
+      <span class="label-text">{{renderInfo.completeOrderNum}}</span>
       <span class="value-text">已完成</span>
     </section>
   </section>
@@ -54,14 +54,14 @@
     <span class="title-text">我的申诉</span>
   </section>
   <section class="task-bord">
-    <section class="task-item">
-      <span class="label-text">24</span>
+    <a class="task-item" routerLink="/main/appeal/my-appeal">
+      <span class="label-text">{{renderInfo.appealWaitNum}}</span>
       <span class="value-text">我发起的未解决申诉</span>
-    </section>
-    <section class="task-item">
-      <span class="label-text">24</span>
+    </a>
+    <a class="task-item" routerLink="/main/appeal/received-appeal">
+      <span class="label-text">{{renderInfo.beAppealWaitNum}}</span>
       <span class="value-text">我被申诉的未解决申诉</span>
-    </section>
+    </a>
   </section>
 </section>
 

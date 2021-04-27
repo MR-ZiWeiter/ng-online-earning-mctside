@@ -1,3 +1,5 @@
+import { CoreToolsFunction } from 'src/app/core/core.tools';
+import { SystemService } from 'src/app/core/services/system/system.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
@@ -7,13 +9,16 @@ import { ApiReleaseService } from 'src/app/core/modules/provider/api';
 import { Step1Component } from './step1/step1.component';
 import { Step2Component } from './step2/step2.component';
 import { Step3Component } from './step3/step3.component';
+import { Step4Component } from './step4/step4.component';
+import { Step5Component } from './step5/step5.component';
+import { Step6Component } from './step6/step6.component';
 
 @Component({
   selector: 'swipe-post-task',
   templateUrl: './post-task.component.html',
   styleUrls: ['./post-task.component.scss']
 })
-export class PostTaskComponent implements OnInit {
+export class PostTaskComponent extends CoreToolsFunction implements OnInit {
 
   public validateForm!: FormGroup;
 
@@ -51,10 +56,21 @@ export class PostTaskComponent implements OnInit {
   @ViewChild(Step3Component)
   private step3Component!: Step3Component;
 
+  @ViewChild(Step4Component)
+  private step4Component!: Step4Component;
+
+  @ViewChild(Step5Component)
+  private step5Component!: Step5Component;
+
+  @ViewChild(Step6Component)
+  private step6Component!: Step6Component;
+
   constructor(
     private fb: FormBuilder,
+    private systemService: SystemService,
     private apiReleaseService: ApiReleaseService
   ) {
+    super();
     this.initalConfigInfo();
   }
 
@@ -100,8 +116,44 @@ export class PostTaskComponent implements OnInit {
     this.apiReleaseService.asyncFetchTempIdToInfo({
       templateId: ev
     }).subscribe(res => {
-      console.log(res);
+      // console.log(res);
+      const cloneReSult = this.handerResultTempChange(res.rel);
+      console.log(cloneReSult)
+      this.validateForm.controls['step1'].setValue(cloneReSult);
+      this.validateForm.controls['step2'].setValue(cloneReSult);
+      this.validateForm.controls['step3'].setValue(cloneReSult);
+      this.validateForm.controls['step4'].setValue(cloneReSult);
+      this.validateForm.controls['step5'].setValue(cloneReSult);
+      this.validateForm.controls['step6'].setValue(cloneReSult);
+
+      // this.validateForm.addControl('step1', new FormControl(res.rel));
+      // this.validateForm.addControl('step2', new FormControl(res.rel));
+      // this.validateForm.addControl('step3', new FormControl(res.rel));
+      // this.validateForm.addControl('step4', new FormControl(res.rel));
+      // this.validateForm.addControl('step5', new FormControl(res.rel));
+      // this.validateForm.addControl('step6', new FormControl(res.rel));
+
+      console.log(this.validateForm)
     })
+  }
+
+  /* 处理模板回填数据 由于后台返回数据模型不一致 所以需要单独处理数据 */
+  private handerResultTempChange(renderInfo: any) {
+    const cloneResult: any = {};
+    for (let key in renderInfo) {
+      if (key.includes('labels')) {
+        cloneResult['labels'] = renderInfo[key];
+      } else if (key.includes('Vo')) {
+        if (Object.prototype.toString.call(renderInfo[key]) === '[object Object]') {
+          cloneResult[key.replace(/Vo/g, 'Form')] = this.handerResultTempChange(renderInfo[key])
+        } else {
+          cloneResult[key.replace(/Vo/g, 'Form')] = renderInfo[key];
+        }
+      } else {
+        cloneResult[key] = renderInfo[key];
+      }
+    }
+    return cloneResult;
   }
 
   /* 校验数据 deep 方式 */
@@ -125,18 +177,58 @@ export class PostTaskComponent implements OnInit {
     }
   }
 
-  submitForm(): void {
+  public submitForm(): void {
     /* 手动校验组件 */
     this.step1Component.checkComponentForm();
     this.step2Component.checkComponentForm();
     this.step3Component.checkComponentForm();
+    this.step4Component.checkComponentForm();
+    this.step5Component.checkComponentForm();
+    this.step6Component.checkComponentForm();
     // console.log(this.step1Component)
     this.deepCheckForm(this.validateForm)
-    console.log(this.validateForm)
+    // console.log(this.validateForm)
+    if (this.validateForm.valid) {
+      let submitForm: any = {};
+      for(const key in this.validateForm.value) {
+        // Object.assign(submitForm, this.validateForm.value[key]);
+        submitForm = this.deepFusinObject(submitForm, this.validateForm.value[key]);
+      }
+      // console.log(submitForm)
+      let commission = 0;
+      submitForm.requiresForms.map((item: any) => {
+        switch(item.tagType) {
+          case 2:
+          case 3:
+            item.requiresRuleItemVos.some((childItem: any) => {
+              if (childItem.id === item.selected) {
+                commission += childItem.fees
+                return true
+              }
+              return false
+            })
+            break;
+          case 4:
+            item.requiresRuleItemVos.map((childItem: any) => {
+              if (item.selected.include(childItem.id)) {
+                commission += childItem.fees
+              }
+            })
+            break;
+        }
+      })
+      // console.log(commission)
+      commission = (commission + submitForm.goodsForm.unitPrice * submitForm.goodsForm.quantity * 100 + submitForm.baseFess + submitForm.superaddFees * 100) * submitForm.businessTaskOriginalBaseForm.taskQuantity;
+      submitForm['commission'] = commission;
+      this.apiReleaseService.asyncPostMewTaskInfo(submitForm).subscribe(res => {
+        this.systemService.presentToast('发布任务成功', 'success');
+      })
+    } else {
+      this.systemService.presentToast('请完善表单后再试，谢谢配合', 'info');
+    }
   }
 
-  getCaptcha(e: MouseEvent): void {
-    e.preventDefault();
+  public openResetForm() {
   }
 
   ngOnInit(): void {
@@ -145,6 +237,8 @@ export class PostTaskComponent implements OnInit {
       step2: [null, [Validators.required]],
       step3: [null, [Validators.required]],
       step4: [null, [Validators.required]],
+      step5: [null, [Validators.required]],
+      step6: [null, [Validators.required]],
     });
   }
 

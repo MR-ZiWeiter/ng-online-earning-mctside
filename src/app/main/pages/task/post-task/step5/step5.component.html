@@ -7,7 +7,7 @@
       <section nz-row>
         <section nz-col [nzSpan]="24">
           <nz-form-item>
-            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="additionalRawards" nzRequired>追加奖励</nz-form-label>
+            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="superaddFees" nzRequired>追加奖励</nz-form-label>
             <nz-form-control
               [nzSm]="4"
               [nzXs]="6"
@@ -16,12 +16,12 @@
                 <i nz-icon nzType="minus" nzTheme="outline"></i>
               </ng-template>
               <nz-input-group [nzAddOnBefore]="nzPrefix" [nzAddOnAfter]="suffixButton">
-                <input type="number" nz-input formControlName="additionalRawards" placeholder="0" />
+                <input type="number" nz-input formControlName="superaddFees" placeholder="0" />
               </nz-input-group>
               <ng-template #suffixButton>
                 <i nz-icon nzType="plus" nzTheme="outline"></i>
               </ng-template>
-              <!-- <nz-input-number nz-input [nzMin]="1" [nzStep]="1" formControlName="additionalRawards"></nz-input-number> -->
+              <!-- <nz-input-number nz-input [nzMin]="1" [nzStep]="1" formControlName="superaddFees"></nz-input-number> -->
             </nz-form-control>
             <button nz-button disabled nzType="text">填入给试客的红包奖励金额</button>
           </nz-form-item>
@@ -78,12 +78,12 @@
       <section nz-row>
         <section nz-col [nzSpan]="24">
           <nz-form-item>
-            <nz-form-label [nzSm]="5" [nzXs]="12" nzFor="toBuyerRemark" nzRequired>留言提醒</nz-form-label>
+            <nz-form-label [nzSm]="5" [nzXs]="12" nzFor="remind" nzRequired>留言提醒</nz-form-label>
             <nz-form-control
               [nzSm]="16"
               [nzXs]="6"
               nzErrorTip="请输入留言提醒">
-              <input nz-input type="text" id="toBuyerRemark" formControlName="toBuyerRemark" placeholder="留言提醒" />
+              <input nz-input type="text" id="remind" formControlName="remind" placeholder="留言提醒" />
             </nz-form-control>
           </nz-form-item>
         </section>

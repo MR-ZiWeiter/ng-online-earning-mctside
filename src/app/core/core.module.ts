@@ -20,6 +20,7 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 
 // 管道类
 import { KeysPipe } from './pipes';
@@ -42,6 +43,7 @@ import { RouterModule } from '@angular/router';
 import { SwipeRadioComponent } from './modules/components/swipe-radio/swipe-radio.component';
 import { SwipeGetCodeInputComponent } from './modules/components/swipe-get-code-input/swipe-get-code-input.component';
 import { SwipeUploadComponent } from './modules/components/swipe-upload/swipe-upload.component';
+import { PricePipe } from './pipes/price.pipe';
 
 @NgModule({
   imports: [
@@ -65,7 +67,8 @@ import { SwipeUploadComponent } from './modules/components/swipe-upload/swipe-up
     NzTableModule,
     NzDividerModule,
     NzTabsModule,
-    NzCheckboxModule
+    NzCheckboxModule,
+    NzPaginationModule
   ],
   exports: [
     ReactiveFormsModule,
@@ -88,6 +91,7 @@ import { SwipeUploadComponent } from './modules/components/swipe-upload/swipe-up
     NzDividerModule,
     NzTabsModule,
     NzCheckboxModule,
+    NzPaginationModule,
     SwipeEyeCareModeComponent,
     SwipeLottieComponent,
     SwipeInputComponent,
@@ -96,7 +100,8 @@ import { SwipeUploadComponent } from './modules/components/swipe-upload/swipe-up
     SwipeGetCodeInputComponent,
     SwipeUploadComponent,
     /* 管道类 */
-    KeysPipe
+    KeysPipe,
+    PricePipe
   ],
   declarations: [
     SwipeEyeCareModeComponent,
@@ -106,7 +111,8 @@ import { SwipeUploadComponent } from './modules/components/swipe-upload/swipe-up
     SwipeGetCodeInputComponent,
     SwipeUploadComponent,
     /* 管道类 */
-    KeysPipe
+    KeysPipe,
+    PricePipe
   ],
   providers: [
     { provide: NZ_ICONS, useValue: icons }

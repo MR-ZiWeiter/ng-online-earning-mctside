@@ -1,3 +1,4 @@
+import { ApiUserIndexService } from 'src/app/core/modules/provider/api';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/core/services/user/user.service';
 
@@ -17,11 +18,18 @@ export class IndexComponent implements OnInit {
     return this.cindex;
   }
 
-  public c: any;
+  public renderInfo: any = {};
 
-  constructor(private userService: UserService) { }
+  constructor(
+    private userService: UserService,
+    private apiUserIndexService: ApiUserIndexService
+  ) { }
 
   ngOnInit() {
+    this.apiUserIndexService.asyncFetchUserCount().subscribe(res => {
+      // console.log(res)
+      this.renderInfo = res.rel;
+    })
     // this.c = this.userService.getWxAppToken().subscribe(res => {
     //   console.log(res);
     // });

@@ -1,5 +1,6 @@
 @import 'mixin';
 .task-page{
+  position: relative;
   .btn-controll {
     @include wh(100%, format(100));
     @include flex-justify-align(center, center);
@@ -7,5 +8,10 @@
       margin: 0 format(15);
       padding: 0 format(34);
     }
+  }
+  .task-window {
+    position: fixed;
+    right: format(50);
+    bottom: format(50);
   }
 }

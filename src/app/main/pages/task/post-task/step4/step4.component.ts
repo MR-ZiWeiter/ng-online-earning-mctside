@@ -1,13 +1,25 @@
 import { CoreToolsFunction } from 'src/app/core/core.tools';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl, FormArray } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output, forwardRef } from '@angular/core';
+import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl, FormArray, NG_VALUE_ACCESSOR, NG_VALIDATORS, ControlValueAccessor } from '@angular/forms';
 
 @Component({
   selector: 'swipe-step4',
   templateUrl: './step4.component.html',
-  styleUrls: ['./step4.component.scss']
+  styleUrls: ['./step4.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => Step4Component),
+      multi: true
+    },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => Step4Component),
+      multi: true
+    }
+  ]
 })
-export class Step4Component extends CoreToolsFunction implements OnInit {
+export class Step4Component extends CoreToolsFunction implements OnInit, ControlValueAccessor {
 
   public selectedValue = null;
 
@@ -41,6 +53,11 @@ export class Step4Component extends CoreToolsFunction implements OnInit {
   /* 实现表单校验规则 */
   writeValue(obj: any): void {
     this.value = obj;
+    /* 数据回填 */
+    if (obj) {
+      // console.log(this.validateForm)
+      this.resultFormInitel(this.validateForm, obj);
+    }
   }
   registerOnChange(fn: any): void {
     this.valueChange = fn;
@@ -66,21 +83,42 @@ export class Step4Component extends CoreToolsFunction implements OnInit {
     return ((this.validateForm.get(path) as any) || {}).controls || []
   }
 
+  /* 返回单选框选中的值 */
+  public resultCheckRadioContext(info: any): {[x: string]: any} {
+    // info.selectedItemId
+    let checkInfo = {};
+    info.requiresRuleItemVos.some((item: any) => {
+      if (info.selectedItemId === item.id) {
+        checkInfo = item;
+        return true;
+      }
+      return false;
+    })
+    return checkInfo;
+  }
+
   /* 动态添加表单校验规则 */
   private newFormGroupValidate(renderArray: any[]) {
     const formArray: FormArray = this.fb.array([]);
     renderArray.map(group => {
       /* 初始化副表单组 */
-      let deputyOptions: {[x: string]: any} = {};
+      let deputyOptions: {[x: string]: any}|null = null;
       /* 判断是否存在副选项 */
       if (group.deputyOptions) {
-        deputyOptions = this.resultChildOptionFormGroup(null, group.deputyOptions.code, null);
+        deputyOptions = this.resultChildOptionFormGroup(null, group.deputyOptions.code, null, group.deputyOptions.tagType);
       }
       /* 定义默认值 */
-      const defaultSelectInputValue = (group.tagType === 2 || group.tagType === 3) ? 1 : null;
+      let defaultSelectInputValue: number|string|null|any;
+      if (group.tagType === 2 || group.tagType === 3) {
+        if (group.requiresRuleItemVos.length) {
+          defaultSelectInputValue = group.requiresRuleItemVos[0].id;
+        } else {
+          defaultSelectInputValue = null;
+        }
+      }
       const defaultFormGroup: FormGroup|any = this.autoGenerateFormGroupCheck(group);
       /* 自动生成默认数据校验表单 */
-      const newSubmitFormObject: {[x: string]: any} = this.resultChildOptionFormGroup(null, group.code, defaultSelectInputValue);
+      const newSubmitFormObject: {[x: string]: any} = this.resultChildOptionFormGroup(null, group.code, defaultSelectInputValue, group.tagType);
       /* 添加其他自定义表单数据 */
       for (const key in deputyOptions) {
         defaultFormGroup.get('deputyOptions').addControl(key, deputyOptions[key]);
@@ -93,7 +131,7 @@ export class Step4Component extends CoreToolsFunction implements OnInit {
       /* 添加控件到数组 */
       formArray.push(defaultFormGroup);
     })
-    console.log(this.validateForm)
+    // console.log(this.validateForm)
     if (this.validateForm) {
       this.validateForm.addControl('requiresForms', formArray);
     }
@@ -121,12 +159,28 @@ export class Step4Component extends CoreToolsFunction implements OnInit {
   }
 
   /* 返回动态表单子数据 */
-  private resultChildOptionFormGroup(i: any, c: string, s: any) {
-    return {
-      inputVal: new FormControl(i, [Validators.required]),
-      ruleCode: new FormControl(c, [Validators.required]),
-      selected: new FormControl(s, [Validators.required])
+  private resultChildOptionFormGroup(i: any, c: string, s: any, type: number = 1) {
+    switch(type) {
+      case 1:
+        return {
+          inputVal: new FormControl(i, [Validators.required]),
+          ruleCode: new FormControl(c, [Validators.required])
+        }
+      case 2:
+      case 3:
+      case 4:
+        return {
+          ruleCode: new FormControl(c, [Validators.required]),
+          selectedItemId: new FormControl(s, [Validators.required])
+        }
+      default:
+        return {
+          inputVal: new FormControl(i, [Validators.required]),
+          ruleCode: new FormControl(c, [Validators.required]),
+          selectedItemId: new FormControl(s, [Validators.required])
+        }
     }
+
   }
 
   /**
@@ -147,37 +201,61 @@ export class Step4Component extends CoreToolsFunction implements OnInit {
 
   /* 特殊单选框处理 */
   public handlerRadioChange(renderInfo: any, index: number, ev: any) {
-    console.log(ev)
-    console.log(renderInfo)
-    console.log(renderInfo.selected)
+    // console.log(ev)
+    // console.log(renderInfo)
+    // console.log(renderInfo.selectedItemId)
     // switch() {}
     renderInfo.requiresRuleItemVos.some((item: any) => {
       // switch() {}
       const currentFromGroup = (this.validateForm.get('requiresForms') as any).controls[index];
       if (item.id === ev) {
+        const requiresSuboptionForm: FormGroup = this.fb.group({modelType: [ev]});
+        let suboption: FormArray;
         switch(item.modelType) {
           case 0:
             break;
           case 1:
-            const taskSubjoinMatterForms: FormArray = this.fb.array([
+            suboption = this.fb.array([
               this.fb.group(this.resultSubjoinFromGroupObject())
             ]);
-            currentFromGroup.addControl('taskSubjoinMatterForms', taskSubjoinMatterForms);
+            requiresSuboptionForm.addControl('suboption', suboption);
+            currentFromGroup.addControl('requiresSuboptionForm', requiresSuboptionForm);
+            break;
+          case 4:
+            suboption = this.fb.array([
+              this.fb.group(this.resultWithGoodsFormGroupObject())
+            ]);
+            requiresSuboptionForm.addControl('suboption', suboption);
+            currentFromGroup.addControl('requiresSuboptionForm', requiresSuboptionForm);
+            break;
         }
+        return true;
       }
+      return false;
     })
 
     if (renderInfo.code === 'WITH_GOODS') {
       const withGoodsFormGroup = (this.validateForm.get('requiresForms') as any).controls[index];
-      if (renderInfo.selected === 2) {
-        const taskSubjoinMatterForms: FormArray = this.fb.array([
+      if (renderInfo.selectedItemId === 2) {
+        const suboption: FormArray = this.fb.array([
           this.fb.group(this.resultSubjoinFromGroupObject()),
           this.fb.group(this.resultSubjoinFromGroupObject(2, 2))
         ]);
-        withGoodsFormGroup.addControl('taskSubjoinMatterForms', taskSubjoinMatterForms);
+        withGoodsFormGroup.addControl('suboption', suboption);
       } else {
-        withGoodsFormGroup.removeControl('taskSubjoinMatterForms');
+        withGoodsFormGroup.removeControl('suboption');
       }
+    }
+  }
+
+  /* 返回附属商品信息表单控件组 */
+  public resultWithGoodsFormGroupObject() {
+    return {
+      master: [0],
+      url: [null, [Validators.required]],
+      image: [null, [Validators.required]],
+      title: [null, [Validators.required]],
+      unitPrice: [null, [Validators.required]],
     }
   }
 

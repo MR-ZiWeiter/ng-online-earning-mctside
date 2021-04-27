@@ -26,6 +26,7 @@
       flex: 1;
       @include flex-justify-align(center, center);
       @include wh(auto, format(54));
+      @include click-active();
       position: relative;
       &.check {
         .label-text {
@@ -70,6 +71,7 @@
     @include grid-col-row-gap(repeat(5, format(186)), format(156),  0, 0);
     .task-item {
       @include flex-justify-align(center, center);
+      @include click-active();
       flex-direction: column;
       .label-text {
         @include sc(format(30), $default_color_3);

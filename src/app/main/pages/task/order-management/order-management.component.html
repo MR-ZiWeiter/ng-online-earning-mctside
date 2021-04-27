@@ -8,12 +8,13 @@
         <nz-form-item>
           <nz-form-label>任务搜索</nz-form-label>
           <nz-form-control class="custom-search-group" [nzSm]="21" [nzXs]="24">
-            <nz-select class="custom-select-input" formControlName="taskType">
+            <nz-select class="custom-select-input" formControlName="checkType">
               <nz-option [nzLabel]="'任务编号'" [nzValue]="1"></nz-option>
-              <nz-option [nzLabel]="'任务金额'" [nzValue]="2"></nz-option>
+              <nz-option [nzLabel]="'掌柜号'" [nzValue]="2"></nz-option>
+              <nz-option [nzLabel]="'买方账号'" [nzValue]="3"></nz-option>
             </nz-select>
             <nz-input-group nzSearch [nzAddOnAfter]="addOnAfterTemplate">
-              <input type="text" class="custom-search-input" nz-input placeholder="请输入相关信息" />
+              <input type="text" class="custom-search-input" formControlName="checkValue" nz-input placeholder="请输入相关信息" />
             </nz-input-group>
             <ng-template #addOnAfterTemplate>
               <button nz-button type="submit" nzType="primary" nzSearch>搜索</button>
@@ -23,36 +24,42 @@
       </form>
     </section>
     <section class="context-list">
-      <section class="task-carc-info">
+      <section class="task-carc-info" *ngFor="let item of renderArray">
         <section class="header-info">
-          <span class="lable-text">订单编号：232030232385143</span>
-          <span class="time-text">发布时间：2021/2/26 09:25:36</span>
+          <span class="lable-text">订单编号：{{item.taskCode}}</span>
+          <span class="time-text">发布时间：{{item.createTime}}</span>
         </section>
         <section class="content-info">
           <section class="product-info">
-            <img class="product-img" src="/" alt="/">
+            <img class="product-img" [src]="item.image" alt="/">
             <section class="product-intro">
-              <span class="label-text">商品标题</span>
-              <span class="label-text">掌柜号</span>
-              <span class="label-text">店铺名</span>
+              <span class="label-text">{{item.title}}</span>
+              <span class="label-text">{{item.shopTitle}}</span>
+              <span class="label-text">{{item.shopTitle}}</span>
             </section>
           </section>
           <section class="task-intro">
-            <span class="label-text">任务金额：￥1000.00</span>
+            <span class="label-text">任务金额：￥{{item.unitPrice}}</span>
             <!-- <span class="label-text">收货时限：物流显示签收好评</span> -->
             <!-- <span class="label-text">任务要求：货比  收藏  男性账号</span> -->
           </section>
-          <section class="task-status">
-            <span class="status-text">待审核</span>
+          <section class="task-status" [ngSwitch]="item.status">
+            <span class="status-text" *ngSwitchCase="0">创建中</span>
+            <span class="status-text" *ngSwitchCase="1">待审核</span>
+            <span class="status-text" *ngSwitchCase="2">审核成功</span>
+            <span class="status-text" *ngSwitchCase="3">审核失败</span>
+            <span class="status-text" *ngSwitchCase="4">进行中</span>
+            <span class="status-text" *ngSwitchCase="5">已完成</span>
+            <span class="status-text" *ngSwitchCase="6">已锁定</span>
           </section>
           <section class="task-handler">
             <button class="handler-btn" nz-button nzType="text">核对订单</button>
-            <button class="handler-btn" nz-button nzType="text" (click)="openOrderDetail()">详情</button>
+            <button class="handler-btn" nz-button nzType="text" (click)="openOrderDetail(item)">详情</button>
             <!-- <button class="handler-btn" nz-button nzType="text">下架</button> -->
           </section>
         </section>
         <section class="footer-info">
-          <span class="lable-text">任务编号：232030232385143</span>
+          <span class="lable-text">任务编号：{{item.id}}</span>
         </section>
       </section>
     </section>

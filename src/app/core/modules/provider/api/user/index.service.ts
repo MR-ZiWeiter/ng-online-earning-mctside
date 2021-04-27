@@ -47,4 +47,15 @@ export class ApiUserIndexService {
     });
   }
 
+  /* 获取统计信息 */
+  asyncFetchUserCount(info: any = {}): Observable<any> {
+    return new Observable(observer => {
+      this.http.get('/business/account-privacy/count', info).subscribe((res: ApiResponseModel) => {
+        observer.next(res);
+      }, err => {
+        observer.error(false);
+      });
+    });
+  }
+
 }

@@ -10,19 +10,20 @@
                 <nz-option *ngFor="let item of tempDictArray" [nzLabel]="item.title" [nzValue]="item.id"></nz-option>
               </nz-select>
             </nz-form-control>
-            <button nz-button color="primary" nzType="text">模板管理</button>
+            <button nz-button color="primary" nzType="text" type="button" routerLink="/main/task/task-template">模板管理</button>
           </nz-form-item>
         </section>
       </section>
     </swipe-step1>
     <swipe-step2 formControlName="step2"></swipe-step2>
     <swipe-step3 formControlName="step3" [renderInfo]="taskTemp.task1"></swipe-step3>
-    <swipe-step4 [renderInfo]="taskTemp.task2"></swipe-step4>
-    <swipe-step5 [renderInfo]="taskTemp.task3"></swipe-step5>
-    <swipe-step6></swipe-step6>
+    <swipe-step4 formControlName="step4" [renderInfo]="taskTemp.task2"></swipe-step4>
+    <swipe-step5 formControlName="step5" [renderInfo]="taskTemp.task3"></swipe-step5>
+    <swipe-step6 formControlName="step6"></swipe-step6>
     <footer class="btn-controll" nz-row nzJustify="center">
       <button class="custom-btn-sty" type="submit" nz-button color="primary" nzType="primary">提交</button>
-      <button class="custom-btn-sty" nz-button nzType="default">重置</button>
+      <button class="custom-btn-sty" type="reset" nz-button nzType="default" (click)="openResetForm()">重置</button>
     </footer>
   </form>
+  <swipe-task-window class="task-window" [renderInfo]="validateForm.value"></swipe-task-window>
 </section>

@@ -1,0 +1,74 @@
+@import 'mixin';
+.task-window-component {
+  @include wh(format(260), auto);
+  @include flex-justify-align(flex-start, center);
+  flex-direction: column;
+  background-color: $default_color;
+  border: format(1) solid #E4E7ED;
+  box-shadow: 0 format(4) format(24) rgba(0, 0, 0, 0.06);
+  opacity: 1;
+  border-radius: format(8);
+  .header-info {
+    @include wh(100%, format(46));
+    @include flex-justify-align(center);
+    @include sc(format(16), $default_color_6);
+    font-weight: 500;
+    border-bottom: format(1) solid $default_border_color;
+  }
+  .context-info {
+    @include wh(100%, auto);
+    @include flex-justify-align(flex-start, center);
+    flex-direction: column;
+    padding: format(15) 0;
+    position: relative;
+    flex: 1;
+    &::after {
+      content: '';
+      @include wh(format(204), 0);
+      border-bottom: format(1) dashed $default_border_color;
+      position: absolute;
+      bottom: 0;
+    }
+    .label-info {
+      @include wh(100%, format(30));
+      @include flex-justify-align(flex-start, center);
+      .label-text {
+        @include wh(format(135), auto);
+        @include sc(format(14), $default_color_9);
+        text-align: right;
+      }
+      .value-text {
+        @include sc(format(14), $bgColorBtn);
+        font-weight: 400;
+      }
+    }
+  }
+  .task-num {
+    @include wh(100%, format(38));
+    @include sc(format(14), $default_color_6);
+    @include flex-justify-align(flex-start, center);
+    .label-info {
+      @include wh(100%, format(30));
+      @include flex-justify-align(flex-start, center);
+      .label-text {
+        @include wh(format(135), auto);
+        @include sc(format(14), $default_color_9);
+        text-align: right;
+      }
+      .value-text {
+        @include sc(format(14), $bgColorBtn);
+        font-weight: 400;
+      }
+    }
+  }
+  .view-btn {
+    @include wh(100%, auto);
+    @include flex-justify-align(center);
+    padding-bottom: format(26);
+    margin-top: format(10);
+    .count-btn {
+      @include wh(format(204), format(40));
+      border-radius: format(8);
+    }
+  }
+}

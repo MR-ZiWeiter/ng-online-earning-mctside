@@ -11,7 +11,7 @@
             <nz-form-item>
               <nz-form-label [nzSm]="5" [nzXs]="24" nzRequired nzFor="platformId">所属平台</nz-form-label>
               <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请选择任务平台">
-                <nz-select nz-col nzSpan="24" nzShowSearch nzAllowClear id="platformId" nzPlaceHolder="请选择所属平台" formControlName="platformId">
+                <nz-select nz-col nzSpan="24" nzShowSearch nzAllowClear id="platformId" nzPlaceHolder="请选择所属平台" formControlName="platformId" (ngModelChange)="platformChange($event)">
                   <nz-option *ngFor="let item of packgeConfig.platform" [nzLabel]="item.title" [nzValue]="item.id"></nz-option>
                 </nz-select>
               </nz-form-control>
@@ -41,7 +41,7 @@
                   <nz-option *ngFor="let option of packgeConfig.shop" [nzLabel]="option.title" [nzValue]="option.id" [nzDisabled]="option.status === 2"></nz-option>
                 </nz-select>
               </nz-form-control>
-              <button nz-button color="primary" nzType="text">绑定店铺</button>
+              <button type="button" nz-button color="primary" nzType="text" routerLink="/main/task/bound-shop">绑定店铺</button>
             </nz-form-item>
           </section>
         </section>

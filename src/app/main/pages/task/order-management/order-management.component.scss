@@ -41,6 +41,7 @@
     .context-list {
       .task-carc-info {
         border: format(1) solid $default_color_11;
+        margin-bottom: format(15);
         .header-info,
         .footer-info {
           @include wh(auto, format(45));

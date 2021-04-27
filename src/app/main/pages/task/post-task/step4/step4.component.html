@@ -12,8 +12,8 @@
                 <nz-form-item>
                   <nz-form-label [nzSm]="5" nzRequired [nzFor]="'select-input-' + keyIndex">{{item.value.title}}</nz-form-label>
                   <nz-form-control [nzSm]="6" [nzXs]="10" [nzErrorTip]="'请输入' + item.title">
-                    <nz-select nz-col nzSpan="24" nzShowSearch nzAllowClear formControlName="selected" [id]="'select-input-' + keyIndex" nzPlaceHolder="不要求">
-                      <nz-option *ngFor="let option of item.value.requiresRuleItemVos" [nzLabel]="option.title" [nzValue]="option.sort"></nz-option>
+                    <nz-select nz-col nzSpan="24" nzShowSearch nzAllowClear formControlName="selectedItemId" [id]="'select-input-' + keyIndex" nzPlaceHolder="不要求">
+                      <nz-option *ngFor="let option of item.value.requiresRuleItemVos" [nzLabel]="option.title" [nzValue]="option.id"></nz-option>
                     </nz-select>
                   </nz-form-control>
                   <button nz-button disabled nzType="text">{{item.value.description}}</button>
@@ -27,8 +27,8 @@
                 <nz-form-item>
                   <nz-form-label [nzSm]="5" [nzFor]="'radio-input-' + keyIndex" nzRequired>{{item.value.title}}</nz-form-label>
                   <nz-form-control [nzSm]="item.value.requiresRuleItemVos.length < 5 ? item.value.requiresRuleItemVos.length * 2 + 2 : 19">
-                    <nz-radio-group class="custom-check-radio-group" [id]="'radio-input-' + keyIndex" formControlName="selected" (ngModelChange)="handlerRadioChange(item.value, keyIndex, $event)">
-                      <label *ngFor="let option of item.value.requiresRuleItemVos" class="min-check-radio" nz-radio [nzValue]="option.sort">{{option.title}}</label>
+                    <nz-radio-group class="custom-check-radio-group" [id]="'radio-input-' + keyIndex" formControlName="selectedItemId" (ngModelChange)="handlerRadioChange(item.value, keyIndex, $event)">
+                      <label *ngFor="let option of item.value.requiresRuleItemVos" class="min-check-radio" nz-radio [nzValue]="option.id">{{option.title}}</label>
                     </nz-radio-group>
                   </nz-form-control>
                   <button nz-button disabled nzType="text">{{item.value.description}}</button>
@@ -64,48 +64,50 @@
                 </section>
               </ng-container>
             </ng-container>
-            <!-- 副产品 -->
-            <ng-container *ngIf="(item.value.code === 'WITH_GOODS') && (item.value.selected === 2)">
-              <ng-container formArrayName="taskSubjoinMatterForms">
-                <ng-container *ngFor="let subItem of item.get('taskSubjoinMatterForms').controls; let subKeyIndex = index;">
-                  <section nz-row [formGroupName]="subKeyIndex">
-                    <section nz-col [nzSpan]="24">
-                      <nz-form-item>
-                        <nz-form-label [nzSm]="5" [nzXs]="12" nzFor="keyword" nzRequired>链接地址{{subItem.value.sort}}</nz-form-label>
-                        <nz-form-control
-                          [nzSm]="5"
-                          [nzXs]="6"
-                          nzErrorTip="请输入商品链接">
-                          <input nz-input id="keyword"  placeholder="请输入商品链接" />
-                        </nz-form-control>
-                        <nz-form-control
-                          class="min-offset-left"
-                          [nzSm]="5"
-                          [nzXs]="6"
-                          nzErrorTip="请输入商品标题">
-                          <input nz-input type="number" placeholder="请输入商品标题" />
-                        </nz-form-control>
-                        <nz-form-control
-                          class="min-offset-left"
-                          [nzSm]="3"
-                          [nzXs]="4"
-                          nzErrorTip="请输入商品价格">
-                          <input nz-input type="number" placeholder="价格" />
-                        </nz-form-control>
-                        <button nz-button class="min-offset-left">增加</button>
-                      </nz-form-item>
+            <!-- 副产品 模板4 -->
+            <ng-container *ngIf="resultCheckRadioContext(item.value).modelType === 4">
+              <ng-container formGroupName="requiresSuboptionForm">
+                <ng-container formArrayName="suboption">
+                  <ng-container *ngFor="let subItem of item.get('requiresSuboptionForm.suboption').controls; let subKeyIndex = index;">
+                    <section nz-row [formGroupName]="subKeyIndex">
+                      <section nz-col [nzSpan]="24">
+                        <nz-form-item>
+                          <nz-form-label [nzSm]="5" [nzXs]="12" nzFor="url" nzRequired>链接地址{{subItem.value.sort}}</nz-form-label>
+                          <nz-form-control
+                            [nzSm]="5"
+                            [nzXs]="6"
+                            nzErrorTip="请输入商品链接">
+                            <input nz-input id="url" formControlName="url" placeholder="请输入商品链接" />
+                          </nz-form-control>
+                          <nz-form-control
+                            class="min-offset-left"
+                            [nzSm]="5"
+                            [nzXs]="6"
+                            nzErrorTip="请输入商品标题">
+                            <input nz-input type="string" formControlName="title" placeholder="请输入商品标题" />
+                          </nz-form-control>
+                          <nz-form-control
+                            class="min-offset-left"
+                            [nzSm]="3"
+                            [nzXs]="4"
+                            nzErrorTip="请输入商品价格">
+                            <input nz-input type="number" formControlName="unitPrice" placeholder="价格" />
+                          </nz-form-control>
+                          <button nz-button class="min-offset-left">增加</button>
+                        </nz-form-item>
+                      </section>
                     </section>
-                  </section>
-                  <section nz-row>
-                    <section nz-col [nzSpan]="24">
-                      <nz-form-item>
-                        <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="norm">副商品图片</nz-form-label>
-                        <nz-form-control [nzSm]="14" [nzXs]="24">
-                          <swipe-upload></swipe-upload>
-                        </nz-form-control>
-                      </nz-form-item>
+                    <section nz-row>
+                      <section nz-col [nzSpan]="24" [formGroupName]="subKeyIndex">
+                        <nz-form-item>
+                          <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="norm">副商品图片</nz-form-label>
+                          <nz-form-control [nzSm]="14" [nzXs]="24">
+                            <swipe-upload formControlName="image"></swipe-upload>
+                          </nz-form-control>
+                        </nz-form-item>
+                      </section>
                     </section>
-                  </section>
+                  </ng-container>
                 </ng-container>
               </ng-container>
             </ng-container>

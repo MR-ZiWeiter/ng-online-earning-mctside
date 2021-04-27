@@ -1,6 +1,8 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzTableQueryParams } from 'ng-zorro-antd/table';
+import { ApiTaskIndexService } from 'src/app/core/modules/provider/api';
 import { OrderInfoComponent } from './order-info/order-info.component';
 
 @Component({
@@ -12,32 +14,60 @@ export class OrderManagementComponent implements OnInit {
 
   public validateForm!: FormGroup;
 
+  public renderConfig: any = {
+    pageNum: 1,
+    pageSize: 20,
+    total: 0,
+    loading: true
+  }
+
+  public renderArray: any[] = [];
+
   constructor(
     private fb: FormBuilder,
-    private nzModalService: NzModalService
+    private nzModalService: NzModalService,
+    private apiTaskIndexService: ApiTaskIndexService,
   ) {}
 
-  submitForm(): void {
+  public fetchOrderList() {
+    this.renderConfig.loading = true;
+    this.apiTaskIndexService.asyncFetchOrderList({
+      ...this.renderConfig,
+      ...this.validateForm.value
+    }).subscribe(res => {
+      this.renderArray = res.rel.list;
+      this.renderConfig.total = res.rel.count;
+      this.renderConfig.loading = false;
+    })
+  }
+
+  public submitForm(): void {
     for (const i in this.validateForm.controls) {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
     }
+    this.fetchOrderList();
   }
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
-      taskType: [null, [Validators.required]]
+      checkType: [1],
+      checkValue: [''],
     });
+    this.fetchOrderList();
   }
 
   /* 打开详情弹窗 */
-  public openOrderDetail() {
+  public openOrderDetail(renderInfo: any) {
     this.nzModalService.create({
       nzContent: OrderInfoComponent,
       nzTitle: '订单详情',
       nzOkDisabled: true,
       nzCancelDisabled: true,
       nzFooter: null,
+      nzComponentParams: {
+        renderInfo
+      },
       nzOnCancel: (e: any) => {
         console.log(e)
       },

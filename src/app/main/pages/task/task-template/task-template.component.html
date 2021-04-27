@@ -12,22 +12,30 @@
         <nz-form-item>
           <nz-form-label>任务搜索</nz-form-label>
           <nz-form-control class="custom-search-group" [nzSm]="21" [nzXs]="24">
-            <nz-select class="custom-select-input" formControlName="taskType">
-              <nz-option [nzLabel]="'任务编号'" [nzValue]="1"></nz-option>
-              <nz-option [nzLabel]="'任务金额'" [nzValue]="2"></nz-option>
+            <nz-select class="custom-select-input" formControlName="platformId">
+              <nz-option [nzLabel]="option.title" [nzValue]="option.id" *ngFor="let option of platformConfig"></nz-option>
             </nz-select>
             <nz-input-group nzSearch [nzAddOnAfter]="addOnAfterTemplate">
-              <input type="text" class="custom-search-input" nz-input placeholder="请输入相关信息" />
+              <input type="text" class="custom-search-input" nz-input formControlName="templateTitle" placeholder="请输入相关信息" />
             </nz-input-group>
             <ng-template #addOnAfterTemplate>
-              <button nz-button nzType="primary" nzSearch>搜索</button>
+              <button nz-button nzType="primary" type="submit" nzSearch>搜索</button>
             </ng-template>
           </nz-form-control>
         </nz-form-item>
       </form>
     </section>
     <section class="context-list">
-      <nz-table #borderedTable nzBordered [nzData]="renderInfoArray">
+      <nz-table
+        #borderedTable
+        nzBordered
+        [nzLoading]="renderConfig.loading"
+        [nzTotal]="renderConfig.total"
+        [nzPageSize]="renderConfig.pageSize"
+        [nzPageIndex]="renderConfig.pageNum"
+        nzBordered
+        (nzQueryParams)="onQueryParamsChange($event)"
+        [nzData]="renderInfoArray">
         <thead>
           <tr>
             <th>序号</th>

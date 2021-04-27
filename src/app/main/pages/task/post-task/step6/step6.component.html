@@ -9,7 +9,7 @@
           <nz-form-item nz-row>
             <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="saveTemplate" nzRequired>将本次任务存为模板</nz-form-label>
             <nz-form-control [nzSm]="5" [nzXs]="24">
-              <nz-radio-group class="custom-check-radio-group" id="saveTemplate" formControlName="saveTemplate">
+              <nz-radio-group class="custom-check-radio-group" id="saveTemplate" formControlName="saveTemplate" (ngModelChange)="tempChnage($event)">
                 <label class="min-check-radio" nz-radio [nzValue]="0">不启用</label>
                 <label class="min-check-radio" nz-radio [nzValue]="1">启用</label>
               </nz-radio-group>

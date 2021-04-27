@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "~11.2.5",
     "@angular/router": "~11.2.5",
     "lottie-web": "^5.7.6",
+    "mqtt": "^4.2.6",
     "ng-zorro-antd": "^11.2.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

@@ -15,47 +15,6 @@ export class FundingDetailsComponent implements OnInit {
 
   public validateForm!: FormGroup;
 
-  // private format?: any = format;
-
-  public dataSet = [
-    {
-      time: '1977/02/11 13:25:56',
-      countIn: '724750',
-      countOut: '17279948119',
-      intro: '司马余强',
-      cover: '123456',
-      code: '055804',
-      remark: '湖南省'
-    },
-    {
-      time: '1977/02/11 13:25:56',
-      countIn: '724750',
-      countOut: '17279948119',
-      intro: '司马余强',
-      cover: '123456',
-      code: '055804',
-      remark: '湖南省'
-    },
-    {
-      time: '1977/02/11 13:25:56',
-      countIn: '724750',
-      countOut: '17279948119',
-      intro: '司马余强',
-      cover: '123456',
-      code: '055804',
-      remark: '湖南省'
-    },
-    {
-      time: '1977/02/11 13:25:56',
-      countIn: '724750',
-      countOut: '17279948119',
-      intro: '司马余强',
-      cover: '123456',
-      code: '055804',
-      remark: '湖南省'
-    }
-  ];
-
   public renderConfig: any = {
     pageNum: 1,
     pageSize: 20,
@@ -66,8 +25,8 @@ export class FundingDetailsComponent implements OnInit {
   public renderArray: any[] = [];
 
   constructor(
-    private datePipe: DatePipe,
     private fb: FormBuilder,
+    private datePipe: DatePipe,
     private apiFinancialService: ApiFinancialService
   ) {}
 

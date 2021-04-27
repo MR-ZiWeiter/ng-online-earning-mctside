@@ -65,6 +65,19 @@ export class Step3Component extends CoreToolsFunction implements OnInit, Control
   /* 实现表单校验规则 */
   writeValue(obj: any): void {
     this.value = obj;
+    /* 数据回填 */
+    if (obj) {
+      /* 处理默认表单回填 */
+      this.resultFormInitel(this.validateForm, obj);
+      /* 处理特殊未双向绑定数据 */
+      const checkedCode = this.validateForm.value.labels;
+      this.shopLabels = this.shopLabels.map((label: any) => {
+        if (checkedCode.includes(label.code)) {
+          label.checked = true;
+        }
+        return label
+      })
+    }
   }
   registerOnChange(fn: any): void {
     this.valueChange = fn;
@@ -94,34 +107,40 @@ export class Step3Component extends CoreToolsFunction implements OnInit, Control
   private newFormGroupValidate(renderArray: any[]) {
     const formArray: FormArray = this.fb.array([]);
     renderArray.map(group => {
-      // console.log(group);
       /* 初始化副表单组 */
-      let deputyOptions = this.fb.group({});
+      let deputyOptions: {[x: string]: any}|null = null;
       /* 判断是否存在副选项 */
       if (group.deputyOptions) {
-        deputyOptions = this.fb.group(this.resultChildOptionFormGroup(null, group.deputyOptions.code, null));
+        deputyOptions = this.resultChildOptionFormGroup(null, group.deputyOptions.code, null, group.deputyOptions.tagType);
       }
       /* 定义默认值 */
-      const defaultSelectInputValue = (group.tagType === 2 || group.tagType === 3) ? 1 : null;
-      // this.autoGenerateFormGroupCheck(group);
-      // console.log(this.autoGenerateFormGroupCheck(group))
+      let defaultSelectInputValue: number|string|null|any;
+      if (group.tagType === 2 || group.tagType === 3) {
+        if (group.requiresRuleItemVos.length) {
+          defaultSelectInputValue = group.requiresRuleItemVos[0].id;
+        } else {
+          defaultSelectInputValue = null;
+        }
+      }
       const defaultFormGroup: FormGroup|any = this.autoGenerateFormGroupCheck(group);
       /* 自动生成默认数据校验表单 */
-      const newSubmitFormObject: {[x: string]: any} = this.resultChildOptionFormGroup(null, group.code, defaultSelectInputValue);
+      const newSubmitFormObject: {[x: string]: any} = this.resultChildOptionFormGroup(null, group.code, defaultSelectInputValue, group.tagType);
       /* 添加其他自定义表单数据 */
-      defaultFormGroup.addControl('deputyOptions', deputyOptions);
+      for (const key in deputyOptions) {
+        defaultFormGroup.get('deputyOptions').addControl(key, deputyOptions[key]);
+      }
+      // defaultFormGroup.addControl('deputyOptions', deputyOptions);
       /* 添加默认数据表单到FormGroup */
       for (const key in newSubmitFormObject) {
         defaultFormGroup.addControl(key, newSubmitFormObject[key]);
       }
-      // console.log(defaultFormGroup)
       /* 添加控件到数组 */
       formArray.push(defaultFormGroup);
     })
+    // console.log(this.validateForm)
     if (this.validateForm) {
       this.validateForm.addControl('requiresForms', formArray);
     }
-    // console.log(this.validateForm)
   }
 
   /* 自动生成对应类型的表单校验规则 */
@@ -146,17 +165,33 @@ export class Step3Component extends CoreToolsFunction implements OnInit, Control
   }
 
   /* 返回动态表单子数据 */
-  private resultChildOptionFormGroup(i: any, c: string, s: any) {
-    return {
-      inputVal: new FormControl(i, [Validators.required]),
-      ruleCode: new FormControl(c, [Validators.required]),
-      selected: new FormControl(s, [Validators.required])
+  private resultChildOptionFormGroup(i: any, c: string, s: any, type: number = 1) {
+    switch(type) {
+      case 1:
+        return {
+          inputVal: new FormControl(i, [Validators.required]),
+          ruleCode: new FormControl(c, [Validators.required])
+        }
+      case 2:
+      case 3:
+      case 4:
+        return {
+          ruleCode: new FormControl(c, [Validators.required]),
+          selectedItemId: new FormControl(s, [Validators.required])
+        }
+      default:
+        return {
+          inputVal: new FormControl(i, [Validators.required]),
+          ruleCode: new FormControl(c, [Validators.required]),
+          selectedItemId: new FormControl(s, [Validators.required])
+        }
     }
+
   }
 
   /* 复选框回调 */
   public checkBoxChange(renderArray: string[]) {
-    this.validateForm.controls['labels'].setValue(renderArray.join(','));
+    this.validateForm.controls['labels'].setValue(renderArray);
   }
 
   /**
@@ -177,6 +212,7 @@ export class Step3Component extends CoreToolsFunction implements OnInit, Control
 
   /* 数据提交到父组件 */
   private submitChange(): void {
+    // console.log(this.validateForm)
     this.renderForm.emit(this.validateForm);
     this.valueChange(this.validateForm.value);
   }
