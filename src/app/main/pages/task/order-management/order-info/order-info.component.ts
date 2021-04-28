@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ApiTaskIndexService } from 'src/app/core/modules/provider/api';
 
 @Component({
   selector: 'swipe-order-info',
@@ -7,11 +8,31 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class OrderInfoComponent implements OnInit {
 
-  @Input() public renderInfo?: any;
+  public orderInfo: any = null;
 
-  constructor() { }
+  private _renderInfo: any = {};
 
-  ngOnInit() {
+  @Input()
+  public set renderInfo(n: any) {
+    this._renderInfo = n;
+    if (n) {
+      this.initalOrderInfo(n.id);
+    }
+  }
+  public get renderInfo() {
+    return this._renderInfo;
+  }
+
+  constructor(
+    private apiTaskIndexService: ApiTaskIndexService
+  ) { }
+
+  ngOnInit() {}
+
+  private initalOrderInfo(taskId: string) {
+    this.apiTaskIndexService.asyncFetchOrderDetail({taskId}).subscribe(res => {
+      this.orderInfo = res.rel;
+    })
   }
 
 }

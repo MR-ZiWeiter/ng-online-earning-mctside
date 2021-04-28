@@ -1,12 +1,12 @@
-<section class="order-info-component">
+<section class="order-info-component" *ngIf="orderInfo">
   <section class="context-group">
     <section class="label-item" nz-row [nzGutter]="[10, 10]">
       <span class="label-text" nz-col [nzSpan]="8">买家下单的订单号：</span>
-      <span class="value-text" nz-col [nzSpan]="16">2515645656456556</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.orderNo}}</span>
     </section>
     <section class="label-item" nz-row [nzGutter]="[10, 10]">
       <span class="label-text" nz-col [nzSpan]="8">买家下单的实付金额：</span>
-      <span class="value-text" nz-col [nzSpan]="16">1563元</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.paidAmount}}元</span>
     </section>
   </section>
   <!-- 标题 -->
@@ -16,35 +16,35 @@
   <section class="context-group">
     <section class="label-item" nz-row [nzGutter]="[10, 10]">
       <span class="label-text" nz-col [nzSpan]="8">任务编号：</span>
-      <span class="value-text" nz-col [nzSpan]="16">251059021282402</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.taskCode}}</span>
     </section>
     <section class="label-item" nz-row [nzGutter]="[10, 10]">
       <span class="label-text" nz-col [nzSpan]="8">任务平台：</span>
-      <span class="value-text" nz-col [nzSpan]="16">天猫</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.platformTitle}}</span>
     </section>
     <section class="label-item" nz-row [nzGutter]="[10, 10]">
       <span class="label-text" nz-col [nzSpan]="8">是否截图：</span>
-      <span class="value-text" nz-col [nzSpan]="16">否</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.s}}</span>
     </section>
     <section class="label-item" nz-row [nzGutter]="[10, 10]">
       <span class="label-text" nz-col [nzSpan]="8">掌柜名称：</span>
-      <span class="value-text" nz-col [nzSpan]="16">落日楼台一笛雨</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.shopTitle}}</span>
     </section>
     <section class="label-item" nz-row [nzGutter]="[10, 10]">
       <span class="label-text" nz-col [nzSpan]="8">商品标题：</span>
-      <span class="value-text" nz-col [nzSpan]="16">一键装机</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.goodsVo.title}}</span>
     </section>
     <section class="label-item" nz-row [nzGutter]="[10, 10]">
       <span class="label-text" nz-col [nzSpan]="8">商品地址： </span>
-      <span class="value-text" nz-col [nzSpan]="16">https://lanhuapp.com/</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.goodsVo.url}}</span>
     </section>
     <section class="label-item" nz-row [nzGutter]="[10, 10]">
       <span class="label-text" nz-col [nzSpan]="8">商品规格：</span>
-      <span class="value-text" nz-col [nzSpan]="16">1台</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.goodsVo.spec}}</span>
     </section>
     <section class="label-item" nz-row [nzGutter]="[10, 10]">
       <span class="label-text" nz-col [nzSpan]="8">商品图片：</span>
-      <span class="value-text" nz-col [nzSpan]="16">1563元</span>
+      <swipe-upload [isReady]="true" [ngModel]="orderInfo.goodsVo.image"></swipe-upload>
     </section>
   </section>
   <!-- 副标题 -->
@@ -54,27 +54,27 @@
   <section class="context-group">
     <section class="label-item" nz-row [nzGutter]="[10, 10]">
       <span class="label-text" nz-col [nzSpan]="8">商品价格：</span>
-      <span class="value-text" nz-col [nzSpan]="16">100.00元</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.goodsVo.unitPrice}}元</span>
     </section>
     <section class="label-item" nz-row [nzGutter]="[10, 10]">
       <span class="label-text" nz-col [nzSpan]="8">每单拍：</span>
-      <span class="value-text" nz-col [nzSpan]="16">1件</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.goodsVo.quantity}}件</span>
     </section>
     <section class="label-item" nz-row [nzGutter]="[10, 10]">
       <span class="label-text" nz-col [nzSpan]="8">基础服务费：</span>
-      <span class="value-text" nz-col [nzSpan]="16">10.00元</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.businessCapitalVo.baseCapital}}元</span>
     </section>
     <section class="label-item" nz-row [nzGutter]="[10, 10]">
       <span class="label-text" nz-col [nzSpan]="8">增值服务：</span>
-      <span class="value-text" nz-col [nzSpan]="16">15</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.businessCapitalVo.additionalCapital}}元</span>
     </section>
     <section class="label-item" nz-row [nzGutter]="[10, 10]">
       <span class="label-text" nz-col [nzSpan]="8">追加奖励：</span>
-      <span class="value-text" nz-col [nzSpan]="16">10元</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.businessCapitalVo.unitPrice}}元</span>
     </section>
     <section class="label-item" nz-row [nzGutter]="[10, 10]">
       <span class="label-text" nz-col [nzSpan]="8">总金额： </span>
-      <span class="value-text" nz-col [nzSpan]="16">135.00元</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.businessCapitalVo.commission}}元</span>
     </section>
   </section>
   <!-- 标题 -->
@@ -82,13 +82,25 @@
     <span class="title-text">二、进店方式</span>
   </section>
   <section class="context-group">
-    <section class="label-item" nz-row [nzGutter]="[10, 10]">
+    <section class="label-item" nz-row [nzGutter]="[10, 10]" [ngSwitch]="orderInfo.placeType">
       <span class="label-text" nz-col [nzSpan]="8">进店方式：</span>
-      <span class="value-text" nz-col [nzSpan]="16">搜索关键字</span>
+      <span class="value-text" nz-col [nzSpan]="16" *ngSwitchCase="1">搜索关键词</span>
+      <span class="value-text" nz-col [nzSpan]="16" *ngSwitchCase="2">搜索店铺名进店</span>
+      <span class="value-text" nz-col [nzSpan]="16" *ngSwitchCase="3">直通车</span>
+      <span class="value-text" nz-col [nzSpan]="16" *ngSwitchCase="4">直接打开网址</span>
+      <span class="value-text" nz-col [nzSpan]="16" *ngSwitchCase="5">淘口令</span>
+      <span class="value-text" nz-col [nzSpan]="16" *ngSwitchCase="6">二维码</span>
+      <span class="value-text" nz-col [nzSpan]="16" *ngSwitchCase="7">其他渠道</span>
     </section>
-    <section class="label-item" nz-row [nzGutter]="[10, 10]">
-      <span class="label-text" nz-col [nzSpan]="8">关键字：</span>
-      <span class="value-text" nz-col [nzSpan]="16">相机</span>
+    <section class="label-item" nz-row [nzGutter]="[10, 10]" *ngFor="let keys of orderInfo.keywordsVos">
+      <ng-container *ngIf="keys.contentType === 1; else imageTemp">
+        <span class="label-text" nz-col [nzSpan]="8">关键字：</span>
+        <span class="value-text" nz-col [nzSpan]="16">{{keys.content}}</span>
+      </ng-container>
+      <ng-template #imageTemp>
+        <span class="label-text" nz-col [nzSpan]="8">图片</span>
+        <swipe-upload [ngModel]="keys.content"></swipe-upload>
+      </ng-template>
     </section>
   </section>
   <!-- 标题 -->
@@ -96,103 +108,49 @@
     <span class="title-text">三、千人千面</span>
   </section>
   <section class="context-group">
-    <section class="label-item" nz-row [nzGutter]="[10, 10]">
-      <span class="label-text" nz-col [nzSpan]="8">买号信誉：</span>
-      <span class="value-text" nz-col [nzSpan]="16">不要求</span>
-    </section>
-    <section class="label-item" nz-row [nzGutter]="[10, 10]">
-      <span class="label-text" nz-col [nzSpan]="8">买号自动打标：</span>
-      <span class="value-text" nz-col [nzSpan]="16">不要求</span>
-    </section>
-    <section class="label-item" nz-row [nzGutter]="[10, 10]">
-      <span class="label-text" nz-col [nzSpan]="8">要求收藏店铺：</span>
-      <span class="value-text" nz-col [nzSpan]="16">不要求</span>
-    </section>
-    <section class="label-item" nz-row [nzGutter]="[10, 10]">
-      <span class="label-text" nz-col [nzSpan]="8">要求收藏加购：</span>
-      <span class="value-text" nz-col [nzSpan]="16">不要求</span>
-    </section>
-    <section class="label-item" nz-row [nzGutter]="[10, 10]">
-      <span class="label-text" nz-col [nzSpan]="8">要求和客服聊天：</span>
-      <span class="value-text" nz-col [nzSpan]="16">不要求</span>
-    </section>
-    <section class="label-item" nz-row [nzGutter]="[10, 10]">
-      <span class="label-text" nz-col [nzSpan]="8">要求买号性别：</span>
-      <span class="value-text" nz-col [nzSpan]="16">女</span>
-    </section>
-    <section class="label-item" nz-row [nzGutter]="[10, 10]">
-      <span class="label-text" nz-col [nzSpan]="8">要求买号年龄：</span>
-      <span class="value-text" nz-col [nzSpan]="16">26-32岁</span>
-    </section>
-    <section class="label-item" nz-row [nzGutter]="[10, 10]">
-      <span class="label-text" nz-col [nzSpan]="8">要求付款方式：</span>
-      <span class="value-text" nz-col [nzSpan]="16">不要求</span>
-    </section>
-    <section class="label-item" nz-row [nzGutter]="[10, 10]">
-      <span class="label-text" nz-col [nzSpan]="8">买号常用购物标签：</span>
-      <span class="value-text" nz-col [nzSpan]="16">女装内衣</span>
-    </section>
+    <ng-container *ngFor="let keys of orderInfo.requiresVos">
+      <section class="label-item" nz-row [nzGutter]="[10, 10]" *ngIf="(keys.userMatch)">
+        <span class="label-text" nz-col [nzSpan]="8">买号信誉：</span>
+        <span class="value-text" nz-col [nzSpan]="16">{{keys.selected}}</span>
+      </section>
+    </ng-container>
   </section>
   <!-- 标题 -->
   <section class="title-info">
     <span class="title-text">四、增值服务</span>
   </section>
   <section class="context-group">
-    <section class="label-item" nz-row [nzGutter]="[10, 10]">
-      <span class="label-text" nz-col [nzSpan]="8">好评方式：</span>
-      <span class="value-text" nz-col [nzSpan]="16">不要求</span>
-    </section>
-    <section class="label-item" nz-row [nzGutter]="[10, 10]">
-      <span class="label-text" nz-col [nzSpan]="8">追评方式：</span>
-      <span class="value-text" nz-col [nzSpan]="16">不要求</span>
-    </section>
-    <section class="label-item" nz-row [nzGutter]="[10, 10]">
-      <span class="label-text" nz-col [nzSpan]="8">货比数量：</span>
-      <span class="value-text" nz-col [nzSpan]="16">不要求</span>
-    </section>
-    <section class="label-item" nz-row [nzGutter]="[10, 10]">
-      <span class="label-text" nz-col [nzSpan]="8">浏览商品数量：</span>
-      <span class="value-text" nz-col [nzSpan]="16">要求</span>
-    </section>
-    <section class="label-item" nz-row [nzGutter]="[10, 10]">
-      <span class="label-text" nz-col [nzSpan]="8">搭配商品：</span>
-      <span class="value-text" nz-col [nzSpan]="16">要求</span>
-    </section>
-    <section class="label-item" nz-row [nzGutter]="[10, 10]">
-      <span class="label-text" nz-col [nzSpan]="8">延迟购买时间：</span>
-      <span class="value-text" nz-col [nzSpan]="16">女</span>
-    </section>
-    <section class="label-item" nz-row [nzGutter]="[10, 10]">
-      <span class="label-text" nz-col [nzSpan]="8">追加奖励：</span>
-      <span class="value-text" nz-col [nzSpan]="16">26-32岁</span>
-    </section>
-    <section class="label-item" nz-row [nzGutter]="[10, 10]">
-      <span class="label-text" nz-col [nzSpan]="8">定时发布：</span>
-      <span class="value-text" nz-col [nzSpan]="16">不要求</span>
-    </section>
-    <section class="label-item" nz-row [nzGutter]="[10, 10]">
-      <span class="label-text" nz-col [nzSpan]="8">留言提醒：</span>
-      <span class="value-text" nz-col [nzSpan]="16">服务很好</span>
-    </section>
+    <ng-container *ngFor="let keys of orderInfo.requiresVos">
+      <section class="label-item" nz-row [nzGutter]="[10, 10]" *ngIf="!(keys.userMatch)">
+        <span class="label-text" nz-col [nzSpan]="8">买号信誉：</span>
+        <span class="value-text" nz-col [nzSpan]="16">{{keys.selected}}</span>
+      </section>
+    </ng-container>
     <section class="label-item" nz-row [nzGutter]="[10, 10]">
       <span class="label-text" nz-col [nzSpan]="8">任务发布时间：</span>
-      <span class="value-text" nz-col [nzSpan]="16">2021/2/19 13:13:18</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.pushTime}}</span>
     </section>
     <section class="label-item" nz-row [nzGutter]="[10, 10]">
       <span class="label-text" nz-col [nzSpan]="8">任务接手时间：</span>
-      <span class="value-text" nz-col [nzSpan]="16">2021/2/19 13:13:54</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.startTime}}</span>
     </section>
     <section class="label-item" nz-row [nzGutter]="[10, 10]">
       <span class="label-text" nz-col [nzSpan]="8">接手人账号：</span>
-      <span class="value-text" nz-col [nzSpan]="16">孙悟空</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.accountId}}</span>
     </section>
     <section class="label-item" nz-row [nzGutter]="[10, 10]">
       <span class="label-text" nz-col [nzSpan]="8">接手买号：</span>
-      <span class="value-text" nz-col [nzSpan]="16">孙悟空</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.account}}</span>
     </section>
-    <section class="label-item" nz-row [nzGutter]="[10, 10]">
+    <section class="label-item" nz-row [nzGutter]="[10, 10]" [ngSwitch]="orderInfo.status">
       <span class="label-text" nz-col [nzSpan]="8">任务当前状态：</span>
-      <span class="value-text" nz-col [nzSpan]="16">进行中</span>
+      <span class="value-text" nz-col [nzSpan]="16" *ngSwitchCase="0">待接手</span>
+      <span class="value-text" nz-col [nzSpan]="16" *ngSwitchCase="1">待开始</span>
+      <span class="value-text" nz-col [nzSpan]="16" *ngSwitchCase="2">进行中</span>
+      <span class="value-text" nz-col [nzSpan]="16" *ngSwitchCase="3">待核对</span>
+      <span class="value-text" nz-col [nzSpan]="16" *ngSwitchCase="4">已过期</span>
+      <span class="value-text" nz-col [nzSpan]="16" *ngSwitchCase="5">已锁定</span>
+      <span class="value-text" nz-col [nzSpan]="16" *ngSwitchCase="6">已完成</span>
     </section>
   </section>
 </section>

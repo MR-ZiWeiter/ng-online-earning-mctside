@@ -59,4 +59,16 @@ export class ApiTaskIndexService {
       });
     });
   }
+
+  /* 订单详情 */
+  asyncFetchOrderDetail(info: any = {}): Observable<any> {
+    return new Observable(observer => {
+      this.http.get('/business/order/details', info, {}).subscribe((res: ApiResponseModel) => {
+        // console.log(res);
+        observer.next(res);
+      }, err => {
+        observer.error(false);
+      });
+    });
+  }
 }

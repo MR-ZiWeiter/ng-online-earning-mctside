@@ -57,6 +57,17 @@ export class OrderManagementComponent implements OnInit {
     this.fetchOrderList();
   }
 
+  public onPageIndexChange(ev: number) {
+    // console.log(ev);
+    this.renderConfig.pageNum = ev;
+    this.fetchOrderList();
+  }
+  public onPageSizeChange(ev: number) {
+    // console.log(ev);
+    this.renderConfig.pageSize = ev;
+    this.fetchOrderList();
+  }
+
   /* 打开详情弹窗 */
   public openOrderDetail(renderInfo: any) {
     this.nzModalService.create({

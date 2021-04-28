@@ -44,13 +44,13 @@
             <!-- <span class="label-text">任务要求：货比  收藏  男性账号</span> -->
           </section>
           <section class="task-status" [ngSwitch]="item.status">
-            <span class="status-text" *ngSwitchCase="0">创建中</span>
-            <span class="status-text" *ngSwitchCase="1">待审核</span>
-            <span class="status-text" *ngSwitchCase="2">审核成功</span>
-            <span class="status-text" *ngSwitchCase="3">审核失败</span>
-            <span class="status-text" *ngSwitchCase="4">进行中</span>
-            <span class="status-text" *ngSwitchCase="5">已完成</span>
-            <span class="status-text" *ngSwitchCase="6">已锁定</span>
+            <span class="status-text" *ngSwitchCase="0">待接手</span>
+            <span class="status-text" *ngSwitchCase="1">待开始</span>
+            <span class="status-text" *ngSwitchCase="2">进行中</span>
+            <span class="status-text" *ngSwitchCase="3">待核对</span>
+            <span class="status-text" *ngSwitchCase="4">已过期</span>
+            <span class="status-text" *ngSwitchCase="5">已锁定</span>
+            <span class="status-text" *ngSwitchCase="6">已完成</span>
           </section>
           <section class="task-handler">
             <button class="handler-btn" nz-button nzType="text">核对订单</button>
@@ -63,5 +63,6 @@
         </section>
       </section>
     </section>
+    <nz-pagination class="custom-pagination" [nzPageIndex]="renderConfig.pageNum" [nzPageSize]="renderConfig.pageSize" [nzTotal]="renderConfig.total" nzShowQuickJumper (nzPageIndexChange)="onPageIndexChange($event)" (nzPageSizeChange)="onPageSizeChange($event)"></nz-pagination>
   </section>
 </section>
