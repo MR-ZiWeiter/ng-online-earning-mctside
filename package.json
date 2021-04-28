@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --host 0.0.0.0 --open",
     "start-es5": "ng serve -c=es5",
     "build": "ng build --prod --aot --progress --vendor-chunk --common-chunk --delete-output-path --build-optimizer",
     "test": "ng test",

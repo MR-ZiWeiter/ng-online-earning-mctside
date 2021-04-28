@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { CoreToolsFunction } from 'src/app/core/core.tools';
 import { SystemService } from 'src/app/core/services/system/system.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -67,6 +68,7 @@ export class PostTaskComponent extends CoreToolsFunction implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private router: Router,
     private systemService: SystemService,
     private apiReleaseService: ApiReleaseService
   ) {
@@ -222,6 +224,7 @@ export class PostTaskComponent extends CoreToolsFunction implements OnInit {
       submitForm['commission'] = commission;
       this.apiReleaseService.asyncPostMewTaskInfo(submitForm).subscribe(res => {
         this.systemService.presentToast('发布任务成功', 'success');
+        this.router.navigate(['/main/task/published-list']);
       })
     } else {
       this.systemService.presentToast('请完善表单后再试，谢谢配合', 'info');

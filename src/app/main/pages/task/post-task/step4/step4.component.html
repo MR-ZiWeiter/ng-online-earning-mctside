@@ -64,6 +64,62 @@
                 </section>
               </ng-container>
             </ng-container>
+            <!-- 模板一 指定评语 -->
+            <ng-container *ngIf="resultCheckRadioContext(item.value).modelType === 1">
+              <ng-container formGroupName="requiresSuboptionForm">
+                <ng-container formArrayName="suboption">
+                  <ng-container *ngFor="let subItem of item.get('requiresSuboptionForm.suboption').controls; let subKeyIndex = index;">
+                    <section nz-row [formGroupName]="subKeyIndex">
+                      <section nz-col [nzSpan]="24">
+                        <nz-form-item>
+                          <nz-form-label [nzSm]="5" [nzXs]="12" nzFor="text" nzRequired>评价{{subItem.value.sort}}</nz-form-label>
+                          <nz-form-control
+                            [nzSm]="13"
+                            [nzXs]="13"
+                            nzErrorTip="请输入评价">
+                            <input nz-input id="text" formControlName="text" placeholder="请输入评价" />
+                          </nz-form-control>
+                          <button nz-button class="min-offset-left">增加</button>
+                        </nz-form-item>
+                      </section>
+                    </section>
+                  </ng-container>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+            <!-- 模板二 指定评语+图片/视频 -->
+            <ng-container *ngIf="resultCheckRadioContext(item.value).modelType === 2 || resultCheckRadioContext(item.value).modelType === 3">
+              <ng-container formGroupName="requiresSuboptionForm">
+                <ng-container formArrayName="suboption">
+                  <ng-container *ngFor="let subItem of item.get('requiresSuboptionForm.suboption').controls; let subKeyIndex = index;">
+                    <section nz-row [formGroupName]="subKeyIndex">
+                      <section nz-col [nzSpan]="24">
+                        <nz-form-item>
+                          <nz-form-label [nzSm]="5" [nzXs]="12" nzFor="text" nzRequired>评价{{subItem.value.sort}}</nz-form-label>
+                          <nz-form-control
+                            [nzSm]="13"
+                            [nzXs]="13"
+                            nzErrorTip="请输入评价">
+                            <input nz-input id="text" formControlName="text" placeholder="请输入评价" />
+                          </nz-form-control>
+                          <button nz-button class="min-offset-left">增加</button>
+                        </nz-form-item>
+                      </section>
+                    </section>
+                    <section nz-row>
+                      <section nz-col [nzSpan]="24" [formGroupName]="subKeyIndex">
+                        <nz-form-item>
+                          <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="urls" nzRequired>可上传最多6张图片/视频</nz-form-label>
+                          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请上传图片或者视频,最少一张">
+                            <swipe-upload [maxFileListLength]="6" [isVideo]="subItem.value.isVideo" formControlName="urls"></swipe-upload>
+                          </nz-form-control>
+                        </nz-form-item>
+                      </section>
+                    </section>
+                  </ng-container>
+                </ng-container>
+              </ng-container>
+            </ng-container>
             <!-- 副产品 模板4 -->
             <ng-container *ngIf="resultCheckRadioContext(item.value).modelType === 4">
               <ng-container formGroupName="requiresSuboptionForm">
@@ -100,9 +156,9 @@
                     <section nz-row>
                       <section nz-col [nzSpan]="24" [formGroupName]="subKeyIndex">
                         <nz-form-item>
-                          <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="norm">副商品图片</nz-form-label>
-                          <nz-form-control [nzSm]="14" [nzXs]="24">
-                            <swipe-upload formControlName="image"></swipe-upload>
+                          <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="norm" nzRequired>副商品图片</nz-form-label>
+                          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请上传图片或者视频,最少一张">
+                            <swipe-upload [maxFileListLength]="6" formControlName="image"></swipe-upload>
                           </nz-form-control>
                         </nz-form-item>
                       </section>

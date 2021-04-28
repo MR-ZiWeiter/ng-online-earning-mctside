@@ -92,7 +92,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ng-online-earning-mctside:build"
+            "browserTarget": "ng-online-earning-mctside:build",
+            "proxyConfig": "proxy.json"
           },
           "configurations": {
             "production": {

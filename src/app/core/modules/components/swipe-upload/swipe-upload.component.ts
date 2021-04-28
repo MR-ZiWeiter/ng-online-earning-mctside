@@ -22,6 +22,7 @@ export class SwipeUploadComponent implements OnInit, OnDestroy, ControlValueAcce
   @Input() public Action = environment.API_URL + '/upload/file';
   @Input() public maxFileListLength = 1;
   @Input() public coustom = false;
+  @Input() public isVideo: boolean = false;
 
   private ossConfig: IAliossConfigModel = {
     dir: 'mctside/',

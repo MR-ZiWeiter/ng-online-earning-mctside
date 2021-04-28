@@ -207,16 +207,27 @@ export class Step4Component extends CoreToolsFunction implements OnInit, Control
     // switch() {}
     renderInfo.requiresRuleItemVos.some((item: any) => {
       // switch() {}
+      // console.log(item)
       const currentFromGroup = (this.validateForm.get('requiresForms') as any).controls[index];
       if (item.id === ev) {
         const requiresSuboptionForm: FormGroup = this.fb.group({modelType: [ev]});
         let suboption: FormArray;
+        /* 清除所有能包含的表单组控件 */
+        currentFromGroup.removeControl('requiresSuboptionForm');
         switch(item.modelType) {
           case 0:
             break;
           case 1:
             suboption = this.fb.array([
               this.fb.group(this.resultSubjoinFromGroupObject())
+            ]);
+            requiresSuboptionForm.addControl('suboption', suboption);
+            currentFromGroup.addControl('requiresSuboptionForm', requiresSuboptionForm);
+            break;
+          case 2:
+          case 3:
+            suboption = this.fb.array([
+              this.fb.group(this.resultSubjoinFromGroupObject(true, item.modelType === 3 ? true : false))
             ]);
             requiresSuboptionForm.addControl('suboption', suboption);
             currentFromGroup.addControl('requiresSuboptionForm', requiresSuboptionForm);
@@ -233,19 +244,6 @@ export class Step4Component extends CoreToolsFunction implements OnInit, Control
       }
       return false;
     })
-
-    if (renderInfo.code === 'WITH_GOODS') {
-      const withGoodsFormGroup = (this.validateForm.get('requiresForms') as any).controls[index];
-      if (renderInfo.selectedItemId === 2) {
-        const suboption: FormArray = this.fb.array([
-          this.fb.group(this.resultSubjoinFromGroupObject()),
-          this.fb.group(this.resultSubjoinFromGroupObject(2, 2))
-        ]);
-        withGoodsFormGroup.addControl('suboption', suboption);
-      } else {
-        withGoodsFormGroup.removeControl('suboption');
-      }
-    }
   }
 
   /* 返回附属商品信息表单控件组 */
@@ -260,12 +258,18 @@ export class Step4Component extends CoreToolsFunction implements OnInit, Control
   }
 
   /* 返回附件表单控件组 */
-  public resultSubjoinFromGroupObject(type: number = 1, sort: number = 1) {
-    return {
-      content: new FormControl(null, [Validators.required]),
-      contentType: new FormControl(type, [Validators.required]),
-      quantity: new FormControl(null, [Validators.required]),
-      sort: new FormControl(sort, [Validators.required]),
+  public resultSubjoinFromGroupObject(isUrls: boolean = false, isVideo: boolean = false) {
+    if (isUrls) {
+      return {
+        text: new FormControl(null, [Validators.required]),
+        urls: new FormControl(null, [Validators.required]),
+        isVideo: new FormControl(isVideo)
+      }
+    } else {
+      return {
+        text: new FormControl(null, [Validators.required]),
+        isVideo: new FormControl(isVideo)
+      }
     }
   }
 
