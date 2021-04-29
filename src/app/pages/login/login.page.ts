@@ -58,7 +58,7 @@ export class LoginPage implements OnInit {
     // console.log('成功-欢迎来到网赚商户端登录');
     this.loginRegisterForm = this.fb.group({
       accountType: [3, [Validators.required]],
-      identifier: [null, [Validators.required, Validators.pattern(/^1[3-9]{1}[0-9]{9}$/)]],
+      identifier: [null, [Validators.required, Validators.pattern(/^[\d*]|[\u4e00-\u9fa5\_]$/)]],
       credential: [null, [Validators.required, Validators.pattern(/^[0-9a-z]{6,20}$/)]],
       loginMode: ['ACCOUNT_PASSWORD', [Validators.required]],
       imageCode: [null, [Validators.required]],
@@ -102,6 +102,23 @@ export class LoginPage implements OnInit {
   public switchLoginType(info: any) {
     this.activeLoginType = info.type;
   }
+  /* 单独校验密码 */
+  public updateConfirmValidator(): void {
+    if (this.loginRegisterForm.controls.check_credential) {
+      /** wait for refresh value */
+      Promise.resolve().then(() => this.loginRegisterForm.controls.check_credential.updateValueAndValidity());
+    }
+  }
+  /* 校验密码 */
+  private checkCredential = (control: FormControl) => {
+    if (!control.value) {
+      return { require: true }
+    } else if (this.loginRegisterForm.controls['credential'].value === control.value) {
+      return {}
+    } else {
+      return { confirm: true, error: true };
+    }
+  }
   /* 切换登录注册 */
   public toggleLoginOfRegister() {
     /* 改变控件组状态 */
@@ -111,6 +128,7 @@ export class LoginPage implements OnInit {
     if (this.register) {
       this.loginRegisterForm.removeControl('imageCode');
       this.loginRegisterForm.removeControl('imageCodeToken');
+      this.loginRegisterForm.addControl('check_credential', new FormControl(null, [Validators.required, this.checkCredential]))
       this.loginRegisterForm.addControl('nickname', new FormControl(null, [Validators.required, Validators.pattern(/^(?:[\u4e00-\u9fa5]+)(?:●[\u4e00-\u9fa5]+)*$|^[a-zA-Z0-9]+\s?[\.·\-()a-zA-Z]*[a-zA-Z]+$/)]));
       this.loginRegisterForm.addControl('smsCode', new FormControl(null, [Validators.required]));
       this.loginRegisterForm.addControl('qq', new FormControl(null, [Validators.required]));
@@ -120,12 +138,13 @@ export class LoginPage implements OnInit {
       this.loginRegisterForm.removeControl('smsCode');
       this.loginRegisterForm.removeControl('qq');
       this.loginRegisterForm.removeControl('wechat');
+      this.loginRegisterForm.removeControl('check_credential');
     }
   }
   /* 获取手机验证码 */
   public fetchPhoneCodeInfo() {
     if (this.loginRegisterForm.controls['identifier'].valid) {
-      this.apiUserAccountService.asyncFetchAccountRegisterCode({
+      this.apiUserAccountService.asyncFetchAccountSmsCode({
         mobile: this.loginRegisterForm.value.identifier
       }).subscribe(res => {
         this.settingTimeOutEvent();

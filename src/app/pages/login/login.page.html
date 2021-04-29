@@ -32,14 +32,14 @@
         <nz-form-item>
           <nz-form-control nzErrorTip="请输入正确的账户密码！">
             <nz-input-group >
-              <input type="password" autocomplete [nzBorderless]="true" class="input" nz-input formControlName="credential" placeholder="请输入密码" />
+              <input type="password" autocomplete [nzBorderless]="true" class="input" nz-input formControlName="credential" placeholder="请输入密码" (ngModelChange)="updateConfirmValidator()"/>
             </nz-input-group>
           </nz-form-control>
         </nz-form-item>
         <nz-form-item *ngIf="register">
           <nz-form-control nzErrorTip="请再次输入正确的账户密码">
             <nz-input-group >
-              <input type="password" autocomplete [nzBorderless]="true" class="input" nz-input formControlName="credential" placeholder="请再次输入密码" />
+              <input type="password" autocomplete [nzBorderless]="true" class="input" nz-input formControlName="check_credential" placeholder="请再次输入密码" />
             </nz-input-group>
           </nz-form-control>
         </nz-form-item>

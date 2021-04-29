@@ -2,11 +2,11 @@
   <section class="context-group">
     <section class="label-item" nz-row [nzGutter]="[10, 10]">
       <span class="label-text" nz-col [nzSpan]="8">买家下单的订单号：</span>
-      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.orderNo}}</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.orderNo || '暂未下单'}}</span>
     </section>
     <section class="label-item" nz-row [nzGutter]="[10, 10]">
       <span class="label-text" nz-col [nzSpan]="8">买家下单的实付金额：</span>
-      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.paidAmount}}元</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.paidAmount || '暂未付款'}}{{orderInfo.paidAmount ? '元' : ''}}</span>
     </section>
   </section>
   <!-- 标题 -->
@@ -24,7 +24,7 @@
     </section>
     <section class="label-item" nz-row [nzGutter]="[10, 10]">
       <span class="label-text" nz-col [nzSpan]="8">是否截图：</span>
-      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.s}}</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.screenshot ? '需要' : '不需要'}}</span>
     </section>
     <section class="label-item" nz-row [nzGutter]="[10, 10]">
       <span class="label-text" nz-col [nzSpan]="8">掌柜名称：</span>
@@ -62,7 +62,7 @@
     </section>
     <section class="label-item" nz-row [nzGutter]="[10, 10]">
       <span class="label-text" nz-col [nzSpan]="8">基础服务费：</span>
-      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.businessCapitalVo.baseCapital}}元</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.businessCapitalVo.baseCapital | price}}元</span>
     </section>
     <section class="label-item" nz-row [nzGutter]="[10, 10]">
       <span class="label-text" nz-col [nzSpan]="8">增值服务：</span>
@@ -70,11 +70,11 @@
     </section>
     <section class="label-item" nz-row [nzGutter]="[10, 10]">
       <span class="label-text" nz-col [nzSpan]="8">追加奖励：</span>
-      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.businessCapitalVo.unitPrice}}元</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.businessCapitalVo.superaddFess}}元</span>
     </section>
     <section class="label-item" nz-row [nzGutter]="[10, 10]">
       <span class="label-text" nz-col [nzSpan]="8">总金额： </span>
-      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.businessCapitalVo.commission}}元</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.businessCapitalVo.commission | price}}元</span>
     </section>
   </section>
   <!-- 标题 -->
@@ -110,7 +110,7 @@
   <section class="context-group">
     <ng-container *ngFor="let keys of orderInfo.requiresVos">
       <section class="label-item" nz-row [nzGutter]="[10, 10]" *ngIf="(keys.userMatch)">
-        <span class="label-text" nz-col [nzSpan]="8">买号信誉：</span>
+        <span class="label-text" nz-col [nzSpan]="8">{{keys.title}}：</span>
         <span class="value-text" nz-col [nzSpan]="16">{{keys.selected}}</span>
       </section>
     </ng-container>
@@ -122,7 +122,7 @@
   <section class="context-group">
     <ng-container *ngFor="let keys of orderInfo.requiresVos">
       <section class="label-item" nz-row [nzGutter]="[10, 10]" *ngIf="!(keys.userMatch)">
-        <span class="label-text" nz-col [nzSpan]="8">买号信誉：</span>
+        <span class="label-text" nz-col [nzSpan]="8">{{keys.title}}：</span>
         <span class="value-text" nz-col [nzSpan]="16">{{keys.selected}}</span>
       </section>
     </ng-container>
