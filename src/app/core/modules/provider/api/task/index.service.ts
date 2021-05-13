@@ -71,4 +71,16 @@ export class ApiTaskIndexService {
       });
     });
   }
+
+  /* 订单核对详情 */
+  asyncFetchCheckInfo(info: any = {}): Observable<any> {
+    return new Observable(observer => {
+      this.http.get('/business/order/collateInfo', info, {}).subscribe((res: ApiResponseModel) => {
+        // console.log(res);
+        observer.next(res);
+      }, err => {
+        observer.error(false);
+      });
+    });
+  }
 }

@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { MainComponent } from './main.component';
 import { IndexComponent } from './pages/index/index.component';
+import { MessagesComponent } from './pages/messages/messages.component';
 
 const routes: Routes = [
   {
@@ -11,9 +12,11 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'index', pathMatch: 'full' },
       { path: 'index', component: IndexComponent },
+      { path: 'messages', component: MessagesComponent },
       { path: 'task', loadChildren: () => import('./pages/task/task.module').then(m => m.TaskModule) },
       { path: 'appeal', loadChildren: () => import('./pages/appeal/appeal.module').then(m => m.AppealModule) },
       { path: 'financial', loadChildren: () => import('./pages/financial/financial.module').then(m => m.FinancialModule) },
+      { path: 'user-info', loadChildren: () => import('./pages/user-info/user-info.module').then(m => m.UserInfoModule) },
     ]
   },
 ];

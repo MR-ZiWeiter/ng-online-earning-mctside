@@ -44,12 +44,12 @@ export class MenuComponent implements OnInit {
 
   openHandler(value: number): void {
     // console.log(value);
-    this.openMap.forEach((item: boolean, index: number) => {
-      if ( value === index ) {
-        this.openMap[index] = true;
-      } else {
-        this.openMap[index] = false;
-      }
-    });
+    // this.openMap.forEach((item: boolean, index: number) => {
+    //   if ( value === index ) {
+    //     this.openMap[index] = true;
+    //   } else {
+    //     this.openMap[index] = false;
+    //   }
+    // });
   }
 }

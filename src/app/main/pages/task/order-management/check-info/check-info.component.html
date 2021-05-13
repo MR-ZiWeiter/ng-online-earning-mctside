@@ -1,0 +1,36 @@
+<section class="check-info-component" *ngIf="orderInfo">
+  <section class="context-group">
+    <section class="label-item" nz-row [nzGutter]="[10, 10]">
+      <span class="label-text" nz-col [nzSpan]="8">任务发布时间：</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.pushTime}}</span>
+    </section>
+    <section class="label-item" nz-row [nzGutter]="[10, 10]">
+      <span class="label-text" nz-col [nzSpan]="8">任务接手时间：</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.startTime}}</span>
+    </section>
+    <section class="label-item" nz-row [nzGutter]="[10, 10]">
+      <span class="label-text" nz-col [nzSpan]="8">接手人账号：</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.accountId}}</span>
+    </section>
+    <section class="label-item" nz-row [nzGutter]="[10, 10]">
+      <span class="label-text" nz-col [nzSpan]="8">接手买号：</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.account}}</span>
+    </section>
+    <section class="label-item" nz-row [nzGutter]="[10, 10]">
+      <span class="label-text" nz-col [nzSpan]="8">任务当前状态：</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.status}}</span>
+    </section>
+    <section class="label-item" nz-row [nzGutter]="[10, 10]">
+      <span class="label-text" nz-col [nzSpan]="8">买家下单的订单号：</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.orderNo}}</span>
+    </section>
+    <section class="label-item" nz-row [nzGutter]="[10, 10]">
+      <span class="label-text" nz-col [nzSpan]="8">买家下单的实付金额：</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.paidAmount}}{{orderInfo.paidAmount ? '元' : ''}}</span>
+    </section>
+    <section class="label-item" nz-row [nzGutter]="[10, 10]">
+      <span class="label-text" nz-col [nzSpan]="8">做单信息：</span>
+      <swipe-upload [isReady]="true" [ngModel]="orderInfo.goodsVo.image"></swipe-upload>
+    </section>
+  </section>
+</section>

@@ -86,6 +86,7 @@ export class BasicInfoComponent implements OnInit {
         // console.log([renderInfo.provinceCode, renderInfo.cityCode, renderInfo.areaCode])
         /* 初始化数据-初始化表单一体 */
         this.validateForm = this.fb.group({
+          avatarUrl: [renderInfo.avatar],
           email: [renderInfo.email, [Validators.email, Validators.required]],
           signature: [renderInfo.signature, [Validators.required]],
           gender: [renderInfo.gender, [Validators.required]],
@@ -95,6 +96,7 @@ export class BasicInfoComponent implements OnInit {
         });
       } else {
         this.validateForm = this.fb.group({
+          avatarUrl: [null],
           email: [null, [Validators.email, Validators.required]],
           signature: [null, [Validators.required]],
           gender: [null, [Validators.required]],

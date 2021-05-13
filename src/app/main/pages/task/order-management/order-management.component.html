@@ -53,7 +53,7 @@
             <span class="status-text" *ngSwitchCase="6">已完成</span>
           </section>
           <section class="task-handler">
-            <button class="handler-btn" nz-button nzType="text">核对订单</button>
+            <button class="handler-btn" nz-button nzType="text" *ngIf="item.status === 3" (click)="openCheckInfo(item)">核对订单</button>
             <button class="handler-btn" nz-button nzType="text" (click)="openOrderDetail(item)">详情</button>
             <!-- <button class="handler-btn" nz-button nzType="text">下架</button> -->
           </section>

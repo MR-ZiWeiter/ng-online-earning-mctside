@@ -5,5 +5,6 @@ export enum RequestMethods {
   OPTIONS = 'OPTIONS',
   PATCH = 'PATCH',
   TRACE = 'TRACE',
-  HEAD = 'HEAD'
+  HEAD = 'HEAD',
+  PUT = 'PUT'
 }

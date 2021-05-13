@@ -21,6 +21,7 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { NzImageModule } from 'ng-zorro-antd/image';
 
 // 管道类
 import { KeysPipe } from './pipes';
@@ -68,7 +69,8 @@ import { PricePipe } from './pipes/price.pipe';
     NzDividerModule,
     NzTabsModule,
     NzCheckboxModule,
-    NzPaginationModule
+    NzPaginationModule,
+    NzImageModule
   ],
   exports: [
     ReactiveFormsModule,
@@ -92,6 +94,7 @@ import { PricePipe } from './pipes/price.pipe';
     NzTabsModule,
     NzCheckboxModule,
     NzPaginationModule,
+    NzImageModule,
     SwipeEyeCareModeComponent,
     SwipeLottieComponent,
     SwipeInputComponent,

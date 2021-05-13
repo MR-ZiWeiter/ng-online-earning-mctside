@@ -129,7 +129,7 @@ export class LoginPage implements OnInit {
       this.loginRegisterForm.removeControl('imageCode');
       this.loginRegisterForm.removeControl('imageCodeToken');
       this.loginRegisterForm.addControl('check_credential', new FormControl(null, [Validators.required, this.checkCredential]))
-      this.loginRegisterForm.addControl('nickname', new FormControl(null, [Validators.required, Validators.pattern(/^(?:[\u4e00-\u9fa5]+)(?:●[\u4e00-\u9fa5]+)*$|^[a-zA-Z0-9]+\s?[\.·\-()a-zA-Z]*[a-zA-Z]+$/)]));
+      this.loginRegisterForm.addControl('nickname', new FormControl(null, [Validators.required, Validators.pattern(/^(?:[\u4e00-\u9fa5]+)(?:●[\u4e00-\u9fa5]+)*$|^[a-zA-Z0-9]+\s?[\.·\-()a-zA-Z]*[a-zA-Z]+$|^[a-zA-Z0-9]{2,}$|/)]));
       this.loginRegisterForm.addControl('smsCode', new FormControl(null, [Validators.required]));
       this.loginRegisterForm.addControl('qq', new FormControl(null, [Validators.required]));
       this.loginRegisterForm.addControl('wechat', new FormControl(null, [Validators.required]));

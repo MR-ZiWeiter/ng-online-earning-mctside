@@ -1,3 +1,4 @@
+import { CheckInfoComponent } from './check-info/check-info.component';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CoreModule } from 'src/app/core/core.module';
@@ -11,6 +12,10 @@ import { OrderManagementComponent } from './order-management.component';
       { path: '', component: OrderManagementComponent }
     ])
   ],
-  declarations: [OrderManagementComponent, OrderInfoComponent]
+  declarations: [
+    OrderManagementComponent,
+    OrderInfoComponent,
+    CheckInfoComponent
+  ]
 })
 export class OrderManagementModule { }

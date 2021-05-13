@@ -1,3 +1,4 @@
+import { CheckInfoComponent } from './check-info/check-info.component';
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NzModalService } from 'ng-zorro-antd/modal';
@@ -16,7 +17,7 @@ export class OrderManagementComponent implements OnInit {
 
   public renderConfig: any = {
     pageNum: 1,
-    pageSize: 20,
+    pageSize: 5,
     total: 0,
     loading: true
   }
@@ -73,6 +74,26 @@ export class OrderManagementComponent implements OnInit {
     this.nzModalService.create({
       nzContent: OrderInfoComponent,
       nzTitle: '订单详情',
+      nzOkDisabled: true,
+      nzCancelDisabled: true,
+      nzFooter: null,
+      nzComponentParams: {
+        renderInfo
+      },
+      nzOnCancel: (e: any) => {
+        console.log(e)
+      },
+      nzOnOk: (e: any) => {
+        console.log(e)
+      }
+    })
+  }
+
+  /* 核对订单 */
+  public openCheckInfo(renderInfo: any) {
+    this.nzModalService.create({
+      nzContent: CheckInfoComponent,
+      nzTitle: '核对订单',
       nzOkDisabled: true,
       nzCancelDisabled: true,
       nzFooter: null,

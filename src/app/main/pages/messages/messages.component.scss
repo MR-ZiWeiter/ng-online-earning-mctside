@@ -1,5 +1,6 @@
 @import 'mixin';
-.task-template-component {
+
+.messages-component {
   background-color: $default_color;
   margin-bottom: format(10);
   >.header-info {
@@ -39,10 +40,6 @@
       margin-top: format(38);
     }
     .context-list {
-      .image-info {
-        @include wh(format(80), auto);
-        max-height: format(80);
-      }
     }
   }
 }

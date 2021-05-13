@@ -7,3 +7,4 @@ export * from './task/release.service';
 export * from './financial/index.service';
 export * from './financial/account.service';
 export * from './appeal/index.service';
+export * from './messages/index.service';

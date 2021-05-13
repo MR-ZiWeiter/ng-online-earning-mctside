@@ -8,7 +8,8 @@ import {
   ApiReleaseService,
   ApiFinancialService,
   ApiFinancialAccountService,
-  ApiAppealService
+  ApiAppealService,
+  ApiMessagesService
 } from './index';
 
 @NgModule({
@@ -22,7 +23,8 @@ import {
     ApiReleaseService,
     ApiFinancialService,
     ApiFinancialAccountService,
-    ApiAppealService
+    ApiAppealService,
+    ApiMessagesService
   ]
 })
 

@@ -47,6 +47,16 @@ export class HttpService {
   }
 
   /**
+   * 发起一个put请求
+   * @param url //
+   * @param paramMap //
+   * @param header //
+   */
+   put(url: string, paramMap: {} = {}, header: {} = {}): Observable<ApiResponseModel> {
+    return this.sendRequest(url, paramMap, RequestMethods.PUT, header);
+  }
+
+  /**
    * 发起一个options请求
    * @param url //
    * @param paramMap //

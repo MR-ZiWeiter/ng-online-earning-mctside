@@ -38,26 +38,30 @@
         [nzData]="renderInfoArray">
         <thead>
           <tr>
-            <th>序号</th>
-            <th>任务区</th>
-            <th>主图</th>
-            <th>模板名称</th>
-            <th>掌柜名称</th>
-            <th>商品网址</th>
-            <th>价格</th>
+            <th nzAlign="center">序号</th>
+            <th nzAlign="center">任务区</th>
+            <th nzAlign="center">主图</th>
+            <th nzAlign="center">模板名称</th>
+            <th nzAlign="center">掌柜名称</th>
+            <th nzAlign="center">商品网址</th>
+            <th nzAlign="center">价格</th>
             <!-- <th>好评时限</th> -->
-            <th>添加时间</th>
-            <th>操作</th>
+            <th nzAlign="center">添加时间</th>
+            <th nzAlign="center">操作</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let data of borderedTable.data">
             <td>{{ data.index }}</td>
             <td>{{ data.platformTitle }}</td>
-            <td>{{ data.image }}</td>
+            <td>
+              <img nz-image class="image-info" [nzSrc]="data.image" />
+            </td>
             <td>{{ data.templateTitle }}</td>
             <td>{{ data.shopTitle }}</td>
-            <td>{{ data.url }}</td>
+            <td>
+              <a nz-button nzType="link" [attr.data-url]="data.url" (click)="onCopyClipboardChange(data.url)">点击复制网址</a>
+            </td>
             <td>{{ data.unitPrice }}</td>
             <!-- <td>{{ data.praiseLimit }}</td> -->
             <td>{{ data.createTime }}</td>

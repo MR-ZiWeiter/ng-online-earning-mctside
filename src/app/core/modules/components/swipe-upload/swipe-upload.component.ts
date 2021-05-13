@@ -17,13 +17,6 @@ import { environment } from '@app/env';
   ]
 })
 export class SwipeUploadComponent implements OnInit, OnDestroy, ControlValueAccessor {
-  @Input() public ListType: 'text' | 'picture' | 'picture-card' = 'picture-card';
-  // @Input() public Action = 'http://ll-wangzhuan.oss-cn-shenzhen.aliyuncs.com';
-  @Input() public Action = environment.API_URL + '/upload/file';
-  @Input() public maxFileListLength = 1;
-  @Input() public coustom = false;
-  @Input() public isVideo: boolean = false;
-  @Input() public isReady: boolean = false;
 
   private ossConfig: IAliossConfigModel = {
     dir: 'mctside/',
@@ -46,6 +39,14 @@ export class SwipeUploadComponent implements OnInit, OnDestroy, ControlValueAcce
 
   /* 获取alioss配置监听 */
   private aliossObserver: any;
+
+  @Input() public ListType: 'text' | 'picture' | 'picture-card' = 'picture-card';
+  // @Input() public Action = 'http://ll-wangzhuan.oss-cn-shenzhen.aliyuncs.com';
+  @Input() public Action = environment.API_URL + '/upload/file';
+  @Input() public maxFileListLength = 1;
+  @Input() public coustom = false;
+  @Input() public isVideo: boolean = false;
+  @Input() public isReady: boolean = false;
 
   constructor(
     private systemService: SystemService
