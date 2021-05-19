@@ -1,27 +1,51 @@
-<div class="clearfix">
-  <nz-upload
-    nzName="file"
-    [nzAction]="Action"
-    [nzListType]="ListType"
-    [nzData]="getExtraData"
-    [nzTransformFile]="transformFile"
-    [(nzFileList)]="fileList"
-    [nzShowButton]="fileList.length < maxFileListLength"
-    [nzPreview]="handlePreview"
-    [nzDisabled]="disabled"
-    class="coustom-upload"
-    (nzChange)="onChange($event)">
-    <div *ngIf="!coustom" class="iiii">
-      <i nz-icon nzType="plus"></i>
-      <div style="margin-top: 8px">上传图片</div>
-    </div>
-    <div *ngIf="coustom">
-      <ng-content></ng-content>
-    </div>
-  </nz-upload>
+<div class="clearfix swipe-upload-component" *ngIf="!isPreview; else viewTemp">
+  <ng-container *ngIf="!coustom">
+    <nz-upload
+      nzName="file"
+      [nzAction]="Action"
+      [nzListType]="ListType"
+      [nzData]="getExtraData"
+      [nzTransformFile]="transformFile"
+      [(nzFileList)]="fileList"
+      [nzShowButton]="fileList.length < maxFileListLength"
+      [nzPreview]="handlePreview"
+      [nzDisabled]="disabled"
+      class="coustom-upload"
+      (nzChange)="onChange($event)">
+      <div class="iiii">
+        <i nz-icon nzType="plus"></i>
+        <div style="margin-top: 8px">上传图片</div>
+      </div>
+    </nz-upload>
+  </ng-container>
+  <ng-container *ngIf="coustom">
+    <nz-upload
+      nzName="file"
+      [nzAction]="Action"
+      [nzData]="getExtraData"
+      [nzTransformFile]="transformFile"
+      [nzPreview]="handlePreview"
+      [nzDisabled]="disabled"
+      class="coustom-upload"
+      [nzFileListRender]="fileListRef"
+      (nzChange)="onChange($event)">
+      <ng-content *ngIf="!fileList.length"></ng-content>
+    </nz-upload>
+    <ng-template #fileListRef>
+      <ng-content *ngIf="fileList.length" select="[name=fileList]"></ng-content>
+    </ng-template>
+  </ng-container>
   <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null" (nzOnCancel)="previewVisible = false">
     <ng-template #modalContent>
       <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
     </ng-template>
   </nz-modal>
 </div>
+<ng-template #viewTemp>
+  <section class="image-list">
+    <section class="image-item" *ngFor="let item of fileList">
+      <img class="image" [src]="item.url"/>
+    </section>
+    <swipe-null-context context="暂无相关数据" *ngIf="!fileList.length"></swipe-null-context>
+  </section>
+</ng-template>

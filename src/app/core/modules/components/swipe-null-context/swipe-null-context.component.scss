@@ -1,0 +1,8 @@
+@import 'mixin';
+
+.swipe-null-context-component {
+  margin: format(20);
+  .label-text {
+    @include sc(format(14), $default_color_6);
+  }
+}

@@ -2,19 +2,22 @@
   <nz-form-item>
     <nz-form-label  [nzSm]="4" [nzXs]="12"  nzFor="realName">姓名</nz-form-label>
     <nz-form-control nz-row [nzSm]="14" [nzXs]="24" nzErrorTip="请输入真实姓名">
-      <input nz-col [nzSpan]="10"  nz-input formControlName="realName" id="realName" placeholder="请输入真实姓名"/>
+      <input [readonly]="renderInfo" nz-col [nzSpan]="10"  nz-input formControlName="realName" id="realName" placeholder="请输入真实姓名"/>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
     <nz-form-label  [nzSm]="4" [nzXs]="12"  nzFor="account">支付宝账号</nz-form-label>
     <nz-form-control nz-row [nzSm]="14" [nzXs]="24" nzErrorTip="请输入支付宝账号">
-      <input nz-col [nzSpan]="10"  nz-input formControlName="account" id="account" placeholder="请输入支付宝账号"/>
+      <input [readonly]="renderInfo" nz-col [nzSpan]="10"  nz-input formControlName="account" id="account" placeholder="请输入支付宝账号"/>
     </nz-form-control>
   </nz-form-item>
-  <nz-form-item  >
+  <nz-form-item *ngIf="!renderInfo; else reyRef">
     <nz-form-label  [nzSm]="4" nzNoColon="true"></nz-form-label>
     <nz-form-control   nz-row [nzSm]="14" [nzXs]="24" nzErrorTip="">
       <button nz-button nzType="primary">确认绑定</button>
     </nz-form-control>
   </nz-form-item>
+  <ng-template #reyRef>
+    <button nz-button nzType="text" type="button" color="primary" class="label-text" title="请联系客服进行支付宝认证">支付宝已绑定，如需解绑/换绑请联系客服</button>
+  </ng-template>
 </form>

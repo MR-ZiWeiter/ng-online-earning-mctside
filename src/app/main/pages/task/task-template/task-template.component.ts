@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { SystemService } from 'src/app/core/services/system/system.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
@@ -27,6 +28,7 @@ export class TaskTemplateComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private router: Router,
     private systemService: SystemService,
     private apiReleaseService: ApiReleaseService,
     private apiMerchantService: ApiMerchantService,
@@ -79,6 +81,21 @@ export class TaskTemplateComponent implements OnInit {
     }).catch(() => {
       this.systemService.presentToast('请选择谷歌浏览器或者火狐浏览器', 'warning');
     })
+  }
+
+  /* 确认删除 */
+  public openDeleteConfirm(info: any) {
+    this.apiReleaseService.asyncFetchTempDeleteInfo({
+      templateId: info.id
+    }).subscribe(res => {
+      // console.log(res);
+      this.systemService.presentToast('删除成功!', 'success');
+      this.onSearchInfo();
+    })
+  }
+
+  public openPostTaskConfirm(info: any) {
+    this.router.navigate(['/main/task/post-task', {tempID: info.id}]);
   }
 
   ngOnInit(): void {

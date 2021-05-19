@@ -1,18 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
-import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { ApiMerchantService } from 'src/app/core/modules/provider/api';
 import { SystemService } from 'src/app/core/services/system/system.service';
 
-function getBase64(file: File): Promise<string | ArrayBuffer | null> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
-  });
-}
 
 @Component({
   selector: 'swipe-bound-shop',
@@ -26,51 +16,6 @@ export class BoundShopComponent implements OnInit {
   public selectedValue = null;
 
   public validateForm!: FormGroup;
-  captchaTooltipIcon: NzFormTooltipIcon = {
-    type: 'info-circle',
-    theme: 'twotone'
-  };
-
-  fileList: NzUploadFile[] = [
-    {
-      uid: '-1',
-      name: 'image.png',
-      status: 'done',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-    },
-    {
-      uid: '-2',
-      name: 'image.png',
-      status: 'done',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-    },
-    {
-      uid: '-3',
-      name: 'image.png',
-      status: 'done',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-    },
-    {
-      uid: '-4',
-      name: 'image.png',
-      status: 'done',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-    },
-    {
-      uid: '-xxx',
-      percent: 50,
-      name: 'image.png',
-      status: 'uploading',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-    },
-    {
-      uid: '-5',
-      name: 'image.png',
-      status: 'error'
-    }
-  ];
-  previewImage: string | undefined = '';
-  previewVisible = false;
 
   constructor(
     private fb: FormBuilder,
@@ -86,7 +31,7 @@ export class BoundShopComponent implements OnInit {
       account: [null, [Validators.required]],
       title: [null, [Validators.required]],
       website: [null, [Validators.required]],
-      image: [null]
+      image: [null, [Validators.required]]
     });
   }
 
@@ -97,25 +42,17 @@ export class BoundShopComponent implements OnInit {
     })
   }
 
-  handlePreview = async (file: NzUploadFile) => {
-    if (!file.url && !file.preview) {
-      file.preview = await getBase64(file.originFileObj!);
-    }
-    this.previewImage = file.url || file.preview;
-    this.previewVisible = true;
-  };
-
   /* 提交数据 */
   public submitForm(): void {
     for (const i in this.validateForm.controls) {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
     }
-    console.log(this.validateForm)
+    // console.log(this.validateForm)
     if (this.validateForm.valid) {
       this.apiMerchantService.asyncFetchBindShopInfo(this.validateForm.value).subscribe(res => {
         // console.log(res);
-        this.systemService.presentToast('新增商品成功!', 'success');
+        this.systemService.presentToast('添加商铺成功!', 'success');
         this.validateForm.reset();
       })
     }

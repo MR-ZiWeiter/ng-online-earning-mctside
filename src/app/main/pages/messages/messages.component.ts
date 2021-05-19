@@ -122,6 +122,7 @@ export class MessagesComponent implements OnInit {
   public openCheckMessagesInfo(renderInfo: any) {
     this.apiMessagesService.asyncUpdateMessagesInfo(renderInfo.id).subscribe(res => {
       this.systemService.presentToast('已标记为已读', 'success');
+      this.onSearchInfo();
     })
   }
 
@@ -129,6 +130,7 @@ export class MessagesComponent implements OnInit {
   public deleteMessageInfo(renderInfo: any): void {
     this.apiMessagesService.asyncDeleteMessagesInfo(renderInfo.id).subscribe(res => {
       this.systemService.presentToast('删除成功', 'success');
+      this.onSearchInfo();
     })
   }
 

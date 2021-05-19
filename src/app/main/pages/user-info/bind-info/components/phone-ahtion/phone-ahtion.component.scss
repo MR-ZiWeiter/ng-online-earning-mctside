@@ -4,4 +4,9 @@
     @include flex-justify-align(flex-start, center);
     @include click-active();
   }
+  .label-text {
+    color: $bgColorBtn;
+    margin-left: 30%;
+  }
 }
+

@@ -46,7 +46,8 @@
         [nzPageIndex]="renderConfig.pageNum"
         nzBordered
         (nzQueryParams)="onQueryParamsChange($event)"
-        [nzData]="renderArray">
+        [nzData]="renderArray"
+        [nzFrontPagination]="false">
         <thead>
           <tr>
             <th nzAlign="center">时间</th>

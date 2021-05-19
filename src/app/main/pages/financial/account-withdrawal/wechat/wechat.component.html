@@ -27,25 +27,7 @@
           <nz-form-item>
             <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="norm" nzRequired>微信收款二维码</nz-form-label>
             <nz-form-control [nzSm]="14" [nzXs]="24">
-              <div class="clearfix">
-                <nz-upload
-                  nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                  nzListType="picture-card"
-                  [(nzFileList)]="fileList"
-                  [nzShowButton]="fileList.length < 8"
-                  [nzPreview]="handlePreview"
-                >
-                  <div>
-                    <i nz-icon nzType="plus"></i>
-                    <div style="margin-top: 8px">Upload</div>
-                  </div>
-                </nz-upload>
-                <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null" (nzOnCancel)="previewVisible = false">
-                  <ng-template #modalContent>
-                    <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
-                  </ng-template>
-                </nz-modal>
-              </div>
+              <swipe-upload [isPreview]="true" [maxFileListLength]="1" formControlName="qrCodeImage"></swipe-upload>
             </nz-form-control>
           </nz-form-item>
         </section>

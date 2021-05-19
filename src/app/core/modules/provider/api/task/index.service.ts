@@ -48,6 +48,42 @@ export class ApiTaskIndexService {
     });
   }
 
+  /* 任务下架 */
+  asyncFetchTaskUnshelve(info: any = {}): Observable<any> {
+    return new Observable(observer => {
+      this.http.get('/business/task/unshelve', info, {}).subscribe((res: ApiResponseModel) => {
+        // console.log(res);
+        observer.next(res);
+      }, err => {
+        observer.error(false);
+      });
+    });
+  }
+
+  /* 任务上架 */
+  asyncFetchTaskPutaway(info: any = {}): Observable<any> {
+    return new Observable(observer => {
+      this.http.get('/business/task/putaway', info, {}).subscribe((res: ApiResponseModel) => {
+        // console.log(res);
+        observer.next(res);
+      }, err => {
+        observer.error(false);
+      });
+    });
+  }
+
+  /* 任务删除 */
+  asyncFetchTaskDelete(info: any = {}): Observable<any> {
+    return new Observable(observer => {
+      this.http.get('/business/task/delete', info, {}).subscribe((res: ApiResponseModel) => {
+        // console.log(res);
+        observer.next(res);
+      }, err => {
+        observer.error(false);
+      });
+    });
+  }
+
   /* 订单列表 */
   asyncFetchOrderList(info: any = {}): Observable<any> {
     return new Observable(observer => {
@@ -76,6 +112,18 @@ export class ApiTaskIndexService {
   asyncFetchCheckInfo(info: any = {}): Observable<any> {
     return new Observable(observer => {
       this.http.get('/business/order/collateInfo', info, {}).subscribe((res: ApiResponseModel) => {
+        // console.log(res);
+        observer.next(res);
+      }, err => {
+        observer.error(false);
+      });
+    });
+  }
+
+  /* 订单核对通过 */
+  asyncFetchCheckPassInfo(info: any = {}): Observable<any> {
+    return new Observable(observer => {
+      this.http.get('/business/order/collatePass', info, {}).subscribe((res: ApiResponseModel) => {
         // console.log(res);
         observer.next(res);
       }, err => {

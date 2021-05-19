@@ -7,11 +7,21 @@
       <span>{{anthorInfo.realName}}</span>
     </div>
     <div class="anthor-top-authentication-info">
-      <div class="authentication">
-        <i nz-icon nzType="mobile"></i><span>手机认证</span>
+      <div [ngClass]="['authentication', anthorInfo.authPhone ? 'success' : 'error']">
+        <i nz-icon nzType="mobile"></i>
+        <span [ngClass]="['label-text']">手机认证</span>
+        <i class="success" *ngIf="anthorInfo.authPhone; else failRef" nz-icon nzType="check" nzTheme="outline"></i>
+        <ng-template #failRef>
+          <i class="error" *ngIf="anthorInfo.authIdCard" nz-icon nzType="close" nzTheme="outline"></i>
+        </ng-template>
       </div>
-      <div class="authentication">
-        <i nz-icon nzType="user"></i><span>实名认证</span>
+      <div [ngClass]="['authentication', anthorInfo.authIdCard ? 'success' : 'error']">
+        <i nz-icon nzType="user"></i>
+        <span [ngClass]="['label-text']">实名认证</span>
+        <i class="success" *ngIf="anthorInfo.authIdCard; else failRef" nz-icon nzType="check" nzTheme="outline"></i>
+        <ng-template #failRef>
+          <i class="error" *ngIf="anthorInfo.authIdCard" nz-icon nzType="close" nzTheme="outline"></i>
+        </ng-template>
       </div>
     </div>
   </div>

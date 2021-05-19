@@ -91,7 +91,7 @@ export class OrderManagementComponent implements OnInit {
 
   /* 核对订单 */
   public openCheckInfo(renderInfo: any) {
-    this.nzModalService.create({
+    const modal = this.nzModalService.create({
       nzContent: CheckInfoComponent,
       nzTitle: '核对订单',
       nzOkDisabled: true,
@@ -106,6 +106,10 @@ export class OrderManagementComponent implements OnInit {
       nzOnOk: (e: any) => {
         console.log(e)
       }
+    })
+    modal.afterClose.subscribe(() => {
+      // console.log(res);
+      this.fetchOrderList();
     })
   }
 }

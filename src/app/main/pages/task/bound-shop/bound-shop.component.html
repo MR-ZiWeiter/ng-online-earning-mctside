@@ -49,27 +49,9 @@
       <section nz-row>
         <section nz-col [nzSpan]="24">
           <nz-form-item>
-            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="norm">店铺后台凭证截图</nz-form-label>
-            <nz-form-control [nzSm]="14" [nzXs]="24">
-              <div class="clearfix">
-                <nz-upload
-                  nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                  nzListType="picture-card"
-                  [(nzFileList)]="fileList"
-                  [nzShowButton]="fileList.length < 8"
-                  [nzPreview]="handlePreview"
-                >
-                  <div>
-                    <i nz-icon nzType="plus"></i>
-                    <div style="margin-top: 8px">上传图片</div>
-                  </div>
-                </nz-upload>
-                <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null" (nzOnCancel)="previewVisible = false">
-                  <ng-template #modalContent>
-                    <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
-                  </ng-template>
-                </nz-modal>
-              </div>
+            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="norm" nzRequired>店铺后台凭证截图</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请上传店铺凭证截图">
+              <swipe-upload [maxFileListLength]="1" formControlName="image"></swipe-upload>
             </nz-form-control>
           </nz-form-item>
         </section>

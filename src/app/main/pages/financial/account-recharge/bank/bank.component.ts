@@ -104,7 +104,7 @@ export class BankComponent implements OnInit {
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
-      screenshot: ['http://', [Validators.required]],
+      screenshot: [null, [Validators.required]],
       realName: [null, [Validators.required]],
       bankCardNum: [null, [Validators.required, Validators.pattern(/^\d+(\.\d+)?$/)]],
       bankName: [null, [Validators.required]],

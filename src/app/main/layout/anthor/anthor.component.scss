@@ -35,6 +35,18 @@
         &:not(:last-child) {
           margin-right: format(30);
         }
+        .label-text {
+          margin-right: format(5);
+        }
+        &.error {
+          color: #ff4d4f;
+        }
+        &.info {
+          color: #faad14;
+        }
+        &.success {
+          color: #52c41a;
+        }
       }
     }
   }

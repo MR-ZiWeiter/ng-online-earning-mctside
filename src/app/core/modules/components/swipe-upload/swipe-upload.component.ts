@@ -46,7 +46,7 @@ export class SwipeUploadComponent implements OnInit, OnDestroy, ControlValueAcce
   @Input() public maxFileListLength = 1;
   @Input() public coustom = false;
   @Input() public isVideo: boolean = false;
-  @Input() public isReady: boolean = false;
+  @Input() public isPreview: boolean = false;
 
   constructor(
     private systemService: SystemService
@@ -78,6 +78,10 @@ export class SwipeUploadComponent implements OnInit, OnDestroy, ControlValueAcce
 
   /* 处理初始化数据后的数据同步 */
   private handlerInputFilesChange(fileInfo: Array<string>|string) {
+    /* 当数据制空时 */
+    if (!fileInfo) {
+      this.fileList = [];
+    }
     /* 处理是数组时 */
     if (fileInfo instanceof Array) {
       this.fileList = fileInfo.map((item: string) => {
@@ -145,6 +149,7 @@ export class SwipeUploadComponent implements OnInit, OnDestroy, ControlValueAcce
       })
       this.valueChange(urlString);
     }
+    this.fileList = e.fileList;
   }
 
   ngOnDestroy(): void {

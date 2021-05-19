@@ -10,14 +10,13 @@
       <nz-table
         [nzTitle]="tableTitle1"
         #borderedTable
-        [nzLoading]="renderConfig.loading"
         [nzTotal]="renderConfig.total"
         [nzPageSize]="renderConfig.pageSize"
         [nzPageIndex]="renderConfig.pageNum"
         nzBordered
         (nzQueryParams)="onQueryParamsChange($event)"
-        nzBordered
-        [nzData]="renderArray">
+        [nzData]="renderArray"
+        [nzFrontPagination]="false">
         <thead>
           <tr>
             <th nzAlign="center">交易/流水号</th>

@@ -1,36 +1,55 @@
 <section class="check-info-component" *ngIf="orderInfo">
   <section class="context-group">
-    <section class="label-item" nz-row [nzGutter]="[10, 10]">
+    <section class="label-item" nz-row>
       <span class="label-text" nz-col [nzSpan]="8">任务发布时间：</span>
       <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.pushTime}}</span>
     </section>
-    <section class="label-item" nz-row [nzGutter]="[10, 10]">
+    <section class="label-item" nz-row>
       <span class="label-text" nz-col [nzSpan]="8">任务接手时间：</span>
       <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.startTime}}</span>
     </section>
-    <section class="label-item" nz-row [nzGutter]="[10, 10]">
+    <section class="label-item" nz-row>
       <span class="label-text" nz-col [nzSpan]="8">接手人账号：</span>
       <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.accountId}}</span>
     </section>
-    <section class="label-item" nz-row [nzGutter]="[10, 10]">
+    <section class="label-item" nz-row>
       <span class="label-text" nz-col [nzSpan]="8">接手买号：</span>
       <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.account}}</span>
     </section>
-    <section class="label-item" nz-row [nzGutter]="[10, 10]">
+    <section class="label-item" nz-row [ngSwitch]="orderInfo.status">
       <span class="label-text" nz-col [nzSpan]="8">任务当前状态：</span>
-      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.status}}</span>
+      <span class="value-text error" nz-col [nzSpan]="16" *ngSwitchCase="3">待核对</span>
+      <span class="value-text info" nz-col [nzSpan]="16" *ngSwitchCase="4">已过期</span>
+      <span class="value-text error" nz-col [nzSpan]="16" *ngSwitchCase="5">已锁定</span>
+      <span class="value-text success" nz-col [nzSpan]="16" *ngSwitchCase="6">已完成</span>
+      <span class="value-text error" nz-col [nzSpan]="16" *ngSwitchCase="7">申诉中</span>
     </section>
-    <section class="label-item" nz-row [nzGutter]="[10, 10]">
+    <section class="label-item" nz-row>
       <span class="label-text" nz-col [nzSpan]="8">买家下单的订单号：</span>
       <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.orderNo}}</span>
     </section>
-    <section class="label-item" nz-row [nzGutter]="[10, 10]">
+    <section class="label-item" nz-row>
       <span class="label-text" nz-col [nzSpan]="8">买家下单的实付金额：</span>
       <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.paidAmount}}{{orderInfo.paidAmount ? '元' : ''}}</span>
     </section>
-    <section class="label-item" nz-row [nzGutter]="[10, 10]">
+    <section class="label-item" nz-row>
       <span class="label-text" nz-col [nzSpan]="8">做单信息：</span>
-      <swipe-upload [isReady]="true" [ngModel]="orderInfo.goodsVo.image"></swipe-upload>
+      <!-- <swipe-upload [isPreview]="true" [ngModel]="orderInfo.stepComplateVoList.image"></swipe-upload> -->
+      <section class="image-list">
+        <section class="image-item" *ngFor="let item of orderInfo.stepComplateVoList">
+          <span class="title-text">{{item.sort}}、{{item.title}} - {{item.status}}</span>
+          <ng-container *ngIf="item.images.length; else tipRef">
+            <img class="image-item-info" [src]="image" *ngFor="let image of item.images"/>
+          </ng-container>
+          <ng-template #tipRef>
+            <swipe-null-context context="该步凑暂无截图信息"></swipe-null-context>
+          </ng-template>
+        </section>
+      </section>
     </section>
   </section>
+  <footer class="btn-controll" nz-row nzJustify="center">
+    <button type="button" class="custom-btn-sty" nz-button color="primary" nzType="primary" (click)="openConfirmInfo()">确认通过</button>
+    <a (click)="openAppealInfo()" class="primary-color" nzType="text" nz-button color="primary">未通过，去申诉 ></a>
+  </footer>
 </section>

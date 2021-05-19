@@ -27,8 +27,8 @@
       <section nz-row>
         <section nz-col [nzSpan]="24">
           <nz-form-item>
-            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="orderNo">订单编号</nz-form-label>
-            <nz-form-control [nzSm]="14" [nzXs]="24">
+            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="orderNo" nzRequired>订单编号</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入订单编号">
               <input nz-input id="orderNo" formControlName="orderNo" placeholder="请输入订单编号" />
             </nz-form-control>
           </nz-form-item>
@@ -47,8 +47,8 @@
       <section nz-row>
         <section nz-col [nzSpan]="24">
           <nz-form-item>
-            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="description">申诉内容</nz-form-label>
-            <nz-form-control [nzSm]="14" [nzXs]="24">
+            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="description" nzRequired>申诉内容</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入申诉内容">
               <textarea nz-input id="description" placeholder="请输入申诉内容" formControlName="description"></textarea>
             </nz-form-control>
           </nz-form-item>
@@ -57,8 +57,8 @@
       <section nz-row>
         <section nz-col [nzSpan]="24">
           <nz-form-item>
-            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="expecte">期望解决方案</nz-form-label>
-            <nz-form-control [nzSm]="14" [nzXs]="24">
+            <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="expecte" nzRequired>期望解决方案</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入期望解决方案">
               <textarea nz-input placeholder="请输入期望解决方案" id="expecte" formControlName="expecte"></textarea>
             </nz-form-control>
           </nz-form-item>

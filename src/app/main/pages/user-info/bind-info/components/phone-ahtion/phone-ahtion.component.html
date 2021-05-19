@@ -2,21 +2,29 @@
   <nz-form-item nz-row>
     <nz-form-label nz-col [nzSpan]="6" nzFor="mobile" nzRequired>手机号码</nz-form-label>
     <nz-form-control nz-row nz-col [nzSpan]="10" nzErrorTip="手机号码输入有误，请重新输入！">
-      <input nz-col [nzSpan]="24" maxlength="11" placeholder="请输入手机号码" nz-input formControlName="mobile" />
+      <input [readonly]="renderInfo" nz-col [nzSpan]="24" maxlength="11" placeholder="请输入手机号码" nz-input formControlName="mobile" />
     </nz-form-control>
   </nz-form-item>
-  <nz-form-item nz-row>
-    <nz-form-label nz-col [nzSpan]="6" nzFor="smsCode" nzRequired>验证码</nz-form-label>
-    <nz-form-control nz-row nz-col [nzSpan]="6" class="phone-code" nzErrorTip="请输入校验码">
-      <input nz-col [nzSpan]="23" maxlength="6" placeholder="请输入验证码" nz-input formControlName="smsCode"
-        id="smsCode" />
-    </nz-form-control>
-    <nz-form-text nz-col [nzSpan]="4" class="code-btn">重新发送验证码</nz-form-text>
-  </nz-form-item>
-  <nz-form-item nz-row>
-    <nz-form-label nz-col [nzSpan]="6" nzNoColon="true"></nz-form-label>
-    <nz-form-control nz-row nz-col [nzSpan]="10">
-      <button nz-button nzType="primary">确认绑定</button>
-    </nz-form-control>
-  </nz-form-item>
+  <ng-container *ngIf="!renderInfo; else reyRef">
+    <nz-form-item nz-row>
+      <nz-form-label nz-col [nzSpan]="6" nzFor="smsCode" nzRequired>验证码</nz-form-label>
+      <nz-form-control nz-row nz-col [nzSpan]="6" class="phone-code" nzErrorTip="请输入校验码">
+        <input nz-col [nzSpan]="23" maxlength="6" placeholder="请输入验证码" nz-input formControlName="smsCode"
+          id="smsCode" />
+      </nz-form-control>
+      <nz-form-text nz-col [nzSpan]="4" class="code-btn" *ngIf="!refCode.isCode; else codeRef" (click)="openFetchCodeChange()">发送验证码</nz-form-text>
+      <ng-template #codeRef>
+        <nz-form-text nz-col [nzSpan]="4" class="code-btn">{{refCode.code}}S后重新获取</nz-form-text>
+      </ng-template>
+    </nz-form-item>
+    <nz-form-item nz-row>
+      <nz-form-label nz-col [nzSpan]="6" nzNoColon="true"></nz-form-label>
+      <nz-form-control nz-row nz-col [nzSpan]="10">
+        <button nz-button nzType="primary">确认绑定</button>
+      </nz-form-control>
+    </nz-form-item>
+  </ng-container>
+  <ng-template #reyRef>
+    <button nz-button nzType="text" type="button" color="primary" class="label-text" title="请联系客服进行手机号更换">手机号已绑定，如需解绑/换绑请联系客服</button>
+  </ng-template>
 </form>

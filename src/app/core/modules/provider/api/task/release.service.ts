@@ -36,6 +36,18 @@ export class ApiReleaseService {
     });
   }
 
+  // 删除模板
+  asyncFetchTempDeleteInfo(info: any = {}): Observable<any> {
+    return new Observable(observer => {
+      this.http.get('/business/template/delete', info, {}).subscribe((res: ApiResponseModel) => {
+        // console.log(res);
+        observer.next(res);
+      }, err => {
+        observer.error(false);
+      });
+    });
+  }
+
   /* 通过模板ID获取模板详情 */
   asyncFetchTempIdToInfo(info: any = {}): Observable<any> {
     return new Observable(observer => {

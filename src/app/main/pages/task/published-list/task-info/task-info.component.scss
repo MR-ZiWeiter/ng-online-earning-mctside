@@ -1,6 +1,6 @@
 @import 'mixin';
 
-.check-info-component {
+.order-info-component {
   .title-info {
     padding: format(20) 0 format(10);
     .title-text {
@@ -17,7 +17,6 @@
   }
   .context-group {
     .label-item {
-      margin-bottom: format(10);
       .label-text {
         @include sc(format(14), $default_color_9);
         font-weight: 400;
@@ -26,21 +25,7 @@
       .value-text {
         @include sc(format(14), $default_color_6);
         font-weight: 400;
-        &.error {
-          color: #ff4d4f;
-        }
-        &.info {
-          color: #faad14;
-        }
-        &.success {
-          color: #52c41a;
-        }
       }
-    }
-  }
-  .btn-controll {
-    .primary-color {
-      color: $bgColorBtn;
     }
   }
 }

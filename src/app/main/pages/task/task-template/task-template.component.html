@@ -66,9 +66,15 @@
             <!-- <td>{{ data.praiseLimit }}</td> -->
             <td>{{ data.createTime }}</td>
             <td>
-              <a>发布</a>
+              <a nz-popconfirm
+                nzPopconfirmTitle="是否使用该模板进行发布任务？"
+                nzPopconfirmPlacement="bottom"
+                (nzOnConfirm)="openPostTaskConfirm(data)">发布</a>
               <nz-divider nzType="vertical"></nz-divider>
-              <a>删除</a>
+              <a nz-popconfirm
+                nzPopconfirmTitle="是否删除该模板？"
+                nzPopconfirmPlacement="bottom"
+                (nzOnConfirm)="openDeleteConfirm(data)">删除</a>
             </td>
           </tr>
         </tbody>

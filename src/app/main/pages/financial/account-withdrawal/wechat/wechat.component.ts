@@ -24,52 +24,6 @@ export class WechatComponent implements OnInit {
   public selectedValue = null;
 
   public validateForm!: FormGroup;
-  captchaTooltipIcon: NzFormTooltipIcon = {
-    type: 'info-circle',
-    theme: 'twotone'
-  };
-
-  fileList: NzUploadFile[] = [
-    {
-      uid: '-1',
-      name: 'image.png',
-      status: 'done',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-    },
-    {
-      uid: '-2',
-      name: 'image.png',
-      status: 'done',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-    },
-    {
-      uid: '-3',
-      name: 'image.png',
-      status: 'done',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-    },
-    {
-      uid: '-4',
-      name: 'image.png',
-      status: 'done',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-    },
-    {
-      uid: '-xxx',
-      percent: 50,
-      name: 'image.png',
-      status: 'uploading',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
-    },
-    {
-      uid: '-5',
-      name: 'image.png',
-      status: 'error'
-    }
-  ];
-  previewImage: string | undefined = '';
-  previewVisible = false;
-
   private _renderInfo: any = {};
 
   @Input()
@@ -79,6 +33,7 @@ export class WechatComponent implements OnInit {
       setTimeout(() => {
         /* 赋值提交数据 */
         this.validateForm.controls['payAccountId'].setValue(n.id);
+        this.validateForm.controls['qrCodeImage'].setValue(n.qrCodeImage);
       }, 300)
     }
   }
@@ -91,15 +46,6 @@ export class WechatComponent implements OnInit {
     private systemService: SystemService,
     private apiFinancialAccountService: ApiFinancialAccountService
   ) {}
-
-  handlePreview = async (file: NzUploadFile) => {
-    if (!file.url && !file.preview) {
-      file.preview = await getBase64(file.originFileObj!);
-    }
-    this.previewImage = file.url || file.preview;
-    this.previewVisible = true;
-  };
-
 
   submitForm(): void {
     for (const i in this.validateForm.controls) {
@@ -137,7 +83,8 @@ export class WechatComponent implements OnInit {
   ngOnInit(): void {
     this.validateForm = this.fb.group({
       amount: [null, [Validators.required, Validators.pattern(/^\d+(\.\d+)?$/)]],
-      payAccountId: [null, [Validators.required]]
+      payAccountId: [null, [Validators.required]],
+      qrCodeImage: [null]
     });
   }
 

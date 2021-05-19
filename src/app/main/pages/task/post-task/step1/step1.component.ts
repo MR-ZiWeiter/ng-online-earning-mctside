@@ -201,7 +201,7 @@ export class Step1Component extends CoreToolsFunction implements OnInit, Control
       businessTaskOriginalBaseForm: this.fb.group({
         /* businessTaskOriginalBaseForm 任务基础信息 */
         platformId: [null, [Validators.required]],
-        screenshot: [0, [Validators.required]],
+        screenshot: [1, [Validators.required]],
         shopId: [null, [Validators.required]],
         taskQuantity: [null, [Validators.required]],
         /* END */

@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { Observable, Observer } from 'rxjs';
+import { ApiUserAccountService } from 'src/app/core/modules/provider/api';
+import { SystemService } from 'src/app/core/services/system/system.service';
 @Component({
   selector: 'swipe-bind-we-chat',
   templateUrl: './bind-weChat.component.html',
@@ -12,13 +14,34 @@ export class BindWeChatComponent implements OnInit {
   validateForm!: FormGroup;
   loading = false;
   avatarUrl?: string;
-  // tslint:disable-next-line:typedef
+  public _renderInfo: any;
+  @Input()
+  public set renderInfo(n: any) {
+    console.log(n)
+    this._renderInfo = n;
+  }
+  public get renderInfo() {
+    return this._renderInfo;
+  }
+  @Output() private reloadChange: EventEmitter<any> = new EventEmitter<any>();
+  constructor(
+    private fb: FormBuilder,
+    private systemService: SystemService,
+    private apiUserAccountService: ApiUserAccountService) {}
   ngOnInit() {
-    this.validateForm = this.fb.group({
-      account: [null, [Validators.required]],
-      imageUrl: [null, [Validators.required]],
-      realName: [null, [Validators.required]],
-    });
+    if (this.renderInfo) {
+      this.validateForm = this.fb.group({
+        account: [this.renderInfo.account, [Validators.required]],
+        imageUrl: [this.renderInfo.imageUrl, [Validators.required]],
+        realName: [this.renderInfo.realName, [Validators.required]],
+      });
+    } else {
+      this.validateForm = this.fb.group({
+        account: [null, [Validators.required]],
+        imageUrl: [null, [Validators.required]],
+        realName: [null, [Validators.required]],
+      });
+    }
   }
   submitForm(): void {
     // tslint:disable-next-line:forin
@@ -26,51 +49,15 @@ export class BindWeChatComponent implements OnInit {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
     }
-  }
-  constructor(private fb: FormBuilder, private msg: NzMessageService) {}
-
-  beforeUpload = (file: NzUploadFile, _fileList: NzUploadFile[]) => {
-    return new Observable((observer: Observer<boolean>) => {
-      const isJpgOrPng =
-        file.type === 'image/jpeg' || file.type === 'image/png';
-      if (!isJpgOrPng) {
-        this.msg.error('You can only upload JPG file!');
-        observer.complete();
-        return;
-      }
-      const isLt2M = file.size! / 1024 / 1024 < 2;
-      if (!isLt2M) {
-        this.msg.error('Image must smaller than 2MB!');
-        observer.complete();
-        return;
-      }
-      observer.next(isJpgOrPng && isLt2M);
-      observer.complete();
-    });
-  };
-
-  private getBase64(img: File, callback: (img: string) => void): void {
-    const reader = new FileReader();
-    reader.addEventListener('load', () => callback(reader.result!.toString()));
-    reader.readAsDataURL(img);
-  }
-
-  handleChange(info: { file: NzUploadFile }): void {
-    switch (info.file.status) {
-      case 'uploading':
-        this.loading = true;
-        break;
-      case 'done':
-        // Get this url from response in real world.
-        this.getBase64(info.file!.originFileObj!, (img: string) => {
-          this.loading = false;
-          this.avatarUrl = img;
-        });
-        break;
-      case 'error':
-        this.msg.error('Network error');
-        this.loading = false;
-        break;
+    if (this.validateForm.valid) {
+      this.apiUserAccountService.asyncUpdateAccountWechatInfo(this.validateForm.value).subscribe(res => {
+        this.systemService.presentToast('保存微信信息成功!', 'success');
+        this.reloadChange.emit();
+      })
+    } else {
+      this.systemService.presentToast('请完善表单后提交', 'error');
     }
   }
+
+
 }

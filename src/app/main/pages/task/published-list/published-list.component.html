@@ -56,9 +56,28 @@
             <span class="status-text" *ngSwitchCase="6">已锁定</span>
           </section>
           <section class="task-handler">
-            <button class="handler-btn" nz-button nzType="text">详情</button>
-            <button class="handler-btn" nz-button nzType="text">删除</button>
-            <button class="handler-btn" nz-button nzType="text">下架</button>
+            <button class="handler-btn" nz-button nzType="text" (click)="openTaskDetail(item)">详情</button>
+            <button
+              nz-popconfirm
+              nzPopconfirmTitle="是否删除当前任务？"
+              nzPopconfirmPlacement="bottom"
+              (nzOnConfirm)="confirmChange('onDeleteTaskInfo', item)"
+              class="handler-btn" nz-button nzType="text">删除</button>
+            <button
+              *ngIf="!item.shelves; else putawayRef"
+              nz-popconfirm
+              nzPopconfirmTitle="是否下架当前任务？"
+              nzPopconfirmPlacement="bottom"
+              (nzOnConfirm)="confirmChange('onUnshelveTaskInfo', item)"
+              class="handler-btn" nz-button nzType="text">下架</button>
+            <ng-template #putawayRef>
+              <button
+                nz-popconfirm
+                nzPopconfirmTitle="是否上架当前任务？"
+                nzPopconfirmPlacement="bottom"
+                (nzOnConfirm)="confirmChange('onPutawayTaskInfo', item)"
+                class="handler-btn" nz-button nzType="text">上架</button>
+            </ng-template>
           </section>
         </section>
         <section class="footer-info">

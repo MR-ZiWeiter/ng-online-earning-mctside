@@ -18,7 +18,8 @@
             </nz-form-item>
           </section>
         </section>
-        <section nz-row>
+        <!-- 注解：暂时取消是否截图功能 -->
+        <section nz-row *ngIf="false">
           <section nz-col [nzSpan]="24">
             <nz-form-item>
               <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="screenshot" nzRequired>是否截图</nz-form-label>

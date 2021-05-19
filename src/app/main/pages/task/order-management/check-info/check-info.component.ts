@@ -1,3 +1,6 @@
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { SystemService } from 'src/app/core/services/system/system.service';
+import { Router } from '@angular/router';
 import { Component, Input, OnInit } from '@angular/core';
 import { ApiTaskIndexService } from 'src/app/core/modules/provider/api';
 
@@ -24,6 +27,9 @@ export class CheckInfoComponent implements OnInit {
   }
 
   constructor(
+    private router: Router,
+    private systemService: SystemService,
+    private nzModalService: NzModalService,
     private apiTaskIndexService: ApiTaskIndexService
   ) { }
 
@@ -35,4 +41,20 @@ export class CheckInfoComponent implements OnInit {
     })
   }
 
+
+  /*  确认通过 */
+  public openConfirmInfo() {
+    this.apiTaskIndexService.asyncFetchCheckPassInfo({
+      taskId: this._renderInfo.id
+    }).subscribe(res => {
+      this.systemService.presentToast('核对通过', 'success');
+      this.nzModalService.closeAll();
+    })
+  }
+
+  /* 跳转申诉页面 */
+  public openAppealInfo() {
+    this.router.navigate(['/main/appeal/new-appeal', { orderNO: this.orderInfo.orderNo }]);
+    this.nzModalService.closeAll();
+  }
 }

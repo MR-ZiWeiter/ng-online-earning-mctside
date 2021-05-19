@@ -24,7 +24,7 @@ export class MenuComponent implements OnInit {
       { name: '提现明细', id: '1-5' , path: 'financial/withdrawal-details'},
      ] },
      { title: '我的申诉', icon: 'comment' , list: [
-      { name: '发现申诉', id: '2-1' , path: 'appeal/new-appeal'},
+      { name: '发起申诉', id: '2-1' , path: 'appeal/new-appeal'},
       { name: '我发起的申诉', id: '2-2' , path: 'appeal/my-appeal'},
       { name: '我收到的申诉', id: '2-3' , path: 'appeal/received-appeal'},
      ] },

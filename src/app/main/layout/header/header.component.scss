@@ -20,6 +20,7 @@
       .header-name {
         @include flex-justify-align();
         @include sc(format(20), $default_color);
+        @include click-active();
         span {
           margin-right: format(8);
           &:last-child {
@@ -28,7 +29,7 @@
           }
         }
       }
-    } 
+    }
     .header-container-right {
       @include flex-justify-align();
       @include sc(format(16), $default_color);

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { SystemService } from './../../../../../../core/services/system/system.service';
+import { ApiUserAccountService } from 'src/app/core/modules/provider/api';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
@@ -13,20 +15,49 @@ export class BindZfbComponent implements OnInit {
   validateForm!: FormGroup;
   loading = false;
   avatarUrl?: string;
-
-  constructor(private fb: FormBuilder, private msg: NzMessageService) {}
+  public _renderInfo: any;
+  @Input()
+  public set renderInfo(n: any) {
+    // console.log(n)
+    this._renderInfo = n;
+  }
+  public get renderInfo() {
+    return this._renderInfo;
+  }
+  @Output() private reloadChange: EventEmitter<any> = new EventEmitter<any>();
+  constructor(
+    private fb: FormBuilder,
+    private systemService: SystemService,
+    private apiUserAccountService: ApiUserAccountService
+  ) {}
 
   ngOnInit() {
-    this.validateForm = this.fb.group({
-      account: [null, [Validators.required]],
-      realName: [null, [Validators.required]]
-    });
+    if (this.renderInfo) {
+      this.validateForm = this.fb.group({
+        account: [this.renderInfo.account, [Validators.required]],
+        realName: [this.renderInfo.realName, [Validators.required]]
+      });
+    } else {
+      this.validateForm = this.fb.group({
+        account: [null, [Validators.required]],
+        realName: [null, [Validators.required]]
+      });
+    }
   }
   submitForm(): void {
     // tslint:disable-next-line:forin
     for (const i in this.validateForm.controls) {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
+    }
+    if (this.validateForm.valid) {
+      this.apiUserAccountService.asyncUpdateAccountAlipayInfo(this.validateForm.value).subscribe(res => {
+        // console.log(res);
+        this.systemService.presentToast('保存支付宝信息成功!', 'success');
+        this.reloadChange.emit();
+      })
+    } else {
+      this.systemService.presentToast('请完善表单后提交', 'error');
     }
   }
 }

@@ -2,40 +2,28 @@
   <nz-form-item>
     <nz-form-label  [nzSm]="4" [nzXs]="12"  nzFor="realName">姓名</nz-form-label>
     <nz-form-control nz-row [nzSm]="14" [nzXs]="24" nzErrorTip="请输入真实姓名">
-      <input nz-col [nzSpan]="10" nz-input formControlName="realName" id="realName" placeholder="请输入真实姓名"/>
+      <input [readonly]="renderInfo" nz-col [nzSpan]="10" nz-input formControlName="realName" id="realName" placeholder="请输入真实姓名"/>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
     <nz-form-label  [nzSm]="4" [nzXs]="12"  nzFor="account">微信号</nz-form-label>
     <nz-form-control nz-row [nzSm]="14" [nzXs]="24" nzErrorTip="请输入微信号">
-      <input nz-col [nzSpan]="10"  nz-input formControlName="account" id="account" placeholder="请输入微信号"/>
+      <input [readonly]="renderInfo" nz-col [nzSpan]="10"  nz-input formControlName="account" id="account" placeholder="请输入微信号"/>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-label  [nzSm]="4" [nzXs]="12"  nzFor="email">上传微信二维码</nz-form-label>
+    <nz-form-label  [nzSm]="4" [nzXs]="12"  nzFor="email">微信二维码</nz-form-label>
     <nz-form-control nz-row [nzSm]="14" [nzXs]="24">
-      <div class="uplaod-content">
-        <nz-upload
-        class="avatar-uploader"
-        nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-        nzName="avatar"
-        nzListType="picture-card"
-        [nzShowUploadList]="false"
-        [nzBeforeUpload]="beforeUpload"
-        (nzChange)="handleChange($event)"
-      >
-        <ng-container *ngIf="!avatarUrl">
-          <button  [nzGhost]="true" nz-button  nzType="primary">点击上传</button>
-        </ng-container>
-        <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%" />
-      </nz-upload>
-      </div>
+      <swipe-upload [isPreview]="!renderInfo" [maxFileListLength]="1" formControlName="imageUrl"></swipe-upload>
     </nz-form-control>
   </nz-form-item>
-  <nz-form-item  >
+  <nz-form-item *ngIf="!renderInfo; else reyRef">
     <nz-form-label  [nzSm]="4" nzNoColon="true"></nz-form-label>
     <nz-form-control   nz-row [nzSm]="14" [nzXs]="24" nzErrorTip="">
       <button type="submit" nz-button nzType="primary">确认绑定</button>
     </nz-form-control>
   </nz-form-item>
+  <ng-template #reyRef>
+    <button nz-button nzType="text" type="button" color="primary" class="label-text" title="请联系客服进行微信认证">微信已绑定，如需解绑/换绑请联系客服</button>
+  </ng-template>
 </form>

@@ -52,8 +52,8 @@ export class HttpService {
    * @param paramMap //
    * @param header //
    */
-   put(url: string, paramMap: {} = {}, header: {} = {}): Observable<ApiResponseModel> {
-    return this.sendRequest(url, paramMap, RequestMethods.PUT, header);
+   put(url: string, paramMap: {} = {}, header: {} = {}, body?: any): Observable<ApiResponseModel> {
+    return this.sendRequest(url, paramMap, RequestMethods.PUT, header, body);
   }
 
   /**
@@ -112,9 +112,9 @@ export class HttpService {
     url: string,
     paramMap: any = {},
     method: RequestMethods = RequestMethods.GET,
-    header: {} = {},
+    header: any = {},
     body?: any): Observable<ApiResponseModel> {
-    if (url.includes('http://') || url.includes('https://')) {
+    if (url.includes('http://') || url.includes('https://') || header?.isLocal) {
       this.logger.log('其他请求地址');
     } else {
       url = environment.API_URL + url;

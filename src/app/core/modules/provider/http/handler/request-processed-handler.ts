@@ -1,4 +1,4 @@
-import { HttpResponse } from '@angular/common/http';
+import { HttpResponse, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 /* 服务注入 */
 import { SystemService } from 'src/app/core/services/system/system.service';
@@ -15,6 +15,11 @@ export class RequestProcessedHandler {
 
   handle(req: HttpResponse<any>): any {
     // return req;
+    // console.log(req)
+    if (req.url?.includes('.json')) {
+      return req
+    }
+    // if () {}
     if (req.body && req.body.reCode === 'SUCCESS') {
       console.log('成功请求...');
       return req;

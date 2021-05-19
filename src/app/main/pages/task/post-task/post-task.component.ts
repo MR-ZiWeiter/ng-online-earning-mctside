@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { Router, ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
 import { CoreToolsFunction } from 'src/app/core/core.tools';
 import { SystemService } from 'src/app/core/services/system/system.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -69,10 +69,17 @@ export class PostTaskComponent extends CoreToolsFunction implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
+    private activatedRoute: ActivatedRoute,
     private systemService: SystemService,
     private apiReleaseService: ApiReleaseService
   ) {
     super();
+    // console.log(activatedRoute)
+    activatedRoute.params.subscribe(renderInfo => {
+      if (renderInfo.tempID) {
+        this.selectTempChange(renderInfo.tempID);
+      }
+    })
     this.initalConfigInfo();
   }
 
@@ -101,13 +108,6 @@ export class PostTaskComponent extends CoreToolsFunction implements OnInit {
       } else {
         task2.push(item);
       }
-      // if (this.roleConfig.rule1.includes(item.code)) {
-      //   task1.push(item);
-      // } else if (this.roleConfig.rule2.includes(item.code)) {
-      //   task2.push(item);
-      // } else {
-      //   task3.push(item);
-      // }
     })
     this.taskTemp = {task1, task2, task3};
   }
@@ -120,7 +120,7 @@ export class PostTaskComponent extends CoreToolsFunction implements OnInit {
     }).subscribe(res => {
       // console.log(res);
       const cloneReSult = this.handerResultTempChange(res.rel);
-      console.log(cloneReSult)
+      // console.log(cloneReSult)
       this.validateForm.controls['step1'].setValue(cloneReSult);
       this.validateForm.controls['step2'].setValue(cloneReSult);
       this.validateForm.controls['step3'].setValue(cloneReSult);
@@ -128,14 +128,7 @@ export class PostTaskComponent extends CoreToolsFunction implements OnInit {
       this.validateForm.controls['step5'].setValue(cloneReSult);
       this.validateForm.controls['step6'].setValue(cloneReSult);
 
-      // this.validateForm.addControl('step1', new FormControl(res.rel));
-      // this.validateForm.addControl('step2', new FormControl(res.rel));
-      // this.validateForm.addControl('step3', new FormControl(res.rel));
-      // this.validateForm.addControl('step4', new FormControl(res.rel));
-      // this.validateForm.addControl('step5', new FormControl(res.rel));
-      // this.validateForm.addControl('step6', new FormControl(res.rel));
-
-      console.log(this.validateForm)
+      // console.log(this.validateForm)
     })
   }
 

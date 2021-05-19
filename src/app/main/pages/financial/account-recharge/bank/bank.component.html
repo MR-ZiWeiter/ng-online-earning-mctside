@@ -114,26 +114,8 @@
           <nz-form-item>
             <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24" nzFor="norm" nzRequired>转账记录截图</nz-form-label>
             <nz-form-control [nzSm]="14" [nzXs]="24">
-              <div class="clearfix">
-                <nz-upload
-                  nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                  nzListType="picture-card"
-                  [(nzFileList)]="fileList"
-                  [nzShowButton]="fileList.length < 8"
-                  [nzPreview]="handlePreview"
-                >
-                  <div>
-                    <i nz-icon nzType="plus"></i>
-                    <div style="margin-top: 8px">点击上传</div>
-                  </div>
-                </nz-upload>
-                <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null" (nzOnCancel)="previewVisible = false">
-                  <ng-template #modalContent>
-                    <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
-                  </ng-template>
-                </nz-modal>
-                <button nz-button disabled nzType="text">注：为提高查账速度，可选提交截图（截图要求：清晰看到打款时间和金额）</button>
-              </div>
+              <swipe-upload [maxFileListLength]="1" formControlName="screenshot"></swipe-upload>
+              <button nz-button disabled nzType="text">注：为提高查账速度，可选提交截图（截图要求：清晰看到打款时间和金额）</button>
             </nz-form-control>
           </nz-form-item>
         </section>

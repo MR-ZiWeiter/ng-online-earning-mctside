@@ -4,6 +4,7 @@ import { UserService } from 'src/app/core/services/user/user.service';
 import { SystemService } from 'src/app/core/services/system/system.service';
 import { ApiUserAccountService } from 'src/app/core/modules/provider/api';
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
+import { environment } from '@app/env';
 
 @Component({
   selector: 'swipe-change-pwd',
@@ -15,10 +16,7 @@ export class ChangePwdComponent implements OnInit {
   public selectedValue = null;
 
   public validateForm!: FormGroup;
-  captchaTooltipIcon: NzFormTooltipIcon = {
-    type: 'info-circle',
-    theme: 'twotone'
-  };
+  public imageCodeToken!: string;
 
   public basicInfo: any = {};
 
@@ -34,6 +32,15 @@ export class ChangePwdComponent implements OnInit {
         this.basicInfo = renderInfo;
       }
     })
+  }
+
+  /* 获取图形验证码 */
+  public switchImageCodeTokenEvent() {
+    const imageCodeToken = Math.random() * 999999999 | 0;
+    this.validateForm.controls['imageCode'].setValue(null);
+    this.validateForm.controls['imageCodeToken'].setValue(imageCodeToken);
+    this.imageCodeToken = `${environment.API_URL}/open/kaptcha/image-code/${imageCodeToken}`;
+    return this.imageCodeToken;
   }
 
   submitForm(): void {
@@ -64,10 +71,6 @@ export class ChangePwdComponent implements OnInit {
     return {};
   };
 
-  getCaptcha(e: MouseEvent): void {
-    e.preventDefault();
-  }
-
   ngOnInit(): void {
     this.validateForm = this.fb.group({
       accountType: [3],
@@ -78,5 +81,6 @@ export class ChangePwdComponent implements OnInit {
       imageCode: [null, [Validators.required]],
       imageCodeToken: [null, [Validators.required]],
     });
+    this.switchImageCodeTokenEvent();
   }
 }

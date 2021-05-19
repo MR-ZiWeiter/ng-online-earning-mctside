@@ -14,7 +14,7 @@ export class WithdrawalDetailsComponent implements OnInit {
 
   public renderConfig: any = {
     pageNum: 1,
-    pageSize: 20,
+    pageSize: 10,
     total: 0,
     loading: true
   }
@@ -25,7 +25,7 @@ export class WithdrawalDetailsComponent implements OnInit {
     private fb: FormBuilder,
     private apiFinancialService: ApiFinancialService
   ) {
-    this.fetchFinancialWithdrawalInfo();
+    // this.fetchFinancialWithdrawalInfo();
   }
 
   public fetchFinancialWithdrawalInfo() {

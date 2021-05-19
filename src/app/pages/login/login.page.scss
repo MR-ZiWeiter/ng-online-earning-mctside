@@ -1,14 +1,15 @@
 @import 'mixin';
 .login-page {
   @include wh(100vw, 100vh);
-  @include flex-justify-align();
+  @include flex-justify-align(center, center);
   transition: all ease 0.5s;
+  position: relative;
 }
 
 .login-bg {
   transition: all ease 0.5s;
   height: 100%;
-  flex: 2;
+  flex: 1;
   img {
     @include wh(100%, 100%);
     object-fit: cover;
@@ -17,9 +18,11 @@
 .login-form-container {
   @include flex-justify-align(center,center);
   transition: all ease 0.5s;
-  flex: 1;
-  height: 100%;
+  position: absolute;
   min-width: format(375);
+  background-color: $default_color;
+  padding: format(30) 0 format(30);
+  border-radius: format(5);
   .login-form {
     // max-width: 300px;
     min-width: format(330);
