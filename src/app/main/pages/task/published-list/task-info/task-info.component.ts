@@ -30,7 +30,7 @@ export class TaskInfoComponent implements OnInit {
   ngOnInit() {}
 
   private initalOrderInfo(taskId: string) {
-    this.apiTaskIndexService.asyncFetchOrderDetail({taskId}).subscribe(res => {
+    this.apiTaskIndexService.asyncFetchTaskDetail({taskId}).subscribe(res => {
       this.orderInfo = res.rel;
     })
   }

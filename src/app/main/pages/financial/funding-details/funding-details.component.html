@@ -62,12 +62,12 @@
         <tbody>
           <tr *ngFor="let data of borderedTable.data" [ngSwitch]="data.groupCode">
             <td nzAlign="center">{{ data.createTime }}</td>
-            <td nzAlign="center">{{ data.direction === 1 ? data.amount : '/' }}</td>
-            <td nzAlign="center">{{ data.direction === 2 ? data.amount : '/' }}</td>
+            <td nzAlign="center">{{ data.direction === 1 ? (data.amount|price) : '/' }}</td>
+            <td nzAlign="center">{{ data.direction === 2 ? (data.amount|price) : '/' }}</td>
             <td nzAlign="center" *ngSwitchCase="'withdraw'">提现</td>
             <td nzAlign="center" *ngSwitchCase="'recharge'">充值</td>
             <td nzAlign="center" *ngSwitchCase="'commission'">佣金</td>
-            <td nzAlign="center">{{ data.afterBalance }}</td>
+            <td nzAlign="center">{{ data.afterBalance|price }}</td>
             <td nzAlign="center">{{ data.outTradeNo }}</td>
             <td nzAlign="center">{{ data.remark }}</td>
           </tr>

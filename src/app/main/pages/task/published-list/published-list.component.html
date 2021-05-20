@@ -29,7 +29,7 @@
     <section class="context-list">
       <section class="task-carc-info" *ngFor="let item of renderArray">
         <section class="header-info">
-          <span class="lable-text">订单编号：{{item.taskCode}}</span>
+          <span class="lable-text">任务编号：{{item.taskCode}}</span>
           <span class="time-text">发布时间：{{item.createTime}}</span>
         </section>
         <section class="content-info">
@@ -80,9 +80,9 @@
             </ng-template>
           </section>
         </section>
-        <section class="footer-info">
-          <span class="lable-text">任务编号：232030232385143</span>
-        </section>
+        <!-- <section class="footer-info">
+          <span class="lable-text">任务编号：{{item.taskCode}}</span>
+        </section> -->
       </section>
     </section>
     <nz-pagination class="custom-pagination" [nzPageIndex]="renderConfig.pageNum" [nzPageSize]="renderConfig.pageSize" [nzTotal]="renderConfig.total" nzShowQuickJumper (nzPageIndexChange)="onPageIndexChange($event)" (nzPageSizeChange)="onPageSizeChange($event)"></nz-pagination>

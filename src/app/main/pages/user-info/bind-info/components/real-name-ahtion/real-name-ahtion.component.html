@@ -11,7 +11,7 @@
     <div nz-col [nzSpan]="12">
       <nz-form-item nz-row>
         <nz-form-label nz-col [nzSpan]="6" nzFor="idCardNum">身份证号码</nz-form-label>
-        <nz-form-control class="input-controll" nz-row nz-col [nzSpan]="18" nzErrorTip="请输入身份证号码">
+        <nz-form-control class="input-controll" nz-row nz-col [nzSpan]="18" nzErrorTip="请输入正确的身份证号码">
           <input [readonly]="renderInfo" class="inpt" nz-col [nzSpan]="24" id="idCardNum" maxlength="18" placeholder="请输入身份证号码" nz-input
             formControlName="idCardNum" />
         </nz-form-control>
@@ -34,7 +34,7 @@
           <div class="card">
             <swipe-upload [coustom]="true" formControlName="mainPhotoUrl">
               <div class="car-content">
-                <button class="btn" >点击上传</button>
+                <button type="button" class="btn" >点击上传</button>
               </div>
               <div class="image-list" name="fileList" (click)="clearFile('mainPhotoUrl')">
                 <img class="image" [src]="validateForm.value.mainPhotoUrl"/>
@@ -59,7 +59,7 @@
           <div class="card">
             <swipe-upload [coustom]="true" formControlName="reversePhotoUrl">
               <div class="car-content">
-                <button class="btn" >点击上传</button>
+                <button type="button" class="btn" >点击上传</button>
               </div>
               <div class="image-list" name="fileList" (click)="clearFile('reversePhotoUrl')">
                 <img class="image" [src]="validateForm.value.reversePhotoUrl"/>
@@ -84,7 +84,7 @@
           <div class="card">
             <swipe-upload [coustom]="true" formControlName="handPhotoUrl">
               <div class="car-content">
-                <button class="btn" >点击上传</button>
+                <button type="button" class="btn" >点击上传</button>
               </div>
               <div class="image-list" name="fileList" (click)="clearFile('handPhotoUrl')">
                 <img class="image" [src]="validateForm.value.handPhotoUrl"/>

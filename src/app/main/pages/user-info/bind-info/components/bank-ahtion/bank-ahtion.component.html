@@ -22,7 +22,7 @@
   </nz-form-item>
   <nz-form-item nz-row>
     <nz-form-label nz-col [nzSpan]="6" nzFor="bankCardNum">银行卡号</nz-form-label>
-    <nz-form-control nz-row nz-col [nzSpan]="18" nzErrorTip="请输入银行卡号">
+    <nz-form-control nz-row nz-col [nzSpan]="18" nzErrorTip="请输入正确的银行卡号">
       <input class="inpt" [readonly]="renderInfo" nz-col [nzSpan]="10" placeholder="请输入银行卡号" nz-input formControlName="bankCardNum" />
     </nz-form-control>
   </nz-form-item>
@@ -42,13 +42,13 @@
   </nz-form-item>
   <nz-form-item nz-row>
     <nz-form-label nz-col [nzSpan]="6" nzFor="branchBankName">支行名称</nz-form-label>
-    <nz-form-control nz-row nz-col [nzSpan]="18" nzErrorTip="请输入支行名称">
+    <nz-form-control nz-row nz-col [nzSpan]="18" nzErrorTip="请输入正确的支行名称">
       <input [readonly]="renderInfo" class="inpt" nz-col [nzSpan]="10" placeholder="支行名称" nz-input formControlName="branchBankName" />
     </nz-form-control>
   </nz-form-item>
   <nz-form-item nz-row>
     <nz-form-label nz-col [nzSpan]="6" nzFor="mobile">开户手机号</nz-form-label>
-    <nz-form-control nz-row nz-col [nzSpan]="18" nzErrorTip="请输入开户手机号">
+    <nz-form-control nz-row nz-col [nzSpan]="18" nzErrorTip="请输入正确的开户手机号">
       <input [readonly]="renderInfo" class="inpt" nz-col [nzSpan]="10" maxlength="11" placeholder="请输入开户手机号" nz-input formControlName="mobile" />
     </nz-form-control>
   </nz-form-item>

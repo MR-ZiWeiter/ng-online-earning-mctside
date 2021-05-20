@@ -38,11 +38,13 @@ export class TaskWindowComponent extends CoreToolsFunction implements OnInit {
     }
     let commission = 0;
     submitForm.requiresForms && submitForm.requiresForms.map((item: any) => {
+      // console.log(item.tagType)
       switch(item.tagType) {
         case 2:
         case 3:
           item.requiresRuleItemVos.some((childItem: any) => {
-            if (childItem.id === item.selected) {
+            // console.log(childItem,item)
+            if (childItem.id === item.selectedItemId) {
               commission += childItem.fees
               return true
             }
@@ -51,13 +53,14 @@ export class TaskWindowComponent extends CoreToolsFunction implements OnInit {
           break;
         case 4:
           item.requiresRuleItemVos.map((childItem: any) => {
-            if (item.selected.include(childItem.id)) {
+            if (item.selectedItemId.include(childItem.id)) {
               commission += childItem.fees
             }
           })
           break;
       }
     })
+    // console.log(commission)
     if (submitForm.baseFess) {
       this.taskInfo.baseFess = submitForm.baseFess || 0;
     }

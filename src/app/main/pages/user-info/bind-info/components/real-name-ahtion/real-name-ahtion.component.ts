@@ -28,13 +28,23 @@ export class RealNameAhtionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.validateForm = this.fb.group({
-      realName: [this.renderInfo.realName, [Validators.required]],
-      idCardNum: [this.renderInfo.idCardNum, [Validators.required]],
-      handPhotoUrl: [this.renderInfo.handPhotoUrl, [Validators.required]],
-      mainPhotoUrl: [this.renderInfo.mainPhotoUrl, [Validators.required]],
-      reversePhotoUrl: [this.renderInfo.reversePhotoUrl, [Validators.required]],
-    });
+    if (this.renderInfo) {
+      this.validateForm = this.fb.group({
+        realName: [this.renderInfo.realName, [Validators.required, Validators.pattern(/^([\u4e00-\u9fa5\·]{1,10})$/)]],
+        idCardNum: [this.renderInfo.idCardNum, [Validators.required, Validators.pattern(/^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/)]],
+        handPhotoUrl: [this.renderInfo.handPhotoUrl, [Validators.required]],
+        mainPhotoUrl: [this.renderInfo.mainPhotoUrl, [Validators.required]],
+        reversePhotoUrl: [this.renderInfo.reversePhotoUrl, [Validators.required]],
+      });
+    } else {
+      this.validateForm = this.fb.group({
+        realName: [null, [Validators.required, Validators.pattern(/^([\u4e00-\u9fa5\·]{1,10})$/)]],
+        idCardNum: [null, [Validators.required, Validators.pattern(/^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/)]],
+        handPhotoUrl: [null, [Validators.required]],
+        mainPhotoUrl: [null, [Validators.required]],
+        reversePhotoUrl: [null, [Validators.required]],
+      });
+    }
   }
   public submitForm(): void {
     // tslint:disable-next-line:forin

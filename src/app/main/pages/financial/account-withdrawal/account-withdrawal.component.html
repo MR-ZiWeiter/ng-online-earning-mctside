@@ -9,7 +9,7 @@
           <nz-form-item>
             <nz-form-label [nzNoColon]="true" [nzSm]="5" [nzXs]="24">账户余额</nz-form-label>
             <nz-form-control>
-              <span>￥{{renderInfo.availableBalance}}</span>
+              <span>￥{{renderInfo.availableBalance|price}}</span>
             </nz-form-control>
           </nz-form-item>
         </section>

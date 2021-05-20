@@ -61,9 +61,9 @@ export class NewAppealComponent implements OnInit {
     ngOnInit(): void {
       this.validateForm = this.fb.group({
         title: [null, [Validators.required]],
-        target: [null, [Validators.required]],
-        orderNo: [null, [Validators.required]],
-        isLock: [false, [Validators.required]],
+        // target: [null, [Validators.required]],
+        taskCode: [null, [Validators.required]],
+        // isLock: [false, [Validators.required]],
         description: [null, [Validators.required]],
         expecte: [null, [Validators.required]]
       });

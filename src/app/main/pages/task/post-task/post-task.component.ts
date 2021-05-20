@@ -23,6 +23,9 @@ export class PostTaskComponent extends CoreToolsFunction implements OnInit {
 
   public validateForm!: FormGroup;
 
+  /* 加载中 */
+  public isSpinning: boolean = false;
+
   /* 选中模板的类型 */
   public tempSelected: any = null;
   /* 模板列表 */
@@ -184,6 +187,7 @@ export class PostTaskComponent extends CoreToolsFunction implements OnInit {
     this.deepCheckForm(this.validateForm)
     // console.log(this.validateForm)
     if (this.validateForm.valid) {
+      this.isSpinning = true;
       let submitForm: any = {};
       for(const key in this.validateForm.value) {
         // Object.assign(submitForm, this.validateForm.value[key]);
@@ -196,7 +200,7 @@ export class PostTaskComponent extends CoreToolsFunction implements OnInit {
           case 2:
           case 3:
             item.requiresRuleItemVos.some((childItem: any) => {
-              if (childItem.id === item.selected) {
+              if (childItem.id === item.selectedItemId) {
                 commission += childItem.fees
                 return true
               }
@@ -205,7 +209,7 @@ export class PostTaskComponent extends CoreToolsFunction implements OnInit {
             break;
           case 4:
             item.requiresRuleItemVos.map((childItem: any) => {
-              if (item.selected.include(childItem.id)) {
+              if (item.selectedItemId.include(childItem.id)) {
                 commission += childItem.fees
               }
             })
@@ -218,6 +222,9 @@ export class PostTaskComponent extends CoreToolsFunction implements OnInit {
       this.apiReleaseService.asyncPostMewTaskInfo(submitForm).subscribe(res => {
         this.systemService.presentToast('发布任务成功', 'success');
         this.router.navigate(['/main/task/published-list']);
+        this.isSpinning = false;
+      }, error => {
+        this.isSpinning = false;
       })
     } else {
       this.systemService.presentToast('请完善表单后再试，谢谢配合', 'info');

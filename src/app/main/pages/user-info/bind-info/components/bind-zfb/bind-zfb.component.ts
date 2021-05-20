@@ -39,8 +39,8 @@ export class BindZfbComponent implements OnInit {
       });
     } else {
       this.validateForm = this.fb.group({
-        account: [null, [Validators.required]],
-        realName: [null, [Validators.required]]
+        account: [null, [Validators.required, Validators.pattern(/^1{1}[3-9]{1}[0-9]{9}$|^(\w+((-\w+)|(\.\w+))*)\+\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/)]],
+        realName: [null, [Validators.required, Validators.pattern(/^([\u4e00-\u9fa5\·]{1,10})$/)]]
       });
     }
   }

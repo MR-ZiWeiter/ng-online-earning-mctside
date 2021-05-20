@@ -30,6 +30,9 @@ export class ChangePwdComponent implements OnInit {
       // console.log(renderInfo)
       if (renderInfo) {
         this.basicInfo = renderInfo;
+        if (this.validateForm && this.validateForm.controls['identifier']) {
+          this.validateForm.controls['identifier'].setValue(renderInfo.phone || renderInfo.realName);
+        }
       }
     })
   }
@@ -51,10 +54,22 @@ export class ChangePwdComponent implements OnInit {
     if (this.validateForm.valid) {
       this.apiUserAccountService.asyncFetchAccountPwdChange(this.validateForm.value).subscribe(res => {
         this.systemService.presentToast('修改成功', 'success');
+        this.resetForm();
+        this.switchImageCodeTokenEvent();
+      }, err => {
+        this.switchImageCodeTokenEvent();
       })
     } else {
       this.systemService.presentToast('请完善表单后提交', 'error');
     }
+  }
+
+  /* 重置数据 */
+  public resetForm() {
+    this.validateForm.controls['credential'].setValue(null);
+    this.validateForm.controls['newCredential'].setValue(null);
+    this.validateForm.controls['checkPassword'].setValue(null);
+    this.validateForm.controls['imageCode'].setValue(null);
   }
 
   updateConfirmValidator(): void {
@@ -74,7 +89,7 @@ export class ChangePwdComponent implements OnInit {
   ngOnInit(): void {
     this.validateForm = this.fb.group({
       accountType: [3],
-      identifier: [null, [Validators.required]],
+      identifier: [this.basicInfo.phone || this.basicInfo.realName, [Validators.required]],
       credential: [null, [Validators.required]],
       newCredential: [null, [Validators.required]],
       checkPassword: [null, [Validators.required, this.confirmationValidator]],

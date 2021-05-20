@@ -133,6 +133,10 @@ export class SwipeUploadComponent implements OnInit, OnDestroy, ControlValueAcce
     this.previewVisible = true;
   };
 
+  public handleDownload = async (file: NzUploadFile) => {
+    window.open(file.url, '_target');
+  }
+
   /* 上传成功后回调 */
   public onChange(e: NzUploadChangeParam): void {
     console.log('Aliyun OSS:', e.fileList);
@@ -140,12 +144,14 @@ export class SwipeUploadComponent implements OnInit, OnDestroy, ControlValueAcce
       const urlList: string[] = [];
       e.fileList.filter(fs => fs.status === 'done').map((item: any) => {
         urlList.push(item.url || item.response.rel.url);
+        item.url = item.url || item.response.rel.url;
       })
       this.valueChange(urlList);
     } else if (e.fileList && this.maxFileListLength === 1) {
       let urlString: any;
       e.fileList.filter(fs => fs.status === 'done').map((item: any) => {
         urlString = item.url || item.response.rel.url;
+        item.url = item.url || item.response.rel.url
       })
       this.valueChange(urlString);
     }

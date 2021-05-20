@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiSystemService, ApiUserAccountService } from 'src/app/core/modules/provider/api';
 import { SystemService } from 'src/app/core/services/system/system.service';
+import { bankRegExp } from './bank-reg';
 
 @Component({
   selector: 'swipe-bank-ahtion',
@@ -56,14 +57,14 @@ export class BankAhtionComponent implements OnInit {
       });
     } else {
       this.validateForm = this.fb.group({
-        realName: [null, [Validators.required]],
-        idCardNum: [null, [Validators.required]],
+        realName: [null, [Validators.required, Validators.pattern(/^([\u4e00-\u9fa5\·]{1,10})$/)]],
+        idCardNum: [null, [Validators.required, Validators.pattern(/^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/)]],
         bankId: [null, [Validators.required]],
-        branchBankName: [null, [Validators.required]],
+        branchBankName: [null, [Validators.required, Validators.pattern(/^([\u4e00-\u9fa5\·]{1,10})$/)]],
         cityCode: [null, [Validators.required]],
-        mobile: [null, [Validators.required]],
+        mobile: [null, [Validators.required, Validators.pattern(/^1{1}[3-9]{1}[0-9]{9}$/)]],
         smsCode: [null, [Validators.required]],
-        bankCardNum: [null, [Validators.required]]
+        bankCardNum: [null, [Validators.required, Validators.pattern(bankRegExp)]]
       });
     }
   }

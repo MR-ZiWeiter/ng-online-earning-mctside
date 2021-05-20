@@ -10,6 +10,7 @@
       [nzShowButton]="fileList.length < maxFileListLength"
       [nzPreview]="handlePreview"
       [nzDisabled]="disabled"
+      [nzDownload]="handleDownload"
       class="coustom-upload"
       (nzChange)="onChange($event)">
       <div class="iiii">
@@ -28,6 +29,7 @@
       [nzDisabled]="disabled"
       class="coustom-upload"
       [nzFileListRender]="fileListRef"
+      [nzDownload]="handleDownload"
       (nzChange)="onChange($event)">
       <ng-content *ngIf="!fileList.length"></ng-content>
     </nz-upload>
@@ -44,7 +46,7 @@
 <ng-template #viewTemp>
   <section class="image-list">
     <section class="image-item" *ngFor="let item of fileList">
-      <img class="image" [src]="item.url"/>
+      <img nz-image class="image" [nzSrc]="item.url || ''"/>
     </section>
     <swipe-null-context context="暂无相关数据" *ngIf="!fileList.length"></swipe-null-context>
   </section>

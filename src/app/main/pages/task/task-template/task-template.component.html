@@ -16,7 +16,7 @@
               <nz-option [nzLabel]="option.title" [nzValue]="option.id" *ngFor="let option of platformConfig"></nz-option>
             </nz-select>
             <nz-input-group nzSearch [nzAddOnAfter]="addOnAfterTemplate">
-              <input type="text" class="custom-search-input" nz-input formControlName="templateTitle" placeholder="请输入相关信息" />
+              <input type="text" class="custom-search-input" nz-input formControlName="templateTitle" placeholder="请输入模板名称" />
             </nz-input-group>
             <ng-template #addOnAfterTemplate>
               <button nz-button nzType="primary" type="submit" nzSearch>搜索</button>
@@ -34,6 +34,7 @@
         [nzPageSize]="renderConfig.pageSize"
         [nzPageIndex]="renderConfig.pageNum"
         nzBordered
+        [nzScroll]="{ x: '1200px' }"
         (nzQueryParams)="onQueryParamsChange($event)"
         [nzData]="renderInfoArray">
         <thead>
@@ -47,25 +48,25 @@
             <th nzAlign="center">价格</th>
             <!-- <th>好评时限</th> -->
             <th nzAlign="center">添加时间</th>
-            <th nzAlign="center">操作</th>
+            <th nzAlign="center" nzRight>操作</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of borderedTable.data">
-            <td>{{ data.index }}</td>
-            <td>{{ data.platformTitle }}</td>
-            <td>
+          <tr *ngFor="let data of borderedTable.data; let idx = index;">
+            <td nzAlign="center">{{ idx + 1 }}</td>
+            <td nzAlign="center">{{ data.platformTitle }}</td>
+            <td nzAlign="center">
               <img nz-image class="image-info" [nzSrc]="data.image" />
             </td>
-            <td>{{ data.templateTitle }}</td>
-            <td>{{ data.shopTitle }}</td>
-            <td>
+            <td nzAlign="center">{{ data.templateTitle }}</td>
+            <td nzAlign="center">{{ data.shopTitle }}</td>
+            <td nzAlign="center">
               <a nz-button nzType="link" [attr.data-url]="data.url" (click)="onCopyClipboardChange(data.url)">点击复制网址</a>
             </td>
-            <td>{{ data.unitPrice }}</td>
+            <td nzAlign="center">{{ data.unitPrice|price }}</td>
             <!-- <td>{{ data.praiseLimit }}</td> -->
-            <td>{{ data.createTime }}</td>
-            <td>
+            <td nzAlign="center">{{ data.createTime }}</td>
+            <td nzAlign="center" nzRight>
               <a nz-popconfirm
                 nzPopconfirmTitle="是否使用该模板进行发布任务？"
                 nzPopconfirmPlacement="bottom"

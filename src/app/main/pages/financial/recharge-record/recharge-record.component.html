@@ -32,9 +32,9 @@
           <tr *ngFor="let data of borderedTable.data" [ngSwitch]="data.status">
             <td nzAlign="center">{{ data.outTradeNo }}</td>
             <td nzAlign="center">{{ data.rechargeMethod }}</td>
-            <td nzAlign="center">{{ data.amount }}</td>
+            <td nzAlign="center">{{ data.amount|price }}</td>
             <td nzAlign="center">{{ data.createTime }}</td>
-            <td nzAlign="center">{{ data.afterBalance }}</td>
+            <td nzAlign="center">{{ data.afterBalance|price }}</td>
             <td nzAlign="center" *ngSwitchCase="1">待审核</td>
             <td nzAlign="center" *ngSwitchCase="2">充值成功</td>
             <td nzAlign="center" *ngSwitchCase="3">审核失败</td>

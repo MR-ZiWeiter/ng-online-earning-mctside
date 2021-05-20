@@ -39,7 +39,7 @@ export class BindWeChatComponent implements OnInit {
       this.validateForm = this.fb.group({
         account: [null, [Validators.required]],
         imageUrl: [null, [Validators.required]],
-        realName: [null, [Validators.required]],
+        realName: [null, [Validators.required, Validators.pattern(/^([\u4e00-\u9fa5\·]{1,10})$/)]],
       });
     }
   }

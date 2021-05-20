@@ -36,8 +36,8 @@
             <td nzAlign="center">{{ data.realName }}</td>
             <td nzAlign="center">{{ data.withdrawalMethod }}</td>
             <td nzAlign="center">{{ data.accountNumbe }}</td>
-            <td nzAlign="center">{{ data.amount }}</td>
-            <td nzAlign="center">{{ data.realAmount }}</td>
+            <td nzAlign="center">{{ data.amount|price }}</td>
+            <td nzAlign="center">{{ data.realAmount|price }}</td>
             <td nzAlign="center">{{ data.createTime }}</td>
             <td nzAlign="center" *ngSwitchCase="1">待审核</td>
             <td nzAlign="center" *ngSwitchCase="2">处理中</td>

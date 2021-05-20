@@ -32,10 +32,17 @@ export class PhoneAhtionComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   ngOnInit() {
-    this.validateForm = this.fb.group({
-      mobile: [this.renderInfo.mobile, [Validators.required, Validators.pattern(/^1{1}[3-9]{1}[0-9]{9}$/)]],
-      smsCode: [null, [Validators.required, Validators.pattern(/^[0-9]{6}$/)]],
-    });
+    if (this.renderInfo) {
+      this.validateForm = this.fb.group({
+        mobile: [this.renderInfo.mobile || null, [Validators.required, Validators.pattern(/^1{1}[3-9]{1}[0-9]{9}$/)]],
+        smsCode: [null, [Validators.required, Validators.pattern(/^[0-9]{6}$/)]],
+      });
+    } else {
+      this.validateForm = this.fb.group({
+        mobile: [null, [Validators.required, Validators.pattern(/^1{1}[3-9]{1}[0-9]{9}$/)]],
+        smsCode: [null, [Validators.required, Validators.pattern(/^[0-9]{6}$/)]],
+      });
+    }
   }
   public openFetchCodeChange() {
     if (this.validateForm.controls['mobile'].valid) {

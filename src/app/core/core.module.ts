@@ -23,6 +23,7 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzImageModule } from 'ng-zorro-antd/image';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 // 管道类
 import { KeysPipe } from './pipes';
@@ -73,7 +74,8 @@ import { PricePipe } from './pipes/price.pipe';
     NzCheckboxModule,
     NzPaginationModule,
     NzImageModule,
-    NzPopconfirmModule
+    NzPopconfirmModule,
+    NzSpinModule
   ],
   exports: [
     ReactiveFormsModule,
@@ -99,6 +101,7 @@ import { PricePipe } from './pipes/price.pipe';
     NzPaginationModule,
     NzImageModule,
     NzPopconfirmModule,
+    NzSpinModule,
     SwipeEyeCareModeComponent,
     SwipeLottieComponent,
     SwipeInputComponent,
