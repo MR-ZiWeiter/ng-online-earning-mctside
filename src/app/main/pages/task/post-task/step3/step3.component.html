@@ -13,7 +13,13 @@
                   <nz-form-label [nzSm]="5" nzRequired [nzFor]="'select-input-' + keyIndex">{{item.value.title}}</nz-form-label>
                   <nz-form-control [nzSm]="6" [nzXs]="10" [nzErrorTip]="'请输入' + item.value.title">
                     <nz-select nz-col nzSpan="24" nzShowSearch nzAllowClear formControlName="selectedItemId" [id]="'select-input-' + keyIndex" nzPlaceHolder="不要求">
-                      <nz-option *ngFor="let option of item.value.requiresRuleItemVos" [nzLabel]="option.title" [nzValue]="option.id"></nz-option>
+                      <!-- PAYMENT_TYPE -->
+                      <ng-container *ngIf="item.value.code === 'PAYMENT_TYPE'; else priceOptionRef">
+                        <nz-option *ngFor="let option of item.value.requiresRuleItemVos" [nzLabel]="option.title" [nzValue]="option.id"></nz-option>
+                      </ng-container>
+                      <ng-template #priceOptionRef>
+                        <nz-option *ngFor="let option of item.value.requiresRuleItemVos" [nzLabel]="option.title + ' ￥' + (option.fees|price)" [nzValue]="option.id"></nz-option>
+                      </ng-template>
                     </nz-select>
                   </nz-form-control>
                   <button nz-button disabled nzType="text">{{item.value.description}}</button>

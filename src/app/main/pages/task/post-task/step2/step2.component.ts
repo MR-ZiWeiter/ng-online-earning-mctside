@@ -84,13 +84,21 @@ export class Step2Component extends CoreToolsFunction implements OnInit, Control
   }
 
   /* 新的一个控件组 */
-  private initControllRows(type: number = 1, sort: number = 1) {
-    return this.fb.group({
-      content: [null, [Validators.required]],
-      contentType: [type, [Validators.required]],
-      quantity: [null, [Validators.required, Validators.pattern(/^\d+$/)]],
-      sort: [sort, [Validators.required, Validators.pattern(/^\d+$/)]],
-    })
+  private initControllRows(type: number = 1, sort: number = 1, noQuantity: boolean = false) {
+    if (noQuantity) {
+      return this.fb.group({
+        content: [null, [Validators.required]],
+        contentType: [type, [Validators.required]],
+        sort: [sort, [Validators.required, Validators.pattern(/^\d+$/)]],
+      })
+    } else {
+      return this.fb.group({
+        content: [null, [Validators.required]],
+        contentType: [type, [Validators.required]],
+        quantity: [null, [Validators.required, Validators.pattern(/^\d+$/)]],
+        sort: [sort, [Validators.required, Validators.pattern(/^\d+$/)]],
+      })
+    }
   }
 
   /**
@@ -119,15 +127,15 @@ export class Step2Component extends CoreToolsFunction implements OnInit, Control
         (this.validateForm.get('businessTaskOriginalBaseForm') as FormGroup).setControl('taskSubjoinMatterForms', arrayGroup);
         break;
       case 5:
-        arrayGroup = this.fb.array([this.initControllRows()]);
+        arrayGroup = this.fb.array([this.initControllRows(1, 1, true)]);
         (this.validateForm.get('businessTaskOriginalBaseForm') as FormGroup).setControl('taskSubjoinMatterForms', arrayGroup);
         break;
       case 6:
-        arrayGroup = this.fb.array([this.initControllRows(2)]);
+        arrayGroup = this.fb.array([this.initControllRows(2, 1, true)]);
         (this.validateForm.get('businessTaskOriginalBaseForm') as FormGroup).setControl('taskSubjoinMatterForms', arrayGroup);
         break;
       case 7:
-        arrayGroup = this.fb.array([this.initControllRows(2), this.initControllRows(1)]);
+        arrayGroup = this.fb.array([this.initControllRows(2, 1, true), this.initControllRows(1, 1, true)]);
         (this.validateForm.get('businessTaskOriginalBaseForm') as FormGroup).setControl('taskSubjoinMatterForms', arrayGroup);
         break;
     }

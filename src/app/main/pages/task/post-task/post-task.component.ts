@@ -117,6 +117,9 @@ export class PostTaskComponent extends CoreToolsFunction implements OnInit {
 
   /* 选择模板点击下拉回调 */
   public selectTempChange(ev: any) {
+    if (!ev) {
+      return;
+    }
     // console.log(ev);
     this.apiReleaseService.asyncFetchTempIdToInfo({
       templateId: ev

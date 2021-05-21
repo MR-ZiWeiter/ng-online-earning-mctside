@@ -162,7 +162,7 @@ export class Step5Component extends CoreToolsFunction implements OnInit {
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
-      timer: [0, [Validators.required]],
+      // timer: [0, [Validators.required]],
       remind: [null, [Validators.required]],
       /* 追加奖励 */
       superaddFees: [null, [Validators.required]],

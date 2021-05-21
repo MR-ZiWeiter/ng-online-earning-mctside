@@ -203,7 +203,7 @@ export class Step1Component extends CoreToolsFunction implements OnInit, Control
         platformId: [null, [Validators.required]],
         screenshot: [1, [Validators.required]],
         shopId: [null, [Validators.required]],
-        taskQuantity: [null, [Validators.required]],
+        taskQuantity: [1, [Validators.required]],
         /* END */
       }),
       goodsForm: this.fb.group({
@@ -213,7 +213,7 @@ export class Step1Component extends CoreToolsFunction implements OnInit, Control
         title: [null, [Validators.required]],
         spec: [null, [Validators.required]],
         unitPrice: [null, [Validators.required, Validators.pattern(/^\d+(\.\d+)?$/)]],
-        quantity: [null, [Validators.required, Validators.pattern(/^\d+(\.\d+)?$/)]],
+        quantity: [1, [Validators.required, Validators.pattern(/^\d+(\.\d+)?$/)]],
         image: [null, [Validators.required]],
         /* 是否主商品 */
         master: [1],

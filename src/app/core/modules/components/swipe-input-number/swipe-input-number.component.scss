@@ -1,0 +1,7 @@
+@import 'mixin';
+
+.swipe-input-number {
+  .min-btn {
+    @include click-active();
+  }
+}

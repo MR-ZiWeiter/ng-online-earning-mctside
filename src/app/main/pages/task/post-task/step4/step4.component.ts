@@ -105,7 +105,8 @@ export class Step4Component extends CoreToolsFunction implements OnInit, Control
       let deputyOptions: {[x: string]: any}|null = null;
       /* 判断是否存在副选项 */
       if (group.deputyOptions) {
-        deputyOptions = this.resultChildOptionFormGroup(null, group.deputyOptions.code, null, group.deputyOptions.tagType);
+        /* 设置默认值 */
+        deputyOptions = this.resultChildOptionFormGroup(0, group.deputyOptions.code, null, group.deputyOptions.tagType);
       }
       /* 定义默认值 */
       let defaultSelectInputValue: number|string|null|any;
@@ -118,7 +119,8 @@ export class Step4Component extends CoreToolsFunction implements OnInit, Control
       }
       const defaultFormGroup: FormGroup|any = this.autoGenerateFormGroupCheck(group);
       /* 自动生成默认数据校验表单 */
-      const newSubmitFormObject: {[x: string]: any} = this.resultChildOptionFormGroup(null, group.code, defaultSelectInputValue, group.tagType);
+      /* 设置默认值 */
+      const newSubmitFormObject: {[x: string]: any} = this.resultChildOptionFormGroup(0, group.code, defaultSelectInputValue, group.tagType);
       /* 添加其他自定义表单数据 */
       for (const key in deputyOptions) {
         defaultFormGroup.get('deputyOptions').addControl(key, deputyOptions[key]);
@@ -244,6 +246,30 @@ export class Step4Component extends CoreToolsFunction implements OnInit, Control
       }
       return false;
     })
+  }
+
+  /* 新增指定评语 */
+  public tempNewChange(control: FormArray, index: number, type: number) {
+    switch(type) {
+      case 0:
+        break;
+      case 1:
+        control.push(this.fb.group(this.resultSubjoinFromGroupObject()));
+        break;
+      case 2:
+      case 3:
+        control.push(this.fb.group(this.resultSubjoinFromGroupObject(true, type === 3 ? true : false)));
+        break;
+      case 4:
+        control.push(this.fb.group(this.resultWithGoodsFormGroupObject()));
+        break;
+    }
+    // console.log(control);
+  }
+
+  /* 删除评语 */
+  public placeKeyDeleteChange(control: FormArray, index: number) {
+    control.removeAt(index);
   }
 
   /* 返回附属商品信息表单控件组 */

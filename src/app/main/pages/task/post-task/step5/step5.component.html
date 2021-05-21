@@ -12,22 +12,14 @@
               [nzSm]="4"
               [nzXs]="6"
               nzErrorTip="请输入追加奖励">
-              <ng-template #nzPrefix>
-                <i nz-icon nzType="minus" nzTheme="outline"></i>
-              </ng-template>
-              <nz-input-group [nzAddOnBefore]="nzPrefix" [nzAddOnAfter]="suffixButton">
-                <input type="number" nz-input formControlName="superaddFees" placeholder="0" />
-              </nz-input-group>
-              <ng-template #suffixButton>
-                <i nz-icon nzType="plus" nzTheme="outline"></i>
-              </ng-template>
+              <swipe-input-number formControlName="superaddFees" placeholder="0" min="1"></swipe-input-number>
               <!-- <nz-input-number nz-input [nzMin]="1" [nzStep]="1" formControlName="superaddFees"></nz-input-number> -->
             </nz-form-control>
             <button nz-button disabled nzType="text">填入给试客的红包奖励金额</button>
           </nz-form-item>
         </section>
       </section>
-      <section nz-row>
+      <!-- <section nz-row>
         <section nz-col [nzSpan]="24">
           <nz-form-item>
             <nz-form-label [nzSm]="5" [nzXs]="24" nzFor="timer" nzRequired>定时发布</nz-form-label>
@@ -40,8 +32,8 @@
             <button nz-button disabled nzType="text">定时上架的数量总数应该与此任务的总数量一致 （启用此项将收取 0 元 增值费）</button>
           </nz-form-item>
         </section>
-      </section>
-      <ng-container *ngIf="validateForm.value.timer">
+      </section> -->
+      <!-- <ng-container *ngIf="validateForm.value.timer">
         <section nz-row>
           <section nz-col [nzSpan]="24">
             <nz-form-item>
@@ -70,11 +62,15 @@
                 nzErrorTip="请输入发布单数">
                 <input nz-input type="number" placeholder="发布单数" />
               </nz-form-control>
-              <button nz-button class="min-offset-left">增加</button>
+              <button type="button" nz-button class="min-offset-left">增加</button>
+              <button type="button" color="danger" *ngIf="(item.get('requiresSuboptionForm.suboption').controls.length - 1) > subKeyIndex; else addControllTemp" nz-button class="min-offset-left" (click)="placeKeyDeleteChange(item.get('requiresSuboptionForm.suboption'), subKeyIndex)">删除</button>
+              <ng-template #addControllTemp>
+                <button type="button" nz-button class="min-offset-left" (click)="tempNewChange(item.get('requiresSuboptionForm.suboption'), keyIndex, resultCheckRadioContext(item.value).modelType)">增加</button>
+              </ng-template>
             </nz-form-item>
           </section>
         </section>
-      </ng-container>
+      </ng-container> -->
       <section nz-row>
         <section nz-col [nzSpan]="24">
           <nz-form-item>

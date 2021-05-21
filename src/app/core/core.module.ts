@@ -46,6 +46,7 @@ import { RouterModule } from '@angular/router';
 import { SwipeRadioComponent } from './modules/components/swipe-radio/swipe-radio.component';
 import { SwipeGetCodeInputComponent } from './modules/components/swipe-get-code-input/swipe-get-code-input.component';
 import { SwipeNullContextComponent } from './modules/components/swipe-null-context/swipe-null-context.component';
+import { SwipeInputNumberComponent } from './modules/components/swipe-input-number/swipe-input-number.component';
 import { SwipeUploadComponent } from './modules/components/swipe-upload/swipe-upload.component';
 import { PricePipe } from './pipes/price.pipe';
 
@@ -110,6 +111,7 @@ import { PricePipe } from './pipes/price.pipe';
     SwipeGetCodeInputComponent,
     SwipeUploadComponent,
     SwipeNullContextComponent,
+    SwipeInputNumberComponent,
     /* 管道类 */
     KeysPipe,
     PricePipe
@@ -122,6 +124,7 @@ import { PricePipe } from './pipes/price.pipe';
     SwipeGetCodeInputComponent,
     SwipeUploadComponent,
     SwipeNullContextComponent,
+    SwipeInputNumberComponent,
     /* 管道类 */
     KeysPipe,
     PricePipe

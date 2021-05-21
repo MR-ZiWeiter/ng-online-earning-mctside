@@ -59,7 +59,10 @@
         <input nz-col [nzSpan]="23" maxlength="6" placeholder="请输入验证码" nz-input formControlName="smsCode"
           id="smsCode" />
       </nz-form-control>
-      <nz-form-text nz-col [nzSpan]="4" class="code-btn">重新发送验证码</nz-form-text>
+      <nz-form-text nz-col [nzSpan]="4" class="code-btn" *ngIf="!refCode.isCode; else codeRef" (click)="openFetchCodeChange()">发送验证码</nz-form-text>
+      <ng-template #codeRef>
+        <nz-form-text nz-col [nzSpan]="4" class="code-btn">{{refCode.code}}S后重新获取</nz-form-text>
+      </ng-template>
     </nz-form-item>
     <nz-form-item nz-row>
       <nz-form-label nz-col [nzSpan]="6" nzNoColon="true"></nz-form-label>

@@ -15,6 +15,11 @@ export class BankAhtionComponent implements OnInit {
   public options = [];
   public cityJsonRenderArray: any = [];
   public backList: any[] = [];
+  public refCode: any = {
+    isCode: false,
+    timer: 0,
+    code: 60
+  };
   public _renderInfo: any;
   @Input()
   public set renderInfo(n: any) {
@@ -70,6 +75,28 @@ export class BankAhtionComponent implements OnInit {
   }
   onChanges(e: any) {
     console.log(e, '银行所在地');
+  }
+  public openFetchCodeChange() {
+    if (this.validateForm.controls['mobile'].valid) {
+      this.apiUserAccountService.asyncFetchAccountSmsCode(this.validateForm.value).subscribe(res => {
+        this.systemService.presentToast('发送短信成功，请注意查收', 'success');
+        this.setTimerInfo();
+      });
+    } else {
+      this.systemService.presentToast('请输入正确的手机号', 'error');
+    }
+  }
+  private setTimerInfo() {
+    this.refCode.code = 60;
+    this.refCode.isCode = true;
+    this.refCode.timer && clearInterval(this.refCode.timer);
+    this.refCode.timer = setInterval(() => {
+      this.refCode.code--;
+      if (this.refCode.code === 0) {
+        clearInterval(this.refCode.timer);
+        this.refCode.isCode = false;
+      }
+    }, 1000)
   }
   public submitForm(): void {
     // tslint:disable-next-line:forin

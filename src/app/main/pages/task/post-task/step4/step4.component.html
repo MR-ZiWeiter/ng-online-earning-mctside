@@ -46,15 +46,7 @@
                           [nzSm]="4"
                           [nzXs]="6"
                           [nzErrorTip]="'请输入' + item.value.deputyOptions.title">
-                          <ng-template #nzPrefix>
-                            <i nz-icon nzType="minus" nzTheme="outline"></i>
-                          </ng-template>
-                          <nz-input-group [nzAddOnBefore]="nzPrefix" [nzAddOnAfter]="suffixButton">
-                            <input type="number" formControlName="inputVal" nz-input placeholder="1" />
-                          </nz-input-group>
-                          <ng-template #suffixButton>
-                            <i nz-icon nzType="plus" nzTheme="outline"></i>
-                          </ng-template>
+                          <swipe-input-number formControlName="inputVal" placeholder="0" min="1"></swipe-input-number>
                           <!-- <nz-input-number nz-input [nzMin]="1" [nzStep]="1" formControlName="price"></nz-input-number> -->
                         </nz-form-control>
                         <button nz-button disabled nzType="text">{{item.value.deputyOptions.description}}</button>
@@ -79,7 +71,10 @@
                             nzErrorTip="请输入评价">
                             <input nz-input id="text" formControlName="text" placeholder="请输入评价" />
                           </nz-form-control>
-                          <button nz-button class="min-offset-left">增加</button>
+                          <button type="button" color="danger" *ngIf="(item.get('requiresSuboptionForm.suboption').controls.length - 1) > subKeyIndex; else addControllTemp" nz-button class="min-offset-left" (click)="placeKeyDeleteChange(item.get('requiresSuboptionForm.suboption'), subKeyIndex)">删除</button>
+                          <ng-template #addControllTemp>
+                            <button type="button" nz-button class="min-offset-left" (click)="tempNewChange(item.get('requiresSuboptionForm.suboption'), keyIndex, resultCheckRadioContext(item.value).modelType)">增加</button>
+                          </ng-template>
                         </nz-form-item>
                       </section>
                     </section>
@@ -102,7 +97,10 @@
                             nzErrorTip="请输入评价">
                             <input nz-input id="text" formControlName="text" placeholder="请输入评价" />
                           </nz-form-control>
-                          <button nz-button class="min-offset-left">增加</button>
+                          <button type="button" color="danger" *ngIf="(item.get('requiresSuboptionForm.suboption').controls.length - 1) > subKeyIndex; else addControllTemp" nz-button class="min-offset-left" (click)="placeKeyDeleteChange(item.get('requiresSuboptionForm.suboption'), subKeyIndex)">删除</button>
+                          <ng-template #addControllTemp>
+                            <button type="button" nz-button class="min-offset-left" (click)="tempNewChange(item.get('requiresSuboptionForm.suboption'), keyIndex, resultCheckRadioContext(item.value).modelType)">增加</button>
+                          </ng-template>
                         </nz-form-item>
                       </section>
                     </section>
@@ -149,7 +147,10 @@
                             nzErrorTip="请输入商品价格">
                             <input nz-input type="number" formControlName="unitPrice" placeholder="价格" />
                           </nz-form-control>
-                          <button nz-button class="min-offset-left">增加</button>
+                          <button type="button" color="danger" *ngIf="(item.get('requiresSuboptionForm.suboption').controls.length - 1) > subKeyIndex; else addControllTemp" nz-button class="min-offset-left" (click)="placeKeyDeleteChange(item.get('requiresSuboptionForm.suboption'), subKeyIndex)">删除</button>
+                          <ng-template #addControllTemp>
+                            <button type="button" nz-button class="min-offset-left" (click)="tempNewChange(item.get('requiresSuboptionForm.suboption'), keyIndex, resultCheckRadioContext(item.value).modelType)">增加</button>
+                          </ng-template>
                         </nz-form-item>
                       </section>
                     </section>
@@ -177,15 +178,7 @@
                     [nzSm]="5"
                     [nzXs]="6"
                     [nzErrorTip]="'请输入' + item.value.title">
-                    <ng-template #nzPrefix>
-                      <i nz-icon nzType="minus" nzTheme="outline"></i>
-                    </ng-template>
-                    <nz-input-group [nzAddOnBefore]="nzPrefix" [nzAddOnAfter]="suffixButton">
-                      <input type="number" nz-input placeholder="0" formControlName="inputVal"/>
-                    </nz-input-group>
-                    <ng-template #suffixButton>
-                      <i nz-icon nzType="plus" nzTheme="outline"></i>
-                    </ng-template>
+                    <swipe-input-number formControlName="inputVal" placeholder="0" min="1"></swipe-input-number>
                   </nz-form-control>
                   <button type="button" nz-button nzType="text">{{item.value.description}}</button>
                 </nz-form-item>
