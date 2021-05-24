@@ -31,7 +31,6 @@ export class ApiSystemService {
     return new Observable((observer: { next: (arg0: any) => void; error: (arg0: boolean) => void; }) => {
       this.http.get('assets/json/city.json', info, {isLocal: true}).subscribe((res: any) => {
         // console.log(res);
-        this.systemService.setAliossConfig(res.rel);
         observer.next(res);
       }, (err: any) => {
         observer.error(false);
@@ -44,7 +43,6 @@ export class ApiSystemService {
     return new Observable((observer: { next: (arg0: any) => void; error: (arg0: boolean) => void; }) => {
       this.http.get('/common/bank/list', info, {}).subscribe((res: any) => {
         // console.log(res);
-        this.systemService.setAliossConfig(res.rel);
         observer.next(res);
       }, (err: any) => {
         observer.error(false);

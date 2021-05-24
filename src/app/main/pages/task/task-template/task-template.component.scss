@@ -43,6 +43,12 @@
         @include wh(format(80), auto);
         max-height: format(80);
       }
+      .input {
+        width: format(100);
+      }
+      .inline-block {
+        display: inline-block;
+      }
     }
   }
 }

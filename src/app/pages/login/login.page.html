@@ -127,14 +127,14 @@
         <div nz-row class="login-form-margin">
         </div>
       </section>
-      <button type="submit" nz-button *ngIf="!activeLoginType && !register" class="login-form-button login-form-margin" [nzType]="'primary'">登陆</button>
-      <button type="submit" nz-button *ngIf="activeLoginType && !register" class="login-form-button login-form-margin" [nzType]="'primary'">登陆</button>
+      <button type="submit" nz-button *ngIf="!activeLoginType && !register" class="login-form-button login-form-margin" [nzType]="'primary'">登录</button>
+      <button type="submit" nz-button *ngIf="activeLoginType && !register" class="login-form-button login-form-margin" [nzType]="'primary'">登录</button>
       <button type="submit" nz-button *ngIf="register" class="login-form-button login-form-margin" [nzType]="'primary'">确认注册</button>
        <section class="register" *ngIf="!register">
         没有账号？<a (click)="toggleLoginOfRegister()">注册</a>
        </section>
       <section class="register" *ngIf="register" >
-        已有账号？<a (click)="toggleLoginOfRegister()">登陆</a>
+        已有账号？<a (click)="toggleLoginOfRegister()">登录</a>
         </section>
     </form>
   </section>

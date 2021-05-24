@@ -3,5 +3,7 @@
 .swipe-input-number {
   .min-btn {
     @include click-active();
+    @include wh(100%, 100%);
+    @include flex-justify-align(center, center);
   }
 }

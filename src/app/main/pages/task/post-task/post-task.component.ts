@@ -198,13 +198,28 @@ export class PostTaskComponent extends CoreToolsFunction implements OnInit {
       }
       // console.log(submitForm)
       let commission = 0;
-      submitForm.requiresForms.map((item: any) => {
+      let suboption = 0;
+      submitForm.requiresForms && submitForm.requiresForms.map((item: any) => {
+        // console.log(item.tagType)
         switch(item.tagType) {
           case 2:
           case 3:
             item.requiresRuleItemVos.some((childItem: any) => {
+              // console.log(childItem,item)
               if (childItem.id === item.selectedItemId) {
-                commission += childItem.fees
+                /* 区别副商品 */
+                if (item.code === 'WITH_GOODS') {
+                  if (item.requiresSuboptionForm && item.requiresSuboptionForm.suboption.length) {
+                    /* 计算副商品的单独增值费用 */
+                    commission += item.requiresSuboptionForm.suboption.length * childItem.fees;
+                    /* 循环得到副商品的总价 */
+                    item.requiresSuboptionForm.suboption.map((pItem: any) => {
+                      suboption += pItem.unitPrice || 0;
+                    })
+                  }
+                } else {
+                  commission += childItem.fees
+                }
                 return true
               }
               return false
@@ -220,7 +235,8 @@ export class PostTaskComponent extends CoreToolsFunction implements OnInit {
         }
       })
       // console.log(commission)
-      commission = (commission + submitForm.goodsForm.unitPrice * submitForm.goodsForm.quantity * 100 + submitForm.baseFess + submitForm.superaddFees * 100) * submitForm.businessTaskOriginalBaseForm.taskQuantity;
+      /* 公式： （增值服务费 + 商品数量*商品价格 + 基础服务费 + 任务追加奖励 + 附属商品费用）* 任务数量 = 总价 */
+      commission = (commission + submitForm.goodsForm.unitPrice * submitForm.goodsForm.quantity * 100 + submitForm.baseFess + submitForm.superaddFees * 100 + suboption * 100) * submitForm.businessTaskOriginalBaseForm.taskQuantity;
       submitForm['commission'] = commission;
       this.apiReleaseService.asyncPostMewTaskInfo(submitForm).subscribe(res => {
         this.systemService.presentToast('发布任务成功', 'success');

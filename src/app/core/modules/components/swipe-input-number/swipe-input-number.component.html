@@ -1,11 +1,15 @@
 <section class="swipe-input-number">
   <ng-template #nzPrefix>
-    <i class="min-btn" nz-icon nzType="minus" nzTheme="outline" (click)="onHandlerChange('less')"></i>
+    <button type="button" nz-button nzType="text" class="min-btn">
+      <i nz-icon nzType="minus" nzTheme="outline" (click)="onHandlerChange('less')"></i>
+    </button>
   </ng-template>
   <nz-input-group [nzAddOnBefore]="nzPrefix" [nzAddOnAfter]="suffixButton">
     <input type="number" nz-input [placeholder]="placeholder" [min]="min" [max]="max" [minlength]="minLength" [maxlength]="maxLength" [formControl]="inputVal"/>
   </nz-input-group>
   <ng-template #suffixButton>
-    <i class="min-btn" nz-icon nzType="plus" nzTheme="outline" (click)="onHandlerChange('plus')"></i>
+    <button type="button" nz-button nzType="text" class="min-btn">
+      <i nz-icon nzType="plus" nzTheme="outline" (click)="onHandlerChange('plus')"></i>
+    </button>
   </ng-template>
 </section>

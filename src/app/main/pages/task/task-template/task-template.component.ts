@@ -75,12 +75,26 @@ export class TaskTemplateComponent implements OnInit {
     this.onSearchInfo();
   }
 
-  public onCopyClipboardChange(URL: string) {
-    navigator.clipboard.writeText(URL).then(() => {
+  public onCopyClipboardChange(URL: string, ev: MouseEvent|any) {
+    if (window.location.href.includes('https://')) {
+      navigator.clipboard.writeText(URL).then(() => {
+        this.systemService.presentToast('已复制到剪切板', 'success');
+      }).catch(() => {
+        this.systemService.presentToast('请选择谷歌浏览器或者火狐浏览器', 'warning');
+      })
+    } else {
+      // console.log(ev)
+      let InputElement: any;
+      if (ev.target.tagName === 'SPAN') {
+        InputElement = ev.target.parentNode.previousElementSibling;
+      } else {
+        InputElement = ev.target.previousElementSibling;
+      }
+      InputElement.select();
+      document.execCommand('copy');
       this.systemService.presentToast('已复制到剪切板', 'success');
-    }).catch(() => {
-      this.systemService.presentToast('请选择谷歌浏览器或者火狐浏览器', 'warning');
-    })
+    }
+    // document.execCommand('copy')
   }
 
   /* 确认删除 */

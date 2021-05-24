@@ -167,8 +167,8 @@ export class LoginPage implements OnInit {
       /* 登录 */
       this.apiUserAccountService[this.register ? 'asyncAccountRegister' : 'asyncAccountLogin'](this.loginRegisterForm.value).subscribe(res => {
         // console.log(res)
-        this.systemService.presentToast(this.register ? '注册成功!' : '登录成功!', "success");
         if (!this.register) {
+          this.systemService.presentToast(this.register ? '注册成功!' : '登录成功!', "success");
           this.router.navigate(['/']);
         } else {
           this.systemService.presentToast('您的注册申请已提交，我们将在1-3个工作日审核后将尽快为您开通商户账号。', 'success');

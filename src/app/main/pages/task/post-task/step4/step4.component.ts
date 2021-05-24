@@ -212,7 +212,7 @@ export class Step4Component extends CoreToolsFunction implements OnInit, Control
       // console.log(item)
       const currentFromGroup = (this.validateForm.get('requiresForms') as any).controls[index];
       if (item.id === ev) {
-        const requiresSuboptionForm: FormGroup = this.fb.group({modelType: [ev]});
+        const requiresSuboptionForm: FormGroup = this.fb.group({modelType: item.modelType});
         let suboption: FormArray;
         /* 清除所有能包含的表单组控件 */
         currentFromGroup.removeControl('requiresSuboptionForm');

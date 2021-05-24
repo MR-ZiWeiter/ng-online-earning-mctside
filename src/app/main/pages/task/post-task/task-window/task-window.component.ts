@@ -37,6 +37,7 @@ export class TaskWindowComponent extends CoreToolsFunction implements OnInit {
       return;
     }
     let commission = 0;
+    let suboption = 0;
     submitForm.requiresForms && submitForm.requiresForms.map((item: any) => {
       // console.log(item.tagType)
       switch(item.tagType) {
@@ -45,7 +46,19 @@ export class TaskWindowComponent extends CoreToolsFunction implements OnInit {
           item.requiresRuleItemVos.some((childItem: any) => {
             // console.log(childItem,item)
             if (childItem.id === item.selectedItemId) {
-              commission += childItem.fees
+              /* 区别副商品 */
+              if (item.code === 'WITH_GOODS') {
+                if (item.requiresSuboptionForm && item.requiresSuboptionForm.suboption.length) {
+                  /* 计算副商品的单独增值费用 */
+                  commission += item.requiresSuboptionForm.suboption.length * childItem.fees;
+                  /* 循环得到副商品的总价 */
+                  item.requiresSuboptionForm.suboption.map((pItem: any) => {
+                    suboption += pItem.unitPrice || 0;
+                  })
+                }
+              } else {
+                commission += childItem.fees
+              }
               return true
             }
             return false
@@ -61,13 +74,14 @@ export class TaskWindowComponent extends CoreToolsFunction implements OnInit {
       }
     })
     // console.log(commission)
+    this.taskInfo.valueAdded = commission || 0;
+    this.taskInfo.suboption = suboption || 0;
     if (submitForm.baseFess) {
       this.taskInfo.baseFess = submitForm.baseFess || 0;
     }
     if (submitForm.goodsForm) {
-      this.taskInfo.commodityFess = submitForm.goodsForm.unitPrice * submitForm.goodsForm.quantity || 0;
+      this.taskInfo.commodityFess = submitForm.goodsForm.unitPrice * (submitForm.goodsForm.quantity || 0) + suboption;
     }
-    this.taskInfo.valueAdded = commission || 0;
     if (submitForm.superaddFees) {
       this.taskInfo.superaddFees = submitForm.superaddFees || 0;
     }

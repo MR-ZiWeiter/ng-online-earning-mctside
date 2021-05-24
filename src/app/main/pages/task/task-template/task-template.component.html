@@ -44,7 +44,7 @@
             <th nzAlign="center">主图</th>
             <th nzAlign="center">模板名称</th>
             <th nzAlign="center">掌柜名称</th>
-            <th nzAlign="center">商品网址</th>
+            <th nzAlign="center" width="200">商品网址</th>
             <th nzAlign="center">价格</th>
             <!-- <th>好评时限</th> -->
             <th nzAlign="center">添加时间</th>
@@ -61,7 +61,8 @@
             <td nzAlign="center">{{ data.templateTitle }}</td>
             <td nzAlign="center">{{ data.shopTitle }}</td>
             <td nzAlign="center">
-              <a nz-button nzType="link" [attr.data-url]="data.url" (click)="onCopyClipboardChange(data.url)">点击复制网址</a>
+              <input class="inline-block input" nz-input [value]="data.url" readonly />
+              <a class="inline-block" nz-button nzType="link" [attr.data-url]="data.url" (click)="onCopyClipboardChange(data.url, $event)">复制</a>
             </td>
             <td nzAlign="center">{{ data.unitPrice|price }}</td>
             <!-- <td>{{ data.praiseLimit }}</td> -->

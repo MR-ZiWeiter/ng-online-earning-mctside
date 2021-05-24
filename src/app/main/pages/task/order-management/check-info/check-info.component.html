@@ -30,7 +30,7 @@
     </section>
     <section class="label-item" nz-row>
       <span class="label-text" nz-col [nzSpan]="8">买家下单的实付金额：</span>
-      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.paidAmount}}{{orderInfo.paidAmount ? '元' : ''}}</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.paidAmount|price}}{{(orderInfo.paidAmount|price) ? '元' : ''}}</span>
     </section>
     <section class="label-item" nz-row>
       <span class="label-text" nz-col [nzSpan]="8">做单信息：</span>
@@ -39,7 +39,7 @@
         <section class="image-item" *ngFor="let item of orderInfo.stepComplateVoList">
           <span class="title-text">{{item.sort}}、{{item.title}} - {{item.status}}</span>
           <ng-container *ngIf="item.images.length; else tipRef">
-            <img class="image-item-info" [src]="image" *ngFor="let image of item.images"/>
+            <img nz-image class="image-item-info" [nzSrc]="image" *ngFor="let image of item.images"/>
           </ng-container>
           <ng-template #tipRef>
             <swipe-null-context context="该步凑暂无截图信息"></swipe-null-context>

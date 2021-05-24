@@ -6,7 +6,7 @@
     </section>
     <section class="label-item" nz-row [nzGutter]="[10, 10]">
       <span class="label-text" nz-col [nzSpan]="8">买家下单的实付金额：</span>
-      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.paidAmount || '暂未付款'}}{{orderInfo.paidAmount ? '元' : ''}}</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.paidAmount ? (orderInfo.paidAmount|price) : '暂未付款'}}{{(orderInfo.paidAmount ? (orderInfo.paidAmount|price) : '') ? '元' : ''}}</span>
     </section>
   </section>
   <!-- 标题 -->
@@ -54,7 +54,7 @@
   <section class="context-group">
     <section class="label-item" nz-row [nzGutter]="[10, 10]">
       <span class="label-text" nz-col [nzSpan]="8">商品价格：</span>
-      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.goodsVo.unitPrice}}元</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.goodsVo.unitPrice|price:'format'}}元</span>
     </section>
     <section class="label-item" nz-row [nzGutter]="[10, 10]">
       <span class="label-text" nz-col [nzSpan]="8">每单拍：</span>
@@ -66,11 +66,11 @@
     </section>
     <section class="label-item" nz-row [nzGutter]="[10, 10]">
       <span class="label-text" nz-col [nzSpan]="8">增值服务：</span>
-      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.businessCapitalVo.additionalCapital}}元</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.businessCapitalVo.additionalCapital|price}}元</span>
     </section>
     <section class="label-item" nz-row [nzGutter]="[10, 10]">
       <span class="label-text" nz-col [nzSpan]="8">追加奖励：</span>
-      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.businessCapitalVo.superaddFess}}元</span>
+      <span class="value-text" nz-col [nzSpan]="16">{{orderInfo.businessCapitalVo.superaddFess|price:'format'}}元</span>
     </section>
     <section class="label-item" nz-row [nzGutter]="[10, 10]">
       <span class="label-text" nz-col [nzSpan]="8">总金额： </span>

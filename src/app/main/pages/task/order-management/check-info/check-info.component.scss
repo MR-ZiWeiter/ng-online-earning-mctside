@@ -36,6 +36,15 @@
           color: #52c41a;
         }
       }
+      .image-list {
+        @include wh(100%, format(104));
+        @include flex-justify-align(flex-start, center);
+        flex-wrap: wrap;
+        .image-item-info {
+          @include wh(format(104), 100%);
+          margin-left: format(10);
+        }
+      }
     }
   }
   .btn-controll {
