@@ -70,6 +70,7 @@ export class PublishedListComponent implements OnInit {
   public openTaskDetail(renderInfo: any) {
     this.nzModalService.create({
       nzContent: TaskInfoComponent,
+      nzWidth: 800,
       nzTitle: '任务详情',
       nzOkDisabled: true,
       nzCancelDisabled: true,

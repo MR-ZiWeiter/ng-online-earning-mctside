@@ -56,7 +56,7 @@ export class ReceivedAppealComponent implements OnInit {
   public openAppealDetail(info: {[x: string]: any}) {
     this.nzModalService.create({
       nzContent: AppealModalComponent,
-      nzWidth: 657,
+      nzWidth: 800,
       nzTitle: '我收到的申诉',
       nzOkDisabled: true,
       nzCancelDisabled: true,

@@ -83,6 +83,39 @@ export class Step4Component extends CoreToolsFunction implements OnInit, Control
     return ((this.validateForm.get(path) as any) || {}).controls || []
   }
 
+  /* 返回当前选中的数据 */
+  public resultSelectChangeInfo(id: number, vos: any) {
+    let result: any = {};
+    vos.requiresRuleItemVos.map((item: any) => {
+      if (item.id === id) {
+        result = item;
+        return true
+      }
+      return false
+    })
+    return result
+  }
+
+  /* 特殊处理副商品数量 */
+  public resultSubDuctInfoNumber(info: any): number {
+    if (info.requiresSuboptionForm) {
+      return info.requiresSuboptionForm.suboption.length
+    }
+    return 0;
+  }
+
+  /* 处理副商品的价格 */
+  public resultSubproductPriceInfo(item: any): number {
+    return (this.resultSelectChangeInfo(item.value.selectedItemId, item.value).fees||0) * (this.resultSubDuctInfoNumber(item.value))
+  }
+
+  public resultWithPriceInfo(item: any) {
+    return (this.resultSelectChangeInfo(item.value.selectedItemId, item.value).fees||0)
+  }
+
+  //
+
+
   /* 返回单选框选中的值 */
   public resultCheckRadioContext(info: any): {[x: string]: any} {
     // info.selectedItemId
@@ -313,6 +346,7 @@ export class Step4Component extends CoreToolsFunction implements OnInit, Control
     }
     /* 监听表单 */
     this.validateForm.valueChanges.subscribe(values => {
+      // console.log(values)
       /* 提交 */
       this.submitChange();
     });

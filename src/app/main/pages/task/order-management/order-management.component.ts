@@ -73,6 +73,7 @@ export class OrderManagementComponent implements OnInit {
   public openOrderDetail(renderInfo: any) {
     this.nzModalService.create({
       nzContent: OrderInfoComponent,
+      nzWidth: 800,
       nzTitle: '订单详情',
       nzOkDisabled: true,
       nzCancelDisabled: true,
@@ -93,6 +94,7 @@ export class OrderManagementComponent implements OnInit {
   public openCheckInfo(renderInfo: any) {
     const modal = this.nzModalService.create({
       nzContent: CheckInfoComponent,
+      nzWidth: 800,
       nzTitle: '核对订单',
       nzOkDisabled: true,
       nzCancelDisabled: true,

@@ -70,7 +70,7 @@
             </nz-input-group>
           </nz-form-control>
         </nz-form-item>
-        <nz-form-item *ngIf="!register">
+        <nz-form-item *ngIf="!register && !reset">
           <nz-form-control nzErrorTip="请输入正确的验证码！">
             <nz-input-group >
               <section class="get-code">
@@ -83,7 +83,7 @@
             </nz-input-group>
           </nz-form-control>
         </nz-form-item>
-        <nz-form-item *ngIf="register">
+        <nz-form-item *ngIf="register || reset">
           <nz-form-control nzErrorTip="请输入正确的验证码！">
             <nz-input-group >
               <section class="get-code">
@@ -106,7 +106,7 @@
         <nz-form-item *ngIf="reset">
           <nz-form-control nzErrorTip="请再次输入正确的账户密码">
             <nz-input-group >
-              <input type="password" autocomplete [nzBorderless]="true" class="input" nz-input formControlName="credential" placeholder="请再次输入新密码" />
+              <input type="password" autocomplete [nzBorderless]="true" class="input" nz-input formControlName="check_credential" placeholder="请再次输入新密码" />
             </nz-input-group>
           </nz-form-control>
         </nz-form-item>
@@ -127,9 +127,14 @@
         <div nz-row class="login-form-margin">
         </div>
       </section>
-      <button type="submit" nz-button *ngIf="!activeLoginType && !register" class="login-form-button login-form-margin" [nzType]="'primary'">登录</button>
-      <button type="submit" nz-button *ngIf="activeLoginType && !register" class="login-form-button login-form-margin" [nzType]="'primary'">登录</button>
-      <button type="submit" nz-button *ngIf="register" class="login-form-button login-form-margin" [nzType]="'primary'">确认注册</button>
+      <ng-container *ngIf="reset; else loginRef">
+        <button type="submit" nz-button class="login-form-button login-form-margin" [nzType]="'primary'">确认修改</button>
+      </ng-container>
+      <ng-template #loginRef>
+        <button type="submit" nz-button *ngIf="!activeLoginType && !register" class="login-form-button login-form-margin" [nzType]="'primary'">登录</button>
+        <button type="submit" nz-button *ngIf="activeLoginType && !register" class="login-form-button login-form-margin" [nzType]="'primary'">登录</button>
+        <button type="submit" nz-button *ngIf="register" class="login-form-button login-form-margin" [nzType]="'primary'">确认注册</button>
+      </ng-template>
        <section class="register" *ngIf="!register">
         没有账号？<a (click)="toggleLoginOfRegister()">注册</a>
        </section>

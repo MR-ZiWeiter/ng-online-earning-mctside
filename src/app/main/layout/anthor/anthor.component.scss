@@ -6,7 +6,7 @@
   flex-direction: column;
   background: $default_color;
   .anthor-top {
-    padding: format(40);
+    padding: format(20);
     @include flex-justify-align(flex-start, center);
     flex-direction: column;
     border-bottom: 1px solid $default_border_bttom_color;
@@ -33,7 +33,7 @@
           margin-right: format(5);
         }
         &:not(:last-child) {
-          margin-right: format(30);
+          margin-right: format(5);
         }
         .label-text {
           margin-right: format(5);
@@ -51,7 +51,7 @@
     }
   }
   .anthor-btm {
-    padding: format(40);
+    padding: format(20) 0;
     @include flex-justify-align(flex-start,center);
     flex-direction: column;
     .anthor-btm-money {
@@ -64,7 +64,7 @@
     }
     .anthor-btm-btn {
       @include flex-justify-align(space-around,center);
-      margin-top: format(25);
+      margin-top: format(15);
       .btn {
         @include wh(format(95), format(36));
         @include flex-justify-align(center,center);
@@ -87,7 +87,7 @@
           }
         }
         &:not(:last-child) {
-          margin-right: format(18);
+          margin-right: format(5);
         }
       }
     }

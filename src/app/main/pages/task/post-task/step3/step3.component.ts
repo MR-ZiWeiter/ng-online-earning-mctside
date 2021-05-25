@@ -103,6 +103,19 @@ export class Step3Component extends CoreToolsFunction implements OnInit, Control
     return ((this.validateForm.get(path) as any) || {}).controls || []
   }
 
+  /* 返回当前选中的数据 */
+  public resultSelectChangeInfo(id: number, vos: any) {
+    let result: any = {};
+    vos.requiresRuleItemVos.map((item: any) => {
+      if (item.id === id) {
+        result = item;
+        return true
+      }
+      return false
+    })
+    return result
+  }
+
   /* 动态添加表单校验规则 */
   private newFormGroupValidate(renderArray: any[]) {
     const formArray: FormArray = this.fb.array([]);
@@ -228,6 +241,7 @@ export class Step3Component extends CoreToolsFunction implements OnInit, Control
     }
     /* 监听表单 */
     this.validateForm.valueChanges.subscribe(values => {
+      // console.log(values)
       this.submitChange();
     });
   }

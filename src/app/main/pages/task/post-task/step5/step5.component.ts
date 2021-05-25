@@ -169,6 +169,7 @@ export class Step5Component extends CoreToolsFunction implements OnInit {
     });
     /* 监听表单 */
     this.validateForm.valueChanges.subscribe(values => {
+      // console.log(values)
       /* 提交 */
       this.submitChange();
     });

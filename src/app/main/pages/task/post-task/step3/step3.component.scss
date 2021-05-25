@@ -22,6 +22,10 @@
         @include flex-justify-align(flex-start, center);
       }
     }
+    .danger {
+      color: $ColorRed;
+      margin-right: format(20);
+    }
     .min-offset-left {
       margin-left: format(12);
     }

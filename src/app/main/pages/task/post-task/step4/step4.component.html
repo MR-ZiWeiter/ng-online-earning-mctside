@@ -16,7 +16,7 @@
                       <nz-option *ngFor="let option of item.value.requiresRuleItemVos" [nzLabel]="option.title" [nzValue]="option.id"></nz-option>
                     </nz-select>
                   </nz-form-control>
-                  <button nz-button disabled nzType="text">{{item.value.description}}</button>
+                  <button nz-button disabled nzType="text"><span class="dangers">*增值费+{{(resultSelectChangeInfo(item.value.selectedItemId, item.value).fees||0)|price}}元</span>{{item.value.description}}</button>
                 </nz-form-item>
               </section>
             </section>
@@ -26,10 +26,11 @@
               <section nz-col [nzSpan]="24">
                 <nz-form-item>
                   <nz-form-label [nzSm]="5" [nzFor]="'radio-input-' + keyIndex" nzRequired>{{item.value.title}}</nz-form-label>
-                  <nz-form-control [nzSm]="item.value.requiresRuleItemVos.length < 5 ? item.value.requiresRuleItemVos.length * 2 + 2 : 19">
+                  <nz-form-control [nzSm]="item.value.requiresRuleItemVos.length < 5 ? item.value.requiresRuleItemVos.length * 2 + 4 : 19">
                     <nz-radio-group class="custom-check-radio-group" [id]="'radio-input-' + keyIndex" formControlName="selectedItemId" (ngModelChange)="handlerRadioChange(item.value, keyIndex, $event)">
                       <label *ngFor="let option of item.value.requiresRuleItemVos" class="min-check-radio" nz-radio [nzValue]="option.id">{{option.title}}</label>
                     </nz-radio-group>
+                    <span class="danger">*增值费+{{ (item.value.code === 'WITH_GOODS' ? resultSubproductPriceInfo(item): resultWithPriceInfo(item))|price}}元</span>
                   </nz-form-control>
                   <button nz-button disabled nzType="text">{{item.value.description}}</button>
                 </nz-form-item>

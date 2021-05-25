@@ -150,4 +150,15 @@ export class ApiUserAccountService {
       });
     });
   }
+  /* 找回密码 */
+  asyncUpdateAccountPwdInfo(info?: any): Observable<any> {
+    return new Observable(observer => {
+      this.http.post('/pwd/find', info, {}, info).subscribe((res: ApiResponseModel) => {
+        observer.next(res);
+      }, err => {
+        console.log(err);
+        observer.error(false);
+      });
+    });
+  }
 }

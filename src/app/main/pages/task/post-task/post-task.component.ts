@@ -127,12 +127,24 @@ export class PostTaskComponent extends CoreToolsFunction implements OnInit {
       // console.log(res);
       const cloneReSult = this.handerResultTempChange(res.rel);
       // console.log(cloneReSult)
+      // this.validateForm.controls['step1'].setValue({
+      //   businessTaskOriginalBaseForm: cloneReSult.businessTaskOriginalBaseForm,
+      //   goodsForm: cloneReSult.goodsForm,
+      //   baseFess: cloneReSult.baseFess
+      // });
+      // this.validateForm.controls['step2'].setValue({businessTaskOriginalBaseForm: cloneReSult.businessTaskOriginalBaseForm});
+      // this.validateForm.controls['step3'].setValue({
+      //   labels: cloneReSult.labels,
+      //   requiresForms: cloneReSult.requiresForms
+      // });
+      // this.validateForm.controls['step4'].setValue({requiresForms: cloneReSult.requiresForms});
       this.validateForm.controls['step1'].setValue(cloneReSult);
       this.validateForm.controls['step2'].setValue(cloneReSult);
       this.validateForm.controls['step3'].setValue(cloneReSult);
       this.validateForm.controls['step4'].setValue(cloneReSult);
       this.validateForm.controls['step5'].setValue(cloneReSult);
-      this.validateForm.controls['step6'].setValue(cloneReSult);
+      /* 第六不要放开 数据会乱 */
+      // this.validateForm.controls['step6'].setValue(cloneReSult);
 
       // console.log(this.validateForm)
     })

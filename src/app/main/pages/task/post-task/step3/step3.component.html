@@ -22,7 +22,7 @@
                       </ng-template>
                     </nz-select>
                   </nz-form-control>
-                  <button nz-button disabled nzType="text">{{item.value.description}}</button>
+                  <button nz-button disabled nzType="text"><span class="danger">*增值费+{{(resultSelectChangeInfo(item.value.selectedItemId, item.value).fees||0)|price}}元</span> {{item.value.description}}</button>
                 </nz-form-item>
               </section>
             </section>
@@ -37,7 +37,7 @@
                       <label *ngFor="let option of item.value.requiresRuleItemVos" class="min-check-radio" nz-radio [nzValue]="option.id">{{option.title}}</label>
                     </nz-radio-group>
                   </nz-form-control>
-                  <button nz-button disabled nzType="text">{{item.value.description}}</button>
+                  <button nz-button disabled nzType="text"><span class="danger">*增值费+{{(resultSelectChangeInfo(item.value.selectedItemId, item.value).fees||0)|price}}元</span>{{item.value.description}}</button>
                 </nz-form-item>
               </section>
             </section>

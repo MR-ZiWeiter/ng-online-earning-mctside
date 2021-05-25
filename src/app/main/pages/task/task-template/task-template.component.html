@@ -64,7 +64,7 @@
               <input class="inline-block input" nz-input [value]="data.url" readonly />
               <a class="inline-block" nz-button nzType="link" [attr.data-url]="data.url" (click)="onCopyClipboardChange(data.url, $event)">复制</a>
             </td>
-            <td nzAlign="center">{{ data.unitPrice|price }}</td>
+            <td nzAlign="center">{{ data.unitPrice|price:'format' }}</td>
             <!-- <td>{{ data.praiseLimit }}</td> -->
             <td nzAlign="center">{{ data.createTime }}</td>
             <td nzAlign="center" nzRight>

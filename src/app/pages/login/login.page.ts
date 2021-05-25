@@ -45,7 +45,29 @@ export class LoginPage implements OnInit {
 
   // 是否注册页面
   public register = false;
-  public reset = false;
+  private _reset: boolean = false;
+  public set reset(n: boolean) {
+    this._reset = n;
+    if (n) {
+      if (this.loginRegisterForm) {
+        this.loginRegisterForm.addControl('check_credential', new FormControl(null, [Validators.required, this.checkCredential]))
+        this.loginRegisterForm.addControl('smsCode', new FormControl(null, [Validators.required]));
+        this.loginRegisterForm.removeControl('imageCode');
+        this.loginRegisterForm.removeControl('imageCodeToken');
+      }
+    } else {
+      if (this.loginRegisterForm) {
+        this.loginRegisterForm.removeControl('check_credential');
+        this.loginRegisterForm.removeControl('smsCode');
+        this.loginRegisterForm.addControl('imageCode', new FormControl(null, [Validators.required]));
+        this.loginRegisterForm.addControl('imageCodeToken', new FormControl(null, [Validators.required]));
+      }
+    }
+  };
+  public get reset() {
+    return this._reset;
+  }
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -162,20 +184,27 @@ export class LoginPage implements OnInit {
       this.loginRegisterForm.controls[i].markAsDirty();
       this.loginRegisterForm.controls[i].updateValueAndValidity();
     }
-    // console.log(this.loginRegisterForm);
+    console.log(this.loginRegisterForm);
     if (this.loginRegisterForm.valid) {
       /* 登录 */
-      this.apiUserAccountService[this.register ? 'asyncAccountRegister' : 'asyncAccountLogin'](this.loginRegisterForm.value).subscribe(res => {
+      this.apiUserAccountService[this.reset ? 'asyncUpdateAccountPwdInfo' : (this.register ? 'asyncAccountRegister' : 'asyncAccountLogin')](this.loginRegisterForm.value).subscribe(res => {
         // console.log(res)
-        if (!this.register) {
-          this.systemService.presentToast(this.register ? '注册成功!' : '登录成功!', "success");
-          this.router.navigate(['/']);
+        if (this.reset) {
+          this.systemService.presentToast('修改密码成功~请重新登录~', "success");
+          this.reset = false;
         } else {
-          this.systemService.presentToast('您的注册申请已提交，我们将在1-3个工作日审核后将尽快为您开通商户账号。', 'success');
+          if (!this.register) {
+            this.systemService.presentToast(this.register ? '注册成功!' : '登录成功!', "success");
+            this.router.navigate(['/']);
+          } else {
+            this.systemService.presentToast('您的注册申请已提交，我们将在1-3个工作日审核后将尽快为您开通商户账号。', 'success');
+          }
         }
       }, error => {
         // console.log(error);
-        this.switchImageCodeTokenEvent();
+        if (!this.reset && !this.register && this.loginRegisterForm.value.loginMode === 'ACCOUNT_PASSWORD') {
+          this.switchImageCodeTokenEvent();
+        }
       })
       /* 预处理登录成功后-后期重写至ApiService模块 */
       // this.userService.setAppToken(
@@ -185,4 +214,4 @@ export class LoginPage implements OnInit {
     }
   }
 }
-4
+

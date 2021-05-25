@@ -47,7 +47,7 @@ export class Step2Component extends CoreToolsFunction implements OnInit, Control
     this.value = obj;
     /* 数据回填 */
     if (obj) {
-      console.log(this.validateForm)
+      // console.log(this.validateForm)
       this.resultFormInitel(this.validateForm, obj);
     }
   }
@@ -79,6 +79,7 @@ export class Step2Component extends CoreToolsFunction implements OnInit, Control
       }),
     });
     this.validateForm.valueChanges.subscribe(values => {
+      // console.log(values)
       this.submitChange();
     });
   }

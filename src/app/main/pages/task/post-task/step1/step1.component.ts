@@ -90,6 +90,7 @@ export class Step1Component extends CoreToolsFunction implements OnInit, Control
     if (obj) {
       // console.log(this.validateForm)
       this.resultFormInitel(this.validateForm, obj);
+      // this.submitForm();
     }
   }
   registerOnChange(fn: any): void {
@@ -103,6 +104,8 @@ export class Step1Component extends CoreToolsFunction implements OnInit, Control
   }
   /* 表单校验 */
   public validate(c: FormControl): {[key: string]: any} {
+    // console.log(c)
+    // this.validateForm = this.fb.group(c.value);
     if (this.validateForm.valid) {
       return {}
     }
@@ -152,6 +155,7 @@ export class Step1Component extends CoreToolsFunction implements OnInit, Control
 
   /* 数据提交到父组件 */
   private submitChange(): void {
+    // console.log(this.validateForm)
     this.renderForm.emit(this.validateForm);
     this.valueChange(this.validateForm.value);
   }
@@ -222,6 +226,8 @@ export class Step1Component extends CoreToolsFunction implements OnInit, Control
     });
     /* 所有数据监听并上传回调 */
     this.validateForm.valueChanges.subscribe(values => {
+      // console.log(values);
+      // console.log(this.validateForm.value);
       this.submitChange();
     });
     /* 监听下单价格 回调监听 */
