@@ -37,9 +37,15 @@
         }
       }
       .image-list {
-        @include wh(100%, format(104));
-        @include flex-justify-align(flex-start, center);
+        @include wh(100%, auto);
+        @include flex-justify-align(flex-start, flex-start);
+        flex-direction: column;
+        padding-left: 19%;
+        min-height: format(104);
         flex-wrap: wrap;
+        .image-item {
+          margin-bottom: format(20);
+        }
         .image-item-info {
           @include wh(format(104), 100%);
           margin-left: format(10);
